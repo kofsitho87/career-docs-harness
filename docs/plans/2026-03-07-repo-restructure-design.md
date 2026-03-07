@@ -31,7 +31,7 @@
 ### 최종 산출물
 
 - `resume/product-engineer.md`
-- `portfolio/outbound-voice-agent.md`
+- `case-studies/outbound-voice-agent.md`
 
 ### 사실 기준 문서와 가이드
 
@@ -59,5 +59,5 @@
 ## 기대 결과
 
 - 저장소를 처음 열었을 때 결과물과 작업 문서의 역할이 더 분명해진다.
-- 이후 포트폴리오 프로젝트가 늘어나도 `resume/`, `portfolio/`, `assets/`, `docs/` 구조 안에서 자연스럽게 확장할 수 있다.
+- 이후 포트폴리오 프로젝트가 늘어나도 `resume/`, `case-studies/`, `assets/`, `docs/` 구조 안에서 자연스럽게 확장할 수 있다.
 - README와 workflow에 적힌 설명이 실제 파일 구조와 더 잘 일치하게 된다.

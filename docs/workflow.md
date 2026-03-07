@@ -30,10 +30,11 @@
 
 ### 1.3 최종 산출물 (final outputs)
 
-이 범주의 문서는 외부에 보여주기 위한 현재 결과물이다. 지원용 이력서, 프로젝트 포트폴리오, 필요 시 시각 자료가 여기에 해당한다.
+이 범주의 문서는 외부에 보여주기 위한 현재 결과물이다. 지원용 이력서, 프로젝트 케이스 스터디, 필요 시 시각 자료가 여기에 해당한다.
 
 - `resume/product-engineer.md`: 현재 메인 이력서 산출물이자 사실 기준 문서
-- `portfolio/outbound-voice-agent.md`: 현재 메인 포트폴리오 산출물
+- `case-studies/outbound-voice-agent.md`: 아웃바운드 Voice AI Agent 케이스 스터디
+- `case-studies/inbound-voice-agent.md`: 인바운드 Voice AI Agent 케이스 스터디
 - `assets/heewung-song-infographic.png`: 이력서와 함께 사용할 수 있는 시각 자료
 
 실무 원칙:
@@ -70,15 +71,16 @@
 다음으로 어떤 메시지와 구조로 보여줄지 정한다.
 
 - 이력서 작성 원칙은 `docs/guides/resume-guide.md`를 기준으로 삼는다.
-- 특정 포트폴리오 문서는 관련 설계 문서를 함께 본다.
-- 현재 아웃바운드 보이스 에이전트 포트폴리오는 `docs/plans/2026-03-07-outbound-voice-agent-portfolio-design.md`를 참고한다.
+- 특정 프로젝트 케이스 스터디 문서는 관련 설계 문서를 함께 본다.
+- 아웃바운드 보이스 에이전트 케이스 스터디는 `docs/plans/2026-03-07-outbound-voice-agent-portfolio-design.md`를 참고한다.
+- 인바운드 보이스 에이전트 케이스 스터디는 `docs/plans/2026-03-07-inbound-voice-agent-portfolio-design.md`를 참고한다.
 
 ### 2.3 최종 문서 작성 또는 개선
 
 기준이 정리되면 실제 산출물을 작성하거나 다듬는다.
 
 - 이력서 작업은 `resume/product-engineer.md`를 중심으로 진행한다.
-- 프로젝트 포트폴리오 작업은 `portfolio/outbound-voice-agent.md`를 중심으로 진행한다.
+- 프로젝트 케이스 스터디 작업은 `case-studies/outbound-voice-agent.md`를 중심으로 진행한다.
 - 이 단계에서는 내용을 압축하거나 재배치할 수 있지만, 사실 왜곡 없이 사실 기준 문서를 바탕으로 수정해야 한다.
 
 ### 2.4 필요 시 보조 자산 생성
@@ -96,26 +98,26 @@
 
 설계 문서는 주제 기준으로 이름이 붙어 있고, 실제 결과 문서는 목적에 맞는 별도 파일명을 사용할 수 있다.
 
-- 포트폴리오 설계 문서: `docs/plans/2026-03-07-outbound-voice-agent-portfolio-design.md`
-- 실제 포트폴리오 산출물: `portfolio/outbound-voice-agent.md`
+- 케이스 스터디 설계 문서: `docs/plans/2026-03-07-outbound-voice-agent-portfolio-design.md`
+- 실제 케이스 스터디 산출물: `case-studies/outbound-voice-agent.md`
 - 저장소 문서화 설계 문서: `docs/plans/2026-03-07-repo-documentation-design.md`
 - 저장소 문서화 구현 계획: `docs/plans/2026-03-07-repo-documentation.md`
 - 실제 문서화 결과 파일: `README.md`, `docs/workflow.md`
 
 따라서 작업자는 "계획 문서를 수정하는지", "최종 산출물을 수정하는지"를 항상 구분해야 한다.
 
-### 3.2 현재 포트폴리오 프로젝트는 1건만 정리되어 있다
+### 3.2 현재 프로젝트 케이스 스터디는 2건 정리되어 있다
 
-현재 저장소에서 명시적으로 정리된 프로젝트 포트폴리오는 `portfolio/outbound-voice-agent.md` 한 개다.
+현재 저장소에서 정리된 프로젝트 케이스 스터디는 2건이다.
 
-의미:
+- `case-studies/outbound-voice-agent.md`: 아웃바운드 Voice AI Agent
+- `case-studies/inbound-voice-agent.md`: 인바운드 Voice AI Agent (아웃바운드의 시리즈 후속편)
 
-- 저장소는 포트폴리오 확장 가능한 구조를 갖고 있지만, 현재 공개용 프로젝트 문서는 아직 제한적이다.
-- 추가 프로젝트를 확장하려면 먼저 사실 자료를 정리하고, 필요한 경우 별도 설계 문서를 만든 뒤 `portfolio/` 아래 산출물을 늘리는 방식이 적절하다.
+추가 프로젝트를 확장하려면 먼저 사실 자료를 정리하고, 필요한 경우 별도 설계 문서를 만든 뒤 `case-studies/` 아래 케이스 스터디 문서를 늘리는 방식이 적절하다.
 
 ### 3.3 일부 설계 문서의 참고 자료는 현재 저장소에 없다
 
-포트폴리오 설계 문서에는 현재 저장소에 없는 참고 자료들이 함께 언급되어 있다. 따라서 설계 문서에 적힌 모든 배경 자료가 실제로 저장소 안에 존재한다고 가정하면 안 된다.
+케이스 스터디 설계 문서에는 현재 저장소에 없는 참고 자료들이 함께 언급되어 있다. 따라서 설계 문서에 적힌 모든 배경 자료가 실제로 저장소 안에 존재한다고 가정하면 안 된다.
 
 현재 확인되지 않는 참고 자료:
 

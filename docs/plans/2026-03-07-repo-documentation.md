@@ -15,7 +15,7 @@
 **Files:**
 - Create: `README.md`
 - Check: `resume/product-engineer.md`
-- Check: `portfolio/outbound-voice-agent.md`
+- Check: `case-studies/outbound-voice-agent.md`
 - Check: `docs/guides/resume-guide.md`
 
 **Step 1: Write the README structure**

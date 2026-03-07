@@ -2,7 +2,7 @@
 
 > **For Claude:** REQUIRED SUB-SKILL: Use superpowers:executing-plans to implement this plan task-by-task.
 
-**Goal:** Generate a single 16:9 PPT-style summary image from `portfolio/outbound-voice-agent.md` using the repository's local `image-generation` skill.
+**Goal:** Generate a single 16:9 PPT-style summary image from `case-studies/outbound-voice-agent.md` using the repository's local `image-generation` skill.
 
 **Architecture:** Use the existing portfolio case study as the only content source, compress it into one slide-worthy visual hierarchy, and run the local Gemini wrapper through `.codex/skills/image-generation/scripts/generate-image`. Save the exported image under `assets/` so it remains a reusable portfolio artifact inside this repository.
 
@@ -61,7 +61,7 @@ The result must feel like a premium technical presentation slide, legible, balan
 ### Task 1: Lock the content scope for the slide
 
 **Files:**
-- Check: `portfolio/outbound-voice-agent.md`
+- Check: `case-studies/outbound-voice-agent.md`
 - Reference: `docs/plans/2026-03-07-outbound-voice-agent-portfolio-design.md`
 - Create: `docs/plans/2026-03-07-outbound-voice-agent-ppt-image.md`
 
@@ -70,7 +70,7 @@ The result must feel like a premium technical presentation slide, legible, balan
 Run:
 
 ```bash
-sed -n '1,260p' portfolio/outbound-voice-agent.md
+sed -n '1,260p' case-studies/outbound-voice-agent.md
 ```
 
 Expected: confirm the slide should center on the project title, role, period, 5 key metrics, architecture summary, and 3 technical differentiators.
@@ -104,7 +104,7 @@ Write this working content block into the plan notes section before generating:
 Run:
 
 ```bash
-rg -n "총 통화 성공|일 평균 통화|도입 병원 수|응답 레이턴시|지원 언어" portfolio/outbound-voice-agent.md
+rg -n "총 통화 성공|일 평균 통화|도입 병원 수|응답 레이턴시|지원 언어" case-studies/outbound-voice-agent.md
 ```
 
 Expected: matches exist for the five headline metrics and no extra section is required to understand the summary image.
@@ -120,7 +120,7 @@ git commit -m "docs: add outbound voice agent ppt image plan"
 
 **Files:**
 - Modify: `docs/plans/2026-03-07-outbound-voice-agent-ppt-image.md`
-- Reference: `portfolio/outbound-voice-agent.md`
+- Reference: `case-studies/outbound-voice-agent.md`
 
 **Step 1: Write the prompt-spec section in the plan**
 
