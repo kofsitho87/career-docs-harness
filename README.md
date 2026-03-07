@@ -22,6 +22,7 @@
 - `resume/`: 최종 이력서 산출물
 - `portfolio/`: 최종 포트폴리오 산출물
 - `assets/`: 이미지와 시각 자료 자산
+- `.codex/skills/image-generation/`: 공유 Gemini 스크립트를 재사용하는 Codex 호환 로컬 이미지 생성 스킬
 - `.claude/skills/image_generation/`: 이미지 자산 제작에 쓰는 로컬 스킬과 스크립트
 
 ## 추천 읽기 순서

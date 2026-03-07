@@ -13,6 +13,7 @@
 - `portfolio/`: 현재 최종 포트폴리오 산출물.
 - `assets/`: 이미지와 시각 자료 자산.
 - `.claude/skills/image_generation/`: 이미지 자산 제작에 쓰는 로컬 스킬과 스크립트.
+- `.codex/skills/image-generation/`: Codex용 로컬 이미지 생성 스킬. 기존 Claude Python 구현을 재사용한다.
 
 ## 현재 대표 산출물
 
@@ -36,6 +37,9 @@
 - 포트폴리오 문서를 수정할 때는 관련 `docs/plans/` 설계 문서를 함께 확인한다.
 - 설계나 구조 변경 전에는 관련 `docs/plans/` 문서를 먼저 확인한다.
 - 이미지나 시각 자산은 문서 구조와 메시지가 정리된 뒤 마지막 단계에서 다룬다.
+- 이미지 생성 요청이 들어오면 `.codex/skills/image-generation/` 스킬을 우선 사용한다.
+- 해당 스킬은 `.claude/skills/image_generation/scripts/generate_image.py`를 단일 구현으로 재사용한다.
+- 이미지 생성 준비 여부를 말하기 전에 `.claude/skills/image_generation/scripts/.env`에 `GEMINI_API_KEY`가 있는지 확인한다.
 - 최종 산출물을 수정할 때는 사실 기준 문서와 모순이 없는지 항상 확인한다.
 
 ## 수정 우선순위

@@ -1,0 +1,3 @@
+display_name: Image Generation
+short_description: Generate repository images with the local Gemini script
+default_prompt: Generate an image for this project using the local image-generation skill.
