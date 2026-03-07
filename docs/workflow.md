@@ -8,7 +8,7 @@
 
 이 범주의 문서는 실제 경력, 프로젝트, 기술, 성과를 정리한 기준 데이터다. 표현 방식은 바뀔 수 있어도 사실 자체를 가장 우선해서 유지해야 한다.
 
-- `docs/source/origin-resume.md`: 경력, 프로젝트, 기술 스택, 활동 이력을 가장 넓게 모아 둔 기본 이력 데이터
+- `resume/product-engineer.md`: 현재 정본이자 경력, 프로젝트, 기술 스택, 활동 이력을 관리하는 사실 기준 이력서
 
 실무 원칙:
 
@@ -32,7 +32,7 @@
 
 이 범주의 문서는 외부에 보여주기 위한 현재 결과물이다. 지원용 이력서, 프로젝트 포트폴리오, 필요 시 시각 자료가 여기에 해당한다.
 
-- `resume/product-engineer.md`: 현재 메인 이력서 산출물
+- `resume/product-engineer.md`: 현재 메인 이력서 산출물이자 사실 기준 문서
 - `portfolio/outbound-voice-agent.md`: 현재 메인 포트폴리오 산출물
 - `assets/heewung-song-infographic.png`: 이력서와 함께 사용할 수 있는 시각 자료
 

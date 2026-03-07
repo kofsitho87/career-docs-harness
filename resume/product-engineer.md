@@ -27,7 +27,7 @@ Multi-Agent 아키텍처 설계, OpenAI Realtime API 기반 실시간 음성 처
 
 ### 와이즈에이아이
 
-**AI 엔지니어 / 팀장**  
+**AI 엔지니어 / AI 프로덕트 팀장**  
 2025.03 - 현재
 
 
@@ -59,14 +59,17 @@ Multi-Agent 아키텍처 설계, OpenAI Realtime API 기반 실시간 음성 처
 
 #### 병원 고객상담 AI Agent 시스템 설계 및 배포
 
+2025.03 - 2025.05
+
 의료기관 고객 상담 자동화를 위한 AI Agent 시스템을 설계하고, 백엔드 API부터 검색 시스템, 운영 대시보드까지 구축했습니다.
 
-- LangGraph 기반 대화 상태 관리와 멀티스텝 워크플로우를 설계 했습니다.
+- LangGraph 기반 대화 상태 관리와 멀티스텝 워크플로우를 설계해 95% 이상의 정확한 고객 상담 응답을 달성했습니다.
 - 병원 웹사이트 데이터를 자동 수집하고 6개 토픽으로 분류·구조화하는 추출 파이프라인을 개발했습니다. TrustCall 기반 스키마 추출로 90% 이상의 정보 추출 정확도를 달성했습니다.
 - FastAPI + LangGraph SDK 기반 비동기 API 서버를 설계하고 API 응답 속도를 70% 개선했습니다.
 - Qdrant 기반 하이브리드 검색 시스템과 Next.js 15 기반 Agent 모니터링 대시보드를 구축했습니다.
+- AWS ECS Fargate 기반 마이크로서비스 아키텍처와 GitHub Actions CI/CD를 구성하고, 개발/운영 환경 분리와 Blue/Green 배포로 99.9% 가용성을 확보했습니다.
 
-기술: Python, FastAPI, LangGraph, LangChain, TrustCall, Crawl4ai, Qdrant, PostgreSQL, Redis, Next.js 15, CopilotKit, shadcn/ui, LangSmith
+기술: Python, FastAPI, LangGraph, LangChain, TrustCall, Crawl4ai, Qdrant, PostgreSQL, Redis, Next.js 15, CopilotKit, shadcn/ui, LangSmith, AWS ECS Fargate, ALB, VPC, ECR, GitHub Actions, Docker, Terraform
 
 ---
 
