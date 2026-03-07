@@ -1,5 +1,6 @@
 .omc
 .omx
+.worktrees
 
 # Env
 .env
