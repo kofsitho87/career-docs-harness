@@ -1,6 +1,6 @@
 # 송희웅
 
-![Infographic](heewung-song-infographic.png)
+![Infographic](../assets/heewung-song-infographic.png)
 
 - 연락처: +82-10-3098-2011
 - 이메일: [kofsitho@naver.com](mailto:kofsitho@naver.com)

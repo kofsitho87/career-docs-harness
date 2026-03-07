@@ -14,9 +14,9 @@
 
 **Files:**
 - Create: `README.md`
-- Check: `dan-resume-product-engineer.md`
-- Check: `projects/portfolio-outbound-voice-agent.md`
-- Check: `docs/resume-guidelines/resume-guide.md`
+- Check: `resume/product-engineer.md`
+- Check: `portfolio/outbound-voice-agent.md`
+- Check: `docs/guides/resume-guide.md`
 
 **Step 1: Write the README structure**
 
@@ -40,8 +40,8 @@ Check that the README can be scanned quickly and does not duplicate the detailed
 
 **Files:**
 - Create: `docs/workflow.md`
-- Check: `docs/origin-resume.md`
-- Check: `docs/resume-guidelines/resume-guide.md`
+- Check: `docs/source/origin-resume.md`
+- Check: `docs/guides/resume-guide.md`
 - Check: `docs/plans/2026-03-07-outbound-voice-agent-portfolio-design.md`
 - Check: `.claude/skills/image_generation/SKILL.md`
 

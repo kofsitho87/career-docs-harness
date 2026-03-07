@@ -26,7 +26,7 @@ Ensure the file clearly states the intended deliverable and the role split betwe
 ### Task 2: Draft the guideline document
 
 **Files:**
-- Create: `docs/resume-portfolio-guidelines.md`
+- Create: `docs/guides/resume-guide.md`
 
 **Step 1: Write the core principles**
 
@@ -47,7 +47,7 @@ Include good vs bad examples, bullet-writing formulas, and reusable templates.
 ### Task 3: Review and polish
 
 **Files:**
-- Review: `docs/resume-portfolio-guidelines.md`
+- Review: `docs/guides/resume-guide.md`
 
 **Step 1: Check practical usefulness**
 

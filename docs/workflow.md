@@ -8,7 +8,7 @@
 
 이 범주의 문서는 실제 경력, 프로젝트, 기술, 성과를 정리한 기준 데이터다. 표현 방식은 바뀔 수 있어도 사실 자체를 가장 우선해서 유지해야 한다.
 
-- `docs/origin-resume.md`: 경력, 프로젝트, 기술 스택, 활동 이력을 가장 넓게 모아 둔 기본 이력 데이터
+- `docs/source/origin-resume.md`: 경력, 프로젝트, 기술 스택, 활동 이력을 가장 넓게 모아 둔 기본 이력 데이터
 
 실무 원칙:
 
@@ -19,7 +19,7 @@
 
 이 범주의 문서는 무엇을 어떻게 쓸지 정하는 기준과 설계 문서다. 사실 데이터 자체를 담기보다는, 어떤 관점으로 문서를 편집할지 안내한다.
 
-- `docs/resume-guidelines/resume-guide.md`: 이력서 구조, 문체, 성과 표현, ATS 대응 등 재사용 가능한 작성 가이드
+- `docs/guides/resume-guide.md`: 이력서 구조, 문체, 성과 표현, ATS 대응 등 재사용 가능한 작성 가이드
 - `docs/plans/2026-03-07-outbound-voice-agent-portfolio-design.md`: 아웃바운드 보이스 에이전트 포트폴리오의 구성과 강조 포인트를 정리한 설계 문서
 - `docs/plans/`: 저장소 문서화나 산출물 정리를 위한 작업 계획 문서 모음
 
@@ -32,9 +32,9 @@
 
 이 범주의 문서는 외부에 보여주기 위한 현재 결과물이다. 지원용 이력서, 프로젝트 포트폴리오, 필요 시 시각 자료가 여기에 해당한다.
 
-- `dan-resume-product-engineer.md`: 현재 메인 이력서 산출물
-- `projects/portfolio-outbound-voice-agent.md`: 현재 메인 포트폴리오 산출물
-- `heewung-song-infographic.png`: 이력서와 함께 사용할 수 있는 시각 자료
+- `resume/product-engineer.md`: 현재 메인 이력서 산출물
+- `portfolio/outbound-voice-agent.md`: 현재 메인 포트폴리오 산출물
+- `assets/heewung-song-infographic.png`: 이력서와 함께 사용할 수 있는 시각 자료
 
 실무 원칙:
 
@@ -62,14 +62,14 @@
 
 먼저 경력, 프로젝트, 기술 스택, 수치 성과 같은 사실 정보를 모은다.
 
-- 기본 시작점은 `docs/origin-resume.md`다.
+- 기본 시작점은 `docs/source/origin-resume.md`다.
 - 새 프로젝트를 문서화할 때도 먼저 사실, 역할, 기간, 성과, 사용 기술을 정리한다.
 
 ### 2.2 작성 및 설계 기준 정의
 
 다음으로 어떤 메시지와 구조로 보여줄지 정한다.
 
-- 이력서 작성 원칙은 `docs/resume-guidelines/resume-guide.md`를 기준으로 삼는다.
+- 이력서 작성 원칙은 `docs/guides/resume-guide.md`를 기준으로 삼는다.
 - 특정 포트폴리오 문서는 관련 설계 문서를 함께 본다.
 - 현재 아웃바운드 보이스 에이전트 포트폴리오는 `docs/plans/2026-03-07-outbound-voice-agent-portfolio-design.md`를 참고한다.
 
@@ -77,8 +77,8 @@
 
 기준이 정리되면 실제 산출물을 작성하거나 다듬는다.
 
-- 이력서 작업은 `dan-resume-product-engineer.md`를 중심으로 진행한다.
-- 프로젝트 포트폴리오 작업은 `projects/portfolio-outbound-voice-agent.md`를 중심으로 진행한다.
+- 이력서 작업은 `resume/product-engineer.md`를 중심으로 진행한다.
+- 프로젝트 포트폴리오 작업은 `portfolio/outbound-voice-agent.md`를 중심으로 진행한다.
 - 이 단계에서는 내용을 압축하거나 재배치할 수 있지만, 사실 왜곡 없이 사실 기준 문서를 바탕으로 수정해야 한다.
 
 ### 2.4 필요 시 보조 자산 생성
@@ -97,7 +97,7 @@
 설계 문서는 주제 기준으로 이름이 붙어 있고, 실제 결과 문서는 목적에 맞는 별도 파일명을 사용할 수 있다.
 
 - 포트폴리오 설계 문서: `docs/plans/2026-03-07-outbound-voice-agent-portfolio-design.md`
-- 실제 포트폴리오 산출물: `projects/portfolio-outbound-voice-agent.md`
+- 실제 포트폴리오 산출물: `portfolio/outbound-voice-agent.md`
 - 저장소 문서화 설계 문서: `docs/plans/2026-03-07-repo-documentation-design.md`
 - 저장소 문서화 구현 계획: `docs/plans/2026-03-07-repo-documentation.md`
 - 실제 문서화 결과 파일: `README.md`, `docs/workflow.md`
@@ -106,12 +106,12 @@
 
 ### 3.2 현재 포트폴리오 프로젝트는 1건만 정리되어 있다
 
-현재 저장소에서 명시적으로 정리된 프로젝트 포트폴리오는 `projects/portfolio-outbound-voice-agent.md` 한 개다.
+현재 저장소에서 명시적으로 정리된 프로젝트 포트폴리오는 `portfolio/outbound-voice-agent.md` 한 개다.
 
 의미:
 
 - 저장소는 포트폴리오 확장 가능한 구조를 갖고 있지만, 현재 공개용 프로젝트 문서는 아직 제한적이다.
-- 추가 프로젝트를 확장하려면 먼저 사실 자료를 정리하고, 필요한 경우 별도 설계 문서를 만든 뒤 `projects/` 아래 산출물을 늘리는 방식이 적절하다.
+- 추가 프로젝트를 확장하려면 먼저 사실 자료를 정리하고, 필요한 경우 별도 설계 문서를 만든 뒤 `portfolio/` 아래 산출물을 늘리는 방식이 적절하다.
 
 ### 3.3 일부 설계 문서의 참고 자료는 현재 저장소에 없다
 

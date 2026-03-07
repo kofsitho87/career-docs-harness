@@ -14,8 +14,8 @@
 
 **Files:**
 - Create: `docs/plans/2026-03-07-resume-rewrite.md`
-- Modify: `resume.md`
-- Create: `resume-product-engineer.md`
+- Modify: `docs/source/origin-resume.md`
+- Create: `resume/product-engineer.md`
 
 **Step 1: Identify the target role and key message**
 
@@ -50,8 +50,8 @@ Emphasize:
 ### Task 2: Draft the new resume file
 
 **Files:**
-- Modify: `resume.md`
-- Create: `resume-product-engineer.md`
+- Modify: `docs/source/origin-resume.md`
+- Create: `resume/product-engineer.md`
 
 **Step 1: Write a stronger summary**
 
@@ -81,7 +81,7 @@ Keep only the strongest supporting items that reinforce the target role.
 ### Task 3: Review and polish
 
 **Files:**
-- Review: `resume-product-engineer.md`
+- Review: `resume/product-engineer.md`
 
 **Step 1: Check consistency**
 

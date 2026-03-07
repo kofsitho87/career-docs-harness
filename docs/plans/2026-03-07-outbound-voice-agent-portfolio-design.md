@@ -59,6 +59,8 @@
 
 ## 참고 문서
 
+아래 참고 문서 중 일부는 현재 저장소에 포함되어 있지 않을 수 있다. 실제 작성 시에는 `portfolio/outbound-voice-agent.md`, `docs/workflow.md`, 현재 저장소 안에 있는 사실 기준 문서를 우선 근거로 사용한다.
+
 - docs/Livkit Agent/outbound_agent_architecture_final.md
 - docs/blog/livekit-hospital-voice-agent.md
 - docs/blog/call-analysis-pipeline-ko.md

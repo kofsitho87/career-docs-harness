@@ -57,6 +57,6 @@
 
 ## 기대 결과물
 
-- `docs/resume-portfolio-guidelines.md`에 실전형 가이드 문서를 작성한다.
+- `docs/guides/resume-guide.md`에 실전형 가이드 문서를 작성한다.
 - 문서 안에 이력서 섹션 템플릿, 프로젝트 설명 템플릿, 불릿 변환 공식까지 포함한다.
 
