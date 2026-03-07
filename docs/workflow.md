@@ -35,7 +35,10 @@
 - `resume/product-engineer.md`: 현재 메인 이력서 산출물이자 사실 기준 문서
 - `case-studies/outbound-voice-agent.md`: 아웃바운드 Voice AI Agent 케이스 스터디
 - `case-studies/inbound-voice-agent.md`: 인바운드 Voice AI Agent 케이스 스터디
+- `case-studies/hospital-customer-support-agent.md`: 병원 고객상담 AI Agent 케이스 스터디
 - `assets/heewung-song-infographic.png`: 이력서와 함께 사용할 수 있는 시각 자료
+- `assets/hospital-customer-support-agent-ppt-overview.png`: 병원 고객상담 AI Agent 개요·아키텍처 시각 자료
+- `assets/hospital-customer-support-agent-ppt-flow.png`: 병원 고객상담 AI Agent 흐름·설계 의사결정 시각 자료
 
 실무 원칙:
 
@@ -74,13 +77,14 @@
 - 특정 프로젝트 케이스 스터디 문서는 관련 설계 문서를 함께 본다.
 - 아웃바운드 보이스 에이전트 케이스 스터디는 `docs/plans/2026-03-07-outbound-voice-agent-portfolio-design.md`를 참고한다.
 - 인바운드 보이스 에이전트 케이스 스터디는 `docs/plans/2026-03-07-inbound-voice-agent-portfolio-design.md`를 참고한다.
+- 병원 고객상담 AI Agent 케이스 스터디는 `docs/plans/2026-03-07-hospital-customer-support-agent-design.md`를 참고한다.
 
 ### 2.3 최종 문서 작성 또는 개선
 
 기준이 정리되면 실제 산출물을 작성하거나 다듬는다.
 
 - 이력서 작업은 `resume/product-engineer.md`를 중심으로 진행한다.
-- 프로젝트 케이스 스터디 작업은 `case-studies/outbound-voice-agent.md`를 중심으로 진행한다.
+- 프로젝트 케이스 스터디 작업은 대상 문서에 맞는 `case-studies/*.md` 파일을 중심으로 진행한다.
 - 이 단계에서는 내용을 압축하거나 재배치할 수 있지만, 사실 왜곡 없이 사실 기준 문서를 바탕으로 수정해야 한다.
 
 ### 2.4 필요 시 보조 자산 생성
@@ -106,35 +110,15 @@
 
 따라서 작업자는 "계획 문서를 수정하는지", "최종 산출물을 수정하는지"를 항상 구분해야 한다.
 
-### 3.2 현재 프로젝트 케이스 스터디는 2건 정리되어 있다
+### 3.2 현재 프로젝트 케이스 스터디는 3건 정리되어 있다
 
-현재 저장소에서 정리된 프로젝트 케이스 스터디는 2건이다.
+현재 저장소에서 정리된 프로젝트 케이스 스터디는 3건이다.
 
 - `case-studies/outbound-voice-agent.md`: 아웃바운드 Voice AI Agent
 - `case-studies/inbound-voice-agent.md`: 인바운드 Voice AI Agent (아웃바운드의 시리즈 후속편)
+- `case-studies/hospital-customer-support-agent.md`: 병원 고객상담 AI Agent
 
 추가 프로젝트를 확장하려면 먼저 사실 자료를 정리하고, 필요한 경우 별도 설계 문서를 만든 뒤 `case-studies/` 아래 케이스 스터디 문서를 늘리는 방식이 적절하다.
-
-### 3.3 일부 설계 문서의 참고 자료는 현재 저장소에 없다
-
-케이스 스터디 설계 문서에는 현재 저장소에 없는 참고 자료들이 함께 언급되어 있다. 따라서 설계 문서에 적힌 모든 배경 자료가 실제로 저장소 안에 존재한다고 가정하면 안 된다.
-
-현재 확인되지 않는 참고 자료:
-
-- `docs/Livkit Agent/outbound_agent_architecture_final.md`
-- `docs/blog/livekit-hospital-voice-agent.md`
-- `docs/blog/call-analysis-pipeline-ko.md`
-- `docs/infra/server-infrastructure.md`
-- `docs/dev/Human 예약 플로우 요약.md`
-- `docs/dev/prompt_and_tools_review.md`
-- `docs/dev/developer_message_catalog.md`
-- `docs/image.png`
-
-실무적으로는 다음처럼 다루는 것이 안전하다.
-
-- 없는 참고 문서는 "외부 참고 또는 미반입 자료"로 간주한다.
-- 최종 산출물 작성 시에는 현재 저장소에 있는 사실 문서와 실제 산출물을 우선 근거로 삼는다.
-- 필요한 경우 누락 자료를 별도로 정리하거나, 설계 문서의 참고 목록을 현재 저장소 상태에 맞게 나중에 정비한다.
 
 ## 4. 권장 작업 방식
 
@@ -143,5 +127,3 @@
 - 사실 업데이트는 먼저 사실 기준 문서에 반영한다.
 - 표현 개선은 가이드와 설계 문서를 확인한 뒤 최종 산출물에 적용한다.
 - 이미지 생성이나 시각 자산 제작은 문서 구조와 메시지가 정리된 뒤에 진행한다.
-- 설계 문서에 있는 참고 자료가 실제로 존재하는지 항상 확인하고, 없는 자료를 전제로 문장을 쓰지 않는다.
-

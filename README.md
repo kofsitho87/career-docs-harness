@@ -13,7 +13,10 @@
 - `resume/product-engineer.md`: 현재 정본이자 사실 기준으로 사용하는 제품 엔지니어 이력서
 - `case-studies/outbound-voice-agent.md`: 아웃바운드 Voice AI Agent 케이스 스터디
 - `case-studies/inbound-voice-agent.md`: 인바운드 Voice AI Agent 케이스 스터디
+- `case-studies/hospital-customer-support-agent.md`: 병원 고객상담 AI Agent 케이스 스터디
 - `assets/heewung-song-infographic.png`: 이력서와 함께 쓰는 시각 자료 자산
+- `assets/hospital-customer-support-agent-ppt-overview.png`: 병원 고객상담 AI Agent 개요·아키텍처 슬라이드 이미지
+- `assets/hospital-customer-support-agent-ppt-flow.png`: 병원 고객상담 AI Agent 흐름·설계 의사결정 슬라이드 이미지
 
 ## 저장소 구성
 
@@ -32,6 +35,5 @@
 2. `resume/product-engineer.md`로 사실 기반 경력 재료와 현재 정본 이력서를 함께 확인합니다.
 3. `docs/guides/resume-guide.md`로 작성 원칙을 확인합니다.
 4. 필요할 때 현재 이력서 표현을 가이드 기준으로 다듬습니다.
-5. `case-studies/outbound-voice-agent.md`와 `case-studies/inbound-voice-agent.md`에서 프로젝트 케이스 스터디 문서를 읽습니다.
+5. `case-studies/outbound-voice-agent.md`, `case-studies/inbound-voice-agent.md`, `case-studies/hospital-customer-support-agent.md`에서 프로젝트 케이스 스터디 문서를 읽습니다.
 6. 필요할 때만 `docs/plans/`에서 설계 의도와 작업 계획을 확인합니다.
-
