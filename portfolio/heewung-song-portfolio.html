@@ -1,0 +1,1269 @@
+<!DOCTYPE html>
+<html lang="ko" class="theme-dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>송희웅 - Voice AI Engineer Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+  <script>Chart.defaults.animation = false;</script>
+  <script src="https://cdn.jsdelivr.net/npm/html-to-image@1.11.11/dist/html-to-image.js"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root { interpolate-size: allow-keywords; }
+
+    html.theme-dark {
+      --bg: #0A0A0A; --surface: #141414; --surface-hover: #1C1C1C;
+      --border: rgba(255,255,255,0.06);
+      --text: #EDEDED; --text-secondary: #888;
+      --accent: #3b82f6; --accent-secondary: #8b5cf6;
+      --positive: #10b981; --negative: #f43f5e; --warning: #f59e0b;
+      --glass-bg: rgba(255,255,255,0.03);
+      --hero-gradient: linear-gradient(135deg, #0f172a 0%, #1e1b4b 40%, #172554 100%);
+      --slide-accent-gradient: linear-gradient(135deg, #1e1b4b 0%, #312e81 50%, #1e3a5f 100%);
+    }
+    html.theme-light {
+      --bg: #FAFAF9; --surface: #FFFFFF; --surface-hover: #F5F5F4;
+      --border: rgba(0,0,0,0.06);
+      --text: #0f172a; --text-secondary: #64748b;
+      --accent: #2563eb; --accent-secondary: #7c3aed;
+      --positive: #059669; --negative: #e11d48; --warning: #d97706;
+      --glass-bg: rgba(0,0,0,0.02);
+      --hero-gradient: linear-gradient(135deg, #e0e7ff 0%, #c7d2fe 40%, #dbeafe 100%);
+      --slide-accent-gradient: linear-gradient(135deg, #eef2ff 0%, #e0e7ff 50%, #dbeafe 100%);
+    }
+
+    body {
+      font-family: 'Noto Sans KR', 'Inter', -apple-system, sans-serif;
+      background: var(--bg); color: var(--text);
+      line-height: 1.6; -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+    h1,h2,h3,h4 { color: var(--text); letter-spacing: -0.03em; line-height: 1.15; text-wrap: balance; }
+    h1 { font-weight: 800; }
+    h2 { font-weight: 700; }
+    h3 { font-weight: 600; }
+
+    /* ===== SLIDE SYSTEM ===== */
+    .slides-container { position: relative; overflow: hidden; }
+    .slide {
+      width: 100vw; height: 100vh; display: none;
+      flex-direction: column; justify-content: center; align-items: center;
+      position: relative; overflow: hidden;
+    }
+    .slide.active { display: flex; }
+    .slide-inner {
+      width: 100%; max-width: 1100px; padding: 60px 48px;
+      position: relative; z-index: 2;
+    }
+    .slide-bg-gradient {
+      position: absolute; inset: 0; z-index: 0;
+    }
+
+    /* ===== HERO SLIDE ===== */
+    .slide-hero .slide-bg-gradient { background: var(--hero-gradient); }
+    .slide-hero .hero-label {
+      font-size: 0.875rem; font-weight: 500; letter-spacing: 0.12em;
+      text-transform: uppercase; color: var(--accent); margin-bottom: 20px;
+      display: inline-block;
+    }
+    .slide-hero h1 { font-size: clamp(2.5rem, 6vw, 4rem); margin-bottom: 16px; }
+    .slide-hero .hero-subtitle {
+      font-size: clamp(1.1rem, 2.5vw, 1.5rem); color: var(--text-secondary);
+      max-width: 700px; line-height: 1.7; font-weight: 400;
+    }
+    .hero-stats {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 24px; margin-top: 48px;
+    }
+    .hero-stat-value {
+      font-size: 2.5rem; font-weight: 800; letter-spacing: -0.04em;
+      line-height: 1;
+    }
+    .hero-stat-label {
+      font-size: 0.8rem; color: var(--text-secondary); margin-top: 6px;
+      font-weight: 500; letter-spacing: 0.02em;
+    }
+
+    /* ===== SECTION SLIDE ===== */
+    .slide-section .slide-bg-gradient { background: var(--slide-accent-gradient); }
+    .slide-section h2 {
+      font-size: clamp(2rem, 5vw, 3.5rem); text-align: center;
+    }
+    .slide-section .section-desc {
+      font-size: 1.15rem; color: var(--text-secondary); text-align: center;
+      max-width: 600px; margin: 16px auto 0;
+    }
+
+    /* ===== CONTENT SLIDES ===== */
+    .slide-content-bg { background: var(--bg); }
+    .slide-content-bg .slide-bg-gradient { background: var(--bg); }
+
+    .slide-title-row {
+      display: flex; align-items: baseline; gap: 16px; margin-bottom: 40px;
+    }
+    .slide-title-row h2 { font-size: clamp(1.8rem, 4vw, 2.5rem); }
+    .slide-title-row .tag {
+      font-size: 0.75rem; font-weight: 600; letter-spacing: 0.08em;
+      text-transform: uppercase; color: var(--accent); background: rgba(59,130,246,0.1);
+      padding: 4px 12px; border-radius: 99px;
+    }
+
+    /* ===== CARDS ===== */
+    .card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 12px; padding: 28px;
+      transition: box-shadow 0.2s ease;
+    }
+    .card:hover {
+      box-shadow: 0 0 0 1px var(--border), 0 8px 24px rgba(0,0,0,0.1);
+    }
+    .card-grid {
+      display: grid; gap: 20px;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    }
+    .card-grid-3 { grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
+
+    .card-icon {
+      width: 44px; height: 44px; border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 16px; flex-shrink: 0;
+    }
+    .card-icon svg { width: 22px; height: 22px; }
+    .card h3 { font-size: 1.15rem; margin-bottom: 8px; }
+    .card p { font-size: 0.9rem; color: var(--text-secondary); line-height: 1.65; }
+
+    /* ===== ARCHITECTURE DIAGRAM ===== */
+    .arch-flow {
+      display: flex; align-items: center; justify-content: center;
+      gap: 12px; flex-wrap: wrap; margin-top: 32px;
+    }
+    .arch-node {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 10px; padding: 14px 20px; text-align: center;
+      min-width: 120px;
+    }
+    .arch-node-primary {
+      background: rgba(59,130,246,0.1); border-color: rgba(59,130,246,0.2);
+    }
+    .arch-node h4 { font-size: 0.85rem; font-weight: 700; margin-bottom: 2px; }
+    .arch-node span { font-size: 0.75rem; color: var(--text-secondary); }
+    .arch-arrow {
+      font-size: 1.2rem; color: var(--text-secondary); font-weight: 300;
+    }
+
+    /* ===== PIPELINE ===== */
+    .pipeline {
+      display: flex; align-items: stretch; gap: 0; margin-top: 32px;
+      flex-wrap: wrap; justify-content: center;
+    }
+    .pipeline-step {
+      background: var(--surface); border: 1px solid var(--border);
+      padding: 20px 24px; text-align: center; flex: 1; min-width: 160px;
+      position: relative;
+    }
+    .pipeline-step:first-child { border-radius: 12px 0 0 12px; }
+    .pipeline-step:last-child { border-radius: 0 12px 12px 0; }
+    .pipeline-step h4 { font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 4px; }
+    .pipeline-step p { font-size: 0.78rem; color: var(--text-secondary); }
+    .pipeline-step .step-num {
+      font-size: 0.65rem; font-weight: 700; color: var(--accent);
+      letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 8px;
+    }
+
+    /* ===== METRIC BARS ===== */
+    .metric-bar-wrap { margin-bottom: 20px; }
+    .metric-bar-label {
+      display: flex; justify-content: space-between; margin-bottom: 6px;
+      font-size: 0.85rem;
+    }
+    .metric-bar-label span:last-child { font-weight: 700; color: var(--accent); }
+    .metric-bar {
+      height: 8px; background: var(--border); border-radius: 99px; overflow: hidden;
+    }
+    .metric-bar-fill {
+      height: 100%; border-radius: 99px;
+      background: linear-gradient(90deg, var(--accent), var(--accent-secondary));
+      transition: width 1s ease;
+    }
+
+    /* ===== TECH TAGS ===== */
+    .tech-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+    .tech-tag {
+      font-size: 0.72rem; font-weight: 600; letter-spacing: 0.02em;
+      padding: 5px 12px; border-radius: 99px;
+      background: var(--glass-bg); border: 1px solid var(--border);
+      color: var(--text-secondary);
+    }
+    .tech-tag.primary { color: var(--accent); background: rgba(59,130,246,0.08); border-color: rgba(59,130,246,0.15); }
+    .tech-tag.secondary { color: var(--accent-secondary); background: rgba(139,92,246,0.08); border-color: rgba(139,92,246,0.15); }
+    .tech-tag.green { color: var(--positive); background: rgba(16,185,129,0.08); border-color: rgba(16,185,129,0.15); }
+
+    /* ===== TIMELINE ===== */
+    .timeline { position: relative; padding-left: 28px; margin-top: 28px; }
+    .timeline::before {
+      content: ''; position: absolute; left: 6px; top: 0; bottom: 0;
+      width: 2px; background: var(--border);
+    }
+    .timeline-item { position: relative; margin-bottom: 28px; }
+    .timeline-item::before {
+      content: ''; position: absolute; left: -24px; top: 6px;
+      width: 10px; height: 10px; border-radius: 50%;
+      background: var(--accent); border: 2px solid var(--bg);
+    }
+    .timeline-item h4 { font-size: 1rem; margin-bottom: 4px; }
+    .timeline-item .tl-date { font-size: 0.75rem; color: var(--accent); font-weight: 600; margin-bottom: 4px; }
+    .timeline-item p { font-size: 0.85rem; color: var(--text-secondary); }
+
+    /* ===== COMPARISON ===== */
+    .comparison-table {
+      width: 100%; border-collapse: separate; border-spacing: 0;
+      margin-top: 24px; font-size: 0.85rem;
+    }
+    .comparison-table th, .comparison-table td {
+      padding: 14px 16px; text-align: left; border-bottom: 1px solid var(--border);
+    }
+    .comparison-table th {
+      font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.08em;
+      color: var(--text-secondary); font-weight: 600;
+    }
+    .comparison-table td:first-child { font-weight: 600; }
+    .val-good { color: var(--positive); font-weight: 700; }
+    .val-bad { color: var(--text-secondary); }
+
+    /* ===== CHART ===== */
+    .chart-container {
+      height: 360px; padding: 24px; border-radius: 12px;
+      background: var(--surface); border: 1px solid var(--border);
+    }
+
+    /* ===== TWO COL ===== */
+    .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; align-items: start; }
+
+    /* ===== NAV ===== */
+    .slide-nav {
+      position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%);
+      display: flex; align-items: center; gap: 8px; z-index: 9998;
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 99px; padding: 6px 16px;
+      backdrop-filter: blur(12px);
+    }
+    .slide-nav button {
+      width: 32px; height: 32px; border-radius: 50%;
+      background: transparent; border: none; color: var(--text-secondary);
+      cursor: pointer; display: flex; align-items: center; justify-content: center;
+      opacity: 0.5; transition: opacity 0.2s;
+    }
+    .slide-nav button:hover { opacity: 1; }
+    .slide-counter {
+      font-size: 0.75rem; color: var(--text-secondary); font-weight: 500;
+      min-width: 44px; text-align: center; opacity: 0.6;
+    }
+
+    /* ===== PROGRESS BAR ===== */
+    .progress-bar {
+      position: fixed; top: 0; left: 0; height: 3px; z-index: 9997;
+      background: linear-gradient(90deg, var(--accent), var(--accent-secondary));
+      transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    /* ===== ANIMATIONS ===== */
+    @keyframes fadeInUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    @keyframes slideInLeft { from { opacity: 0; transform: translateX(-40px); } to { opacity: 1; transform: translateX(0); } }
+    @keyframes slideInRight { from { opacity: 0; transform: translateX(40px); } to { opacity: 1; transform: translateX(0); } }
+    .animate { animation: fadeInUp 0.6s ease-out both; }
+    .animate.delay-1 { animation-delay: 0.1s; }
+    .animate.delay-2 { animation-delay: 0.2s; }
+    .animate.delay-3 { animation-delay: 0.3s; }
+    .animate.delay-4 { animation-delay: 0.4s; }
+    .animate.delay-5 { animation-delay: 0.5s; }
+    .animate.delay-6 { animation-delay: 0.6s; }
+
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation: none !important; transition: none !important; }
+      .reveal { opacity: 1; transform: none; }
+    }
+
+    /* ===== PRINT ===== */
+    @media print {
+      body { background: white !important; color: black !important; }
+      .viz-menu, .slide-nav, .progress-bar { display: none !important; }
+      .slide { display: flex !important; page-break-after: always; height: auto; min-height: 100vh; }
+      .card { break-inside: avoid; border: 1px solid #ddd; box-shadow: none; }
+      * { print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+    }
+    @page { margin: 0.5in; }
+
+    /* ===== MENU ===== */
+    .viz-menu { position: fixed; top: 16px; right: 16px; z-index: 9999; }
+    .viz-menu-toggle {
+      width: 44px; height: 44px; border-radius: 12px;
+      background: var(--surface); border: 1px solid var(--border);
+      color: var(--text); cursor: pointer; display: flex;
+      align-items: center; justify-content: center;
+      backdrop-filter: blur(12px); transition: all 0.2s;
+    }
+    .viz-menu-toggle:hover { background: var(--surface-hover); }
+    .viz-menu-dropdown {
+      position: absolute; top: 52px; right: 0; min-width: 200px;
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 12px; padding: 8px;
+      opacity: 0; visibility: hidden; transform: translateY(-8px);
+      transition: all 0.2s; backdrop-filter: blur(16px);
+    }
+    .viz-menu-dropdown.open { opacity: 1; visibility: visible; transform: translateY(0); }
+    .viz-menu-dropdown button {
+      width: 100%; padding: 10px 14px; border: none; border-radius: 8px;
+      background: transparent; color: var(--text); font-size: 14px;
+      font-family: inherit; cursor: pointer; text-align: left;
+      display: flex; align-items: center; gap: 10px; transition: background 0.15s;
+    }
+    .viz-menu-dropdown button:hover { background: var(--surface-hover); }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 768px) {
+      .slide-inner { padding: 40px 24px; }
+      .two-col { grid-template-columns: 1fr; }
+      .card-grid, .card-grid-3 { grid-template-columns: 1fr; }
+      .pipeline { flex-direction: column; }
+      .pipeline-step { border-radius: 8px !important; }
+      .arch-flow { flex-direction: column; }
+      .hero-stats { grid-template-columns: repeat(2, 1fr); }
+      .comparison-table { font-size: 0.78rem; }
+    }
+    @media (max-width: 375px) {
+      body { overflow-x: hidden; }
+      .slide-inner { padding: 32px 16px; }
+      .hero-stat-value { font-size: 2rem; }
+    }
+
+    /* ===== DECORATIVE ===== */
+    .dot-pattern {
+      position: absolute; inset: 0; z-index: 0; opacity: 0.03;
+      background-image: radial-gradient(circle, var(--text) 1px, transparent 1px);
+      background-size: 24px 24px;
+    }
+
+    /* ===== CLOSING SLIDE ===== */
+    .contact-links { display: flex; flex-wrap: wrap; gap: 16px; margin-top: 32px; }
+    .contact-link {
+      display: flex; align-items: center; gap: 8px;
+      padding: 10px 20px; border-radius: 10px;
+      background: var(--surface); border: 1px solid var(--border);
+      color: var(--text); text-decoration: none; font-size: 0.85rem; font-weight: 500;
+      transition: all 0.2s;
+    }
+    .contact-link:hover { background: var(--surface-hover); border-color: var(--accent); }
+    .contact-link svg { width: 18px; height: 18px; color: var(--accent); }
+  </style>
+</head>
+<body>
+  <a href="#main-content" class="skip-link" style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;z-index:10000;padding:8px 16px;background:var(--accent);color:white;text-decoration:none;border-radius:4px;" onfocus="this.style.cssText='position:fixed;left:16px;top:16px;z-index:10000;padding:8px 16px;background:var(--accent);color:white;text-decoration:none;border-radius:4px;'" onblur="this.style.cssText='position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;'">Skip to content</a>
+
+  <!-- PROGRESS BAR -->
+  <div class="progress-bar" id="progressBar" style="width: 0%;"></div>
+
+  <!-- MENU -->
+  <div class="viz-menu">
+    <button class="viz-menu-toggle" onclick="toggleMenu()" aria-label="Menu">
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+        <line x1="3" y1="5" x2="17" y2="5"/><line x1="3" y1="10" x2="17" y2="10"/><line x1="3" y1="15" x2="17" y2="15"/>
+      </svg>
+    </button>
+    <div class="viz-menu-dropdown" id="vizMenuDropdown">
+      <button onclick="cycleTheme()"><span id="themeIcon">&#127769;</span><span id="themeLabel">Dark</span></button>
+      <button onclick="downloadImage()"><span>&#128229;</span><span>Download PNG</span></button>
+      <button onclick="window.print()"><span>&#128424;</span><span>Print / PDF</span></button>
+    </div>
+  </div>
+
+  <main id="main-content" role="main">
+    <div class="slides-container">
+
+      <!-- ===== SLIDE 1: HERO ===== -->
+      <section class="slide slide-hero active" data-slide="1">
+        <div class="slide-bg-gradient"></div>
+        <div class="dot-pattern"></div>
+        <div class="slide-inner">
+          <div class="hero-label animate">Voice AI Engineer</div>
+          <h1 class="animate delay-1">송희웅</h1>
+          <p class="hero-subtitle animate delay-2">
+            병원 Voice AI 시스템을 1인 설계·개발·운영하며<br>
+            100개 병원, 일 2,000건 실시간 AI 통화를 처리하는<br>
+            프로덕션 서비스를 구축했습니다.
+          </p>
+          <div class="hero-stats animate delay-3">
+            <div>
+              <div class="hero-stat-value" style="color: var(--accent);" data-count="96000" data-suffix="+">0</div>
+              <div class="hero-stat-label">총 통화 성공</div>
+            </div>
+            <div>
+              <div class="hero-stat-value" data-count="2000" data-suffix="/일">0</div>
+              <div class="hero-stat-label">일 평균 통화</div>
+            </div>
+            <div>
+              <div class="hero-stat-value" data-count="100" data-suffix="+">0</div>
+              <div class="hero-stat-label">도입 병원</div>
+            </div>
+            <div>
+              <div class="hero-stat-value" data-count="6">0</div>
+              <div class="hero-stat-label">지원 언어</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== SLIDE 2: ABOUT ===== -->
+      <section class="slide slide-content-bg" data-slide="2">
+        <div class="slide-bg-gradient"></div>
+        <div class="slide-inner">
+          <div class="slide-title-row animate">
+            <h2>About Me</h2>
+            <span class="tag">9년+ 경력</span>
+          </div>
+          <div class="two-col">
+            <div class="animate delay-1">
+              <p style="font-size: 1.05rem; line-height: 1.8; color: var(--text-secondary);">
+                프론트엔드, 백엔드, 인프라를 아우르며 제품을 설계하고 출시해 온 시니어 엔지니어입니다.
+              </p>
+              <p style="font-size: 1.05rem; line-height: 1.8; margin-top: 16px;">
+                Multi-Agent 아키텍처 설계, OpenAI Realtime API 기반 실시간 음성 처리, LLM 기반 통화 분석 파이프라인 등 <strong>AI 애플리케이션의 설계부터 프로덕션 운영까지 엔드투엔드 오너십</strong>에 강점이 있습니다.
+              </p>
+              <div class="timeline animate delay-3">
+                <div class="timeline-item">
+                  <div class="tl-date">2025.03 - 현재</div>
+                  <h4>와이즈에이아이 &middot; AI 프로덕트 팀장</h4>
+                  <p>병원 Voice AI 제품 설계·개발·운영</p>
+                </div>
+                <div class="timeline-item">
+                  <div class="tl-date">2019.03 - 2025.02</div>
+                  <h4>투썬월드 &middot; 소프트웨어 엔지니어</h4>
+                  <p>교육/AI 서비스 웹 제품 개발</p>
+                </div>
+                <div class="timeline-item">
+                  <div class="tl-date">2017 - 2018</div>
+                  <h4>투미유 &middot; iOS &amp; Backend 개발</h4>
+                  <p>영어회화 학습 서비스 개발</p>
+                </div>
+              </div>
+            </div>
+            <div class="animate delay-2">
+              <h3 style="font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-secondary); margin-bottom: 16px;">Core Tech Stack</h3>
+              <div class="tech-tags" style="gap: 10px;">
+                <span class="tech-tag primary">OpenAI Realtime API</span>
+                <span class="tech-tag primary">LiveKit Agents</span>
+                <span class="tech-tag primary">LangGraph</span>
+                <span class="tech-tag primary">LangChain</span>
+                <span class="tech-tag secondary">Claude API</span>
+                <span class="tech-tag secondary">GPT-4.1</span>
+                <span class="tech-tag secondary">Gemini 2.5 Pro</span>
+                <span class="tech-tag green">Python</span>
+                <span class="tech-tag green">FastAPI</span>
+                <span class="tech-tag">Next.js</span>
+                <span class="tech-tag">React</span>
+                <span class="tech-tag">TypeScript</span>
+                <span class="tech-tag">Qdrant</span>
+                <span class="tech-tag">PostgreSQL</span>
+                <span class="tech-tag">RabbitMQ</span>
+                <span class="tech-tag">Kafka</span>
+                <span class="tech-tag">AWS ECS Fargate</span>
+                <span class="tech-tag">Docker</span>
+                <span class="tech-tag">Terraform</span>
+                <span class="tech-tag">SIP Trunk</span>
+              </div>
+              <div style="margin-top: 32px;">
+                <h3 style="font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-secondary); margin-bottom: 16px;">Open Source</h3>
+                <div class="card" style="padding: 18px 20px;">
+                  <h4 style="font-size: 0.9rem;">LangChain-OpenTutorial</h4>
+                  <p style="font-size: 0.8rem; color: var(--text-secondary);">Core Contributor &middot; 2025.02</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== SLIDE 3: PROJECT SECTION - OUTBOUND ===== -->
+      <section class="slide slide-section" data-slide="3">
+        <div class="slide-bg-gradient"></div>
+        <div class="dot-pattern"></div>
+        <div class="slide-inner" style="text-align: center;">
+          <div class="animate" style="font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.15em; color: var(--accent); margin-bottom: 16px;">Case Study 01</div>
+          <h2 class="animate delay-1">병원 아웃바운드<br>Voice AI Agent</h2>
+          <p class="section-desc animate delay-2">병원 예약 확인·안내 전화를 AI가 자동 발신하고,<br>통화 내용을 자동 분석하는 실시간 음성 AI 시스템</p>
+          <div style="margin-top: 32px;" class="animate delay-3">
+            <span class="tag" style="font-size: 0.85rem; padding: 6px 18px;">1인 설계 · 개발 · 운영</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== SLIDE 4: OUTBOUND - ARCHITECTURE ===== -->
+      <section class="slide slide-content-bg" data-slide="4">
+        <div class="slide-bg-gradient"></div>
+        <div class="slide-inner">
+          <div class="slide-title-row animate">
+            <h2>Multi-Agent 아키텍처</h2>
+            <span class="tag">설계</span>
+          </div>
+          <p class="animate delay-1" style="color: var(--text-secondary); margin-bottom: 32px; max-width: 700px;">
+            단일 Agent의 프롬프트 200줄, 도구 14개 → 역할별 3개 Agent로 분리하여<br>도구 오호출률 감소, 독립적 유지보수 달성
+          </p>
+
+          <div class="two-col animate delay-2">
+            <div>
+              <table class="comparison-table">
+                <thead><tr><th>항목</th><th>Before</th><th>After</th></tr></thead>
+                <tbody>
+                  <tr><td>프롬프트 길이</td><td class="val-bad">200줄</td><td class="val-good">각 40~50줄</td></tr>
+                  <tr><td>Agent당 도구 수</td><td class="val-bad">14개</td><td class="val-good">3~6개</td></tr>
+                  <tr><td>도구 오호출률</td><td class="val-bad">높음</td><td class="val-good">현저히 감소</td></tr>
+                  <tr><td>유지보수성</td><td class="val-bad">낮음</td><td class="val-good">독립적 수정</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <div>
+              <div class="arch-flow" style="flex-direction: column; gap: 16px;">
+                <div class="arch-node arch-node-primary" style="width: 100%;">
+                  <h4>TriageCoordinator</h4>
+                  <span>의도 분류 · 프롬프트 40줄 · 도구 3개</span>
+                </div>
+                <div style="display: flex; gap: 12px; width: 100%;">
+                  <div class="arch-node" style="flex: 1;">
+                    <h4>BookingAgent</h4>
+                    <span>예약 CRUD · 도구 5개</span>
+                  </div>
+                  <div class="arch-node" style="flex: 1;">
+                    <h4>InfoAgent</h4>
+                    <span>정보 안내 · 도구 6개</span>
+                  </div>
+                </div>
+                <div style="display: flex; gap: 12px; width: 100%;">
+                  <div class="arch-node" style="flex: 1;">
+                    <span>Booking API</span>
+                  </div>
+                  <div class="arch-node" style="flex: 1;">
+                    <span>Qdrant VectorDB</span>
+                  </div>
+                  <div class="arch-node" style="flex: 1;">
+                    <span>RabbitMQ</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== SLIDE 5: OUTBOUND - REALTIME + LATENCY ===== -->
+      <section class="slide slide-content-bg" data-slide="5">
+        <div class="slide-bg-gradient"></div>
+        <div class="slide-inner">
+          <div class="slide-title-row animate">
+            <h2>레이턴시 67% 감소</h2>
+            <span class="tag">성능</span>
+          </div>
+          <div class="two-col">
+            <div class="animate delay-1">
+              <h3 style="margin-bottom: 20px;">기존 STT → LLM → TTS 파이프라인</h3>
+              <div class="pipeline">
+                <div class="pipeline-step">
+                  <div class="step-num">Step 1</div>
+                  <h4>STT</h4>
+                  <p>~200ms</p>
+                </div>
+                <div class="pipeline-step">
+                  <div class="step-num">Step 2</div>
+                  <h4>LLM</h4>
+                  <p>~500ms</p>
+                </div>
+                <div class="pipeline-step">
+                  <div class="step-num">Step 3</div>
+                  <h4>TTS</h4>
+                  <p>~200ms</p>
+                </div>
+              </div>
+              <div style="text-align: center; margin-top: 12px;">
+                <span style="font-size: 1.5rem; font-weight: 800; color: var(--negative);">~900ms</span>
+                <span style="font-size: 0.85rem; color: var(--text-secondary); margin-left: 8px;">총 레이턴시</span>
+              </div>
+
+              <h3 style="margin: 32px 0 20px;">OpenAI Realtime API</h3>
+              <div class="pipeline">
+                <div class="pipeline-step" style="border-radius: 12px; background: rgba(59,130,246,0.06);">
+                  <div class="step-num">Single</div>
+                  <h4>Realtime API</h4>
+                  <p>End-to-end</p>
+                </div>
+              </div>
+              <div style="text-align: center; margin-top: 12px;">
+                <span style="font-size: 1.5rem; font-weight: 800; color: var(--positive);">~300ms</span>
+                <span style="font-size: 0.85rem; color: var(--text-secondary); margin-left: 8px;">67% 감소</span>
+              </div>
+            </div>
+            <div class="animate delay-2">
+              <h3 style="margin-bottom: 20px;">프로덕션 예외 처리</h3>
+              <div class="card" style="margin-bottom: 12px;">
+                <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 8px;">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--warning)" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+                  <h4 style="font-size: 0.9rem;">자동응답기(ARS) 3중 감지</h4>
+                </div>
+                <p style="font-size: 0.8rem; color: var(--text-secondary);">자동 인사말 + 버튼 입력 안내 + 프롬프트 반복</p>
+              </div>
+              <div class="card" style="margin-bottom: 12px;">
+                <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 8px;">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12,6 12,12 16,14"/></svg>
+                  <h4 style="font-size: 0.9rem;">사용자 무응답 처리</h4>
+                </div>
+                <p style="font-size: 0.8rem; color: var(--text-secondary);">2회 확인 시도 → 미응답 시 종료</p>
+              </div>
+              <div class="card">
+                <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 8px;">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--positive)" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+                  <h4 style="font-size: 0.9rem;">상담원 연결 Fallback</h4>
+                </div>
+                <p style="font-size: 0.8rem; color: var(--text-secondary);">명시적 요청 → SIP 전환 / 희망일 수집</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== SLIDE 6: OUTBOUND - ANALYSIS PIPELINE ===== -->
+      <section class="slide slide-content-bg" data-slide="6">
+        <div class="slide-bg-gradient"></div>
+        <div class="slide-inner">
+          <div class="slide-title-row animate">
+            <h2>통화 분석 파이프라인</h2>
+            <span class="tag">AI Pipeline</span>
+          </div>
+          <p class="animate delay-1" style="color: var(--text-secondary); margin-bottom: 32px; max-width: 700px;">
+            통화 종료 후 RabbitMQ로 비동기 전달 → 3단계 AI 분석 → 15개 메타데이터 자동 추출
+          </p>
+          <div class="pipeline animate delay-2" style="margin-bottom: 40px;">
+            <div class="pipeline-step">
+              <div class="step-num">Step 0</div>
+              <h4>음성 전사 교정</h4>
+              <p>Gemini 2.5 Pro<br>멀티모달 오디오 비교<br>Ghost Message 제거</p>
+            </div>
+            <div class="pipeline-step">
+              <div class="step-num">Step 1</div>
+              <h4>대화 분석</h4>
+              <p>Claude / GPT-4.1<br>trustcall JSON Patch<br>15개 메타데이터 추출</p>
+            </div>
+            <div class="pipeline-step">
+              <div class="step-num">Step 2</div>
+              <h4>대화 요약</h4>
+              <p>GPT-4.1<br>환자 관점 요약<br>결과 중심 서술</p>
+            </div>
+          </div>
+          <div class="card-grid animate delay-3" style="grid-template-columns: 1fr 1fr;">
+            <div class="card">
+              <h3 style="font-size: 0.95rem; margin-bottom: 12px;">LLM + Hard Rules 하이브리드</h3>
+              <table class="comparison-table" style="margin-top: 0;">
+                <thead><tr><th>LLM</th><th>Hard Rules</th></tr></thead>
+                <tbody>
+                  <tr><td>맥락 이해</td><td>100% 일관성</td></tr>
+                  <tr><td>유연한 판단</td><td>예측 가능한 결과</td></tr>
+                  <tr><td>새 패턴 대응</td><td>정확한 기준 판단</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="card">
+              <h3 style="font-size: 0.95rem; margin-bottom: 12px;">추출 메타데이터 예시</h3>
+              <div style="font-size: 0.8rem; color: var(--text-secondary); line-height: 1.9;">
+                <div style="display: flex; justify-content: space-between;"><span>상담원 연결 성공</span><span class="val-good">transfer_call_request</span></div>
+                <div style="display: flex; justify-content: space-between;"><span>예약 생성 완료</span><span class="val-good">reservation_creation</span></div>
+                <div style="display: flex; justify-content: space-between;"><span>긍정 응답</span><span class="val-good">positive_response</span></div>
+                <div style="display: flex; justify-content: space-between;"><span>지연 종료</span><span style="color: var(--warning);">end_call_due_to_delay</span></div>
+                <div style="display: flex; justify-content: space-between;"><span>거절 종료</span><span style="color: var(--negative);">user_rejection</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== SLIDE 7: OUTBOUND - INFRA ===== -->
+      <section class="slide slide-content-bg" data-slide="7">
+        <div class="slide-bg-gradient"></div>
+        <div class="slide-inner">
+          <div class="slide-title-row animate">
+            <h2>프로덕션 인프라</h2>
+            <span class="tag">AWS</span>
+          </div>
+          <div class="two-col">
+            <div class="animate delay-1">
+              <h3 style="margin-bottom: 16px;">AWS ECS Fargate 아키텍처</h3>
+              <div class="card-grid-3" style="grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 24px;">
+                <div class="card" style="padding: 16px; text-align: center;">
+                  <div style="font-size: 0.7rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.08em;">DEV</div>
+                  <div style="font-size: 1rem; font-weight: 700; margin-top: 4px;">2 vCPU</div>
+                  <div style="font-size: 0.75rem; color: var(--text-secondary);">4 GB</div>
+                </div>
+                <div class="card" style="padding: 16px; text-align: center;">
+                  <div style="font-size: 0.7rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.08em;">QA</div>
+                  <div style="font-size: 1rem; font-weight: 700; margin-top: 4px;">2 vCPU</div>
+                  <div style="font-size: 0.75rem; color: var(--text-secondary);">4 GB</div>
+                </div>
+                <div class="card" style="padding: 16px; text-align: center; border-color: rgba(59,130,246,0.2);">
+                  <div style="font-size: 0.7rem; color: var(--accent); text-transform: uppercase; letter-spacing: 0.08em; font-weight: 700;">PROD</div>
+                  <div style="font-size: 1rem; font-weight: 700; margin-top: 4px;">4 vCPU</div>
+                  <div style="font-size: 0.75rem; color: var(--text-secondary);">8 GB</div>
+                </div>
+              </div>
+              <div class="card" style="padding: 16px;">
+                <div style="font-size: 0.8rem; color: var(--text-secondary); line-height: 1.8;">
+                  <div><strong style="color: var(--text);">Multi-AZ</strong> &middot; 2개 가용 영역 분산 배치</div>
+                  <div><strong style="color: var(--text);">프라이빗 서브넷</strong> &middot; 외부 직접 접근 차단</div>
+                  <div><strong style="color: var(--text);">Auto Scaling</strong> &middot; 최대 20 태스크</div>
+                  <div><strong style="color: var(--text);">Secrets Manager</strong> &middot; API 키 9개 중앙 관리</div>
+                </div>
+              </div>
+            </div>
+            <div class="animate delay-2">
+              <h3 style="margin-bottom: 16px;">비용 최적화 스케일링</h3>
+              <div role="img" aria-label="시간대별 ECS 태스크 수를 보여주는 차트. 07:50에 3개로 시작, 09:30에 10개로 증가, 17:00에 2개로 감소, 21:30에 0개로 중지">
+                <div class="chart-container" style="height: 320px;">
+                  <canvas id="scalingChart"></canvas>
+                </div>
+              </div>
+              <div style="display: flex; gap: 16px; margin-top: 12px; font-size: 0.75rem; color: var(--text-secondary);">
+                <span>CPU/Memory 50% 임계 &middot; Scale-out 20초</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== SLIDE 8: INBOUND SECTION ===== -->
+      <section class="slide slide-section" data-slide="8">
+        <div class="slide-bg-gradient"></div>
+        <div class="dot-pattern"></div>
+        <div class="slide-inner" style="text-align: center;">
+          <div class="animate" style="font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.15em; color: var(--accent); margin-bottom: 16px;">Case Study 02</div>
+          <h2 class="animate delay-1">병원 인바운드<br>Voice AI Agent</h2>
+          <p class="section-desc animate delay-2">환자가 병원에 전화를 걸면 AI가 자동 응대하고,<br>설정 기반 콜 플로우로 병원별 시나리오를 동적 제어</p>
+        </div>
+      </section>
+
+      <!-- ===== SLIDE 9: INBOUND - FLOW CONFIG ===== -->
+      <section class="slide slide-content-bg" data-slide="9">
+        <div class="slide-bg-gradient"></div>
+        <div class="slide-inner">
+          <div class="slide-title-row animate">
+            <h2>설정 기반 동적 콜 플로우</h2>
+            <span class="tag">핵심 설계</span>
+          </div>
+          <p class="animate delay-1" style="color: var(--text-secondary); margin-bottom: 32px; max-width: 700px;">
+            병원마다 다른 콜 플로우를 코드 변경 없이 JSON 설정으로 제어.<br>5가지 노드 타입으로 DTMF IVR + 자유대화를 동일 엔진에서 처리.
+          </p>
+          <div class="animate delay-2" style="border-radius: 12px; overflow: hidden; border: 1px solid var(--border); background: var(--surface);">
+            <img src="/Users/heewungsong/Desktop/Dan/career-docs-harness/assets/inbound-call-flow-config.png" alt="AI 수신 응대 흐름 - 통화 수신부터 운영시간 판별, 인사말, 에이전트 전환까지의 노드 그래프 구성" style="width: 100%; height: auto; display: block;">
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== SLIDE 10: INBOUND - ACTION MODE + TRANSFER ===== -->
+      <section class="slide slide-content-bg" data-slide="10">
+        <div class="slide-bg-gradient"></div>
+        <div class="slide-inner">
+          <div class="slide-title-row animate">
+            <h2>동적 행동 제어 &amp; Transfer</h2>
+            <span class="tag">운영 설계</span>
+          </div>
+          <div class="two-col">
+            <div class="animate delay-1">
+              <h3 style="margin-bottom: 16px;">action_mode_handler</h3>
+              <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 20px;">
+                같은 도구도 병원마다 다르게 동작. 데코레이터 패턴으로 설정 기반 분기.
+              </p>
+              <div class="arch-flow" style="flex-direction: column; gap: 12px; align-items: stretch;">
+                <div class="arch-node arch-node-primary" style="width: 100%;">
+                  <h4>도구 호출</h4>
+                  <span>action_mode_handler 확인</span>
+                </div>
+                <div style="display: flex; gap: 10px;">
+                  <div class="arch-node" style="flex: 1; border-color: rgba(16,185,129,0.3);">
+                    <h4 style="color: var(--positive);">auto</h4>
+                    <span>AI 자동 처리</span>
+                  </div>
+                  <div class="arch-node" style="flex: 1; border-color: rgba(59,130,246,0.3);">
+                    <h4 style="color: var(--accent);">transfer</h4>
+                    <span>상담원 연결</span>
+                  </div>
+                  <div class="arch-node" style="flex: 1; border-color: rgba(245,158,11,0.3);">
+                    <h4 style="color: var(--warning);">leave_memo</h4>
+                    <span>메모 후 종료</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="animate delay-2">
+              <h3 style="margin-bottom: 16px;">Warm Transfer 상세</h3>
+              <div class="card" style="padding: 20px;">
+                <div style="font-size: 0.82rem; line-height: 2;">
+                  <div style="display: flex; align-items: center; gap: 8px;">
+                    <span style="font-size: 0.65rem; font-weight: 700; color: var(--accent); width: 48px;">1단계</span>
+                    <span>상담원 호출 + AI 브리핑 전달</span>
+                  </div>
+                  <div style="display: flex; align-items: center; gap: 8px;">
+                    <span style="font-size: 0.65rem; font-weight: 700; color: var(--accent); width: 48px;">2단계</span>
+                    <span>재시도 로직 (최대 3회)</span>
+                  </div>
+                  <div style="display: flex; align-items: center; gap: 8px;">
+                    <span style="font-size: 0.65rem; font-weight: 700; color: var(--accent); width: 48px;">3단계</span>
+                    <span>연결 후 disconnect 모니터링</span>
+                  </div>
+                </div>
+              </div>
+              <div style="margin-top: 16px;">
+                <h4 style="font-size: 0.8rem; margin-bottom: 10px;">재시도 상태 분기</h4>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 6px; font-size: 0.78rem;">
+                  <div class="card" style="padding: 10px 14px; text-align: center;">
+                    <span style="color: var(--warning);">TIMEOUT</span><br><span style="color: var(--text-secondary);">재시도</span>
+                  </div>
+                  <div class="card" style="padding: 10px 14px; text-align: center;">
+                    <span style="color: var(--negative);">ERROR</span><br><span style="color: var(--text-secondary);">재시도</span>
+                  </div>
+                  <div class="card" style="padding: 10px 14px; text-align: center;">
+                    <span style="color: var(--negative);">DECLINED</span><br><span style="color: var(--text-secondary);">즉시 중단</span>
+                  </div>
+                  <div class="card" style="padding: 10px 14px; text-align: center;">
+                    <span style="color: var(--positive);">SUCCESS</span><br><span style="color: var(--text-secondary);">모니터링</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== SLIDE 11: INBOUND - ANALYSIS EVOLUTION ===== -->
+      <section class="slide slide-content-bg" data-slide="11">
+        <div class="slide-bg-gradient"></div>
+        <div class="slide-inner">
+          <div class="slide-title-row animate">
+            <h2>분석 파이프라인의 진화</h2>
+            <span class="tag">학습 &amp; 개선</span>
+          </div>
+          <div class="two-col">
+            <div class="animate delay-1">
+              <h3 style="margin-bottom: 16px;">아웃바운드 → 인바운드 개선</h3>
+              <table class="comparison-table">
+                <thead><tr><th></th><th>아웃바운드</th><th>인바운드</th></tr></thead>
+                <tbody>
+                  <tr><td>분류 방식</td><td class="val-bad">LLM + Rules</td><td class="val-good">100% 규칙 기반</td></tr>
+                  <tr><td>LLM 호출</td><td class="val-bad">필요</td><td class="val-good">불필요</td></tr>
+                  <tr><td>일관성</td><td class="val-bad">LLM 의존</td><td class="val-good">100%</td></tr>
+                  <tr><td>비용</td><td class="val-bad">LLM 비용 발생</td><td class="val-good">비용 제거</td></tr>
+                  <tr><td>지연</td><td class="val-bad">LLM 지연</td><td class="val-good">즉시 실행</td></tr>
+                  <tr><td>메시지 큐</td><td>RabbitMQ</td><td>Kafka</td></tr>
+                  <tr><td>메타데이터</td><td>15개</td><td>24개</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="animate delay-2">
+              <h3 style="margin-bottom: 16px;">핵심 인사이트</h3>
+              <div class="card" style="margin-bottom: 16px; border-left: 3px solid var(--accent);">
+                <p style="font-size: 0.9rem; font-style: italic; line-height: 1.7;">
+                  "로그 설계가 충분히 정교하면<br>분류 단계에서 LLM이 불필요하다"
+                </p>
+              </div>
+              <div class="card" style="border-left: 3px solid var(--accent-secondary);">
+                <p style="font-size: 0.9rem; font-style: italic; line-height: 1.7;">
+                  "후처리의 품질은 후처리 단계가 아니라<br>데이터 생성 단계에서 결정된다"
+                </p>
+              </div>
+              <div style="margin-top: 24px;">
+                <h4 style="font-size: 0.8rem; margin-bottom: 12px;">인바운드 전용 기능</h4>
+                <div style="font-size: 0.82rem; color: var(--text-secondary); line-height: 2;">
+                  <div>&#8226; 상담원 대화 전사 (consultant role)</div>
+                  <div>&#8226; Playback Segment 계산</div>
+                  <div>&#8226; AI→상담원 전체 타임라인 통합</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== SLIDE 12: CASE STUDY 3 - CUSTOMER SUPPORT ===== -->
+      <section class="slide slide-section" data-slide="12">
+        <div class="slide-bg-gradient"></div>
+        <div class="dot-pattern"></div>
+        <div class="slide-inner" style="text-align: center;">
+          <div class="animate" style="font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.15em; color: var(--accent); margin-bottom: 16px;">Case Study 03</div>
+          <h2 class="animate delay-1">병원 고객상담<br>AI Agent</h2>
+          <p class="section-desc animate delay-2">LangGraph 기반 상담 아키텍처와 검색·API·운영 경계를<br>함께 설계한 고객상담 자동화 시스템</p>
+          <div style="margin-top: 32px;" class="animate delay-3">
+            <span class="tag" style="font-size: 0.85rem; padding: 6px 18px;">핵심 아키텍트</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== SLIDE 13: CUSTOMER SUPPORT - DETAILS ===== -->
+      <section class="slide slide-content-bg" data-slide="13">
+        <div class="slide-bg-gradient"></div>
+        <div class="slide-inner">
+          <div class="slide-title-row animate">
+            <h2>LangGraph 상담 아키텍처</h2>
+            <span class="tag">설계</span>
+          </div>
+          <div class="two-col">
+            <div class="animate delay-1">
+              <h3 style="margin-bottom: 16px;">상담 플로우 설계</h3>
+              <div class="arch-flow" style="flex-direction: column; gap: 12px; align-items: stretch;">
+                <div class="arch-node arch-node-primary" style="width: 100%;">
+                  <h4>primary_assistant</h4>
+                  <span>질문 의도 해석 · 검색 호출</span>
+                </div>
+                <div style="display: flex; gap: 10px;">
+                  <div class="arch-node" style="flex: 1;">
+                    <h4>customer_interaction</h4>
+                    <span>개인정보 수집</span>
+                  </div>
+                  <div class="arch-node" style="flex: 1;">
+                    <h4>tools</h4>
+                    <span>Qdrant 검색 실행</span>
+                  </div>
+                </div>
+                <div class="arch-node" style="width: 100%;">
+                  <h4>extract_personal_info</h4>
+                  <span>이름 · 전화번호 · 생년월일 추출</span>
+                </div>
+              </div>
+              <div style="margin-top: 20px;">
+                <h4 style="font-size: 0.78rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 8px;">상태 관리</h4>
+                <div class="tech-tags">
+                  <span class="tech-tag primary">pending_question</span>
+                  <span class="tech-tag primary">collected_info</span>
+                  <span class="tech-tag">is_personal_info_saved</span>
+                  <span class="tech-tag">current_node</span>
+                </div>
+              </div>
+            </div>
+            <div class="animate delay-2">
+              <h3 style="margin-bottom: 16px;">서비스 전체 경계</h3>
+              <div class="card-grid-3" style="grid-template-columns: 1fr; gap: 10px;">
+                <div class="card" style="padding: 16px 20px;">
+                  <div style="display: flex; align-items: center; gap: 12px;">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+                    <div>
+                      <h4 style="font-size: 0.85rem;">FastAPI + LangGraph SDK</h4>
+                      <p style="font-size: 0.75rem;">비동기 API 서버</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="card" style="padding: 16px 20px;">
+                  <div style="display: flex; align-items: center; gap: 12px;">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--accent-secondary)" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                    <div>
+                      <h4 style="font-size: 0.85rem;">Qdrant 검색 시스템</h4>
+                      <p style="font-size: 0.75rem;">병원별 지식 벡터 검색</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="card" style="padding: 16px 20px;">
+                  <div style="display: flex; align-items: center; gap: 12px;">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--positive)" stroke-width="2"><path d="M12 20V10"/><path d="M18 20V4"/><path d="M6 20v-4"/></svg>
+                    <div>
+                      <h4 style="font-size: 0.85rem;">Next.js 운영 대시보드</h4>
+                      <p style="font-size: 0.75rem;">상담 상태 모니터링</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="card" style="padding: 16px 20px;">
+                  <div style="display: flex; align-items: center; gap: 12px;">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--warning)" stroke-width="2"><path d="M22 12H2"/><path d="M5.45 5.11L2 12v6a2 2 0 002 2h16a2 2 0 002-2v-6l-3.45-6.89A2 2 0 0016.76 4H7.24a2 2 0 00-1.79 1.11z"/></svg>
+                    <div>
+                      <h4 style="font-size: 0.85rem;">AWS ECS Fargate + Terraform</h4>
+                      <p style="font-size: 0.75rem;">CI/CD 배포 구조</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="card" style="margin-top: 16px; border-left: 3px solid var(--positive); padding: 16px 20px;">
+                <p style="font-size: 0.85rem; line-height: 1.7;">
+                  <strong>핵심:</strong> pending_question으로 질문을 보관하고,<br>
+                  개인정보 수집 후 원래 질문으로 자동 복귀
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== SLIDE 14: CLOSING ===== -->
+      <section class="slide slide-hero" data-slide="14">
+        <div class="slide-bg-gradient"></div>
+        <div class="dot-pattern"></div>
+        <div class="slide-inner">
+          <div class="hero-label animate">Thank You</div>
+          <h1 class="animate delay-1" style="font-size: clamp(2rem, 5vw, 3rem);">AI 제품의 설계부터<br>프로덕션 운영까지</h1>
+          <p class="hero-subtitle animate delay-2" style="margin-bottom: 40px;">
+            Multi-Agent 아키텍처, 실시간 음성 처리, LLM 분석 파이프라인,<br>
+            프로덕션 인프라까지 엔드투엔드 오너십으로 제품을 만듭니다.
+          </p>
+          <div class="contact-links animate delay-3">
+            <a href="mailto:kofsitho@naver.com" class="contact-link">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+              kofsitho@naver.com
+            </a>
+            <a href="https://github.com/kofsitho87" class="contact-link" target="_blank">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22"/></svg>
+              GitHub
+            </a>
+            <a href="https://www.linkedin.com/in/kofsitho" class="contact-link" target="_blank">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+              LinkedIn
+            </a>
+            <a href="https://medium.com/@kofsitho" class="contact-link" target="_blank">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg>
+              Blog
+            </a>
+          </div>
+          <div class="tech-tags animate delay-4" style="margin-top: 32px;">
+            <span class="tech-tag primary">Voice AI</span>
+            <span class="tech-tag primary">Multi-Agent</span>
+            <span class="tech-tag secondary">LLM Pipeline</span>
+            <span class="tech-tag green">Production Infra</span>
+            <span class="tech-tag">End-to-End Ownership</span>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- SLIDE NAV -->
+  <nav class="slide-nav" aria-label="Slide navigation">
+    <button onclick="prevSlide()" aria-label="Previous slide">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
+    </button>
+    <span class="slide-counter" id="slideCounter">1 / 14</span>
+    <button onclick="nextSlide()" aria-label="Next slide">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+    </button>
+  </nav>
+
+  <script>
+    // === Menu ===
+    function toggleMenu() {
+      var dropdown = document.getElementById('vizMenuDropdown');
+      if (dropdown) dropdown.classList.toggle('open');
+    }
+    document.addEventListener('click', function(e) {
+      if (!e.target.closest('.viz-menu')) {
+        var dropdown = document.getElementById('vizMenuDropdown');
+        if (dropdown) dropdown.classList.remove('open');
+      }
+    });
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') {
+        var dropdown = document.getElementById('vizMenuDropdown');
+        if (dropdown) dropdown.classList.remove('open');
+      }
+    });
+
+    // === Theme ===
+    var savedTheme = localStorage.getItem('viz-theme');
+    var currentTheme = savedTheme || (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+    function applyTheme(t) {
+      document.documentElement.className = 'theme-' + t;
+      document.getElementById('themeIcon').textContent = t === 'dark' ? '\uD83C\uDF19' : '\u2600\uFE0F';
+      document.getElementById('themeLabel').textContent = t === 'dark' ? 'Dark' : 'Light';
+      localStorage.setItem('viz-theme', t);
+      currentTheme = t;
+      if (typeof onThemeChange === 'function') onThemeChange();
+    }
+    function cycleTheme() { applyTheme(currentTheme === 'dark' ? 'light' : 'dark'); }
+    applyTheme(currentTheme);
+
+    // === Slides ===
+    var currentSlide = 1;
+    var totalSlides = document.querySelectorAll('.slide').length;
+    var slides = document.querySelectorAll('.slide');
+
+    function showSlide(n) {
+      if (n < 1 || n > totalSlides) return;
+      slides.forEach(function(s) { s.classList.remove('active'); });
+      slides[n - 1].classList.add('active');
+      currentSlide = n;
+      document.getElementById('slideCounter').textContent = n + ' / ' + totalSlides;
+      document.getElementById('progressBar').style.width = ((n / totalSlides) * 100) + '%';
+
+      // Re-trigger animations
+      var inner = slides[n - 1].querySelector('.slide-inner');
+      if (inner) {
+        var animEls = inner.querySelectorAll('.animate');
+        animEls.forEach(function(el) {
+          el.style.animation = 'none';
+          el.offsetHeight;
+          el.style.animation = '';
+        });
+      }
+    }
+
+    function nextSlide() { showSlide(currentSlide + 1); }
+    function prevSlide() { showSlide(currentSlide - 1); }
+
+    // Keyboard nav
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'Enter') { e.preventDefault(); nextSlide(); }
+      if (e.key === 'ArrowLeft') { e.preventDefault(); prevSlide(); }
+    });
+
+    // Touch nav
+    var touchStartX = 0;
+    document.addEventListener('touchstart', function(e) { touchStartX = e.changedTouches[0].screenX; });
+    document.addEventListener('touchend', function(e) {
+      var diff = touchStartX - e.changedTouches[0].screenX;
+      if (Math.abs(diff) > 50) { diff > 0 ? nextSlide() : prevSlide(); }
+    });
+
+    // Click nav (left third prev, right two-thirds next)
+    document.addEventListener('click', function(e) {
+      if (e.target.closest('.viz-menu') || e.target.closest('.slide-nav') || e.target.closest('a') || e.target.closest('button')) return;
+      var x = e.clientX / window.innerWidth;
+      if (x < 0.33) prevSlide();
+      else if (x > 0.5) nextSlide();
+    });
+
+    // Init progress
+    document.getElementById('progressBar').style.width = ((1 / totalSlides) * 100) + '%';
+
+    // === Number Counter ===
+    function animateCounters() {
+      document.querySelectorAll('[data-count]').forEach(function(el) {
+        if (el.dataset.counted) return;
+        el.dataset.counted = '1';
+        var target = parseFloat(el.dataset.count);
+        var prefix = el.dataset.prefix || '';
+        var suffix = el.dataset.suffix || '';
+        var start = performance.now();
+        var duration = 1200;
+        (function tick(now) {
+          var p = Math.min((now - start) / duration, 1);
+          var eased = 1 - Math.pow(1 - p, 3);
+          el.textContent = prefix + Math.round(target * eased).toLocaleString() + suffix;
+          if (p < 1) requestAnimationFrame(tick);
+        })(start);
+      });
+    }
+    var counterEl = document.querySelector('[data-count]');
+    if (counterEl) {
+      // Since hero is visible immediately, animate right away
+      setTimeout(animateCounters, 600);
+    }
+
+    // === Scroll Reveal ===
+    document.querySelectorAll('[data-reveal]').forEach(function(el) { el.classList.add('reveal'); });
+    var revealObserver = new IntersectionObserver(function(entries) {
+      entries.forEach(function(e) { if (e.isIntersecting) { e.target.classList.add('visible'); revealObserver.unobserve(e.target); } });
+    }, { threshold: 0.15 });
+    document.querySelectorAll('.reveal').forEach(function(el) { revealObserver.observe(el); });
+
+    // === Download PNG ===
+    async function downloadImage() {
+      var menu = document.querySelector('.viz-menu');
+      menu.style.display = 'none';
+      try {
+        var url = await htmlToImage.toPng(document.body, { quality: 1, pixelRatio: 2, filter: function(n) { return !n.classList || !n.classList.contains('viz-menu'); } });
+        var a = document.createElement('a'); a.href = url;
+        a.download = document.title.replace(/\s+/g, '-').toLowerCase() + '.png'; a.click();
+      } catch(e) { console.error('Download failed:', e); }
+      menu.style.display = '';
+    }
+
+    // === Chart.js - Scaling Chart ===
+    var chartsBuilt = false;
+
+    function buildCharts() {
+      if (chartsBuilt || typeof Chart === 'undefined') return;
+
+      var isDark = document.documentElement.classList.contains('theme-dark');
+      var textColor = isDark ? '#888' : '#64748b';
+      var gridColor = isDark ? 'rgba(255,255,255,0.04)' : 'rgba(0,0,0,0.06)';
+      var accentColor = isDark ? '#3b82f6' : '#2563eb';
+
+      var ctx = document.getElementById('scalingChart');
+      if (!ctx) return;
+
+      // Reset canvas
+      var parent = ctx.parentNode;
+      var canvas = document.createElement('canvas');
+      canvas.id = 'scalingChart';
+      canvas.setAttribute('role', 'img');
+      canvas.setAttribute('aria-label', '시간대별 ECS 태스크 수 차트');
+      parent.replaceChild(canvas, ctx);
+
+      try {
+        window.scalingChartInstance = new Chart(canvas, {
+          type: 'line',
+          data: {
+            labels: ['00:00', '07:50', '08:00', '09:30', '10:00', '12:00', '14:00', '17:00', '18:00', '21:30', '22:00'],
+            datasets: [{
+              label: 'ECS Tasks',
+              data: [0, 3, 3, 10, 10, 10, 10, 2, 2, 0, 0],
+              borderColor: accentColor,
+              backgroundColor: isDark ? 'rgba(59,130,246,0.1)' : 'rgba(37,99,235,0.08)',
+              fill: true,
+              tension: 0.3,
+              pointRadius: 0,
+              pointHoverRadius: 6,
+              borderWidth: 2
+            }]
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+              tooltip: {
+                enabled: true,
+                padding: 12,
+                cornerRadius: 8,
+                titleFont: { size: 13, family: 'Inter' },
+                bodyFont: { size: 12, family: 'Inter' }
+              },
+              legend: { display: false }
+            },
+            scales: {
+              x: {
+                ticks: { color: textColor, font: { size: 11, family: 'Inter' }, maxRotation: 0 },
+                grid: { color: gridColor }
+              },
+              y: {
+                ticks: { color: textColor, font: { size: 11, family: 'Inter' }, stepSize: 5 },
+                grid: { color: gridColor },
+                min: 0, max: 15,
+                title: { display: true, text: 'Tasks', color: textColor, font: { size: 11, family: 'Inter' } }
+              }
+            },
+            layout: { padding: { top: 10, right: 10, bottom: 0, left: 0 } }
+          }
+        });
+        chartsBuilt = true;
+      } catch(e) {
+        console.error('Chart creation failed:', e);
+      }
+    }
+
+    function onThemeChange() {
+      if (chartsBuilt) {
+        chartsBuilt = false;
+        if (window.scalingChartInstance) {
+          try { window.scalingChartInstance.destroy(); } catch(e) {}
+        }
+        buildCharts();
+      }
+    }
+
+    window.addEventListener('load', buildCharts);
+  </script>
+</body>
+</html>
