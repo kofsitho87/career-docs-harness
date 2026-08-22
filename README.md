@@ -21,7 +21,7 @@
 ## 저장소 구성
 
 - `resume/product-engineer.md`: 현재 사실 기준(source-of-truth)으로 사용하는 이력서
-- `docs/guides/`: 재사용 가능한 이력서 작성 가이드
+- `docs/guides/`: 재사용 가능한 이력서 작성 가이드와 채용공고 검색 가이드
 - `docs/plans/`: 문서 구조, 케이스 스터디, 저장소 문서화 관련 설계 및 구현 계획
 - `resume/`: 최종 이력서 산출물
 - `case-studies/`: 개별 프로젝트 기반 케이스 스터디 문서
@@ -34,6 +34,7 @@
 1. `README.md`로 저장소 목적과 구조를 파악합니다.
 2. `resume/product-engineer.md`로 사실 기반 경력 재료와 현재 정본 이력서를 함께 확인합니다.
 3. `docs/guides/resume-guide.md`로 작성 원칙을 확인합니다.
-4. 필요할 때 현재 이력서 표현을 가이드 기준으로 다듬습니다.
-5. `case-studies/outbound-voice-agent.md`, `case-studies/inbound-voice-agent.md`, `case-studies/hospital-customer-support-agent.md`에서 프로젝트 케이스 스터디 문서를 읽습니다.
-6. 필요할 때만 `docs/plans/`에서 설계 의도와 작업 계획을 확인합니다.
+4. 채용공고 탐색 작업이 필요할 때는 `docs/guides/job-search-protocol.md`를 확인합니다.
+5. 필요할 때 현재 이력서 표현을 가이드 기준으로 다듬습니다.
+6. `case-studies/outbound-voice-agent.md`, `case-studies/inbound-voice-agent.md`, `case-studies/hospital-customer-support-agent.md`에서 프로젝트 케이스 스터디 문서를 읽습니다.
+7. 필요할 때만 `docs/plans/`에서 설계 의도와 작업 계획을 확인합니다.

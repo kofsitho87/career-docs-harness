@@ -20,6 +20,7 @@
 이 범주의 문서는 무엇을 어떻게 쓸지 정하는 기준과 설계 문서다. 사실 데이터 자체를 담기보다는, 어떤 관점으로 문서를 편집할지 안내한다.
 
 - `docs/guides/resume-guide.md`: 이력서 구조, 문체, 성과 표현, ATS 대응 등 재사용 가능한 작성 가이드
+- `docs/guides/job-search-protocol.md`: 원하는 포지션과 스펙을 바탕으로 적합한 채용공고를 찾기 위한 내부 검색 프로토콜
 - `docs/plans/2026-03-07-outbound-voice-agent-portfolio-design.md`: 아웃바운드 보이스 에이전트 포트폴리오의 구성과 강조 포인트를 정리한 설계 문서
 - `docs/plans/`: 저장소 문서화나 산출물 정리를 위한 작업 계획 문서 모음
 
@@ -74,6 +75,7 @@
 다음으로 어떤 메시지와 구조로 보여줄지 정한다.
 
 - 이력서 작성 원칙은 `docs/guides/resume-guide.md`를 기준으로 삼는다.
+- 채용공고 탐색 작업은 `docs/guides/job-search-protocol.md`를 기준으로 검색 입력값, 사이트별 탐색 순서, 적합도 판단 방식을 맞춘다.
 - 특정 프로젝트 케이스 스터디 문서는 관련 설계 문서를 함께 본다.
 - 아웃바운드 보이스 에이전트 케이스 스터디는 `docs/plans/2026-03-07-outbound-voice-agent-portfolio-design.md`를 참고한다.
 - 인바운드 보이스 에이전트 케이스 스터디는 `docs/plans/2026-03-07-inbound-voice-agent-portfolio-design.md`를 참고한다.
