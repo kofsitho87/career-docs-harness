@@ -11,6 +11,9 @@
 ## 현재 산출물
 
 - `resume/product-engineer.md`: 현재 정본이자 사실 기준으로 사용하는 제품 엔지니어 이력서
+- `resume/cupix-ax-operations-engineer.md`: 큐픽스 AX Operations Engineer 지원용 맞춤 이력서
+- `portfolio/cupix-ax-aiu-case-study.html`: 큐픽스 지원용 AIU AX 인터랙티브 시각 사례
+- `output/pdf/cupix-ax-aiu-case-study.pdf`: 큐픽스 지원용 AIU AX 1페이지 PDF 부록
 - `case-studies/outbound-voice-agent.md`: 아웃바운드 Voice AI Agent 케이스 스터디
 - `case-studies/inbound-voice-agent.md`: 인바운드 Voice AI Agent 케이스 스터디
 - `case-studies/hospital-customer-support-agent.md`: 병원 고객상담 AI Agent 케이스 스터디

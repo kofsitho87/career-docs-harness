@@ -6,22 +6,23 @@
 - 이메일: [kofsitho@naver.com](mailto:kofsitho@naver.com)
 - GitHub: [https://github.com/kofsitho87](https://github.com/kofsitho87)
 - LinkedIn: [https://www.linkedin.com/in/kofsitho](https://www.linkedin.com/in/kofsitho)
-- Tech Blog: [https://medium.com/@kofsitho](https://medium.com/@kofsitho)
+- Tech Blog: [https://kofsitho87.github.io/my-tech-blog/](https://kofsitho87.github.io/my-tech-blog/)
+- Medium: [https://medium.com/@kofsitho](https://medium.com/@kofsitho)
 
 ## Professional Summary
 
-9년 이상의 경력을 가진 시니어 소프트웨어 엔지니어입니다. 프론트엔드, 백엔드, 인프라를 아우르며 제품을 설계하고 출시해 왔고, 최근에는 병원 아웃바운드 Voice AI 시스템을 단독으로 설계·개발·운영하며 100개 병원에 도입, 일 2,000건의 실시간 AI 통화를 처리하는 프로덕션 서비스를 구축했습니다.
+9년 이상의 경력을 가진 시니어 소프트웨어 엔지니어입니다. 프론트엔드, 백엔드, 인프라를 아우르며 제품을 설계하고 출시해 왔고, 최근에는 병원 인바운드·아웃바운드 Voice AI 제품을 엔드투엔드로 개발·운영하고 있습니다. 아웃바운드 시스템을 단독으로 구축해 100개 병원에 도입하고 일 2,000건의 실시간 AI 통화를 처리했습니다.
 
-Multi-Agent 아키텍처 설계, OpenAI Realtime API 기반 실시간 음성 처리, LLM 기반 통화 분석 파이프라인 등 AI 애플리케이션의 설계부터 프로덕션 운영까지 엔드투엔드 오너십에 강점이 있습니다. LangChain 오픈소스 Core Contributor로도 활동했습니다.
+Self-hosted LiveKit 기반 실시간 음성 처리, 안전한 Tool Calling과 AgentTask 설계, 상담원 전환, Kafka 기반 통화 분석과 LLM 평가 등 AI 애플리케이션의 설계부터 프로덕션 운영까지 엔드투엔드 오너십에 강점이 있습니다. LangChain 오픈소스 Core Contributor로도 활동했습니다.
 
 ## Core Competencies
 
 - Frontend: Next.js, React, TypeScript, Tailwind CSS, shadcn/ui, TanStack Query, Vue, Vuetify
-- Backend: Python, FastAPI, Node.js
-- AI / LLM: OpenAI Realtime API, Claude API, LangGraph, LangChain, RAG, trustcall, LangSmith
-- Voice AI & Telephony: LiveKit Agents, SIP Trunk, WebRTC, STT/TTS
+- Backend: Python, FastAPI, Node.js, Kafka, RabbitMQ
+- AI / LLM: OpenAI Realtime API, Claude API, LangGraph, LangChain, RAG, trustcall, LangSmith, Langfuse, LLM Evaluation
+- Voice AI & Telephony: LiveKit Agents, Self-hosted LiveKit, SIP Trunk, WebRTC, STT/TTS, DTMF, AMD, Warm/Cold Transfer
 - Data / Search: PostgreSQL, MySQL, Redis, MongoDB, Qdrant, hybrid search (Dense + Sparse), OpenAI Embeddings, BM25, cross-encoder reranking
-- Infra / DevOps: AWS ECS Fargate, ECR, ALB, VPC, S3, Secrets Manager, CloudWatch, Docker, Auto Scaling, Multi-AZ, GitHub Actions, Terraform
+- Infra / DevOps: AWS ECS Fargate, Kubernetes, ECR, ALB, VPC, S3, Secrets Manager, CloudWatch, Docker, Auto Scaling, Multi-AZ, GitHub Actions, Terraform
 
 ## Experience
 
@@ -39,7 +40,24 @@ Multi-Agent 아키텍처 설계, OpenAI Realtime API 기반 실시간 음성 처
 | 도입 병원 수 | 100개+ |
 | 지원 언어 | 6개 (한/영/중/일/스페인어/베트남어) |
 
+#### 사내 AIU 업무지원 Multi-Agent 및 AX 자동화 플랫폼 구축
+
+2026.08 - 현재
+
+AIU 제품과 운영 정보를 여러 사내 시스템에서 찾아야 하는 반복 업무를 줄이기 위해, OpenBot 기반의 사내 업무지원 AI Agent를 설계·구축했습니다.
+
+- Web과 Slack에서 AIU 제품 사용법, 인바운드·아웃바운드 통화 운영, Agent Admin, HQ/SVC 업무를 질의할 수 있도록 기존 AIU Agent를 Bun·TypeScript 기반 Deep Agents 아키텍처로 마이그레이션했습니다.
+- 최상위 Supervisor가 요청 도메인을 판별하고 `inbound-agent`, `agent-admin-agent`, `outbound-agent`, `hq-svc-agent` 네 전문 Agent에 위임하도록 구성해 서로 다른 제품·데이터·권한 경계를 분리했습니다.
+- 5개 사내 시스템의 사용자·AI 매뉴얼 322개를 Google Cloud OKF v0.2 지식 번들로 통합하고, source manifest와 frontmatter의 역할·claim·분류 정보를 기준으로 검색 전에 접근 범위를 제한하는 read-only 지식 backend를 구현했습니다.
+- 인바운드·아웃바운드 통화 검색과 전환율·운영 지표 분석을 위한 SELECT-only MySQL Tool을 구현했습니다. 사용자 입력은 parameter binding으로 분리하고 SSL 인증서 검증, 조회 한도, transcript 비식별화와 근거 turn 제한을 적용했습니다.
+- AG-UI를 통해 Web·Slack 실행을 하나의 Agent runtime으로 연결하고, 서명된 run assertion, OpenBot의 Computer Use·plugin 정책, 감사 로그와 Human-in-the-Loop 경계를 유지하도록 통합했습니다.
+- Docker Compose 실행 환경과 지식 manifest·권한 격리·AG-UI 응답·DB 조회·첨부 처리 등을 검증하는 37개 자동화 테스트를 구성했습니다.
+
+기술: TypeScript, Bun, Deep Agents, LangGraph, LangChain, AG-UI, OpenAI API, MySQL, Slack, Docker, Google Cloud OKF v0.2
+
 #### 병원 아웃바운드 Voice AI Agent 설계 및 운영
+
+2025 - 현재
 
 병원의 예약 확인·안내 전화를 AI가 자동 발신하고, 통화 종료 후 전사 교정·구조화 분석·요약까지 비동기로 처리하는 실시간 Voice AI 시스템을 설계·개발·운영했습니다.
 
@@ -49,22 +67,49 @@ Multi-Agent 아키텍처 설계, OpenAI Realtime API 기반 실시간 음성 처
 - 자동응답기 3중 조건 감지, 사용자 무응답 종료, 상담원 연결 및 메시지 수집 fallback 등 프로덕션 예외 처리 로직을 구축해 실제 운영 환경에서의 실패 케이스를 흡수했습니다.
 - Gemini 2.5 Pro 멀티모달 기반 STT 교정, Ghost Message 제거, DTMF 보존 예외 처리, trustcall 기반 메타데이터 추출을 포함한 통화 분석 파이프라인을 구현했습니다.
 - RabbitMQ로 통화 처리와 분석 처리를 분리하고, AWS ECS Fargate DEV/QA/PROD 3환경, Multi-AZ, 시간 기반 + 메트릭 기반 오토스케일링(최대 20 태스크), Secrets Manager, CloudWatch 구조화 로그 체계를 설계해 운영 안정성과 비용 효율을 함께 확보했습니다.
+- 외부 발신 오케스트레이터와 LiveKit Agent 사이의 통화 수명주기를 event-driven 방식으로 재설계했습니다. Participant listener 등록 후 현재 상태를 다시 확인하는 `subscribe-then-snapshot`, 계층화된 timeout, 실제 SIP 연결 이후의 녹음·분석 callback 등록으로 연결 race와 잘못된 후처리를 방지했습니다.
+- AMD 판별 중 시작된 발화가 Agent 전환 후 완료되며 설정 인사말 대신 LLM 응답을 생성하던 race condition을 메트릭 타임라인으로 추적했습니다. 생성이 금지된 최종 Task에서 `StopResponse`를 강제하고 회귀 테스트를 추가해 결정적 인사말 경계를 보호했습니다.
 
-기술: Python, LiveKit Agents, OpenAI Realtime API, SIP, RabbitMQ, Qdrant, Gemini 2.5 Pro, Claude Sonnet, GPT-4.1, trustcall, Pydantic, AWS ECS Fargate, S3, Secrets Manager, CloudWatch, Docker, VPC, Auto Scaling
+기술: Python, LiveKit Agents, OpenAI Realtime API, LiveKit AMD, SIP, voxBridge, RabbitMQ, Qdrant, Gemini 2.5 Pro, Claude Sonnet, GPT-4.1, trustcall, Pydantic, AWS ECS Fargate, S3, Secrets Manager, CloudWatch, Docker, VPC, Auto Scaling
 
-#### 병원 인바운드 Voice AI Agent 설계
+#### 병원 인바운드 Voice AI Agent 구축 및 운영
 
-2025
+2025 - 현재
 
-아웃바운드 운영 경험을 바탕으로, 환자가 병원에 전화를 걸었을 때 병원별 시나리오를 코드 변경 없이 제어할 수 있는 인바운드 Voice AI 시스템을 설계했습니다.
+환자가 병원에 전화해 예약 조회·신청·변경·취소, 병원 정보 안내, 상담원 연결을 처리할 수 있는 Self-hosted LiveKit 기반 인바운드 Voice AI 시스템을 구축·운영하고 있습니다.
 
-- 병원마다 다른 전화 응대 방식을 하드코딩하지 않기 위해 `flow_config` 기반 노드 그래프 아키텍처를 설계했습니다. `condition` / `greeting` / `agent` / `action` / `exit` 노드를 조합해 DTMF IVR과 자유대화 플로우를 동일 엔진에서 처리할 수 있게 만들었습니다.
-- 기존 Multi-Agent 구조 위에 `SupervisorAgent`를 추가해 콜 플로우 제어와 실제 응답 에이전트의 책임을 분리했습니다. 설정만으로 운영시간 분기, 메뉴 라우팅, 상담원 연결, 종료 시나리오를 바꿀 수 있도록 했습니다.
-- 도구 실행 시점에 `auto` / `transfer` / `leave_memo`를 동적으로 분기하는 `action_mode_handler` 패턴을 설계해, 병원별 운영 정책 차이를 코드 수정 없이 반영할 수 있게 했습니다.
-- Warm/Cold Transfer 상태 흐름, 재시도 로직, 연결 실패 fallback, 연결 후 모니터링까지 포함한 상담원 연결 구조를 설계해 AI 응대와 사람 상담 사이의 운영 경계를 제품 수준으로 정리했습니다.
-- Kafka 기반 비동기 분석 파이프라인으로 정규화, 규칙 기반 메타데이터 추출, 상담원 대화 전사, 요약 저장 흐름을 분리해 인바운드 운영 데이터의 후처리 구조를 구축했습니다.
+- `AgentServer` / `AgentSession` / `SingleAgent` 런타임과 `flow_config` 기반 노드 그래프를 결합했습니다. 병원별 운영시간, DTMF 메뉴, 자유대화, 상담원 연결과 종료 정책을 코드 배포 없이 설정으로 제어하도록 만들었습니다.
+- 하나의 `SingleAgent`가 통화 Context를 유지하고 예약·DTMF·상담원 연결 업무를 `AgentTask`에 위임하는 Supervisor Pattern을 구현했습니다. Task가 typed result를 반환하도록 해 업무 완료, 이탈, 상담원 요청과 통화 종료의 제어권을 명확히 분리했습니다.
+- 예약 조회·신청·변경·취소 흐름에서 LLM은 대화를 담당하고 코드는 병원 기준 정보, 실시간 일정, 후보 스테이징과 최종 동의 대상을 검증하도록 설계했습니다. 병원별 `auto` / `transfer` / `leave_memo` 정책을 공통 코드에서 분기해 잘못된 Tool 실행과 상태 변경을 방지했습니다.
+- Self-hosted LiveKit 환경에 `SingleRoomWarmTransferTask`를 구현했습니다. 환자·AI·상담원의 오디오 구독 권한, DTMF 수락, FIFO 상담원 대기열, 재시도·AI 복귀·메모 fallback과 연결 종료까지 상태 머신으로 관리했습니다.
+- VAD, endpointing, turn detection, interruption과 preemptive generation을 조정하고 STT·LLM·TTS·Tool·E2E 지표를 분리해 관측했습니다. 결정적 안내와 되돌리기 어려운 Tool 구간에는 별도 interruption guardrail을 적용했습니다.
+- 단위 테스트, LiveKit text-only Agent 평가, 로컬 환자 시뮬레이션, 오디오·실제 전화망 검증으로 이어지는 4단계 테스트 체계를 구축했습니다. 외부 예약·연결·종료 Tool을 mock 처리하고 운영 장애를 회귀 시나리오로 전환했습니다.
+- LiveKit Worker의 통화별 프로세스 격리와 Kubernetes Pod 수용량을 분석해 prewarm·메모리·동시 Job·graceful drain을 함께 다루는 동시 통화 확장 및 장애 복구 기준을 정리했습니다.
 
-기술: Python, LiveKit Agents, OpenAI Realtime API, SIP, Kafka, Qdrant, Gemini 2.5 Pro, GPT-4.1, Pydantic, AWS ECS Fargate, S3, Docker
+기술: Python, LiveKit Agents, Self-hosted LiveKit, SIP, STT/LLM/TTS, DTMF, Kafka, Qdrant, GPT-4.1, Pydantic, Kubernetes, S3, Docker, pytest
+
+#### Voice AI 통화 분석 및 Privacy-safe LLM 평가 파이프라인
+
+2026
+
+실시간 통화와 분석 부하를 분리하면서도 한 통화의 업무 결과와 품질을 재구성할 수 있는 Kafka 기반 후처리·평가 파이프라인을 구축했습니다.
+
+- 대화 transcript, 구조화 Agent event, 녹음과 단계별 latency metric을 Kafka로 전달하고, `room_name` 기준 멱등 처리와 재처리가 가능한 Consumer를 구현해 분석 장애가 실시간 통화에 영향을 주지 않도록 분리했습니다.
+- 상담원 연결 이후의 녹음 구간을 잘라 전사를 보완하고, 원본 event를 업무별 시도와 통화별 최종 resolution으로 정규화하는 Analytics v2를 설계했습니다. 실패를 단계·유형·개선 주체로 분류해 운영 KPI에서 원인까지 추적할 수 있게 했습니다.
+- 업무 완료는 결정론적 event로, 요청 의도와 응답 품질은 근거 turn을 포함한 Semantic 분석으로 평가했습니다. `task_completion`, `routing_correctness`, `response_quality`를 버전이 있는 Langfuse session score로 발행하도록 구현했습니다.
+- 환자 transcript·임상 정보·식별 정보는 로컬 저장소에 유지하고 비민감 집계값만 Langfuse로 전송했습니다. 통화·점수·평가 버전 기반 idempotency key와 hard-cap 규칙으로 개인정보 경계와 재평가 일관성을 확보했습니다.
+
+기술: Python, Kafka, PostgreSQL, LLM Evaluation, Langfuse, Pydantic, Object Storage
+
+#### 역할 기반 사용자·AI 매뉴얼 및 코드 동기화 체계 구축
+
+2026
+
+- Google Cloud Open Knowledge Format v0.2를 기반으로 사용자 매뉴얼과 AI용 Playbook·Policy·State Model을 하나의 지식 번들로 설계하고, 역할·claim·위험도·근거 source를 frontmatter 계약으로 정의했습니다.
+- 인증된 역할과 claim으로 본문 로드 전에 문서 접근 범위를 줄이는 resolver, 코드 capability와 문서를 연결하는 catalog, 두 매뉴얼이 공유하는 Git 동기화 marker를 구현했습니다.
+- source drift, 깨진 링크, capability coverage, HITL 확인 정책과 공개·비공개 문서 경계를 검사하는 deterministic checker와 CI를 구축했습니다. 현재 문서 내용은 사람 검토가 진행 중인 draft로 관리하고 있습니다.
+
+기술: Google Cloud OKF v0.2, Python, Markdown, YAML, GitHub Actions
 
 #### 병원 고객상담 AI Agent 시스템 아키텍처 설계 및 배포
 
