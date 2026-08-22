@@ -12,7 +12,9 @@
 
 - `resume/product-engineer.md`: 현재 정본이자 사실 기준으로 사용하는 제품 엔지니어 이력서
 - `resume/cupix-ax-operations-engineer.md`: 큐픽스 AX Operations Engineer 지원용 맞춤 이력서
-- `portfolio/cupix-ax-aiu-case-study.html`: 큐픽스 지원용 AIU AX 인터랙티브 시각 사례
+- `portfolio/heewung-song-portfolio.html`: 병원 Voice AI 3개 프로젝트와 사내 업무지원 Multi-Agent(AIU / AX 자동화)까지 담은 슬라이드형 종합 포트폴리오
+- `portfolio/cupix-ax-aiu-case-study.html`: 큐픽스 지원용 AIU AX 인터랙티브 시각 사례 — AIU 프로젝트 1건을 깊게 파고드는 단일 프로젝트 딥다이브
+- `portfolio/cupix-ax-career-story.html`: 큐픽스 지원용 커리어 저니 내러티브 — 아웃바운드·인바운드·고객상담·통화 지표 자동화·AIU까지 다섯 프로젝트가 하나의 반복 업무 자동화 패턴으로 이어지는 과정을 보여주는 스토리텔링형 페이지. `cupix-ax-aiu-case-study.html`을 대체하지 않고, 그 산출물이 어떤 경력 위에서 나왔는지 보여주는 동반 문서로 존재한다.
 - `output/pdf/cupix-ax-aiu-case-study.pdf`: 큐픽스 지원용 AIU AX 1페이지 PDF 부록
 - `case-studies/outbound-voice-agent.md`: 아웃바운드 Voice AI Agent 케이스 스터디
 - `case-studies/inbound-voice-agent.md`: 인바운드 Voice AI Agent 케이스 스터디

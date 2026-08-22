@@ -970,15 +970,15 @@
                   <div class="section-title">Key Achievements</div>
                   <div class="achievement-stack">
                     <div class="achievement-box primary">
-                      <div class="achievement-value" data-count="96000" data-suffix="+">0</div>
+                      <div class="achievement-value" data-count="620000" data-suffix="+">0</div>
                       <div class="achievement-label">Total successful AI calls in production</div>
                     </div>
                     <div class="achievement-box secondary">
-                      <div class="achievement-value" data-count="100" data-suffix="+">0</div>
+                      <div class="achievement-value" data-count="300" data-suffix="+">0</div>
                       <div class="achievement-label">Hospitals deployed</div>
                     </div>
                     <div class="achievement-box tertiary">
-                      <div class="achievement-value" data-count="2000" data-suffix="/day">0</div>
+                      <div class="achievement-value" data-count="4000" data-suffix="/day">0</div>
                       <div class="achievement-label">Daily realtime call volume</div>
                     </div>
                   </div>
@@ -1061,21 +1061,21 @@
                   <article class="card metric-card animate delay-1">
                     <div>
                       <div class="metric-label">Production Calls</div>
-                      <div class="metric-value accent" data-count="96000" data-suffix="+">0</div>
+                      <div class="metric-value accent" data-count="550000" data-suffix="+">0</div>
                     </div>
                     <div class="delta">병원 아웃바운드 시스템 누적 성공 통화</div>
                   </article>
                   <article class="card metric-card animate delay-2">
                     <div>
                       <div class="metric-label">Daily Capacity</div>
-                      <div class="metric-value" data-count="2000" data-suffix="/day">0</div>
+                      <div class="metric-value" data-count="2500" data-suffix="/day">0</div>
                     </div>
-                    <div class="delta">실시간 운영 기준 일 평균 처리량</div>
+                    <div class="delta">아웃바운드 실시간 운영 기준 일 평균 처리량</div>
                   </article>
                   <article class="card metric-card animate delay-3">
                     <div>
                       <div class="metric-label">Hospital Rollout</div>
-                      <div class="metric-value" data-count="100" data-suffix="+">0</div>
+                      <div class="metric-value" data-count="300" data-suffix="+">0</div>
                     </div>
                     <div class="delta">실제 도입 병원 수</div>
                   </article>
@@ -1246,10 +1246,10 @@
                     <div class="mini-heading">Result</div>
                     <h3 class="korean-copy">실서비스 성과</h3>
                   </div>
-                  <p class="korean-copy">100개+ 병원, 일 2,000건, 누적 96,000건+ 통화를 처리했고 Realtime API로 약 900ms 파이프라인을 약 300ms 수준으로 줄였습니다.</p>
+                  <p class="korean-copy">300개+ 병원, 일 2,500건, 누적 55만 건+ 통화를 처리했고 OpenAI Realtime API로 STT→LLM→TTS를 단일 파이프라인으로 통합해 약 900~1200ms 응답 레이턴시를 유지했습니다.</p>
                   <div class="card-footer">
-                    <span class="tag">100+ hospitals</span>
-                    <span class="tag">~300ms</span>
+                    <span class="tag">300+ hospitals</span>
+                    <span class="tag">~900-1200ms</span>
                   </div>
                 </article>
               </section>
@@ -1388,7 +1388,7 @@
                   <ul class="list korean-copy">
                     <li>실시간 전화망 연결</li>
                     <li>다국어 지원</li>
-                    <li>96,000건+ 누적 성공 통화</li>
+                    <li>55만 건+ 누적 성공 통화</li>
                   </ul>
                 </article>
                 <article class="card comparison-card animate delay-2">
@@ -1775,7 +1775,7 @@
           labels: ['성공 통화', '일 평균 통화', '도입 병원', '지원 언어'],
           datasets: [{
             label: '운영 지표',
-            data: [96000, 2000, 100, 6],
+            data: [550000, 2500, 300, 6],
             backgroundColor: [colors.accent, colors.accentSecondary, colors.positive, colors.warning],
             borderRadius: 8,
             maxBarThickness: 58

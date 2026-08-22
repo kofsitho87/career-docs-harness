@@ -12,9 +12,9 @@
 
 | 지표      | 수치                     |
 | ------- | ---------------------- |
-| 총 통화 성공 | 96,000건+               |
-| 일 평균 통화 | 2,000건/일               |
-| 도입 병원 수 | 100개+                  |
+| 총 통화 성공 | 62만 건+ (아웃바운드 55만+ · 인바운드 7만+) |
+| 일 평균 통화 | 4,000건/일 (아웃바운드 2,500 · 인바운드 1,500) |
+| 도입 병원 수 | 300개+                  |
 | 지원 언어   | 6개 (한/영/중/일/스페인어/베트남어) |
 
 
@@ -24,7 +24,7 @@
 
 - OpenAI Realtime API와 SIP 트렁크를 결합한 실시간 아웃바운드 콜 시스템을 설계·구현해 병원 예약 확인·안내 통화를 자동화했습니다.
 - 단일 Agent의 한계를 분석하고 `TriageCoordinator` / `BookingAgent` / `InfoAgent` 기반 Multi-Agent 구조로 재설계해 운영 안정성과 유지보수성을 높였습니다.
-- 응답 지연을 기존 STT→LLM→TTS 파이프라인 약 900ms에서 약 300ms 수준으로 줄였고, 예약 CRUD 멀티턴 플로우와 Qdrant 기반 정보 검색을 한 통화 안에서 연결했습니다.
+- STT→LLM→TTS 개별 호출을 단일 Realtime 파이프라인으로 통합해 응답 레이턴시를 약 900~1200ms 수준으로 유지했고, 예약 CRUD 멀티턴 플로우와 Qdrant 기반 정보 검색을 한 통화 안에서 연결했습니다.
 - 자동응답기 감지, 무응답 종료, 상담원 연결 fallback, STT 교정, Ghost Message 제거, trustcall 기반 메타데이터 추출까지 포함한 프로덕션 운영 구조를 구축했습니다.
 - 사용기술: Python, LiveKit Agents, OpenAI Realtime API, SIP, RabbitMQ, Qdrant, Gemini 2.5 Pro, Claude Sonnet, GPT-4.1, trustcall, Pydantic, AWS ECS Fargate, S3, Secrets Manager, CloudWatch, Docker, VPC, Auto Scaling
 

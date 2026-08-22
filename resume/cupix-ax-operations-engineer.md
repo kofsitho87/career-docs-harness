@@ -7,7 +7,7 @@
 - GitHub: [https://github.com/kofsitho87](https://github.com/kofsitho87)
 - LinkedIn: [https://www.linkedin.com/in/kofsitho](https://www.linkedin.com/in/kofsitho)
 - Tech Blog: [https://kofsitho87.github.io/my-tech-blog/](https://kofsitho87.github.io/my-tech-blog/)
-- AX Case Study: [AIU 업무지원 Agent 시각 사례](../output/pdf/cupix-ax-aiu-case-study.pdf) · [Interactive HTML](../portfolio/cupix-ax-aiu-case-study.html)
+- AX Case Study: [AIU 업무지원 Agent 시각 사례](../output/pdf/cupix-ax-aiu-case-study.pdf) · [Interactive HTML](../portfolio/cupix-ax-aiu-case-study.html) · [Career Story](../portfolio/cupix-ax-career-story.html)
 
 ## Professional Summary
 
@@ -55,7 +55,7 @@
 병원의 반복적인 예약 확인·안내·상담 업무를, 병원별 정책을 코드 배포 없이 바꿀 수 있는 운영 workflow로 설계하고 실제 전화망에서 운영했습니다.
 
 - 병원별 운영시간, DTMF, 예약 처리, 상담원 연결, 종료 정책을 `flow_config`와 `auto` / `transfer` / `leave_memo` 설정으로 분리했습니다.
-- 아웃바운드 Voice AI를 단독 구축해 100개 이상 병원에 도입하고, 일 평균 2,000건·누적 96,000건 이상의 통화를 처리했습니다.
+- 아웃바운드 Voice AI를 단독 구축해 300개 이상 병원에 도입하고, 일 평균 2,500건·누적 55만 건 이상의 통화를 처리했습니다.
 - 무응답, 자동응답기, Agent 전환 충돌, 외부 API 장애를 재현 가능한 상태·이벤트로 정리하고 회귀 테스트와 fallback 경로로 전환했습니다.
 - 단위 테스트, text-only Agent 평가, 시뮬레이션, 실제 전화망 테스트를 4단계로 묶고 개인정보 없는 합성 데이터와 mock Tool로 운영 부작용을 차단했습니다.
 

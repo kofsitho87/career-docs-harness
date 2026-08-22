@@ -7,7 +7,7 @@
 2025.03 - 현재 | AI 엔지니어 / AI 프로덕트 팀장
 
 - 병원 Voice AI 제품의 실시간 통화 시스템, 상담 구조, 분석 파이프라인, 운영 인프라를 설계·개발·운영
-- 총 통화 성공 96,000건+, 일 평균 2,000건, 도입 병원 100개+, 지원 언어 6개
+- 총 통화 성공 62만 건+ (아웃바운드 55만+·인바운드 7만+), 일 평균 4,000건 (아웃바운드 2,500·인바운드 1,500), 도입 병원 300개+, 지원 언어 6개
 
 #### 병원 아웃바운드 Voice AI Agent 설계 및 운영
 
@@ -15,7 +15,7 @@
 
 - 병원의 예약 확인·안내 전화를 AI가 자동 발신하고, 통화 종료 후 전사 교정·구조화 분석·요약까지 비동기로 처리하는 실시간 Voice AI 시스템 설계·개발·운영
 - 단일 Agent 구조를 `TriageCoordinator` / `BookingAgent` / `InfoAgent`로 분리한 Multi-Agent 아키텍처 설계
-- OpenAI Realtime API와 SIP 트렁크를 결합해 실제 전화망 기반 아웃바운드 콜 시스템 구현, 응답 지연을 약 900ms에서 약 300ms로 단축
+- OpenAI Realtime API와 SIP 트렁크를 결합해 실제 전화망 기반 아웃바운드 콜 시스템 구현, STT→LLM→TTS를 단일 파이프라인으로 통합해 응답 레이턴시 약 900~1200ms 수준 유지
 - 예약 CRUD 멀티턴 플로우, Qdrant 기반 병원 정보 검색, 자동응답기 감지, 무응답 종료, 상담원 연결 fallback 등 운영 로직 구현
 - Gemini 2.5 Pro 기반 STT 교정, Ghost Message 제거, trustcall 기반 메타데이터 추출, RabbitMQ 기반 분석 파이프라인 분리 구축
 - 사용기술: Python, LiveKit Agents, OpenAI Realtime API, SIP, RabbitMQ, Qdrant, Gemini 2.5 Pro, Claude Sonnet, GPT-4.1, trustcall, Pydantic, AWS ECS Fargate, S3, Secrets Manager, CloudWatch, Docker, VPC, Auto Scaling

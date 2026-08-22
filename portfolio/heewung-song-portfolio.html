@@ -395,20 +395,20 @@
           <h1 class="animate delay-1">송희웅</h1>
           <p class="hero-subtitle animate delay-2">
             병원 Voice AI 시스템을 1인 설계·개발·운영하며<br>
-            100개 병원, 일 2,000건 실시간 AI 통화를 처리하는<br>
+            300개 병원, 일 4,000건 실시간 AI 통화를 처리하는<br>
             프로덕션 서비스를 구축했습니다.
           </p>
           <div class="hero-stats animate delay-3">
             <div>
-              <div class="hero-stat-value" style="color: var(--accent);" data-count="96000" data-suffix="+">0</div>
+              <div class="hero-stat-value" style="color: var(--accent);" data-count="620000" data-suffix="+">0</div>
               <div class="hero-stat-label">총 통화 성공</div>
             </div>
             <div>
-              <div class="hero-stat-value" data-count="2000" data-suffix="/일">0</div>
+              <div class="hero-stat-value" data-count="4000" data-suffix="/일">0</div>
               <div class="hero-stat-label">일 평균 통화</div>
             </div>
             <div>
-              <div class="hero-stat-value" data-count="100" data-suffix="+">0</div>
+              <div class="hero-stat-value" data-count="300" data-suffix="+">0</div>
               <div class="hero-stat-label">도입 병원</div>
             </div>
             <div>
@@ -440,6 +440,7 @@
                   <div class="tl-date">2025.03 - 현재</div>
                   <h4>와이즈에이아이 &middot; AI 프로덕트 팀장</h4>
                   <p>병원 Voice AI 제품 설계·개발·운영</p>
+                  <p style="margin-top: 6px; font-size: 0.78rem;">&#8226; 2026.08~ 사내 업무지원 Multi-Agent(AIU / AX 자동화) 설계·구축 병행</p>
                 </div>
                 <div class="timeline-item">
                   <div class="tl-date">2019.03 - 2025.02</div>
@@ -460,6 +461,7 @@
                 <span class="tech-tag primary">LiveKit Agents</span>
                 <span class="tech-tag primary">LangGraph</span>
                 <span class="tech-tag primary">LangChain</span>
+                <span class="tech-tag primary">Deep Agents</span>
                 <span class="tech-tag secondary">Claude API</span>
                 <span class="tech-tag secondary">GPT-4.1</span>
                 <span class="tech-tag secondary">Gemini 2.5 Pro</span>
@@ -476,6 +478,9 @@
                 <span class="tech-tag">Docker</span>
                 <span class="tech-tag">Terraform</span>
                 <span class="tech-tag">SIP Trunk</span>
+                <span class="tech-tag">Bun</span>
+                <span class="tech-tag">AG-UI</span>
+                <span class="tech-tag">Google Cloud OKF</span>
               </div>
               <div style="margin-top: 32px;">
                 <h3 style="font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-secondary); margin-bottom: 16px;">Open Source</h3>
@@ -503,19 +508,19 @@
           <!-- 핵심 수치 하이라이트 -->
           <div style="display: flex; justify-content: center; gap: 40px; margin-top: 36px;" class="animate delay-4">
             <div>
-              <div style="font-size: 1.8rem; font-weight: 800; color: var(--accent);">96,000+</div>
+              <div style="font-size: 1.8rem; font-weight: 800; color: var(--accent);">550,000+</div>
               <div style="font-size: 0.75rem; color: var(--text-secondary);">총 통화 성공</div>
             </div>
             <div>
-              <div style="font-size: 1.8rem; font-weight: 800;">2,000/일</div>
+              <div style="font-size: 1.8rem; font-weight: 800;">2,500/일</div>
               <div style="font-size: 0.75rem; color: var(--text-secondary);">일 평균 통화</div>
             </div>
             <div>
-              <div style="font-size: 1.8rem; font-weight: 800;">100+</div>
+              <div style="font-size: 1.8rem; font-weight: 800;">300+</div>
               <div style="font-size: 0.75rem; color: var(--text-secondary);">도입 병원</div>
             </div>
             <div>
-              <div style="font-size: 1.8rem; font-weight: 800;">~300ms</div>
+              <div style="font-size: 1.8rem; font-weight: 800;">900~1200ms</div>
               <div style="font-size: 0.75rem; color: var(--text-secondary);">응답 레이턴시</div>
             </div>
           </div>
@@ -708,10 +713,13 @@
               </div>
             </div>
             <div class="animate delay-2">
-              <h3 style="margin-bottom: 16px;">OpenAI Realtime API &middot; 67% 레이턴시 감소</h3>
+              <h3 style="margin-bottom: 16px;">OpenAI Realtime API &middot; 파이프라인 단순화</h3>
+              <p style="font-size: 0.82rem; color: var(--text-secondary); margin-bottom: 12px;">
+                홉을 줄여 아키텍처는 단순해졌지만, 실제 응답 레이턴시는 900~1200ms 수준입니다.
+              </p>
               <!-- Before -->
               <div class="card" style="margin-bottom: 12px; padding: 16px;">
-                <h4 style="font-size: 0.72rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 10px;">Before: 3단계 파이프라인</h4>
+                <h4 style="font-size: 0.72rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 10px;">기존: 3단계 파이프라인</h4>
                 <div class="pipeline" style="margin-top: 0;">
                   <div class="pipeline-step" style="padding: 10px 14px;">
                     <h4 style="font-size: 0.75rem;">STT</h4>
@@ -727,21 +735,21 @@
                   </div>
                 </div>
                 <div style="text-align: center; margin-top: 8px;">
-                  <span style="font-size: 1.2rem; font-weight: 800; color: var(--negative);">~900ms</span>
+                  <span style="font-size: 1.2rem; font-weight: 800;">~900ms</span>
                 </div>
               </div>
               <!-- After -->
-              <div class="card" style="padding: 16px; border-color: rgba(16,185,129,0.2);">
-                <h4 style="font-size: 0.72rem; color: var(--positive); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 10px;">After: Realtime API</h4>
+              <div class="card" style="padding: 16px;">
+                <h4 style="font-size: 0.72rem; color: var(--accent); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 10px;">Realtime API: 단일 파이프라인</h4>
                 <div class="pipeline" style="margin-top: 0;">
-                  <div class="pipeline-step" style="padding: 10px 14px; border-radius: 12px; background: rgba(16,185,129,0.04);">
+                  <div class="pipeline-step" style="padding: 10px 14px; border-radius: 12px;">
                     <h4 style="font-size: 0.75rem;">음성 &rarr; Realtime &rarr; 음성</h4>
                     <p>End-to-end</p>
                   </div>
                 </div>
                 <div style="text-align: center; margin-top: 8px;">
-                  <span style="font-size: 1.2rem; font-weight: 800; color: var(--positive);">~300ms</span>
-                  <span style="font-size: 0.8rem; color: var(--text-secondary); margin-left: 6px;">(67% 감소)</span>
+                  <span style="font-size: 1.2rem; font-weight: 800; color: var(--accent);">~900-1200ms</span>
+                  <span style="font-size: 0.8rem; color: var(--text-secondary); margin-left: 6px;">(홉 감소 &middot; 아키텍처 단순화)</span>
                 </div>
               </div>
               <!-- Qdrant -->
@@ -766,7 +774,7 @@
             <span class="tag">운영</span>
           </div>
           <p class="animate delay-1" style="color: var(--text-secondary); margin-bottom: 28px; max-width: 700px;">
-            일 2,000건 실 통화에서 발견한 엣지 케이스와 해결 방법
+            일 2,500건 실 통화에서 발견한 엣지 케이스와 해결 방법
           </p>
           <div class="card-grid animate delay-2" style="grid-template-columns: 1fr 1fr 1fr;">
             <!-- ARS -->
@@ -971,7 +979,7 @@
                 </div>
                 <div class="card" style="padding: 14px 18px;">
                   <h4 style="font-size: 0.78rem; color: var(--accent);">OpenAI Realtime API</h4>
-                  <p style="font-size: 0.75rem;">STT→LLM→TTS ~900ms → 단일 호출 ~300ms (67% 감소)</p>
+                  <p style="font-size: 0.75rem;">STT→LLM→TTS 개별 호출 → 단일 Realtime 호출 통합 → 900~1200ms로 안정화, 아키텍처 단순화</p>
                 </div>
                 <div class="card" style="padding: 14px 18px;">
                   <h4 style="font-size: 0.78rem; color: var(--accent);">Gemini 멀티모달 교정</h4>
@@ -1253,8 +1261,195 @@
         </div>
       </section>
 
-      <!-- ===== SLIDE 16: CLOSING ===== -->
-      <section class="slide slide-hero" data-slide="16">
+      <!-- ===== SLIDE 16: CASE STUDY 4 - AIU SECTION ===== -->
+      <section class="slide slide-section" data-slide="16">
+        <div class="slide-bg-gradient"></div>
+        <div class="dot-pattern"></div>
+        <div class="slide-inner" style="text-align: center;">
+          <div class="animate" style="font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.15em; color: var(--accent); margin-bottom: 16px;">Case Study 04</div>
+          <h2 class="animate delay-1">사내 업무지원<br>Multi-Agent (AIU / AX 자동화)</h2>
+          <p class="section-desc animate delay-2">AIU 제품과 운영 정보를 5개 사내 시스템에서 찾아야 했던 반복 업무를,<br>Web·Slack 하나의 접점과 권한 경계를 가진 Multi-Agent로 통합</p>
+          <div style="margin-top: 24px;" class="animate delay-3">
+            <span class="tag" style="font-size: 0.85rem; padding: 6px 18px;">설계 · 구축 오너 &middot; 2026.08~</span>
+          </div>
+          <!-- 핵심 수치 하이라이트 -->
+          <div style="display: flex; justify-content: center; gap: 40px; margin-top: 36px;" class="animate delay-4">
+            <div>
+              <div style="font-size: 1.8rem; font-weight: 800; color: var(--accent);">5&rarr;1</div>
+              <div style="font-size: 0.75rem; color: var(--text-secondary);">업무 조회 접점 통합</div>
+            </div>
+            <div>
+              <div style="font-size: 1.8rem; font-weight: 800;">322개</div>
+              <div style="font-size: 0.75rem; color: var(--text-secondary);">통합 매뉴얼 &middot; Playbook</div>
+            </div>
+            <div>
+              <div style="font-size: 1.8rem; font-weight: 800;">4개</div>
+              <div style="font-size: 0.75rem; color: var(--text-secondary);">전문 도메인 Agent</div>
+            </div>
+            <div>
+              <div style="font-size: 1.8rem; font-weight: 800;">37개</div>
+              <div style="font-size: 0.75rem; color: var(--text-secondary);">자동화 회귀 테스트</div>
+            </div>
+          </div>
+          <div class="tech-tags animate delay-5" style="justify-content: center; margin-top: 24px;">
+            <span class="tech-tag primary">Deep Agents</span>
+            <span class="tech-tag primary">AG-UI</span>
+            <span class="tech-tag green">TypeScript</span>
+            <span class="tech-tag green">Bun</span>
+            <span class="tech-tag">Google Cloud OKF</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== SLIDE 17: AIU - ARCHITECTURE & KNOWLEDGE CONTRACT ===== -->
+      <section class="slide slide-content-bg" data-slide="17">
+        <div class="slide-bg-gradient"></div>
+        <div class="slide-inner">
+          <div class="slide-title-row animate">
+            <h2>Multi-Agent 아키텍처 &amp; 지식 계약</h2>
+            <span class="tag">설계</span>
+          </div>
+          <div class="two-col">
+            <div class="animate delay-1">
+              <h3 style="margin-bottom: 16px;">Supervisor + 4개 도메인 Agent</h3>
+              <div class="arch-flow" style="flex-direction: column; gap: 12px; align-items: stretch;">
+                <div class="arch-node arch-node-primary" style="width: 100%;">
+                  <h4>AIU Supervisor</h4>
+                  <span>의도 &middot; 제품 &middot; 권한 라우팅</span>
+                </div>
+                <div style="display: flex; gap: 10px;">
+                  <div class="arch-node" style="flex: 1;">
+                    <h4>Inbound Agent</h4>
+                    <span>통화 검색 &middot; 응대율 분석</span>
+                  </div>
+                  <div class="arch-node" style="flex: 1;">
+                    <h4>Outbound Agent</h4>
+                    <span>발신 결과 &middot; 연결 지표</span>
+                  </div>
+                </div>
+                <div style="display: flex; gap: 10px;">
+                  <div class="arch-node" style="flex: 1;">
+                    <h4>Agent Admin Agent</h4>
+                    <span>화면 안내 &middot; 설정 위치</span>
+                  </div>
+                  <div class="arch-node" style="flex: 1;">
+                    <h4>HQ/SVC Agent</h4>
+                    <span>운영 정책 &middot; 매뉴얼</span>
+                  </div>
+                </div>
+              </div>
+              <div class="card" style="margin-top: 16px; border-left: 3px solid var(--accent); padding: 16px 20px;">
+                <h4 style="font-size: 0.8rem; margin-bottom: 6px;">접근 범위를 좁히는 라우팅</h4>
+                <div style="font-size: 0.8rem; color: var(--text-secondary); line-height: 1.8;">
+                  <div>&#8226; Supervisor는 <strong style="color: var(--text);">원본 지식을 직접 읽지 않음</strong></div>
+                  <div>&#8226; 요청을 <strong style="color: var(--text);">도메인 Agent 1곳에만 위임</strong> (권한·데이터 혼합 방지)</div>
+                </div>
+              </div>
+            </div>
+            <div class="animate delay-2">
+              <h3 style="margin-bottom: 16px;">지식 계약: 322개 문서 &rarr; Google Cloud OKF</h3>
+              <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 16px;">
+                5개 사내 시스템의 사용자 매뉴얼과 AI Playbook 322개를 하나의 지식 번들로 통합. RAG를 붙이기 전에 frontmatter의 역할·claim·분류로 접근 계약을 먼저 고정.
+              </p>
+              <div style="display: flex; flex-direction: column; gap: 8px;">
+                <div class="card" style="padding: 14px 18px;">
+                  <h4 style="font-size: 0.78rem; color: var(--accent);">한 형식, 두 독자</h4>
+                  <p style="font-size: 0.75rem;">사람용 매뉴얼과 Agent용 Playbook·Policy·State Model을 같은 번들에 둬 설명이 갈라지지 않게 함</p>
+                </div>
+                <div class="card" style="padding: 14px 18px;">
+                  <h4 style="font-size: 0.78rem; color: var(--accent);">Pre-retrieval 권한 필터</h4>
+                  <p style="font-size: 0.75rem;">본문 로드 전에 역할·claim으로 검색 범위를 줄여, 도메인 Agent만 허용된 지식을 조회</p>
+                </div>
+                <div class="card" style="padding: 14px 18px;">
+                  <h4 style="font-size: 0.78rem; color: var(--accent);">Source Drift 검사</h4>
+                  <p style="font-size: 0.75rem;">source manifest와 deterministic checker로 문서·코드 capability를 CI에서 상시 검증</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== SLIDE 18: AIU - GOVERNANCE & SCOPE ===== -->
+      <section class="slide slide-content-bg" data-slide="18">
+        <div class="slide-bg-gradient"></div>
+        <div class="slide-inner">
+          <div class="slide-title-row animate">
+            <h2>거버넌스 &amp; 운영 범위</h2>
+            <span class="tag">안전장치 &middot; 정직한 범위</span>
+          </div>
+          <p class="animate delay-1" style="color: var(--text-secondary); margin-bottom: 28px; max-width: 800px;">
+            사내 데이터와 고객·환자 식별정보가 섞일 수 있는 업무라서, 기능을 여는 속도보다 열리지 않아야 할 경로를 먼저 막았습니다.
+          </p>
+          <div class="card-grid animate delay-2" style="grid-template-columns: 1fr 1fr 1fr;">
+            <!-- SELECT-only -->
+            <div class="card">
+              <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 12px;">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/><path d="M3 12c0 1.66 4 3 9 3s9-1.34 9-3"/></svg>
+                <h3 style="font-size: 0.95rem;">SELECT-only 조회</h3>
+              </div>
+              <p style="font-size: 0.82rem; color: var(--text-secondary);">
+                운영 지표 조회는 SELECT-only MySQL Tool로만 실행합니다. 사용자 입력은 parameter binding으로 분리하고 SSL 인증서를 검증합니다.
+              </p>
+              <div style="font-size: 0.72rem; color: var(--text-secondary); margin-top: 10px; padding-top: 10px; border-top: 1px solid var(--border);">
+                조회 한도와 raw transcript 비노출을 기본값으로 설정
+              </div>
+            </div>
+            <!-- PII -->
+            <div class="card">
+              <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 12px;">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--warning)" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+                <h3 style="font-size: 0.95rem;">식별정보 비식별화</h3>
+              </div>
+              <p style="font-size: 0.82rem; color: var(--text-secondary);">
+                민감 통화 검토는 명시적으로 지목된 <strong style="color: var(--text);">최대 5건의 후보</strong>만 읽습니다. 전화번호·주민번호·이메일은 가리고 원문 전체 덤프를 막습니다.
+              </p>
+              <div style="font-size: 0.72rem; color: var(--text-secondary); margin-top: 10px; padding-top: 10px; border-top: 1px solid var(--border);">
+                근거 turn 제한으로 열람 범위를 추가로 축소
+              </div>
+            </div>
+            <!-- HITL -->
+            <div class="card">
+              <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 12px;">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--positive)" stroke-width="2"><path d="M12 2l8 4v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6l8-4z"/><path d="M9 12l2 2 4-4"/></svg>
+                <h3 style="font-size: 0.95rem;">HITL &middot; 감사 로그</h3>
+              </div>
+              <p style="font-size: 0.82rem; color: var(--text-secondary);">
+                서명된 사용자 실행 정보만 Agent가 수락합니다. 브라우저·파일·plugin 작업은 정책 평가와 사람 승인을 통과해야 실행됩니다.
+              </p>
+              <div style="font-size: 0.72rem; color: var(--text-secondary); margin-top: 10px; padding-top: 10px; border-top: 1px solid var(--border);">
+                모든 실행은 감사 로그로 추적
+              </div>
+            </div>
+          </div>
+          <!-- 정직한 범위 -->
+          <div class="animate delay-3" style="margin-top: 20px;">
+            <h4 style="font-size: 0.85rem; margin-bottom: 10px;">2026.08 착수 &middot; 약 3주 만에 1차 운영 가능한 상태</h4>
+            <div style="display: flex; gap: 16px;">
+              <div class="card" style="flex: 1; padding: 16px;">
+                <h4 style="font-size: 0.72rem; color: var(--positive); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 10px;">1차 범위에서 완료</h4>
+                <div style="font-size: 0.8rem; color: var(--text-secondary); line-height: 1.9;">
+                  <div>&#8226; Deep Agents 마이그레이션 + AG-UI Web&middot;Slack 런타임</div>
+                  <div>&#8226; OKF 지식 번들과 본문 전 권한 필터</div>
+                  <div>&#8226; SELECT-only 운영 조회와 비식별화</div>
+                  <div>&#8226; HITL&middot;감사 로그 연동, 37개 회귀 테스트</div>
+                </div>
+              </div>
+              <div class="card" style="flex: 1; padding: 16px;">
+                <h4 style="font-size: 0.72rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 10px;">아직 말하지 않는 것</h4>
+                <div style="font-size: 0.8rem; color: var(--text-secondary); line-height: 1.9;">
+                  <div>&#8226; 절감 시간&middot;전사 확산률처럼 측정하지 않은 성과</div>
+                  <div>&#8226; 문서 본문은 사람 검토 중인 draft</div>
+                  <div>&#8226; 세일즈&middot;재무&middot;HR 전사 과제 진단</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== SLIDE 19: CLOSING ===== -->
+      <section class="slide slide-hero" data-slide="19">
         <div class="slide-bg-gradient"></div>
         <div class="dot-pattern"></div>
         <div class="slide-inner">
@@ -1300,7 +1495,7 @@
     <button onclick="prevSlide()" aria-label="Previous slide">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
     </button>
-    <span class="slide-counter" id="slideCounter">1 / 16</span>
+    <span class="slide-counter" id="slideCounter">1 / 19</span>
     <button onclick="nextSlide()" aria-label="Next slide">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
     </button>
