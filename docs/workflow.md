@@ -34,6 +34,7 @@
 이 범주의 문서는 외부에 보여주기 위한 현재 결과물이다. 지원용 이력서, 프로젝트 케이스 스터디, 필요 시 시각 자료가 여기에 해당한다.
 
 - `resume/product-engineer.md`: 현재 메인 이력서 산출물이자 사실 기준 문서
+- `portfolio/heewung-song-portfolio.html`: 반복 업무를 프로덕션 AI 시스템으로 전환해 온 다섯 프로젝트를 하나의 커리어 서사로 연결한 종합 포트폴리오
 - `case-studies/outbound-voice-agent.md`: 아웃바운드 Voice AI Agent 케이스 스터디
 - `case-studies/inbound-voice-agent.md`: 인바운드 Voice AI Agent 케이스 스터디
 - `case-studies/hospital-customer-support-agent.md`: 병원 고객상담 AI Agent 케이스 스터디
@@ -87,6 +88,8 @@
 
 - 이력서 작업은 `resume/product-engineer.md`를 중심으로 진행한다.
 - 프로젝트 케이스 스터디 작업은 대상 문서에 맞는 `case-studies/*.md` 파일을 중심으로 진행한다.
+- 종합 포트폴리오의 구조나 중심 메시지를 바꿀 때는 `docs/plans/2026-08-24-general-portfolio-narrative-design.md`를 기준으로 Voice AI, 통화 지표 자동화, AIU가 하나의 문제 해결 패턴으로 연결되는지 확인한다.
+- 종합 포트폴리오의 AIU 업무지원 Agent 장을 수정할 때는 `docs/plans/2026-08-24-aiu-portfolio-expansion-design.md`를 기준으로 Supervisor·지식·운영 데이터·OpenBot 실행 경계가 분리되어 있는지 확인한다.
 - 이 단계에서는 내용을 압축하거나 재배치할 수 있지만, 사실 왜곡 없이 사실 기준 문서를 바탕으로 수정해야 한다.
 
 ### 2.4 필요 시 보조 자산 생성

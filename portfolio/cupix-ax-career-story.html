@@ -6,6 +6,8 @@
   <title>송희웅 — 반복 업무를 시스템으로 바꿔온 커리어 스토리</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Noto+Sans+KR:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+  <script>Chart.defaults.animation = false;</script>
   <script src="https://cdn.jsdelivr.net/npm/html-to-image@1.11.11/dist/html-to-image.js"></script>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -194,6 +196,57 @@
     .fit-grid article h3 { font-size: 1.05rem; }
     .fit-arrow { color: var(--accent); font-size: 0.8rem; font-weight: 700; margin: 10px 0; display: block; }
 
+    .ask-layout { display: grid; grid-template-columns: 220px minmax(0, 1fr); gap: 18px; margin-top: 28px; }
+    .ask-tabs { display: grid; gap: 8px; align-content: start; }
+    .ask-tab {
+      width: 100%; text-align: left; border: 1px solid var(--border); background: var(--surface);
+      color: var(--text); border-radius: 10px; padding: 12px 14px; cursor: pointer; font: inherit;
+    }
+    .ask-tab.active { border-color: var(--accent); background: color-mix(in srgb, var(--accent), transparent 92%); }
+    .ask-tab small { display: block; margin-top: 4px; color: var(--text-secondary); }
+    .ask-panel { min-height: 280px; }
+    .ask-quote {
+      margin-top: 16px; padding: 16px 18px; border-left: 3px solid var(--accent);
+      background: var(--bg); border-radius: 0 10px 10px 0; font-size: 1.05rem;
+    }
+    .ask-result { margin-top: 16px; color: var(--text-secondary); }
+
+    .arch-grid { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 18px; margin-top: 28px; }
+    .flow { display: grid; gap: 10px; }
+    .flow-row { display: grid; align-items: center; gap: 8px; }
+    .flow-row.entry { grid-template-columns: 1fr 28px 1fr; }
+    .flow-row.specialists, .flow-row.sources { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .flow-row.sources { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .node {
+      min-height: 64px; border: 1px solid var(--border); border-radius: 10px; background: var(--bg);
+      padding: 10px 12px; display: flex; align-items: center; color: var(--text);
+      font: inherit; text-align: left; cursor: pointer; width: 100%;
+    }
+    .node:hover, .node.active { background: var(--surface-hover); box-shadow: inset 0 0 0 1px var(--border); }
+    .node.primary { background: color-mix(in srgb, var(--accent), transparent 91%); border-color: color-mix(in srgb, var(--accent), transparent 68%); }
+    .node-title { display: block; font-size: 0.88rem; font-weight: 700; }
+    .node-sub { display: block; margin-top: 2px; color: var(--text-secondary); font-size: 0.72rem; }
+    .arrow { display: grid; place-items: center; color: var(--text-secondary); }
+    .arch-detail { min-height: 280px; }
+
+    .chart-container {
+      height: 360px; padding: 40px; border-radius: 12px; background: var(--surface);
+      border: 1px solid var(--border); margin-top: 24px;
+    }
+    .chart-container canvas { display: block; width: 100% !important; height: 100% !important; }
+
+    .okf-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; margin-top: 28px; }
+    .okf-grid article h3 { font-size: 1.15rem; margin: 8px 0 10px; }
+
+    .gov-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; margin-top: 28px; }
+    .gov-grid h3 { margin: 8px 0 10px; }
+
+    details { margin-top: 12px; background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 16px 18px; overflow: hidden; }
+    details summary { cursor: pointer; list-style: none; font-weight: 650; }
+    details summary::-webkit-details-marker { display: none; }
+    details p, details ul { margin-top: 10px; color: var(--text-secondary); }
+    details ul { padding-left: 18px; display: grid; gap: 6px; }
+
     .site-footer {
       padding: 40px 0 72px; border-top: 1px solid var(--border); color: var(--text-secondary); font-size: 0.88rem;
     }
@@ -242,9 +295,11 @@
     .reveal.visible { opacity: 1; transform: translateY(0); }
 
     @media (max-width: 900px) {
-      .hero-grid, .split, .chapter-grid, .chapter-grid.cols-3, .meta-grid, .screen-block, .screen-block.reverse, .scope-grid, .fit-grid {
+      .hero-grid, .split, .chapter-grid, .chapter-grid.cols-3, .meta-grid, .screen-block, .screen-block.reverse, .scope-grid, .fit-grid, .ask-layout, .arch-grid, .okf-grid, .gov-grid {
         grid-template-columns: 1fr;
       }
+      .flow-row.entry, .flow-row.specialists, .flow-row.sources { grid-template-columns: 1fr; }
+      .flow-row.entry .arrow { transform: rotate(90deg); }
       .timeline-track { grid-template-columns: repeat(5, minmax(120px, 1fr)); overflow-x: auto; }
       .site-nav { margin-right: 60px; }
       section { padding: 60px 0; }
@@ -554,9 +609,37 @@
     <section class="wrap" id="aiu" data-reveal>
       <div class="eyebrow"><span class="eyebrow-line"></span>Chapter 05 · 2026.08 – 현재 (착수 3주 차)</div>
       <h2>문제 #5 — 이번엔 병원이 아니라, 우리 팀 자신의 문제였다</h2>
-      <p class="lede">운영·HQ/SVC 담당자들은 AIU 제품 사용법, 통화 운영 현황, Agent Admin 설정, 운영 지표를 각기 다른 시스템에서 찾고 있었습니다. 대상은 환자의 전화가 아니라 동료의 질문이었지만, 반복되는 조회 업무라는 형태는 앞의 네 챕터와 똑같았습니다. 그래서 같은 근육을 한 단계 위, 사내 업무지원이라는 새로운 문제에 적용했습니다.</p>
+      <p class="lede">운영·HQ/SVC 담당자들은 AIU 제품 사용법, 통화 운영 현황, Agent Admin 설정, 운영 지표를 각기 다른 시스템에서 찾고 있었습니다. 대상은 환자의 전화가 아니라 동료의 질문이었지만, 반복되는 조회 업무라는 형태는 앞의 네 챕터와 똑같았습니다. 그래서 같은 근육을 한 단계 위, 사내 업무지원이라는 새로운 문제에 적용했습니다. 화면을 찾아 들어가지 않고, 업무 언어로 묻게 만드는 일이었습니다.</p>
 
-      <div class="chapter-grid">
+      <div class="split">
+        <article class="card before">
+          <div class="card-label">Before</div>
+          <h3>제품별 화면을 외운다</h3>
+          <ul>
+            <li>AIU 사용법은 매뉴얼 저장소에서 찾는다</li>
+            <li>통화 운영 현황은 인바운드·아웃바운드 콘솔이 다르다</li>
+            <li>설정 변경 위치는 Agent Admin 화면 경로에 의존한다</li>
+            <li>HQ/SVC 정책은 또 다른 문서 묶음에 있다</li>
+          </ul>
+        </article>
+        <article class="card after">
+          <div class="card-label">After</div>
+          <h3>업무 언어로 한 곳에서 묻는다</h3>
+          <ul>
+            <li>Web과 Slack이 같은 AG-UI 런타임을 쓴다</li>
+            <li>Supervisor가 도메인을 나누고 허용된 Agent만 답한다</li>
+            <li>문서는 역할·claim을 통과한 뒤에만 본문을 연다</li>
+            <li>운영 지표는 SELECT-only로, 같은 계산 규칙을 코드에 둔다</li>
+          </ul>
+        </article>
+      </div>
+      <div role="img" aria-label="이전에는 5개 시스템 화면을 찾아 들어갔고, 이후에는 Web과 Slack 하나의 접점에서 질문합니다.">
+        <div class="chart-container">
+          <canvas id="entryChart"></canvas>
+        </div>
+      </div>
+
+      <div class="chapter-grid" style="margin-top:36px;">
         <article class="card">
           <div class="card-label">Routing — Chapter 1의 재적용</div>
           <h3>Supervisor + 4개 도메인 Agent</h3>
@@ -569,29 +652,146 @@
         </article>
       </div>
 
-      <div class="chapter-grid" style="margin-top:14px;">
-        <article class="card">
-          <div class="card-label">Guardrails</div>
-          <h3>SELECT-only 데이터, HITL, 감사 로그</h3>
-          <p class="text-secondary">통화 검색과 운영 지표 분석을 위한 SELECT-only MySQL Tool은 사용자 입력을 parameter binding으로 분리하고 SSL 인증서를 검증하며, 조회 한도와 transcript 비식별화를 기본값으로 둡니다. 민감 통화는 후보 5건만 읽고 전화번호·주민번호·이메일을 비식별화했습니다. 브라우저·파일·plugin 실행은 정책 평가·감사 로그·Human-in-the-Loop을 거치도록 AG-UI로 Web·Slack 실행을 하나의 runtime에 묶었습니다.</p>
+      <div class="card-label" style="margin-top:40px;">What people can ask</div>
+      <h3 style="margin-top:8px;">현업이 실제로 던지는 질문 형태</h3>
+      <p class="text-secondary" style="margin-top:10px;max-width:720px;">도메인마다 문서·Tool·응답 계약이 다릅니다. 아래는 실제 운영 데이터 수치가 아니라, Agent가 처리하도록 설계한 질문 유형입니다.</p>
+      <div class="ask-layout">
+        <div class="ask-tabs" role="tablist" aria-label="업무 도메인">
+          <button class="ask-tab active" data-ask="inbound" role="tab" aria-selected="true">인바운드 운영<small>통화 검색 · 전환율</small></button>
+          <button class="ask-tab" data-ask="outbound" role="tab" aria-selected="false">아웃바운드 운영<small>발신 결과 · 연결 지표</small></button>
+          <button class="ask-tab" data-ask="admin" role="tab" aria-selected="false">Agent Admin<small>화면 안내 · 설정 위치</small></button>
+          <button class="ask-tab" data-ask="hq" role="tab" aria-selected="false">HQ / SVC<small>정책 · 운영 매뉴얼</small></button>
+        </div>
+        <article class="card ask-panel" id="askPanel">
+          <div class="card-label" id="askLabel">Inbound Agent</div>
+          <h3 id="askTitle">운영 현황을 콘솔 경로 없이 묻는다</h3>
+          <p class="ask-quote" id="askQuote">이번 주 인바운드 응대율과 예약 전환율을 비교해 줘. 이탈이 인사말 전에 몰리는지도 같이 봐줘.</p>
+          <p class="ask-result" id="askResult">허용된 역할이면 SELECT-only Tool이 날짜·병원·업무 결과 필터로 집계합니다. 지표 정의는 화면마다 달라지지 않도록 코드로 고정했습니다. 민감 통화 원문은 후보 제한과 비식별화를 거친 뒤에만 봅니다.</p>
         </article>
+      </div>
+
+      <div class="card-label" style="margin-top:40px;">How it runs</div>
+      <h3 style="margin-top:8px;">질문에서 실행 가능한 업무까지</h3>
+      <p class="text-secondary" style="margin-top:10px;max-width:720px;">기존 AIU Agent를 Bun·TypeScript 기반 Deep Agents로 옮기고, AG-UI로 Web과 Slack 실행을 하나의 런타임에 묶었습니다. 노드를 누르면 그 레이어가 왜 필요한지 볼 수 있습니다.</p>
+      <div class="arch-grid">
+        <div class="flow">
+          <div class="flow-row entry">
+            <button class="node primary" data-node="entry"><span><span class="node-title">Web · Slack</span><span class="node-sub">현업의 자연어 요청</span></span></button>
+            <span class="arrow" aria-hidden="true">→</span>
+            <button class="node" data-node="supervisor"><span><span class="node-title">AIU Supervisor</span><span class="node-sub">의도 · 제품 · 권한 라우팅</span></span></button>
+          </div>
+          <div class="flow-row specialists">
+            <button class="node" data-node="io"><span><span class="node-title">Inbound · Outbound</span><span class="node-sub">통화 검색 · 운영 분석</span></span></button>
+            <button class="node" data-node="admin"><span><span class="node-title">Agent Admin · HQ/SVC</span><span class="node-sub">화면 안내 · 운영 정책</span></span></button>
+          </div>
+          <div class="flow-row sources">
+            <button class="node" data-node="okf"><span><span class="node-title">OKF Knowledge</span><span class="node-sub">322개 문서</span></span></button>
+            <button class="node" data-node="db"><span><span class="node-title">SELECT-only DB</span><span class="node-sub">운영 지표</span></span></button>
+            <button class="node" data-node="hitl"><span><span class="node-title">Computer · Plugin</span><span class="node-sub">정책 · 감사 · HITL</span></span></button>
+          </div>
+        </div>
+        <article class="card arch-detail" id="archDetail">
+          <div class="card-label">Entry</div>
+          <h3>하나의 업무 접점</h3>
+          <p class="text-secondary">현업은 제품별 화면과 데이터 저장소를 외우지 않습니다. Web 또는 Slack에서 업무 언어로 질문하면 같은 Agent runtime이 응답합니다.</p>
+        </article>
+      </div>
+
+      <div class="card-label" style="margin-top:40px;">Knowledge contract</div>
+      <h3 style="margin-top:8px;">문서를 모으는 것이 아니라 접근 계약을 만든다</h3>
+      <p class="text-secondary" style="margin-top:10px;max-width:720px;">RAG를 붙이기 전에, 누가 어떤 본문을 열 수 있는지를 frontmatter 계약으로 고정했습니다.</p>
+      <div class="okf-grid">
+        <article class="card">
+          <div class="card-label">Bundle</div>
+          <h3>한 형식, 두 독자</h3>
+          <p class="text-secondary">사람용 매뉴얼과 Agent용 Playbook·Policy·State Model을 같은 번들로 둡니다. 설명이 갈라지면 운영과 AI 응답이 동시에 어긋납니다.</p>
+        </article>
+        <article class="card">
+          <div class="card-label">Pre-retrieval</div>
+          <h3>본문 전에 권한을 줄인다</h3>
+          <p class="text-secondary">역할·claim·문서 분류로 검색 범위를 먼저 자릅니다. Supervisor는 원본 문서를 직접 읽지 못하고, 해당 도메인 Agent만 허용된 지식을 봅니다.</p>
+        </article>
+        <article class="card">
+          <div class="card-label">Integrity</div>
+          <h3>문서와 코드를 같이 검사한다</h3>
+          <p class="text-secondary">source drift, 깨진 링크, capability coverage, HITL 정책을 deterministic checker와 테스트로 확인합니다. 문서 본문은 사람 검토 중인 draft로 관리합니다.</p>
+        </article>
+      </div>
+
+      <div class="screen-block" style="margin-top:40px;">
+        <div>
+          <div class="card-label">01 · Operating status</div>
+          <h3>찾아 들어가던 화면을 질문으로</h3>
+          <p class="text-secondary" style="margin-top:12px;">응대율, 자체 처리율, 예약 전환율, 상담원 연결 성공률을 화면마다 다시 세지 않습니다. 날짜·병원·업무 결과 필터와 계산 규칙을 SELECT-only Tool에 명시했습니다. 숫자는 비식별 샘플이며 실제 운영값이 아닙니다.</p>
+          <div class="chips"><span class="chip">자연어 조회</span><span class="chip">지표 정의 고정</span><span class="chip">콘솔 경로 제거</span></div>
+        </div>
+        <button class="screen-shot" onclick="showPreview('operations')" aria-label="인바운드 운영 현황 샘플 화면 확대">
+          <img id="operations-image" src="../assets/cupix-ax-operations-screen.png" alt="인바운드 운영 현황 샘플 화면. 실데이터 없는 외부 제출용 콘솔">
+        </button>
+      </div>
+
+      <div class="card-label" style="margin-top:40px;">Guardrails</div>
+      <h3 style="margin-top:8px;">AI가 일하려면 경계부터 설계한다</h3>
+      <p class="text-secondary" style="margin-top:10px;max-width:720px;">사내 데이터와 고객·환자 식별정보가 섞일 수 있는 업무라서, 도구를 여는 속도보다 열리지 않아야 할 경로를 먼저 막았습니다.</p>
+      <div class="gov-grid">
+        <article class="card">
+          <div class="card-label">Access</div>
+          <h3>Role · Claim 사전 필터</h3>
+          <p class="text-secondary">인증된 역할과 claim으로 본문 로드 전 문서 집합을 줄입니다. 검색이 먼저 되고 권한이 나중에 붙는 구조를 피했습니다.</p>
+        </article>
+        <article class="card">
+          <div class="card-label">Data</div>
+          <h3>SELECT-only 조회</h3>
+          <p class="text-secondary">사용자 입력은 parameter binding으로 분리하고 SSL을 검증합니다. 조회 한도와 raw transcript 비노출을 기본값으로 둡니다.</p>
+        </article>
+        <article class="card">
+          <div class="card-label">Privacy</div>
+          <h3>식별정보 비식별화</h3>
+          <p class="text-secondary">민감 통화 검토는 최대 5건의 명시적 후보만 읽습니다. 전화번호, 주민번호, 이메일을 가리고 원문 전체 덤프를 막습니다.</p>
+        </article>
+        <article class="card">
+          <div class="card-label">Execution</div>
+          <h3>HITL · 감사 로그</h3>
+          <p class="text-secondary">서명된 사용자 실행 정보만 Agent가 수락합니다. 브라우저·파일·plugin 작업은 정책 평가와 사람 승인을 통과해야 합니다.</p>
+        </article>
+      </div>
+
+      <div class="chapter-grid" style="margin-top:14px;">
         <article class="card">
           <div class="card-label">Speed as evidence</div>
           <h3>착수 3주 만에 1차 운영 가능한 상태</h3>
           <p class="text-secondary">2026.08에 착수해 지식 통합, 권한 경계, Web·Slack 런타임, 37개 자동화 테스트까지 3주 만에 갖췄습니다. 완성된 전사 플랫폼이 아니라, 반복 업무를 빠르게 구조화된 시스템으로 옮기는 실행 속도 자체가 이 챕터가 보여주는 것입니다.</p>
         </article>
+        <article class="card">
+          <div class="card-label">Stack & verification</div>
+          <h3>이 프로젝트를 구분하는 기술</h3>
+          <p class="text-secondary">LLM API나 MySQL, Slack은 연동 대상입니다. 이 과제의 핵심은 Agent 런타임, 채널 프로토콜, 지식 계약입니다.</p>
+        </article>
       </div>
 
       <div class="metric-grid" style="margin-top:28px;">
-        <article class="metric"><div class="metric-value">5개</div><div class="metric-label">통합한 사내 시스템</div></article>
-        <article class="metric"><div class="metric-value">322개</div><div class="metric-label">사용자·AI 매뉴얼</div></article>
-        <article class="metric"><div class="metric-value">4개</div><div class="metric-label">Supervisor 산하 도메인 Agent</div></article>
-        <article class="metric"><div class="metric-value">37개</div><div class="metric-label">권한·조회·응답 회귀 테스트</div></article>
+        <article class="metric"><div class="metric-value" data-count="5">5개</div><div class="metric-label">통합한 사내 시스템</div></article>
+        <article class="metric"><div class="metric-value" data-count="322">322개</div><div class="metric-label">사용자·AI 매뉴얼</div></article>
+        <article class="metric"><div class="metric-value" data-count="4">4개</div><div class="metric-label">Supervisor 산하 도메인 Agent</div></article>
+        <article class="metric"><div class="metric-value" data-count="37">37개</div><div class="metric-label">권한·조회·응답 회귀 테스트</div></article>
       </div>
 
       <div class="stack">
-        <span>TypeScript</span><span>Bun</span><span>Deep Agents</span><span>LangGraph</span><span>AG-UI</span><span>Google Cloud OKF v0.2</span><span>MySQL</span>
+        <span>TypeScript</span><span>Bun</span><span>Deep Agents</span><span>LangGraph</span><span>AG-UI</span><span>Google Cloud OKF v0.2</span>
       </div>
+      <details>
+        <summary>37개 자동화 테스트가 지키는 것</summary>
+        <ul>
+          <li>지식 manifest와 역할·claim 격리</li>
+          <li>AG-UI 응답 계약</li>
+          <li>DB 조회 한도와 SELECT-only 경계</li>
+          <li>첨부 처리와 Docker Compose 실행 경로</li>
+        </ul>
+      </details>
+      <details>
+        <summary>연동은 보이되 기술 줄에는 넣지 않은 것</summary>
+        <p>OpenAI API, MySQL, Slack, Docker Compose는 실제로 붙였습니다. 다만 이 프로젝트를 다른 Agent 작업과 구분하는 키워드는 아니라서 핵심 스택에서 뺐습니다.</p>
+      </details>
 
       <div class="scope-grid">
         <article class="card">
@@ -600,7 +800,8 @@
           <ul class="text-secondary" style="margin-top:12px;padding-left:18px;display:grid;gap:8px;">
             <li>Deep Agents 마이그레이션과 AG-UI Web·Slack 런타임</li>
             <li>OKF 지식 번들과 본문 전 권한 필터</li>
-            <li>SELECT-only 운영 조회와 비식별화, HITL·감사 로그</li>
+            <li>SELECT-only 운영 조회와 비식별화</li>
+            <li>HITL·감사 로그 연동, 37개 회귀 테스트</li>
           </ul>
         </article>
         <article class="card">
@@ -608,15 +809,11 @@
           <h3>착수 3주 차의 정직한 범위</h3>
           <ul class="text-secondary" style="margin-top:12px;padding-left:18px;display:grid;gap:8px;">
             <li>절감 시간·전사 확산률처럼 아직 측정하지 않은 성과</li>
-            <li>문서 본문은 사람 검토가 진행 중인 draft</li>
+            <li>문서 본문은 사람 검토 중인 draft</li>
             <li>세일즈·재무·HR 같은 다른 전사 과제로의 확장 여부</li>
+            <li>n8n, Zapier, Retool 같은 로우코드 스택 — 대신 코드 기반 Agent로 더 세밀한 권한·데이터 제어가 필요한 워크플로우를 우선 다뤘습니다</li>
           </ul>
         </article>
-      </div>
-
-      <div class="callout">
-        <p>Supervisor + 4개 도메인 Agent 구조, OKF 지식 계약, 거버넌스 설계의 전체 기술 상세는 별도 페이지에 정리했습니다.</p>
-        <a href="cupix-ax-aiu-case-study.html">AIU Interactive Case Study 보기 →</a>
       </div>
     </section>
 
@@ -660,7 +857,7 @@
       <div>
         <strong style="color:var(--text);">송희웅</strong>
         <p>큐픽스 AX Operations Engineer 지원 사례 · 커리어 저니 내러티브</p>
-        <p><a href="mailto:kofsitho@naver.com">kofsitho@naver.com</a> · <a href="https://github.com/kofsitho87">GitHub</a> · <a href="cupix-ax-aiu-case-study.html">AIU Case Study</a></p>
+        <p><a href="mailto:kofsitho@naver.com">kofsitho@naver.com</a> · <a href="https://github.com/kofsitho87">GitHub</a></p>
       </div>
       <span class="safe-note"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>화면 이미지는 외부 제출용 샘플 · 고객·환자·실제 운영 데이터 미포함</span>
     </div>
@@ -697,12 +894,142 @@
     var currentTheme = 'light';
     var savedTheme = readStoredTheme();
     currentTheme = savedTheme || (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+    var askCopy = {
+      inbound: {
+        label: 'Inbound Agent',
+        title: '운영 현황을 콘솔 경로 없이 묻는다',
+        quote: '이번 주 인바운드 응대율과 예약 전환율을 비교해 줘. 이탈이 인사말 전에 몰리는지도 같이 봐줘.',
+        result: '허용된 역할이면 SELECT-only Tool이 날짜·병원·업무 결과 필터로 집계합니다. 지표 정의는 화면마다 달라지지 않도록 코드로 고정했습니다. 민감 통화 원문은 후보 제한과 비식별화를 거친 뒤에만 봅니다.'
+      },
+      outbound: {
+        label: 'Outbound Agent',
+        title: '발신 결과와 연결 지표를 같은 정의로 본다',
+        quote: '최근 아웃바운드에서 상담원 연결이 얼마나 됐는지, 실패가 무응답인지 자동응답기인지 구분해 줘.',
+        result: '아웃바운드 전문 Agent만 해당 데이터 도구를 사용합니다. Supervisor가 원본 지식을 직접 읽지 않으므로 인바운드 문서와 권한이 섞이지 않습니다.'
+      },
+      admin: {
+        label: 'Agent Admin',
+        title: '설정 화면 위치를 매뉴얼로 안내한다',
+        quote: '병원 운영시간을 코드 배포 없이 바꾸려면 어느 화면의 어떤 설정을 봐야 해?',
+        result: 'Agent Admin 문서와 화면 안내만 이 Agent의 계약입니다. 운영 정책 변경을 애플리케이션 코드와 분리해 둔 제품 구조를, 현업이 경로를 외우지 않고 물을 수 있게 연결했습니다.'
+      },
+      hq: {
+        label: 'HQ / SVC',
+        title: '정책 근거를 권한 안에서만 찾는다',
+        quote: '이 운영 정책의 근거가 HQ 매뉴얼 어디에 있어? 내가 봐도 되는 문서만 보여줘.',
+        result: 'HQ/SVC Agent는 자신의 문서 집합만 검색합니다. 역할·claim을 통과하지 못한 본문은 검색 결과에도 올라오지 않습니다.'
+      }
+    };
+    var nodeCopy = {
+      entry: { label: 'Entry', title: '하나의 업무 접점', body: '현업은 제품별 화면과 데이터 저장소를 외우지 않습니다. Web 또는 Slack에서 업무 언어로 질문하면 같은 Agent runtime이 응답합니다.' },
+      supervisor: { label: 'Supervisor', title: '권한 확장을 막는 라우터', body: '최상위 Agent는 원본 지식을 직접 읽지 않습니다. 요청을 하나의 전문 Agent에 위임해 도메인 혼합과 권한 확장을 막습니다.' },
+      io: { label: 'Specialist', title: '통화 운영 도메인', body: '인바운드와 아웃바운드는 검색·전환율·운영 분석 Tool 계약이 다릅니다. 같은 자연어라도 다른 데이터 경계로 들어갑니다.' },
+      admin: { label: 'Specialist', title: '설정과 정책 도메인', body: 'Agent Admin과 HQ/SVC는 화면 안내·운영 정책·설정 문서를 담당합니다. 통화 원문을 읽지 않는 것이 이 분리의 목적입니다.' },
+      okf: { label: 'Knowledge', title: 'OKF 지식 번들', body: '322개 사용자·AI 매뉴얼을 Google Cloud OKF로 묶고, frontmatter의 역할·claim·분류로 본문 접근을 제한합니다.' },
+      db: { label: 'Data', title: '읽기 전용 운영 데이터', body: '운영 지표는 SELECT-only입니다. 계산 규칙을 코드로 두어 콘솔마다 다른 숫자를 말하지 않게 합니다.' },
+      hitl: { label: 'Execution', title: '위험한 실행은 사람 경유', body: 'Computer Use와 plugin은 정책 평가, 감사 로그, Human-in-the-Loop를 통과해야 합니다. 서명된 사용자 실행만 수락합니다.' }
+    };
+
+    function cssVar(name) {
+      return getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+    }
+    var ChartManager = {
+      charts: new Map(),
+      safeInit: function(canvasId, config) {
+        if (typeof Chart === 'undefined') {
+          console.error('Chart.js library not loaded - check CDN inclusion');
+          return null;
+        }
+        try {
+          if (this.charts.has(canvasId)) {
+            this.charts.get(canvasId).destroy();
+            this.charts.delete(canvasId);
+          }
+          var ctx = document.getElementById(canvasId);
+          if (!ctx) {
+            console.error('Canvas element not found: ' + canvasId);
+            return null;
+          }
+          if (ctx.chart) { ctx.chart.destroy(); delete ctx.chart; }
+          ctx.setAttribute('role', 'img');
+          if (!ctx.getAttribute('aria-label')) ctx.setAttribute('aria-label', '업무 조회 접점 비교 차트');
+          var chart = new Chart(ctx, config);
+          this.charts.set(canvasId, chart);
+          return chart;
+        } catch (error) {
+          console.error('Chart initialization failed', error);
+          return null;
+        }
+      }
+    };
+    function buildCharts() {
+      if (typeof Chart === 'undefined') { console.error('Chart.js not loaded'); return; }
+      var accent = cssVar('--accent');
+      var text = cssVar('--text-secondary');
+      var border = cssVar('--border');
+      ChartManager.safeInit('entryChart', {
+        type: 'bar',
+        data: {
+          labels: ['이전 · 찾아 들어가던 시스템', '이후 · Web·Slack 접점'],
+          datasets: [{ label: '업무 조회 접점 수', data: [5, 1], backgroundColor: [cssVar('--text-secondary'), accent], borderRadius: 6, barPercentage: 0.46 }]
+        },
+        options: {
+          indexAxis: 'y',
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: { display: false },
+            tooltip: { enabled: true, padding: 12, cornerRadius: 8 },
+            title: { display: true, text: '반복 조회가 거치던 접점', color: cssVar('--text'), font: { size: 16, family: 'Noto Sans KR' }, padding: { bottom: 16 } }
+          },
+          layout: { padding: 20 },
+          scales: {
+            x: { beginAtZero: true, ticks: { stepSize: 1, color: text }, grid: { color: border }, suggestedMax: 6 },
+            y: { ticks: { color: cssVar('--text') }, grid: { display: false } }
+          }
+        }
+      });
+    }
+    function onThemeChange() {
+      setTimeout(buildCharts, 120);
+    }
+    window.addEventListener('load', function() { setTimeout(buildCharts, 200); });
+
+    document.querySelectorAll('.ask-tab').forEach(function(button) {
+      button.addEventListener('click', function() {
+        document.querySelectorAll('.ask-tab').forEach(function(tab) {
+          tab.classList.remove('active');
+          tab.setAttribute('aria-selected', 'false');
+        });
+        button.classList.add('active');
+        button.setAttribute('aria-selected', 'true');
+        var copy = askCopy[button.getAttribute('data-ask')];
+        if (!copy) return;
+        document.getElementById('askLabel').textContent = copy.label;
+        document.getElementById('askTitle').textContent = copy.title;
+        document.getElementById('askQuote').textContent = copy.quote;
+        document.getElementById('askResult').textContent = copy.result;
+      });
+    });
+
+    document.querySelectorAll('[data-node]').forEach(function(button) {
+      button.addEventListener('click', function() {
+        document.querySelectorAll('[data-node]').forEach(function(node) { node.classList.remove('active'); });
+        button.classList.add('active');
+        var copy = nodeCopy[button.getAttribute('data-node')];
+        var detail = document.getElementById('archDetail');
+        if (!copy || !detail) return;
+        detail.innerHTML = '<div class="card-label">' + copy.label + '</div><h3>' + copy.title + '</h3><p class="text-secondary">' + copy.body + '</p>';
+      });
+    });
+
     function applyTheme(theme) {
       document.documentElement.className = 'theme-' + theme;
       var label = document.getElementById('themeLabel');
       if (label) label.textContent = theme === 'dark' ? '라이트 테마' : '다크 테마';
       writeStoredTheme(theme);
       currentTheme = theme;
+      onThemeChange();
     }
     function cycleTheme() { applyTheme(currentTheme === 'dark' ? 'light' : 'dark'); }
     applyTheme(currentTheme);

@@ -1,6 +1,8 @@
 .omc
 .omx
 .worktrees
+.DS_Store
+tmp/
 
 # Env
 .env

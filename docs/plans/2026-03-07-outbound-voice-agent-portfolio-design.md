@@ -29,33 +29,42 @@
 - 해결하려는 문제
 - 목표
 
-### 3. Multi-Agent Voice AI 설계
+### 3. 아웃바운드 호출 수명주기와 업무 실행 구조
 
-- 단일 Agent 한계 → Multi-Agent 전환 (Before/After)
-- TriageCoordinator / BookingAgent / InfoAgent 역할
-- Agent 전환 플로우 + 컨텍스트 전달
-- 예약 플로우 (AgentTask 멀티턴)
-- Qdrant 벡터 DB 기반 정보 검색
-- OpenAI Realtime API (900ms → 300ms)
-- 실전 예외 처리 (ARS, 무응답, 상담원 Fallback, Human 예약 모드)
-- 프롬프트 시스템 + Developer 메시지 카탈로그
+- voxBridge가 Room·SIP 발신을 소유하고 Agent가 `sip.callStatus=active`를 기다리는 책임 분리
+- `subscribe-then-snapshot`, 계층화된 timeout, 연결 이후 녹음·AMD와 shutdown 분석 payload 경계
+- `FakeAgent` → AMD → `SingleAgent` 전환
+- `flow_config` 기반 condition/greeting/agent/action/exit 노드
+- 하나의 `SingleAgent`가 Context를 유지하고 예약·DTMF·전환 업무를 AgentTask에 위임
+- 통화 목적 계약과 금지 Tool, `auto` / `transfer` / `leave_memo` 정책
+- FAQ API 목록을 시작 시 주입하고 등록된 근거 범위 안에서만 응답
+- 구조화된 `extra.agent_event`와 레거시 문자열 fallback 구분
 
-### 4. 통화 분석 파이프라인
+### 4. 안전한 예약 신청과 프로덕션 예외 처리
 
-- 왜 필요한가 (STT 오류, 결과 파악)
-- 3단계 비동기 파이프라인 (Gemini 교정 → trustcall 분석 → 요약)
-- Ghost Message + DTMF 처리
-- LLM + Hard Rules 하이브리드
-- 비즈니스 로직 연동 (예약 모드별 분기)
+- 생년월일 확인 → 진료과 선택 → 실시간 일정 조회 → 후보 스테이징 → 최종 동의
+- 예약은 EMR 즉시 확정이 아니라 병원 확인 전 신청 접수 상태
+- 변경·취소는 상담원 연결 또는 메모 접수로 전달
+- AMD 사람/기계 판정과 `StopResponse` 기반 첫 발화 race 방어
+- Task·AMD·warm transfer와 충돌하지 않는 사용자 무응답 처리
+- Redis 공용 FIFO warm transfer, trunk 점유권, 브리핑·DTMF 수락·재시도·메모 fallback
 
-### 5. 프로덕션 인프라
+### 5. 통화 분석 파이프라인
 
-- AWS ECS Fargate DEV/QA/PROD 3환경
-- Multi-AZ 고가용성
-- 시간 기반 + 메트릭 기반 Auto Scaling
-- Secrets Manager, CloudWatch 모니터링
+- Kafka로 실시간 통화와 분석 Consumer 분리
+- 상담원 연결 이후 녹음 구간 Gemini 보완 전사
+- 구조화 이벤트 기반 결정론 분류 + trustcall 의미 분석
+- GPT-5.6 Luna primary / Gemini 3.5 Flash fallback 분석·요약
+- 통화 결과, 예약 신청, 연결·메모·이탈 상태 재구성
 
-### 6. 기술 스택 & 성과 요약
+### 6. 프로덕션 인프라와 관측
+
+- Tokyo ECS Fargate와 Korea Kubernetes 이중 배포 경로
+- S3 녹음, Kafka 후처리, Redis warm-transfer 상태
+- STT·Turn Detection·LLM·TTS·Playback·E2E latency 분리 관측
+- 구조화 로그, 테스트 통화, 회귀 테스트
+
+### 7. 기술 스택 & 성과 요약
 
 ## 참고 문서
 
@@ -69,4 +78,3 @@
 - docs/dev/prompt_and_tools_review.md
 - docs/dev/developer_message_catalog.md
 - docs/image.png
-

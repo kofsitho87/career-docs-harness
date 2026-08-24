@@ -24,7 +24,11 @@
 - Governance / Operations: Role·Claim 기반 접근 제어, SELECT-only 데이터 도구, 개인정보 비식별화, HITL, 감사 로그, CI와 회귀 테스트
 - Infra / DevOps: AWS ECS Fargate, Kubernetes, Docker, GitHub Actions, Terraform, CloudWatch, Auto Scaling
 
+
+
 ## Experience
+
+
 
 ### 와이즈에이아이
 
@@ -43,10 +47,9 @@
 - 5개 사내 시스템의 사용자 매뉴얼과 AI Playbook 322개를 Google Cloud OKF(사내 지식 관리 프레임워크) 지식 번들로 통합하고, 역할·claim 기준으로 본문 접근을 제한해 문서 검색 범위를 안전하게 제한했습니다.
 - 최상위 Supervisor가 인바운드·아웃바운드·Agent Admin·HQ/SVC 요청을 나누고, 각 하위 Agent가 자신의 도메인 데이터·업무·권한 경계만 사용하도록 구성했습니다.
 - 통화 검색, 병원별 운영 현황, 예약 전환율, 상담원 연결 지표를 자연어로 조회하는 SELECT-only MySQL Tool을 만들고 지표 계산 규칙을 코드로 명시했습니다.
-- 민감 통화는 후보 5건만 읽고 전화번호·주민번호·이메일을 비식별화했으며, 브라우저·파일·plugin 실행은 정책 평가·감사 로그·HITL을 거치도록 연결했습니다.
-- Docker Compose로 서비스를 묶고 지식 manifest, 권한 격리, 응답, DB 조회, 첨부 처리를 검증하는 37개 자동화 테스트를 구성했습니다.
+- Docker Compose로 서비스를 묶고 지식 manifest, 권한 격리, 응답, DB 조회, 첨부 처리에 대한 자동화를 구성했습니다.
 
-기술: TypeScript, Bun, Deep Agents, AG-UI, Google Cloud OKF
+기술: Deep Agents, AG-UI, Google Cloud OKF
 
 #### 병원 Voice AI 운영 workflow 구축
 
@@ -83,6 +86,8 @@
 
 ---
 
+
+
 ### 투썬월드
 
 **소프트웨어 엔지니어**
@@ -117,12 +122,18 @@
 - LangChain-OpenTutorial Core Contributor (2025.02)
 - LiveKit Agent 기반 AI 영어 선생님 프로젝트 제작 및 지피터스 사례 발표 (2024.10)
 
+
+
 ## Education
+
+
 
 ### 대진대학교
 
 - 철학과 졸업
 - 2006.03 - 2013.08
+
+
 
 ## Language
 
