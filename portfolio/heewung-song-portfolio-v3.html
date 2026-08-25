@@ -836,29 +836,178 @@
   <main id="main" role="main">
     <div class="deck">
 
-      <!-- ============ 01 · HERO ============ -->
+      <!-- ============ 01 · HERO — career thesis ============ -->
       <section class="slide slide-hero active" data-slide="hero">
+        <div class="stage-bg"></div><div class="grid-bg"></div>
         <div class="slide-inner">
-          <div class="head an d1">
-            <h2>PLACEHOLDER — Task 2~7에서 채운다</h2>
+          <div class="hero-top an">
+            <span class="who ko">송희웅 · Heewung Song</span>
+            <span class="sep"></span>
+            <span class="yr ko">AI Product Engineer · 10년+ · 2026</span>
+          </div>
+          <div class="hero-grid">
+            <div>
+              <h1 class="an d1">반복되는 운영 업무를,<br>프로덕션 AI 시스템으로.</h1>
+              <p class="hero-sub an d2">
+                병원의 전화 업무를 AI가 실제로 처리하게 만들고, 그 시스템을 <strong>설계부터 운영까지</strong> 책임집니다.
+                같은 방식을 통화 분석과 사내 업무지원 AI로 넓혀 왔습니다.
+              </p>
+              <p class="hero-not an d3">
+                <s>Voice AI만 개발한 엔지니어</s> &rarr; <b>운영 업무를 시스템으로 옮기는 AI Product Engineer</b>
+              </p>
+            </div>
+            <div class="hero-map an d3">
+              <div class="hero-map-h">Four chapters · one pattern</div>
+              <div class="hero-map-row" style="--c:#6ee7a8"><span class="n">01</span><span class="t">병원 전화 Voice AI<span class="d">거는 전화와 받는 전화를 하나의 시스템으로</span></span></div>
+              <div class="hero-map-row" style="--c:#5ad0cd"><span class="n">02</span><span class="t">통화 관측과 평가<span class="d">수천 건의 결과를 다시 듣지 않고 재구성</span></span></div>
+              <div class="hero-map-row" style="--c:#5cbde2"><span class="n">03</span><span class="t">챗봇 고객상담<span class="d">웹과 카카오의 1차 응대</span></span></div>
+              <div class="hero-map-row" style="--c:#6aa9ff"><span class="n">04</span><span class="t">AIU 사내 업무지원<span class="d">같은 방식을 동료의 업무로</span></span></div>
+            </div>
+          </div>
+          <div class="hero-stats an d4">
+            <div class="hero-stat hero-stat-own"><b data-count="620000" data-suffix="+">0</b><span>프로덕션 AI 통화</span></div>
+            <div class="hero-stat"><b data-count="4000" data-suffix="/일">0</b><span>일 평균 통화</span></div>
+            <div class="hero-stat"><b data-count="300" data-suffix="+">0</b><span>도입 병원</span></div>
+            <div class="hero-stat"><b data-count="6">0</b><span>다국어 운영</span></div>
           </div>
         </div>
       </section>
 
-      <!-- ============ 02 · ABOUT ============ -->
+      <!-- ============ 02 · ABOUT — how I build ============ -->
       <section class="slide" data-slide="about">
         <div class="slide-inner">
+          <div class="rail an">
+            <span class="rail-ch">PROLOGUE</span><span class="rail-name">Working thesis</span>
+            <span class="rail-layer" data-l="design">Method</span>
+          </div>
           <div class="head an d1">
-            <h2>PLACEHOLDER — Task 2~7에서 채운다</h2>
+            <h2>기술이 아니라, 업무 구조에서 시작합니다</h2>
+            <p class="claim">
+              무엇을 쓸지 고르기 전에, <strong>누가 무엇을 반복하고 어떤 예외가 운영을 멈추게 하는지</strong>부터 정의합니다.
+            </p>
+          </div>
+
+          <div class="career an d2">
+            <div class="career-h">
+              <span class="l"><b>소프트웨어 제품 개발 10년+</b> &mdash; 그 위에 올린 <i>AI 제품 1년 6개월</i></span>
+              <span class="r">2014 &rarr; 2026</span>
+            </div>
+            <div class="career-bar">
+              <div class="seg">
+                <span class="co">예스콜닷컴</span>
+                <span class="ro">웹 개발자 &middot; 웹 빌더</span>
+                <span class="dt">2014.12 – 2016.02</span>
+              </div>
+              <div class="seg">
+                <span class="co">투미유</span>
+                <span class="ro">iOS &amp; Backend</span>
+                <span class="dt">2017.10 – 2018.12</span>
+              </div>
+              <div class="seg">
+                <span class="co">투썬월드</span>
+                <span class="ro">소프트웨어 엔지니어 &middot; 교육/AI 서비스 웹 제품 &mdash; 프론트엔드·백엔드·인프라</span>
+                <span class="dt">2019.03 – 2025.02</span>
+              </div>
+              <div class="seg seg-ai">
+                <span class="co">와이즈에이아이</span>
+                <span class="ro">AI 엔지니어 / AI 프로덕트 팀장</span>
+                <span class="dt">2025.03 – 현재</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="lay lay-2">
+            <div class="col an d3">
+              <div class="sec-h"><h3 class="cap ko">일하는 방식</h3></div>
+              <ol class="ledger own">
+                <li><span class="n">01</span><span class="k">업무 이해</span><span class="v">반복 구간과 사람이 병목이 되는 지점을 먼저 찾습니다.</span></li>
+                <li><span class="n">02</span><span class="k">경계 설계</span><span class="v">정책·권한·예외를 코드와 설정으로 고정해 모델의 추론과 분리합니다.</span></li>
+                <li><span class="n">03</span><span class="k">제품화</span><span class="v">실제 도구·데이터·채널에 연결해 운영 가능한 상태까지 만듭니다.</span></li>
+                <li><span class="n">04</span><span class="k">운영 개선</span><span class="v">관측과 평가 결과를 다음 설계의 근거로 되돌립니다.</span></li>
+              </ol>
+              <p class="support">
+                프론트엔드·백엔드·인프라 경험 위에서 Multi-Agent, 실시간 음성 처리, 검색, LLM 평가를 하나의 제품 경계로 연결해 왔습니다.
+              </p>
+              <div class="note note-own">
+                <strong>Open Source</strong> · LangChain-OpenTutorial Core Contributor (2025.02)
+              </div>
+            </div>
+            <div class="col an d4">
+              <div>
+                <div class="sec-h"><h3 class="cap">End-to-end product scope</h3></div>
+                <p class="sec-sub ko">사용자 접점에서 데이터·인프라까지 연결하고, 운영 결과를 다시 설계로 되돌립니다.</p>
+                <div class="scope-map" aria-label="AI 제품의 엔드투엔드 설계 및 운영 범위">
+                  <ol class="scope-stack">
+                    <li class="scope-layer scope-surface">
+                      <span class="scope-n">01</span>
+                      <span class="scope-copy"><strong>사용자 접점</strong><span>Voice · Web · Slack</span></span>
+                      <span class="chips"><span class="chip">WebRTC</span><span class="chip">AG-UI</span><span class="chip">Next.js</span><span class="chip">React</span></span>
+                    </li>
+                    <li class="scope-layer scope-agent">
+                      <span class="scope-n">02</span>
+                      <span class="scope-copy"><strong>Agent 런타임</strong><span>추론 · Workflow · 업무 경계</span></span>
+                      <span class="chips"><span class="chip">LiveKit Agents</span><span class="chip">LangGraph</span><span class="chip">Deep Agents</span><span class="chip">LangChain</span></span>
+                    </li>
+                    <li class="scope-layer scope-app">
+                      <span class="scope-n">03</span>
+                      <span class="scope-copy"><strong>애플리케이션</strong><span>서비스 · API · Tool 구현</span></span>
+                      <span class="chips"><span class="chip">Python</span><span class="chip">TypeScript</span><span class="chip">Bun</span><span class="chip">FastAPI</span></span>
+                    </li>
+                    <li class="scope-layer scope-data">
+                      <span class="scope-n">04</span>
+                      <span class="scope-copy"><strong>데이터 기반</strong><span>저장 · 검색 · 이벤트 전달</span></span>
+                      <span class="chips"><span class="chip">PostgreSQL</span><span class="chip">MySQL</span><span class="chip">Redis</span><span class="chip">Qdrant Hybrid</span><span class="chip">Kafka</span><span class="chip">RabbitMQ</span></span>
+                    </li>
+                  </ol>
+                  <aside class="scope-feedback" aria-label="전체 제품 스택의 관측 및 평가 피드백 루프">
+                    <span class="scope-loop">Feedback loop</span>
+                    <div><strong>관측 · 평가</strong><p>전 레이어의 실행 결과를 품질과 운영 근거로 재구성</p></div>
+                    <div class="chips"><span class="chip chip-bound">Langfuse</span><span class="chip chip-bound">LangSmith</span></div>
+                    <span class="scope-return">Re-design</span>
+                  </aside>
+                  <div class="scope-base">
+                    <span><strong>프로덕션 인프라</strong><small>배포 · 격리 · 재현 가능한 운영 기반</small></span>
+                    <span class="chips"><span class="chip">AWS ECS Fargate</span><span class="chip">Docker</span><span class="chip">Terraform</span></span>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
-      <!-- ============ 03 · MAP ============ -->
+      <!-- ============ 03 · PORTFOLIO MAP ============ -->
       <section class="slide" data-slide="map">
         <div class="slide-inner">
+          <div class="rail an">
+            <span class="rail-ch">INDEX</span><span class="rail-name">Portfolio map · click to jump</span>
+            <span class="rail-layer" data-l="evidence">22 slides</span>
+          </div>
           <div class="head an d1">
-            <h2>PLACEHOLDER — Task 2~7에서 채운다</h2>
+            <h2>각 Chapter가 답하는 질문</h2>
+            <p class="claim">네 Chapter는 각각 하나의 질문에 답하고, 그 답을 <strong>코드와 운영으로 확인 가능한 설계 증거</strong>로 뒷받침합니다. 행을 누르면 해당 Chapter로 이동합니다.</p>
+          </div>
+          <div class="map an d2">
+            <button class="map-row" style="--c:#6ee7a8" onclick="showSlide(4)">
+              <span class="n">01</span><span class="t">병원 전화 Voice AI<span>Call operations</span></span>
+              <span class="e"><b>병원의 전화 업무를 AI가 대신할 수 있는가?</b><i>flow_config 설정 · stage-before-commit 예약 · 공용 FIFO 상담원 연결</i></span>
+              <span class="c">5 slides &rarr;</span>
+            </button>
+            <button class="map-row" style="--c:#5ad0cd" onclick="showSlide(9)">
+              <span class="n">02</span><span class="t">통화 관측과 평가<span>Observe the work</span></span>
+              <span class="e"><b>수천 건의 통화를 사람이 다시 듣지 않고 판정할 수 있는가?</b><i>전사 보완 · 배타적 resolution · 근거 기반 의미 QA</i></span>
+              <span class="c">5 slides &rarr;</span>
+            </button>
+            <button class="map-row" style="--c:#5cbde2" onclick="showSlide(14)">
+              <span class="n">03</span><span class="t">챗봇 고객상담<span>Stateful service</span></span>
+              <span class="e"><b>검색·개인정보·중단이 섞인 상담을 상태로 관리할 수 있는가?</b><i>결정론적 4단 게이트 · pending_question 복귀</i></span>
+              <span class="c">3 slides &rarr;</span>
+            </button>
+            <button class="map-row" style="--c:#6aa9ff" onclick="showSlide(17)">
+              <span class="n">04</span><span class="t">AIU 사내 업무지원<span>Internal operations</span></span>
+              <span class="e"><b>같은 방식을 동료의 업무로 옮길 수 있는가?</b><i>범위 나눈 전문가 · SELECT-only 조회 · 실행 권한 분리</i></span>
+              <span class="c">5 slides &rarr;</span>
+            </button>
           </div>
         </div>
       </section>
