@@ -1250,7 +1250,35 @@
             <span class="rail-layer" data-l="what">무엇인가</span>
           </div>
           <div class="head an d1">
-            <h2>PLACEHOLDER — Task 2~7에서 채운다</h2>
+            <h2>통화가 끝난 뒤, 결과와 품질을 재구성합니다</h2>
+            <p class="claim">통화 수천 건의 결과와 품질을, <em>사람이 녹취를 다시 듣지 않고</em> 재구성하는 후처리입니다.</p>
+          </div>
+          <div class="an d2">
+            <div class="stack">
+              <div class="flow">
+                <div class="node"><b>입력</b></div><span class="arw">&rarr;</span>
+                <div class="node"><b>중복 확인</b></div><span class="arw">&rarr;</span>
+                <div class="node"><b>정규화</b></div><span class="arw">&rarr;</span>
+                <div class="node"><b>전사 보완</b></div><span class="arw">&rarr;</span>
+                <div class="node"><b>요약</b></div>
+              </div>
+              <span class="arw" style="display:block;text-align:center;transform:rotate(90deg)">&rarr;</span>
+              <div class="flow">
+                <div class="node"><b>발행</b></div><span class="arw">&rarr;</span>
+                <div class="node"><b>저장</b></div><span class="arw">&rarr;</span>
+                <div class="node"><b>결정론적 분석</b></div><span class="arw">&rarr;</span>
+                <div class="node"><b>의미 분석</b></div><span class="arw">&rarr;</span>
+                <div class="node node-own"><b>점수</b></div>
+              </div>
+            </div>
+          </div>
+          <div class="an d3" style="margin-top:0.7rem">
+            <div class="sec-h"><h3 class="cap ko">설계 원칙</h3></div>
+            <div class="blk">
+              <h4 class="cap-own">왜 분리돼 있나</h4>
+              <p>실시간 통화 경로와 분석 부하를 Kafka로 분리했습니다. 분석이 멈춰도 통화는 계속됩니다.</p>
+            </div>
+            <div class="note note-edge" style="margin-top:0.4rem"><strong>안 하는 것</strong> · 통화 중에는 아무것도 바꾸지 않습니다. 전부 사후 처리입니다.</div>
           </div>
         </div>
       </section>
@@ -1264,7 +1292,28 @@
             <span class="rail-layer" data-l="how">기능</span>
           </div>
           <div class="head an d1">
-            <h2>PLACEHOLDER — Task 2~7에서 채운다</h2>
+            <h2>전사 보완 — AI가 못 들은 구간을 복원하다</h2>
+          </div>
+          <div class="an d2">
+            <div class="sec-h"><h3 class="cap cap-own ko">무엇을 하는가</h3></div>
+            <p class="claim" style="margin-top:0">상담원에게 연결된 뒤로는 AI가 대화에서 빠져 있어, <em>통화 기록이 끊깁니다</em>.</p>
+          </div>
+          <div class="an d3" style="margin-top:0.65rem">
+            <div class="sec-h"><h3 class="cap cap-bound ko">어떻게 만들었나</h3></div>
+            <div class="flow">
+              <div class="node"><b>녹음 크롭</b><span>CloudFront 녹음을 전환 성공 이벤트 기준으로 자름</span></div><span class="arw">&rarr;</span>
+              <div class="node"><b>Gemini 구조화 전사</b><span>발신자·상담원 turn 복원</span></div><span class="arw">&rarr;</span>
+              <div class="node node-own"><b>순서 보존 병합</b><span>원본 배열 순서를 유지</span></div>
+            </div>
+            <div class="note" style="margin-top:0.4rem"><strong>recording_started_at</strong> · 기준 앵커로 삼고, 없을 때만 최초 assistant 발화로 폴백합니다. 시간 기준점 하나가 전사·재생·분석 전체의 정합성을 좌우합니다.</div>
+          </div>
+          <div class="an d4" style="margin-top:0.65rem">
+            <div class="sec-h"><h3 class="cap cap-edge ko">뭐가 깨졌나</h3></div>
+            <ul class="bul">
+              <li>녹음 앵커가 통화 시작과 어긋나 <strong>재생 위치가 밀림</strong></li>
+              <li>너무 짧거나 진폭이 낮은 오디오가 <strong>잡음을 만듦</strong></li>
+              <li>녹음이 아직 준비되지 않음 — <strong>가용성 재시도</strong>로 대응</li>
+            </ul>
           </div>
         </div>
       </section>
@@ -1278,7 +1327,32 @@
             <span class="rail-layer" data-l="how">기능</span>
           </div>
           <div class="head an d1">
-            <h2>PLACEHOLDER — Task 2~7에서 채운다</h2>
+            <h2>통화 결과 판정 — 통화당 정확히 하나의 resolution</h2>
+          </div>
+          <div class="an d2">
+            <div class="sec-h"><h3 class="cap cap-own ko">무엇을 하는가</h3></div>
+            <p class="claim" style="margin-top:0">결과와 실패 책임을 LLM 없이 <em>규칙으로 판정</em>합니다.</p>
+          </div>
+          <div class="an d3" style="margin-top:0.6rem">
+            <div class="sec-h"><h3 class="cap cap-bound ko">어떻게 만들었나</h3></div>
+            <div class="flow">
+              <div class="node"><b>events</b><span>원본 이벤트</span></div><span class="arw">&rarr;</span>
+              <div class="node"><b>attempts</b><span>업무 단위 시도로 정규화</span></div><span class="arw">&rarr;</span>
+              <div class="node node-own"><b>rollup</b><span>실패를 단계·유형·책임 주체로 귀속</span></div>
+            </div>
+            <div class="chips" style="margin-top:0.5rem">
+              <span class="chip">01</span><span class="chip">02</span><span class="chip">03</span><span class="chip">04</span><span class="chip">05</span><span class="chip">06</span><span class="chip chip-edge">07</span>
+            </div>
+            <div class="note" style="margin-top:0.35rem"><strong>배타적 우선순위</strong> · 고정된 7단계 중 통화당 정확히 하나만 채택됩니다. KPI 중복 집계를 막는 장치이며, <strong>통화 결과 분포</strong> 화면이 이 규칙의 직접 산출물입니다.</div>
+          </div>
+          <div class="an d4" style="margin-top:0.6rem">
+            <div class="sec-h"><h3 class="cap cap-edge ko">뭐가 깨졌나</h3></div>
+            <ul class="bul">
+              <li>공유된 transfer 이벤트가 <strong>이전 모든 intent에 중복 청구</strong>됨</li>
+              <li><strong>시스템 종료를 고객 이탈로 오독</strong></li>
+              <li>없는 <code>result_count</code>를 <strong>0으로 취급</strong></li>
+              <li>생년월일 입력 후 실패와 <strong>입력 자체가 없던 실패를 같게 처리</strong></li>
+            </ul>
           </div>
         </div>
       </section>
@@ -1292,7 +1366,27 @@
             <span class="rail-layer" data-l="how">기능</span>
           </div>
           <div class="head an d1">
-            <h2>PLACEHOLDER — Task 2~7에서 채운다</h2>
+            <h2>의미 QA — 평가하되 판정은 건드리지 않다</h2>
+          </div>
+          <div class="an d2">
+            <div class="sec-h"><h3 class="cap cap-own ko">무엇을 하는가</h3></div>
+            <p class="claim" style="margin-top:0">임상·긴급도·행정·경험·미지원 요청·응답 품질을 <em>LLM으로 평가</em>합니다.</p>
+          </div>
+          <div class="an d3" style="margin-top:0.6rem">
+            <div class="sec-h"><h3 class="cap cap-bound ko">어떻게 만들었나</h3></div>
+            <div class="blk">
+              <h4 class="cap-bound">근거 기반 소견</h4>
+              <p>모든 소견에 신뢰도와 근거 turn index를 요구하고, sanitizer가 날조되거나 범위를 벗어난 증거를 거부합니다. 결정론 계층과 완전히 분리됩니다.</p>
+            </div>
+            <p class="claim" style="margin-top:0.45rem">AI가 <em>"목요일 오후 가능합니다"</em>라고 말한 것을 근거로 환자가 목요일을 원했다고 판정하던 문제입니다. 그래서 <strong>환자 의도 관련 소견은 user turn만 인용</strong>하도록 강제합니다.</p>
+            <div class="note note-own" style="margin-top:0.4rem"><strong>경계는 테스트로 강제</strong> · 의미 소견은 하위 Kafka payload와 Langfuse 전송에서 제외됩니다. <code>test_main_kafka_payload.py</code>가 허용 키 집합을 고정해 재귀 검사하고, <code>test_semantic_layer_boundary.py</code>가 결정론 계층의 의미 모듈 의존을 정적으로 차단합니다.</div>
+          </div>
+          <div class="an d4" style="margin-top:0.6rem">
+            <div class="sec-h"><h3 class="cap cap-edge ko">뭐가 깨졌나</h3></div>
+            <ul class="bul">
+              <li>AI 발화를 <strong>발신자 의도의 증거로 사용</strong> — 위 사례</li>
+              <li>단순 가용성 질문을 <strong>예약 의도로 오분류</strong></li>
+            </ul>
           </div>
         </div>
       </section>
@@ -1306,7 +1400,37 @@
             <span class="rail-layer" data-l="result">결과와 한계</span>
           </div>
           <div class="head an d1">
-            <h2>PLACEHOLDER — Task 2~7에서 채운다</h2>
+            <h2>이걸로 무엇을 하는가</h2>
+            <p class="claim">두 화면이 이 챕터의 결과물입니다. 하는 일이 서로 다르므로 나란히 놓습니다.</p>
+          </div>
+          <div class="an d2">
+            <div class="figs">
+              <figure class="fig">
+                <div class="fig-h"><b>Monitor</b><span class="cap ko">운영 현황</span></div>
+                <div class="frame frame-dash">
+                  <img src="../assets/cupix-ax-operations-screen.png" alt="운영 현황 화면 — 응대 성공률과 인사말 전·중·후로 나눈 초기 이탈">
+                </div>
+                <figcaption class="fig-cap"><b>MONITOR</b><span>응대 성공률·셀프 처리율·예약 전환율과 인사말 전·중·후로 나눈 초기 이탈</span></figcaption>
+              </figure>
+              <figure class="fig">
+                <div class="fig-h"><b>Diagnose</b><span class="cap ko">콜 분석 진단실</span></div>
+                <div class="frame frame-dash">
+                  <img src="../assets/cupix-ax-analytics-screen.png" alt="콜 분석 진단실 화면 — 시도 단위 손실 지점과 개선 담당 주체">
+                </div>
+                <figcaption class="fig-cap"><b>DIAGNOSE</b><span>시도 단위로 분해한 손실 지점과 개선 담당 주체</span></figcaption>
+              </figure>
+            </div>
+          </div>
+          <div class="an d3" style="margin-top:0.6rem">
+            <div class="note">운영 도구도 있습니다 · 버전 기반 백필로 과거 통화를 규칙 변경에 맞춰 다시 계산하고, 리포트 시점에 신뢰도 임계값을 바꿔도 모델을 다시 돌리지 않습니다.</div>
+          </div>
+          <div class="an d4" style="margin-top:0.6rem">
+            <div class="sec-h"><h3 class="cap cap-edge ko">한계</h3></div>
+            <ul class="bul bul-deny">
+              <li>완료 이벤트 발행이 DB 저장보다 먼저입니다 · <strong>중복 또는 부분 실패</strong>가 가능하며 감사 대상입니다</li>
+              <li><strong>의미 분석은 결정론적 귀속을 덮어쓸 수 없습니다</strong> · 수동 검토 큐에 신호만 남깁니다</li>
+              <li>상담원 발화가 없으면 상담 결과는 <code>unknown</code>으로 남습니다 · <strong>추정하지 않습니다</strong></li>
+            </ul>
           </div>
         </div>
       </section>
