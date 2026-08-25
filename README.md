@@ -14,6 +14,7 @@
 - `resume/cupix-ax-operations-engineer.md`: 큐픽스 AX Operations Engineer 지원용 맞춤 이력서
 - `portfolio/heewung-song-portfolio.html`: 반복 운영 업무를 프로덕션 AI 시스템으로 바꿔 온 커리어를 중심으로, 병원 Voice AI·고객상담·통화 지표 자동화·사내 업무지원 Multi-Agent(AIU)를 연결한 슬라이드형 종합 포트폴리오
 - `portfolio/heewung-song-portfolio-v2.html`: 같은 28장 서사를 유지한 채 시각 위계(Chapter → Problem → System boundary → Evidence → My Role)와 슬라이드별 다이어그램 언어를 재설계한 개선 버전
+- `portfolio/heewung-song-portfolio-v3.html`: 4개 챕터·22장으로 구조를 재설계한 현재 대표 종합 포트폴리오. 각 챕터가 `① 무엇인가 → ② 기능별 실패 사례·의도적 경계 → ③ 결과와 한계`의 동일한 3단 리듬을 따르며, 병원 전화 Voice AI(인/아웃바운드 통합)·통화 관측과 평가·챗봇 고객상담·AIU 사내 업무지원 순으로 전개된다
 - `portfolio/cupix-ax-aiu-case-study.html`: 큐픽스 지원용 AIU AX 인터랙티브 시각 사례 — AIU 프로젝트 1건을 깊게 파고드는 단일 프로젝트 딥다이브
 - `portfolio/cupix-ax-career-story.html`: 큐픽스 지원용 커리어 저니 내러티브 — 아웃바운드·인바운드·고객상담·통화 지표 자동화·AIU까지 다섯 프로젝트가 하나의 반복 업무 자동화 패턴으로 이어지는 과정을 보여주는 스토리텔링형 페이지. `cupix-ax-aiu-case-study.html`을 대체하지 않고, 그 산출물이 어떤 경력 위에서 나왔는지 보여주는 동반 문서로 존재한다.
 - `output/pdf/heewung-song-ai-product-engineer-portfolio.pdf`: 종합 포트폴리오 28장을 16:9 페이지로 변환한 원티드 업로드용 PDF
