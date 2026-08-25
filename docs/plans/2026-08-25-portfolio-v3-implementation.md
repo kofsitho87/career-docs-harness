@@ -40,9 +40,11 @@ v2의 줄 구성은 다음과 같다. 셸 추출에 그대로 쓴다.
 - `1`–`824`: `<!DOCTYPE>`부터 `</style>`까지. head + CSS 전체
 - `825`–`840`: `<body>`, skip 링크, progress 바, 메뉴
 - `841`: `<div class="deck">`
-- `842`–`2345`: 슬라이드 28장 (v3에서는 버린다)
-- `2346`–`2348`: `</div></main>` 및 counter
+- `842`–`2335`: 슬라이드 28장 (v3에서는 버린다)
+- `2336`–`2347`: `</div>`(deck) · `</main>` · `<nav>`(이전/다음 버튼과 counter)
 - `2349`–`2474`: `<script>`부터 `</html>`까지. 네비게이션·테마·카운터·PNG 저장
+
+`2343`의 counter 초기값이 `1 / 28`로 하드코딩돼 있다. v3에서 `1 / 22`로 고쳐야 한다.
 
 ### 사용 가능한 이미지
 
@@ -92,7 +94,7 @@ v2의 CSS·메뉴·JS를 그대로 옮기고, 내용이 빈 슬라이드 22개�
 
 **Files:**
 - Create: `portfolio/heewung-song-portfolio-v3.html`
-- Read: `portfolio/heewung-song-portfolio-v2.html:1-840`, `:2346-2474`
+- Read: `portfolio/heewung-song-portfolio-v2.html:1-841`, `:2336-2474`
 
 **Interfaces:**
 - Consumes: 없음
@@ -106,11 +108,13 @@ V2=portfolio/heewung-song-portfolio-v2.html
 V3=portfolio/heewung-song-portfolio-v3.html
 sed -n '1,841p' "$V2" > "$V3"
 printf '\n      <!-- SLIDES -->\n\n' >> "$V3"
-sed -n '2346,2474p' "$V2" >> "$V3"
+sed -n '2336,2474p' "$V2" >> "$V3"
 wc -l "$V3"
 ```
 
-기대: 972줄 안팎. `<div class="deck">`까지가 앞부분, `</div></main>` 이후 JS가 뒷부분이다.
+기대: 983줄 안팎. `<div class="deck">`까지가 앞부분, `</div>` · `</main>` · `<nav>` · `<script>`가 뒷부분이다.
+
+경계를 반드시 눈으로 확인한다. `2336`은 deck을 닫는 `</div>`이고 `2337`은 `</main>`이다. `2346`에서 자르면 `<nav>` 중간이 잘려 HTML이 깨진다.
 
 - [ ] **Step 2: 제목과 챕터 클래스를 v3에 맞춘다**
 
@@ -121,6 +125,15 @@ grep -n "ch5\|\.ch4\|\.ch1" portfolio/heewung-song-portfolio-v3.html | head -20
 ```
 
 `ch5` 선택자가 있으면 지운다. 없으면 이 스텝은 확인만 하고 넘어간다.
+
+이어서 counter 초기값을 고친다. v2에서 `1 / 28`로 하드코딩돼 있다.
+
+```bash
+sed -i '' 's|>1 / 28<|>1 / 22<|' portfolio/heewung-song-portfolio-v3.html
+grep -n "1 / 22" portfolio/heewung-song-portfolio-v3.html
+```
+
+한 줄이 잡혀야 한다.
 
 - [ ] **Step 3: 빈 슬라이드 22개를 삽입한다**
 
