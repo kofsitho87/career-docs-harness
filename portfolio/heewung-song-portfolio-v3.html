@@ -25,8 +25,8 @@
       --display: 'Manrope', 'IBM Plex Sans KR', sans-serif;
 
       /* type scale — hard floor is --t-meta (13.3px @1080p) */
-      --t-eyebrow: 0.68rem;
-      --t-meta:    0.745rem;
+      --t-eyebrow: 0.78rem;
+      --t-meta:    0.78rem;
       --t-small:   0.815rem;
       --t-body:    0.9rem;
       --t-h3:      1.0rem;
@@ -854,8 +854,8 @@
                 병원의 전화 업무를 AI가 실제로 처리하게 만들고, 그 시스템을 <strong>설계부터 운영까지</strong> 책임집니다.
                 같은 방식을 통화 분석과 사내 업무지원 AI로 넓혀 왔습니다.
               </p>
-              <p class="hero-not an d3">
-                <s>Voice AI만 개발한 엔지니어</s> &rarr; <b>운영 업무를 시스템으로 옮기는 AI Product Engineer</b>
+              <p class="hero-not an d3" style="display:block">
+                병원 전화 Voice AI에서 시작해 <b>통화 관측과 평가 · 챗봇 고객상담 · AIU 사내 업무지원까지</b> 운영 AI 제품의 범위를 넓혀 왔습니다.
               </p>
             </div>
             <div class="hero-map an d3">
@@ -872,6 +872,7 @@
             <div class="hero-stat"><b data-count="300" data-suffix="+">0</b><span>도입 병원</span></div>
             <div class="hero-stat"><b data-count="6">0</b><span>다국어 운영</span></div>
           </div>
+          <p class="hero-map-h ko an d5" style="margin-top:1rem;margin-bottom:0">키보드 ← → 또는 화면 클릭으로 다음 슬라이드</p>
         </div>
       </section>
 
@@ -991,22 +992,22 @@
           </div>
           <div class="map an d2">
             <button class="map-row" style="--c:#6ee7a8" onclick="showSlide(4)">
-              <span class="n">01</span><span class="t">병원 전화 Voice AI<span>Call operations</span></span>
+              <span class="n">01</span><span class="t">병원 전화 Voice AI<span>Call operations</span><span class="cap ko cap-own" style="display:block;margin-top:0.18rem">운영 검증 완료</span></span>
               <span class="e"><b>병원의 전화 업무를 AI가 대신할 수 있는가?</b><i>flow_config 설정 · stage-before-commit 예약 · 공용 FIFO 상담원 연결</i></span>
               <span class="c">5 slides &rarr;</span>
             </button>
             <button class="map-row" style="--c:#5ad0cd" onclick="showSlide(9)">
-              <span class="n">02</span><span class="t">통화 관측과 평가<span>Observe the work</span></span>
+              <span class="n">02</span><span class="t">통화 관측과 평가<span>Observe the work</span><span class="cap ko cap-own" style="display:block;margin-top:0.18rem">운영 중</span></span>
               <span class="e"><b>수천 건의 통화를 사람이 다시 듣지 않고 판정할 수 있는가?</b><i>전사 보완 · 배타적 resolution · 근거 기반 의미 QA</i></span>
               <span class="c">5 slides &rarr;</span>
             </button>
             <button class="map-row" style="--c:#5cbde2" onclick="showSlide(14)">
-              <span class="n">03</span><span class="t">챗봇 고객상담<span>Stateful service</span></span>
+              <span class="n">03</span><span class="t">챗봇 고객상담<span>Stateful service</span><span class="cap ko cap-bound" style="display:block;margin-top:0.18rem">제품 기반 구축</span></span>
               <span class="e"><b>검색·개인정보·중단이 섞인 상담을 상태로 관리할 수 있는가?</b><i>결정론적 다섯 게이트 · pending_question 복귀</i></span>
               <span class="c">3 slides &rarr;</span>
             </button>
             <button class="map-row" style="--c:#6aa9ff" onclick="showSlide(17)">
-              <span class="n">04</span><span class="t">AIU 사내 업무지원<span>Internal operations</span></span>
+              <span class="n">04</span><span class="t">AIU 사내 업무지원<span>Internal operations</span><span class="cap ko cap-edge" style="display:block;margin-top:0.18rem">3주 MVP · 검증 중</span></span>
               <span class="e"><b>같은 방식을 동료의 업무로 옮길 수 있는가?</b><i>범위 나눈 전문가 · SELECT-only 조회 · 실행 권한 분리</i></span>
               <span class="c">5 slides &rarr;</span>
             </button>
@@ -1068,7 +1069,7 @@
             <span class="rail-layer" data-l="how">기능</span>
           </div>
           <div class="head an d1">
-            <h2>신규 예약 — 검색과 동의를 분리하다</h2>
+            <h2>신규 예약 — 확인되지 않은 시간은 예약으로 남기지 않는다</h2>
           </div>
           <div class="an d2">
             <div class="sec-h"><h3 class="cap cap-own ko">무엇을 하는가</h3></div>
@@ -1104,7 +1105,7 @@
             <span class="rail-layer" data-l="how">기능</span>
           </div>
           <div class="head an d1">
-            <h2>상담원 연결 — 공유 자원의 상태 관리</h2>
+            <h2>상담원 연결 — 여러 통화가 동시에 한 사람을 찾을 때</h2>
           </div>
           <div class="an d2">
             <div class="sec-h"><h3 class="cap cap-own ko">무엇을 하는가</h3></div>
@@ -1329,7 +1330,7 @@
             <span class="rail-layer" data-l="how">기능</span>
           </div>
           <div class="head an d1">
-            <h2>통화 결과 판정 — 통화당 정확히 하나의 resolution</h2>
+            <h2>통화 결과 판정 — 통화 한 건에 결과는 오직 하나</h2>
           </div>
           <div class="an d2">
             <div class="sec-h"><h3 class="cap cap-own ko">무엇을 하는가</h3></div>
@@ -1486,11 +1487,11 @@
             <span class="rail-layer" data-l="how">기능</span>
           </div>
           <div class="head an d1">
-            <h2>상담 흐름 — LLM 팀을 부르기 전에 다섯 게이트를 먼저 확인한다</h2>
+            <h2>상담 흐름 — AI에게 넘기기 전에 다섯 가지부터 확인한다</h2>
           </div>
           <div class="an d2">
             <div class="sec-h"><h3 class="cap cap-own ko">무엇을 하는가</h3></div>
-            <p class="claim" style="margin-top:0">결정론적으로 답할 수 있는지 먼저 확인하고, <em>하나라도 걸리면 그 자리에서 마칩니다</em>.</p>
+            <p class="claim" style="margin-top:0">정해진 규칙으로 답할 수 있는지 먼저 확인하고, <em>하나라도 해당하면 그 자리에서 마칩니다</em>.</p>
           </div>
           <div class="an d3" style="margin-top:0.32rem">
             <div class="sec-h"><h3 class="cap cap-bound ko">어떻게 만들었나</h3></div>
@@ -1536,7 +1537,7 @@
           </div>
           <div class="head an d1">
             <h2>웹에서 시작해, 카카오·음성까지 이어지는 기반입니다</h2>
-            <p class="claim">웹으로 시작한 상담 그래프는 채널이 카카오·음성으로 넓어져도 <em>같은 그래프 위에서</em> 동작합니다.</p>
+            <p class="claim">웹으로 시작한 상담 구조는 채널이 카카오·음성으로 넓어져도 <em>같은 구조 위에서</em> 동작합니다.</p>
           </div>
           <div class="an d2" style="margin-top:0.8rem">
             <div class="blk blk-own">
@@ -1574,7 +1575,7 @@
               <div class="node node-bound"><b>OpenBot</b><span>신원 · 권한 · 실행 · 감사</span></div><span class="arw">&rarr;</span>
               <div class="node node-own"><b>AIU</b><span>추론하고 답한다</span></div>
             </div>
-            <div class="note note-edge"><strong>AIU는 효과를 직접 실행하지 않습니다</strong> · 실행이 필요하면 OpenBot으로 되돌려 보냅니다.</div>
+            <div class="note note-edge"><strong>AI가 외부 시스템을 임의로 변경하지 않습니다</strong> · 실행이 필요하면 OpenBot으로 되돌려 보냅니다.</div>
           </div>
           <div class="an d3" style="margin-top:0.85rem">
             <div class="sec-h"><h3 class="cap ko">기능 여섯</h3></div>
@@ -1607,7 +1608,7 @@
             <span class="rail-layer" data-l="how">기능</span>
           </div>
           <div class="head an d1">
-            <h2>매뉴얼 답변 — Supervisor는 매뉴얼을 직접 읽지 못한다</h2>
+            <h2>매뉴얼 답변 — 한 AI가 다 읽지 않고 나눠서 맡긴다</h2>
           </div>
           <div class="an d2">
             <div class="sec-h"><h3 class="cap cap-own ko">무엇을 하는가</h3></div>
@@ -1761,7 +1762,7 @@
             <span class="sep"></span>
             <span class="yr ko">송희웅 · AI Product Engineer</span>
           </div>
-          <h1 class="an d1 h1-close">업무를 이해하고,<br>경계를 설계하고,<br>운영으로 증명합니다.</h1>
+          <h1 class="an d1 h1-close">업무를 이해하고,<br>할 일과 안 할 일을 정하고,<br>운영으로 증명합니다.</h1>
           <p class="hero-sub an d2">
             병원 전화, 통화 관측과 평가, 챗봇 고객상담, 사내 업무지원까지 &mdash;
             업무 도메인과 채널은 다르지만 <strong>반복 업무를 프로덕션 AI 시스템으로 바꾸는 방식은 같았습니다.</strong>
@@ -1798,7 +1799,7 @@
           </div>
 
           <p class="claim an d4" style="margin-top:1.15rem">
-            네 챕터 모두 <strong>안 하는 것</strong>을 분명히 적었습니다 &mdash; 통화 중 커밋은 EMR 확정이 아니고, AIU는 효과를 스스로 실행하지 않습니다. 경계는 빠뜨린 게 아니라 의도적으로 그었고, 각 챕터가 그렇게 밝혔습니다.
+            네 챕터 모두 <strong>안 하는 것</strong>을 분명히 적었습니다 &mdash; 통화 중 커밋은 EMR 확정이 아니고, AI가 외부 시스템을 임의로 변경하지 않습니다. 하지 않기로 한 일은 빠뜨린 게 아니라 의도적으로 정했고, 각 챕터가 그렇게 밝혔습니다.
           </p>
 
           <div class="contact an d5">
