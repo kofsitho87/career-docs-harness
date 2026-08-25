@@ -1090,7 +1090,7 @@
               <li>소진돼야 할 <strong>EarliestOffer</strong>가 stale 승인으로 재사용됨</li>
               <li>빈 검색 결과에 <strong>다른 시간을 몰래 대체</strong></li>
             </ul>
-            <div class="note note-own" style="margin-top:0.4rem"><strong>잡는 법</strong> · 예방은 stage-before-commit, 탐지는 <strong>UNSOUND_COMMIT</strong> · 통화에서 한 번도 발화되지 않은 시간이 커밋되면 성공을 강등합니다. 끊긴 assistant 발화는 증거로 인정하지 않습니다.</div>
+            <div class="note note-own" style="margin-top:0.4rem"><strong>잡는 법</strong> · 예방은 stage-before-commit, 탐지는 <strong>UNSOUND_COMMIT</strong> · 통화에서 한 번도 발화되지 않은 시간이 커밋되면 성공을 강등합니다. 끊긴 assistant 발화는 증거로 인정하지 않습니다. 관측된 발동률은 <strong>18건 / 24,647 예약 시도 = 0.073%</strong>입니다.</div>
             <div class="note note-edge" style="margin-top:0.35rem"><strong>성숙도 차이</strong> · 위는 인바운드의 Dynamic Booking v3, 아웃바운드는 레거시 create 경로가 활성 상태로 신청 정보만 staging합니다.</div>
           </div>
         </div>
@@ -1234,6 +1234,14 @@
             </div>
           </div>
           <div class="an d4" style="margin-top:0.8rem">
+            <div class="sec-h"><h3 class="cap ko">예약·귀인 개선 지표</h3></div>
+            <div class="metrics" style="grid-template-columns:repeat(2,minmax(0,1fr))">
+              <div class="metric metric-key metric-text"><b>8.48% → 25.08%</b><span>예약 신청·변경·취소·조회를 합친 전체 시도 성사율 · 2026-05 → 2026-08 MTD · +16.6%p</span></div>
+              <div class="metric metric-key metric-text"><b>8.54% → 0.34%</b><span>백엔드 귀인 실패율 · 2026-05 → 2026-08 MTD · −8.2%p</span></div>
+            </div>
+            <div class="note" style="margin-top:0.35rem">2026-04~08 prod 관측 · 활성 고객 구성이 달라져 월별 변화를 제품 성능 변화로 귀속할 수 없음</div>
+          </div>
+          <div class="an d5" style="margin-top:0.8rem">
             <div class="sec-h"><h3 class="cap cap-edge ko">한계</h3></div>
             <ul class="bul bul-deny">
               <li>통화 안의 커밋은 예약 <strong>신청</strong> 기록이며 EMR 최종 확정이 아닙니다</li>
@@ -1432,6 +1440,8 @@
           </div>
           <div class="an d3" style="margin-top:0.6rem">
             <div class="note">운영 도구도 있습니다 · 버전 기반 백필로 과거 통화를 규칙 변경에 맞춰 다시 계산하고, 리포트 시점에 신뢰도 임계값을 바꿔도 모델을 다시 돌리지 않습니다.</div>
+            <div class="note note-own" style="margin-top:0.35rem">분석 커버리지 · 70,653 / 70,654 = 99.999%</div>
+            <div class="note note-own" style="margin-top:0.35rem">24,647건의 예약 시도를 단계·유형·책임 주체로 귀인했고, 시스템(BACKEND) 귀인은 265건 / 24,647건 = 1.08%</div>
           </div>
           <div class="an d4" style="margin-top:0.6rem">
             <div class="sec-h"><h3 class="cap cap-edge ko">한계</h3></div>
