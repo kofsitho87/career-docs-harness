@@ -35,6 +35,7 @@
 
 - `resume/product-engineer.md`: 현재 메인 이력서 산출물이자 사실 기준 문서
 - `portfolio/heewung-song-portfolio.html`: 반복 업무를 프로덕션 AI 시스템으로 전환해 온 다섯 프로젝트를 하나의 커리어 서사로 연결한 종합 포트폴리오
+- `portfolio/heewung-song-portfolio-v2.html`: 위 포트폴리오의 디자인 개선 버전. 콘텐츠·수치·28장 구성은 동일하고 시각 위계와 레이아웃 언어만 재설계했다. 사실을 고칠 때는 두 파일을 함께 맞춘다.
 - `case-studies/outbound-voice-agent.md`: 아웃바운드 Voice AI Agent 케이스 스터디
 - `case-studies/inbound-voice-agent.md`: 인바운드 Voice AI Agent 케이스 스터디
 - `case-studies/hospital-customer-support-agent.md`: 병원 고객상담 AI Agent 케이스 스터디
