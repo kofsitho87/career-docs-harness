@@ -156,10 +156,10 @@
     .rail-layer[data-l="evidence"] { --layer: var(--mute); }
 
     /* chapter hues: green (patient-call execution) → blue (internal knowledge) */
-    .ch1 { --ch: #6ee7a8; } .ch2 { --ch: #63ddb8; } .ch3 { --ch: #5ad0cd; }
-    .ch4 { --ch: #5cbde2; }
-    html.theme-light .ch1 { --ch: #07753f; } html.theme-light .ch2 { --ch: #0a6f5c; }
-    html.theme-light .ch3 { --ch: #0d6570; } html.theme-light .ch4 { --ch: #175f96; }
+    .ch1 { --ch: #6ee7a8; } .ch2 { --ch: #5ad0cd; } .ch3 { --ch: #5cbde2; }
+    .ch4 { --ch: #6aa9ff; }
+    html.theme-light .ch1 { --ch: #07753f; } html.theme-light .ch2 { --ch: #0d6570; }
+    html.theme-light .ch3 { --ch: #175f96; } html.theme-light .ch4 { --ch: #2059a8; }
 
     /* ============================================================
        TITLE / CLAIM / SUPPORT — the reading order of every slide
@@ -867,7 +867,7 @@
             </div>
           </div>
           <div class="hero-stats an d4">
-            <div class="hero-stat hero-stat-own"><b data-count="620000" data-suffix="+">0</b><span>프로덕션 AI 통화</span></div>
+            <div class="hero-stat hero-stat-own"><b data-count="620000" data-suffix="+">0</b><span>프로덕션 AI 통화 성공</span></div>
             <div class="hero-stat"><b data-count="4000" data-suffix="/일">0</b><span>일 평균 통화</span></div>
             <div class="hero-stat"><b data-count="300" data-suffix="+">0</b><span>도입 병원</span></div>
             <div class="hero-stat"><b data-count="6">0</b><span>다국어 운영</span></div>
@@ -1002,7 +1002,7 @@
             </button>
             <button class="map-row" style="--c:#5cbde2" onclick="showSlide(14)">
               <span class="n">03</span><span class="t">챗봇 고객상담<span>Stateful service</span></span>
-              <span class="e"><b>검색·개인정보·중단이 섞인 상담을 상태로 관리할 수 있는가?</b><i>결정론적 4단 게이트 · pending_question 복귀</i></span>
+              <span class="e"><b>검색·개인정보·중단이 섞인 상담을 상태로 관리할 수 있는가?</b><i>결정론적 다섯 게이트 · pending_question 복귀</i></span>
               <span class="c">3 slides &rarr;</span>
             </button>
             <button class="map-row" style="--c:#6aa9ff" onclick="showSlide(17)">
@@ -1108,7 +1108,7 @@
           </div>
           <div class="an d2">
             <div class="sec-h"><h3 class="cap cap-own ko">무엇을 하는가</h3></div>
-            <p class="claim" style="margin-top:0">여러 통화가 동시에 같은 상담원·trunk를 요청하는 상황을 하나의 대기열로 처리합니다.</p>
+            <p class="claim" style="margin-top:0">여러 통화가 동시에 같은 상담원·trunk(대표번호 회선)를 요청하는 상황을 하나의 대기열로 처리합니다.</p>
           </div>
           <div class="an d3" style="margin-top:0.6rem">
             <div class="sec-h"><h3 class="cap cap-bound ko">어떻게 만들었나</h3></div>
@@ -1145,7 +1145,7 @@
               <li>보관된 완료 기록이 <strong>활성 통화로 집계</strong></li>
               <li>"오래됐다"만으로 정리하면 <strong>갱신 중인 살아있는 통화를 끊음</strong></li>
             </ul>
-            <div class="note note-own" style="margin-top:0.35rem"><strong>watchdog 경합</strong> · 전체 무응답 감시 타이머가 DTMF·전환 태스크의 자체 타임아웃과 경합해, <code>suppress_user_presence_task</code>로 억제합니다.</div>
+            <div class="note note-own" style="margin-top:0.35rem"><strong>watchdog 경합</strong> · 전체 무응답 감시 타이머가 DTMF(전화 키패드 입력)·전환 태스크의 자체 타임아웃과 경합해, <code>suppress_user_presence_task</code>로 억제합니다.</div>
           </div>
         </div>
       </section>
@@ -1172,7 +1172,7 @@
                 <div class="cap cap-ch" style="margin-bottom:0.3rem">아웃바운드</div>
                 <ul class="bul">
                   <li><strong>시작</strong> · voxBridge가 SIP 참가자를 만들고 워커는 기다림</li>
-                  <li><strong>게이트</strong> · FakeAgent &rarr; active(60초) &rarr; AMD &rarr; SingleAgent(human/uncertain만)</li>
+                  <li><strong>게이트</strong> · FakeAgent &rarr; active(60초) &rarr; AMD(수신자 응답 판별) &rarr; SingleAgent(human/uncertain만)</li>
                   <li><strong>지식</strong> · FAQ 벌크 프롬프트 주입(<code>get_faqs</code>)</li>
                   <li><strong>목적</strong> · 발신 시점에 이미 정해져 있음</li>
                 </ul>
@@ -1279,7 +1279,8 @@
               <h4 class="cap-own">왜 분리돼 있나</h4>
               <p>실시간 통화 경로와 분석 부하를 Kafka로 분리했습니다. 분석이 멈춰도 통화는 계속됩니다.</p>
             </div>
-            <div class="note note-edge" style="margin-top:0.4rem"><strong>안 하는 것</strong> · 통화 중에는 아무것도 바꾸지 않습니다. 전부 사후 처리입니다.</div>
+            <div class="note note-edge" style="margin-top:0.4rem"><strong>범위</strong> · 이 파이프라인은 인바운드 통화를 다루며, 아웃바운드는 별도 파이프라인을 쓰고 결정론적 귀속·의미 분리·버전 관리까지 갖춘 것은 인바운드뿐입니다.</div>
+            <div class="note note-edge" style="margin-top:0.35rem"><strong>안 하는 것</strong> · 통화 중에는 아무것도 바꾸지 않습니다. 전부 사후 처리입니다.</div>
           </div>
         </div>
       </section>
@@ -1485,7 +1486,7 @@
             <span class="rail-layer" data-l="how">기능</span>
           </div>
           <div class="head an d1">
-            <h2>LLM 팀을 부르기 전에, 다섯 게이트를 먼저 확인합니다</h2>
+            <h2>상담 흐름 — LLM 팀을 부르기 전에 다섯 게이트를 먼저 확인한다</h2>
           </div>
           <div class="an d2">
             <div class="sec-h"><h3 class="cap cap-own ko">무엇을 하는가</h3></div>
@@ -1565,7 +1566,7 @@
           <div class="head an d1">
             <h2>동료가 웹·Slack에서 물으면, AIU가 매뉴얼 근거로 답합니다</h2>
             <p class="claim">매뉴얼에서 근거를 찾아 답하고, <em>저장된 통화를 조회·분석</em>하는 AIU 운영 전문가 코워커입니다.</p>
-            <p class="support">웹과 Slack은 AG-UI로 하나의 런타임에 연결됩니다.</p>
+            <p class="support">AIU는 Agent Admin, HQ·SVC 운영 도구, 인바운드·아웃바운드 Voice AI를 아우르는 병원 AI 제품군의 이름입니다. 웹과 Slack은 AG-UI로 하나의 런타임에 연결됩니다.</p>
           </div>
           <div class="an d2">
             <div class="flow">
@@ -1654,7 +1655,7 @@
             <span class="rail-layer" data-l="how">기능</span>
           </div>
           <div class="head an d1">
-            <h2>통화 조회·전환율 — 지표 정의는 코드가 소유합니다</h2>
+            <h2>통화 조회·전환율 — 지표 정의는 코드가 소유한다</h2>
           </div>
           <div class="an d2">
             <div class="sec-h"><h3 class="cap cap-own ko">무엇을 하는가</h3></div>
@@ -1790,7 +1791,7 @@
               <div class="close-step">
                 <b>04 · 운영 개선</b>
                 <strong>결과를 규칙으로 되돌린다</strong>
-                <span>통화당 정확히 하나의 resolution만 채택하고, 그 결과가 모니터링 화면의 산출물이 됩니다.</span>
+                <span>통화당 정확히 하나의 resolution만 채택하고, 그 결과가 진단 화면의 산출물이 됩니다.</span>
                 <em>Ch 02</em>
               </div>
             </div>
