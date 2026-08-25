@@ -1087,7 +1087,7 @@
               <li>소진돼야 할 <strong>EarliestOffer</strong>가 stale 승인으로 재사용됨</li>
               <li>빈 검색 결과에 <strong>다른 시간을 몰래 대체</strong></li>
             </ul>
-            <div class="note note-own" style="margin-top:0.4rem"><strong>잡는 법 · UNSOUND_COMMIT</strong> · 통화에서 한 번도 발화되지 않은 시간이 커밋되면 성공을 강등합니다. 끊긴 assistant 발화는 증거로 인정하지 않습니다.</div>
+            <div class="note note-own" style="margin-top:0.4rem"><strong>잡는 법</strong> · 예방은 stage-before-commit, 탐지는 <strong>UNSOUND_COMMIT</strong> · 통화에서 한 번도 발화되지 않은 시간이 커밋되면 성공을 강등합니다. 끊긴 assistant 발화는 증거로 인정하지 않습니다.</div>
             <div class="note note-edge" style="margin-top:0.35rem"><strong>성숙도 차이</strong> · 위는 인바운드의 Dynamic Booking v3, 아웃바운드는 레거시 create 경로가 활성 상태로 신청 정보만 staging합니다.</div>
           </div>
         </div>
@@ -1170,7 +1170,7 @@
                 <div class="cap cap-ch" style="margin-bottom:0.3rem">아웃바운드</div>
                 <ul class="bul">
                   <li><strong>시작</strong> · voxBridge가 SIP 참가자를 만들고 워커는 기다림</li>
-                  <li><strong>게이트</strong> · FakeAgent &rarr; active(60초) &rarr; AMD &rarr; SingleAgent</li>
+                  <li><strong>게이트</strong> · FakeAgent &rarr; active(60초) &rarr; AMD &rarr; SingleAgent(human/uncertain만)</li>
                   <li><strong>지식</strong> · FAQ 벌크 프롬프트 주입(<code>get_faqs</code>)</li>
                   <li><strong>목적</strong> · 발신 시점에 이미 정해져 있음</li>
                 </ul>
