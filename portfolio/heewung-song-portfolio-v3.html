@@ -149,12 +149,9 @@
       text-transform: uppercase; color: var(--text-3); white-space: nowrap;
     }
     .rail-layer::before { content: ''; width: 0.42rem; height: 0.42rem; border-radius: 50%; background: var(--layer, var(--text-3)); }
-    .rail-layer[data-l="problem"]  { --layer: var(--mute); }
-    .rail-layer[data-l="design"]   { --layer: var(--own); }
-    .rail-layer[data-l="boundary"] { --layer: var(--bound); }
-    .rail-layer[data-l="evidence"] { --layer: var(--bound); }
-    .rail-layer[data-l="outcome"]  { --layer: var(--own); }
-    .rail-layer[data-l="ops"]      { --layer: var(--edge); }
+    .rail-layer[data-l="what"]   { --layer: var(--bound); }
+    .rail-layer[data-l="how"]    { --layer: var(--own); }
+    .rail-layer[data-l="result"] { --layer: var(--edge); }
 
     /* chapter hues: green (patient-call execution) → blue (internal knowledge) */
     .ch1 { --ch: #6ee7a8; } .ch2 { --ch: #63ddb8; } .ch3 { --ch: #5ad0cd; }
@@ -284,7 +281,7 @@
     .career-h .l i { font-style: normal; color: var(--own); font-weight: 600; }
     .career-h .r { font: 500 var(--t-meta)/1 var(--mono); letter-spacing: 0.1em; color: var(--text-3); white-space: nowrap; }
     .career-bar { display: grid; grid-template-columns: minmax(8.4rem,14fr) minmax(8.4rem,15fr) minmax(0,72fr) minmax(11rem,20fr); gap: 4px; }
-    .slide[data-slide="2"] .career + .lay { margin-top: 0.7rem; }
+    .slide[data-slide="about"] .career + .lay { margin-top: 0.7rem; }
     .seg {
       min-width: 0; padding: 0.45rem 0.65rem 0.5rem; border-radius: var(--r-s);
       border-top: 2px solid var(--text-3);
