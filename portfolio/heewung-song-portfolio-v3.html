@@ -1749,11 +1749,76 @@
         </div>
       </section>
 
-      <!-- ============ 22 · CLOSING ============ -->
-      <section class="slide" data-slide="closing">
+      <!-- ============ 22 · CLOSING — the reusable pattern ============ -->
+      <section class="slide slide-hero" data-slide="closing">
+        <div class="stage-bg"></div><div class="grid-bg"></div>
         <div class="slide-inner">
-          <div class="head an d1">
-            <h2>PLACEHOLDER — Task 2~7에서 채운다</h2>
+          <div class="hero-top an">
+            <span class="who">One pattern · Four chapters</span>
+            <span class="sep"></span>
+            <span class="yr ko">송희웅 · AI Product Engineer</span>
+          </div>
+          <h1 class="an d1 h1-close">업무를 이해하고,<br>경계를 설계하고,<br>운영으로 증명합니다.</h1>
+          <p class="hero-sub an d2">
+            병원 전화, 통화 관측과 평가, 챗봇 고객상담, 사내 업무지원까지 &mdash;
+            업무 도메인과 채널은 다르지만 <strong>반복 업무를 프로덕션 AI 시스템으로 바꾸는 방식은 같았습니다.</strong>
+          </p>
+
+          <div class="an d3" style="margin-top:1.2rem">
+            <div class="hero-map-h ko">네 챕터에서 반복된 같은 방식</div>
+            <div class="close-loop">
+              <div class="close-step">
+                <b>01 · 업무 이해</b>
+                <strong>반복 판단부터 가른다</strong>
+                <span>챗봇은 LLM 팀을 부르기 전에 다섯 게이트로 결정론적으로 답할 수 있는지 먼저 확인합니다.</span>
+                <em>Ch 03</em>
+              </div>
+              <div class="close-step">
+                <b>02 · 경계 설계</b>
+                <strong>정책과 추론을 분리한다</strong>
+                <span>병원별 통화 흐름은 flow_config 설정으로 고정하고, 예약 확인 문구는 모델이 아니라 코드가 만듭니다.</span>
+                <em>Ch 01</em>
+              </div>
+              <div class="close-step">
+                <b>03 · 제품화</b>
+                <strong>실제 채널에 연결한다</strong>
+                <span>인바운드·아웃바운드가 하나의 FIFO 대기열과 상태 머신을 공유해 실제 SIP 통화로 운영됩니다.</span>
+                <em>Ch 01</em>
+              </div>
+              <div class="close-step">
+                <b>04 · 운영 개선</b>
+                <strong>결과를 규칙으로 되돌린다</strong>
+                <span>통화당 정확히 하나의 resolution만 채택하고, 그 결과가 모니터링 화면의 산출물이 됩니다.</span>
+                <em>Ch 02</em>
+              </div>
+            </div>
+          </div>
+
+          <p class="claim an d4" style="margin-top:1.15rem">
+            네 챕터 모두 결과 앞에 <strong>안 하는 것</strong>을 먼저 적었습니다 &mdash; 통화 중 커밋은 EMR 확정이 아니고, AIU는 효과를 스스로 실행하지 않습니다. 경계는 빠뜨린 게 아니라 의도적으로 그었고, 각 챕터가 그렇게 밝혔습니다.
+          </p>
+
+          <div class="contact an d5">
+            <a href="mailto:kofsitho@naver.com">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+              kofsitho@naver.com
+            </a>
+            <a href="https://github.com/kofsitho87" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22"/></svg>
+              GitHub
+            </a>
+            <a href="https://www.linkedin.com/in/kofsitho" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+              LinkedIn
+            </a>
+            <a href="https://kofsitho87.github.io/my-tech-blog" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M7 9l-2 3 2 3"/><path d="M11 15h6"/></svg>
+              Tech Blog
+            </a>
+            <a href="https://medium.com/@kofsitho" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg>
+              Medium
+            </a>
           </div>
         </div>
       </section>
