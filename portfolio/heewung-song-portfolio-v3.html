@@ -1021,7 +1021,38 @@
             <span class="rail-layer" data-l="what">무엇인가</span>
           </div>
           <div class="head an d1">
-            <h2>PLACEHOLDER — Task 2~7에서 채운다</h2>
+            <h2>병원 전화 업무를 두 방향에서 대신합니다</h2>
+            <p class="claim">아웃바운드로 걸고 인바운드로 받는 <em>두 방향 모두 같은 기능 세트</em>로 움직입니다. 통화 한 통은 네 단계를 거치고, 민감한 내용은 그 전체를 관통해 밖으로 나가지 않습니다.</p>
+          </div>
+          <div class="an d2">
+            <div class="flow">
+              <div class="node node-own"><b>규칙을 받는다</b><span>병원마다 다른 설정을 통화 시작 때</span></div><span class="arw">&rarr;</span>
+              <div class="node"><b>대화를 진행한다</b><span>설정대로</span></div><span class="arw">&rarr;</span>
+              <div class="node"><b>처리를 정한다</b><span>AI · 사람 연결 · 메모</span></div><span class="arw">&rarr;</span>
+              <div class="node"><b>결과를 넘긴다</b><span>통화 종료 후 분석으로</span></div>
+            </div>
+            <div class="note note-edge"><strong>민감한 내용은 밖으로 내보내지 않는다</strong> · 네 단계 전체를 관통하는 규칙입니다.</div>
+          </div>
+          <div class="an d3" style="margin-top:0.85rem">
+            <div class="sec-h"><h3 class="cap ko">기능 여섯</h3></div>
+            <div class="chips">
+              <span class="chip">병원 지식 답변</span>
+              <span class="chip">신규 예약 신청</span>
+              <span class="chip">예약 조회</span>
+              <span class="chip">예약 변경</span>
+              <span class="chip">예약 취소</span>
+              <span class="chip chip-edge">상담원 연결 · 실패 시 메모 접수</span>
+            </div>
+          </div>
+          <div class="grid-2 an d4" style="margin-top:0.7rem">
+            <div class="blk">
+              <h4 class="cap-own">규모</h4>
+              <p>6개 언어(ko-KR · en-US · zh-CN · ja-JP · es-ES · vi-VN) · action mode 3종(auto · transfer · leave_memo)</p>
+            </div>
+            <div class="blk">
+              <h4 class="cap-edge">안 하는 것</h4>
+              <p>통화 중 커밋은 EMR 확정이 아님 · 병원 근거 없는 답변은 하지 않고, 조회 실패 시 no-knowledge 상태로 통화를 계속함</p>
+            </div>
           </div>
         </div>
       </section>
@@ -1035,7 +1066,29 @@
             <span class="rail-layer" data-l="how">기능</span>
           </div>
           <div class="head an d1">
-            <h2>PLACEHOLDER — Task 2~7에서 채운다</h2>
+            <h2>신규 예약 — 검색과 동의를 분리하다</h2>
+          </div>
+          <div class="an d2">
+            <div class="sec-h"><h3 class="cap cap-own ko">무엇을 하는가</h3></div>
+            <p class="claim" style="margin-top:0">통화 중 환자가 말한 조건으로 예약을 신청 접수합니다.</p>
+          </div>
+          <div class="an d3" style="margin-top:0.65rem">
+            <div class="sec-h"><h3 class="cap cap-bound ko">어떻게 만들었나</h3></div>
+            <div class="gates">
+              <div class="gate"><span class="g-n">01 · Search</span><b class="g-t">조건으로 실시간 일정 조회</b></div>
+              <div class="gate"><span class="g-n">02 · Stage</span><b class="g-t">stage_booking만 확인 문구 생성</b><span class="g-g">모델이 만든 시간은 쓰지 않습니다</span></div>
+              <div class="gate gate-final"><span class="g-n">03 · Commit</span><b class="g-t">발화된 시간과 일치할 때만 신청 기록</b></div>
+            </div>
+          </div>
+          <div class="an d4" style="margin-top:0.65rem">
+            <div class="sec-h"><h3 class="cap cap-edge ko">뭐가 깨졌나</h3></div>
+            <ul class="bul">
+              <li>"네" 같은 수긍을 검색 조건으로 착각해 <strong>날짜를 지어냄</strong></li>
+              <li>소진돼야 할 <strong>EarliestOffer</strong>가 stale 승인으로 재사용됨</li>
+              <li>빈 검색 결과에 <strong>다른 시간을 몰래 대체</strong></li>
+            </ul>
+            <div class="note note-own" style="margin-top:0.4rem"><strong>잡는 법 · UNSOUND_COMMIT</strong> · 통화에서 한 번도 발화되지 않은 시간이 커밋되면 성공을 강등합니다. 끊긴 assistant 발화는 증거로 인정하지 않습니다.</div>
+            <div class="note note-edge" style="margin-top:0.35rem"><strong>성숙도 차이</strong> · 위는 인바운드의 Dynamic Booking v3, 아웃바운드는 레거시 create 경로가 활성 상태로 신청 정보만 staging합니다.</div>
           </div>
         </div>
       </section>
@@ -1049,7 +1102,48 @@
             <span class="rail-layer" data-l="how">기능</span>
           </div>
           <div class="head an d1">
-            <h2>PLACEHOLDER — Task 2~7에서 채운다</h2>
+            <h2>상담원 연결 — 공유 자원의 상태 관리</h2>
+          </div>
+          <div class="an d2">
+            <div class="sec-h"><h3 class="cap cap-own ko">무엇을 하는가</h3></div>
+            <p class="claim" style="margin-top:0">여러 통화가 동시에 같은 상담원·trunk를 요청하는 상황을 하나의 대기열로 처리합니다.</p>
+          </div>
+          <div class="an d3" style="margin-top:0.6rem">
+            <div class="sec-h"><h3 class="cap cap-bound ko">어떻게 만들었나</h3></div>
+            <div class="lay lay-2a" style="gap:1rem">
+              <div class="col">
+                <div class="states">
+                  <div class="st"><b>queued</b><span>FIFO 대기</span></div><span class="st-arw">&rarr;</span>
+                  <div class="st"><b>waiting</b><span>trunk 확인</span></div><span class="st-arw">&rarr;</span>
+                  <div class="st"><b>dialing</b><span>SIP 호출</span></div><span class="st-arw">&rarr;</span>
+                  <div class="st st-key"><b>briefing</b><span>AI 브리핑</span></div><span class="st-arw">&rarr;</span>
+                  <div class="st st-key"><b>connected</b><span>trunk 점유</span></div>
+                </div>
+                <div class="lay lay-3 lay-tight" style="margin-top:0.45rem">
+                  <div class="blk blk-own"><h4>ZSET</h4><p>권위 있는 FIFO 순서</p></div>
+                  <div class="blk blk-bound"><h4>HASH</h4><p>대시보드 읽기 모델</p></div>
+                  <div class="blk blk-edge"><h4>Stream</h4><p>알림 전용 · PII 없음</p></div>
+                </div>
+                <div class="note" style="margin-top:0.35rem">세 키 모두 <code>{company_id}</code>를 포함해 같은 Redis Cluster 슬롯에 둡니다.</div>
+              </div>
+              <figure class="fig">
+                <div class="fig-h"><b>Warm Transfer 상태 흐름</b><span class="cap">Runtime</span></div>
+                <div class="frame frame-contain" style="background:var(--panel)">
+                  <img src="../assets/inbound-warm-transfer-flow.png" alt="상담원 연결 warm transfer 상태 흐름도">
+                </div>
+                <figcaption class="fig-cap"><b>STATE</b><span>큐 대기부터 trunk 점유까지, 인바운드·아웃바운드가 공유하는 상태 머신입니다.</span></figcaption>
+              </figure>
+            </div>
+          </div>
+          <div class="an d4" style="margin-top:0.6rem">
+            <div class="sec-h"><h3 class="cap cap-edge ko">뭐가 깨졌나</h3></div>
+            <ul class="bul">
+              <li>재시도가 큐를 <strong>새치기하고 좀비 엔트리를 연장</strong></li>
+              <li>늦게 도착한 콜백이 <strong>해제된 HASH를 되살림</strong></li>
+              <li>보관된 완료 기록이 <strong>활성 통화로 집계</strong></li>
+              <li>"오래됐다"만으로 정리하면 <strong>갱신 중인 살아있는 통화를 끊음</strong></li>
+            </ul>
+            <div class="note note-own" style="margin-top:0.35rem"><strong>watchdog 경합</strong> · 전체 무응답 감시 타이머가 DTMF·전환 태스크의 자체 타임아웃과 경합해, <code>suppress_user_presence_task</code>로 억제합니다.</div>
           </div>
         </div>
       </section>
@@ -1063,7 +1157,43 @@
             <span class="rail-layer" data-l="how">기능</span>
           </div>
           <div class="head an d1">
-            <h2>PLACEHOLDER — Task 2~7에서 채운다</h2>
+            <h2>두 방향의 차이 — 시작하는 방법이 다르다</h2>
+          </div>
+          <div class="an d2">
+            <div class="sec-h"><h3 class="cap cap-own ko">무엇을 하는가</h3></div>
+            <p class="claim" style="margin-top:0">기능은 같지만 통화가 시작되는 방식이 다르고, 그 차이에서 아웃바운드 고유의 사건이 나옵니다.</p>
+          </div>
+          <div class="an d3" style="margin-top:0.6rem">
+            <div class="sec-h"><h3 class="cap cap-bound ko">어떻게 만들었나</h3></div>
+            <div class="lay lay-2">
+              <div class="col">
+                <div class="cap cap-ch" style="margin-bottom:0.3rem">아웃바운드</div>
+                <ul class="bul">
+                  <li><strong>시작</strong> · voxBridge가 SIP 참가자를 만들고 워커는 기다림</li>
+                  <li><strong>게이트</strong> · FakeAgent &rarr; active(60초) &rarr; AMD &rarr; SingleAgent</li>
+                  <li><strong>지식</strong> · FAQ 벌크 프롬프트 주입(<code>get_faqs</code>)</li>
+                  <li><strong>목적</strong> · 발신 시점에 이미 정해져 있음</li>
+                </ul>
+              </div>
+              <div class="col">
+                <div class="cap cap-ch" style="margin-bottom:0.3rem">인바운드</div>
+                <ul class="bul">
+                  <li><strong>시작</strong> · SIP 수신 후 참가자 admission</li>
+                  <li><strong>게이트</strong> · 유효한 metadata와 참가자 확인</li>
+                  <li><strong>지식</strong> · Call Context 주입 + no-knowledge fallback</li>
+                  <li><strong>목적</strong> · 통화 중에 알아내야 함</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="an d4" style="margin-top:0.6rem">
+            <div class="sec-h"><h3 class="cap cap-edge ko">뭐가 깨졌나</h3></div>
+            <ul class="bul">
+              <li><strong>1 · AMD race condition</strong> — 판별 중 시작된 발화가 전환 후 완료돼 인사말 대신 LLM 응답이 나가던 문제. <code>FakeAgent</code>·<code>GreetingDtmfTask</code>에 <code>StopResponse</code>를 강제해 해결</li>
+              <li><strong>2 · 늦은 STT</strong> — 통화 종료 후 발화처럼 보이던 문제. 분석에서 <code>PARTICIPANT_DISCONNECTED</code>를 끝으로 이동 후 분류</li>
+              <li><strong>3 · DTMF provenance 누수</strong> — 일회성 키패드 선택이 자율 도구 호출로 새던 문제. <code>get_my_appointment_list</code>가 시작 시 <code>from_dtmf_selection</code>을 제거</li>
+            </ul>
+            <div class="note" style="margin-top:0.35rem"><strong>동시성 상한</strong> · <code>compute_load()</code>가 활성 잡 5개를 기준으로 계산해 연결 5통 + 셋업 1건까지 허용하고 7번째를 막습니다.</div>
           </div>
         </div>
       </section>
@@ -1077,7 +1207,36 @@
             <span class="rail-layer" data-l="result">결과와 한계</span>
           </div>
           <div class="head an d1">
-            <h2>PLACEHOLDER — Task 2~7에서 채운다</h2>
+            <h2>4단계로 검증하고, 두 방향의 결과와 한계를 봅니다</h2>
+            <p class="claim">뒤로 갈수록 느리고 현실에 가까운 단계로 검증하며, <em>앞 단계에서 걸리는 것을 뒤로 넘기지 않습니다</em>.</p>
+          </div>
+          <div class="an d2">
+            <div class="sec-h"><h3 class="cap ko">검증 4단계 · 양방향 공통</h3></div>
+            <div class="flow">
+              <div class="node"><b>01 · 단위 테스트</b><span>규칙 · 상태 · API</span></div><span class="arw">&rarr;</span>
+              <div class="node"><b>02 · Text Eval</b><span>LiveKit text-only Agent 평가</span></div><span class="arw">&rarr;</span>
+              <div class="node"><b>03 · 환자 시뮬레이션</b><span>로컬 · 멀티턴</span></div><span class="arw">&rarr;</span>
+              <div class="node node-own"><b>04 · 오디오·전화망</b><span>실제 SIP</span></div>
+            </div>
+          </div>
+          <div class="an d3" style="margin-top:0.8rem">
+            <div class="sec-h"><h3 class="cap ko">방향별 운영 규모</h3></div>
+            <div class="metrics">
+              <div class="metric metric-key"><b>550,000+</b><span>아웃바운드 통화 성공</span></div>
+              <div class="metric"><b>2,500/일</b><span>아웃바운드 일 평균 통화</span></div>
+              <div class="metric"><b>300+</b><span>도입 병원</span></div>
+              <div class="metric metric-key"><b>70,000+</b><span>인바운드 통화 성공</span></div>
+              <div class="metric"><b>1,500/일</b><span>인바운드 일 평균 통화</span></div>
+              <div class="metric"><b>620,000+ · 4,000/일</b><span>두 방향 합산</span></div>
+            </div>
+          </div>
+          <div class="an d4" style="margin-top:0.8rem">
+            <div class="sec-h"><h3 class="cap cap-edge ko">한계</h3></div>
+            <ul class="bul bul-deny">
+              <li>통화 안의 커밋은 예약 <strong>신청</strong> 기록이며 EMR 최종 확정이 아닙니다</li>
+              <li>아웃바운드의 예약 변경·취소는 AI가 실행하지 않고, <strong>상담원 연결 또는 메모 접수</strong>로 넘깁니다</li>
+              <li>완료 이벤트 발행이 DB 저장보다 먼저라 <strong>중복 또는 부분 실패</strong>가 가능하며 감사 대상입니다</li>
+            </ul>
           </div>
         </div>
       </section>
