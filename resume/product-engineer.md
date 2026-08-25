@@ -76,7 +76,7 @@ AIU 제품과 운영 정보를 여러 사내 시스템에서 찾아야 하는 �
 - voxBridge가 Room·SIP 발신 수명주기를 소유하고 Agent가 `sip.callStatus=active`를 기다리도록 책임을 분리했습니다. Participant listener를 먼저 등록한 뒤 현재 상태를 다시 읽는 `subscribe-then-snapshot`, 계층화된 timeout과 단일 cleanup 소유권으로 중복 발신과 Room 정리 race를 방지했습니다.
 - AMD 판정 전에는 무발화 `FakeAgent`, 사람 또는 불확실 판정 뒤에는 하나의 `SingleAgent`를 활성화했습니다. `condition`·`greeting`·`agent`·`action`·`exit` 노드로 구성한 `flow_config`와 통화 목적 계약으로 DTMF, 예약, 정보 안내, 상담원 연결과 종료를 코드 배포 없이 조합했습니다.
 - AWS Streaming STT, OpenAI LLM과 Gemini fallback, Google Streaming TTS를 결합하고 preemptive LLM·TTS를 적용했습니다. STT 지연, Turn Detection, LLM TTFT, TTS TTFB, Playback과 E2E latency를 분리해 관측하며 속도와 Tool 제어·감사 가능성을 함께 관리했습니다.
-- 신규 예약은 생년월일 확인, 진료과·실시간 일정 조회, 후보 스테이징과 최종 동의를 AgentTask로 분리했습니다. 통화 중 EMR 예약을 즉시 확정하지 않고 완전한 예약 신청 정보를 기록한 뒤 병원 확인 전 상태임을 명확히 안내했으며, 변경·취소는 정책에 따라 상담원 연결 또는 메모 접수로 전달했습니다.
+- 신규 예약은 생년월일 DTMF 확인, 진료과 조회, 일정 선택과 확인을 `ScheduleSelectionTask`로 분리하고 진료과·의료진 변경 시 해당 단계로 되돌아가는 재선택을 최대 3회 허용했습니다. 선택 결과는 부분 갱신이 아니라 스냅샷 교체로 기록해 통화 종료 시점에 불완전한 신청 정보가 남지 않게 했습니다. 통화 중 EMR 예약을 즉시 확정하지 않고 완전한 예약 신청 정보를 기록한 뒤 병원 확인 전 상태임을 명확히 안내했으며, 변경·취소는 정책에 따라 상담원 연결 또는 메모 접수로 전달했습니다.
 - 병원 FAQ는 통화 시작 시 기관별 활성 목록을 조회해 프롬프트에 주입하고, 등록된 답변 범위 밖에서는 추정하지 않도록 제한했습니다. 답변 매칭 결과를 구조화 이벤트로 기록해 정보 안내 성공 여부를 후처리에서 재현할 수 있게 했습니다.
 - warm/cold transfer, 인바운드·아웃바운드 공용 Redis FIFO, trunk 점유권, AI 브리핑과 상담원 DTMF 수락, 대기 재확인·재시도·수신자 이탈·메모 fallback을 하나의 상태 모델로 관리하고 상태 변경을 Redis Stream으로 발행했습니다.
 - 통화 transcript와 `extra.agent_event` 구조화 이벤트를 Kafka로 분석 Consumer에 전달했습니다. 상담원 연결 이후 녹음 구간을 Gemini로 보완 전사하고, 결정론적 이벤트 분류와 trustcall 기반 의미 분석·요약을 결합해 결과·이탈·전환 상태를 재구성했습니다.
