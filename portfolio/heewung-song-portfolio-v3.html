@@ -1235,7 +1235,6 @@
             <ul class="bul bul-deny">
               <li>통화 안의 커밋은 예약 <strong>신청</strong> 기록이며 EMR 최종 확정이 아닙니다</li>
               <li>아웃바운드의 예약 변경·취소는 AI가 실행하지 않고, <strong>상담원 연결 또는 메모 접수</strong>로 넘깁니다</li>
-              <li>완료 이벤트 발행이 DB 저장보다 먼저라 <strong>중복 또는 부분 실패</strong>가 가능하며 감사 대상입니다</li>
             </ul>
           </div>
         </div>
@@ -1340,9 +1339,15 @@
               <div class="node"><b>attempts</b><span>업무 단위 시도로 정규화</span></div><span class="arw">&rarr;</span>
               <div class="node node-own"><b>rollup</b><span>실패를 단계·유형·책임 주체로 귀속</span></div>
             </div>
-            <div class="chips" style="margin-top:0.5rem">
-              <span class="chip">01</span><span class="chip">02</span><span class="chip">03</span><span class="chip">04</span><span class="chip">05</span><span class="chip">06</span><span class="chip chip-edge">07</span>
-            </div>
+            <ol class="ledger bound" style="margin-top:0.45rem">
+              <li><span class="n">01</span><span class="k"><code>SELF_SERVED</code></span><span class="v">업무가 통화 안에서 완결</span></li>
+              <li><span class="n">02</span><span class="k"><code>HUMAN_SERVED</code></span><span class="v">상담원 연결로 처리</span></li>
+              <li><span class="n">03</span><span class="k"><code>DEFERRED</code></span><span class="v">메모 접수로 이관</span></li>
+              <li><span class="n">04</span><span class="k"><code>ESCALATION_FAILED</code></span><span class="v">연결을 시도했으나 넘기지 못함</span></li>
+              <li><span class="n">05</span><span class="k"><code>UNRESOLVED</code></span><span class="v">업무가 실패·차단·불완전 커밋</span></li>
+              <li><span class="n">06</span><span class="k"><code>ABANDONED</code></span><span class="v">그 외 이탈</span></li>
+              <li><span class="n">07</span><span class="k"><code>NO_ENGAGEMENT</code></span><span class="v">시도 자체가 없음</span></li>
+            </ol>
             <div class="note" style="margin-top:0.35rem"><strong>배타적 우선순위</strong> · 고정된 7단계 중 통화당 정확히 하나만 채택됩니다. KPI 중복 집계를 막는 장치이며, <strong>통화 결과 분포</strong> 화면이 이 규칙의 직접 산출물입니다.</div>
           </div>
           <div class="an d4" style="margin-top:0.6rem">
@@ -1417,7 +1422,7 @@
                 <div class="frame frame-dash">
                   <img src="../assets/cupix-ax-analytics-screen.png" alt="콜 분석 진단실 화면 — 시도 단위 손실 지점과 개선 담당 주체">
                 </div>
-                <figcaption class="fig-cap"><b>DIAGNOSE</b><span>시도 단위로 분해한 손실 지점과 개선 담당 주체</span></figcaption>
+                <figcaption class="fig-cap"><b>DIAGNOSE</b><span>시도 단위로 분해한 손실 지점과 개선 담당 주체, 상호배타 통화 결과 분포와 자체 처리율</span></figcaption>
               </figure>
             </div>
           </div>
