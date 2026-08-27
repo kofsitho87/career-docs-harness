@@ -2088,7 +2088,13 @@
     .lead-solo .lead-text { border-left: 0; padding-left: 0; }
     .lead-body { display: grid; gap: 0.85rem; }
     .split :is(b, span, small, p, li, h3, h4) { word-break: keep-all; overflow-wrap: break-word; }
-    .split-side .chatbot-entry { grid-template-columns: minmax(0,1fr); }
+    /* icon boxes are <span>, so `.chatbot-outcome span` / `.chatbot-core span`
+       (0,1,1) beat `.chatbot-outcome-icon` (0,1,0) and knocked the box out of
+       grid — the glyph sat at the top instead of the centre. Restore it. */
+    .chatbot-outcome span.chatbot-outcome-icon,
+    .chatbot-core span.chatbot-core-icon { display: grid; place-items: center; }
+    .chatbot-outcome span.chatbot-outcome-icon { margin-top: 0; }
+    .chatbot-core span.chatbot-core-icon { margin-top: 0; margin-bottom: 0.68rem; }
     .split-ev .split-main .claim { font-size: var(--t-body); line-height: 1.62; }
 
     /* narrow-column modifiers — stack what would otherwise sit in a row */
@@ -2300,6 +2306,8 @@
        ============================================================ */
     @media print {
       .menu, .nav, .progress, .screenshot-modal { display: none !important; }
+      /* 화면 전용 조작 안내는 인쇄물에서 의미가 없다 */
+      .zoom-hint, .skip { display: none !important; }
       .slide { display: flex !important; page-break-after: always; height: 100vh; overflow: hidden; }
       * { print-color-adjust: exact; -webkit-print-color-adjust: exact; }
     }
@@ -3470,7 +3478,7 @@
       </section>
 
       <!-- ============ 19 · CH3 ① 병원 고객상담 AI Agent ============ -->
-      <section class="slide ch3 split-layout" data-slide="ch3-what">
+      <section class="slide ch3 split-layout lead-layout" data-slide="ch3-what">
         <div class="stage-bg"></div>
         <div class="slide-inner">
 
@@ -3479,45 +3487,45 @@
             <span class="rail-track"><i></i><i></i><i class="on"></i><i></i></span>
             <span class="rail-layer" data-l="what">무엇인가</span>
           </div>
-          <div class="split split-ev">
-            <div class="split-main">
-              <div class="head an d1">
-                <h2>병원 고객상담 AI Agent</h2>
-                <p class="support">2025.03 – 2026.03 · 초기 상담 그래프와 서비스 경계 설계·주요 구현</p>
-                <p class="claim">웹·Kakao에서 환자 문의를 받고, 병원별 지식 안내부터 필요한 상담 절차까지 이어주는 <em>텍스트 기반 상담 챗봇</em>입니다.</p>
+          <div class="lead an d1">
+            <div class="lead-title">
+              <h2>병원 고객상담 AI Agent</h2>
+            </div>
+            <div class="lead-text">
+              <p class="support">2025.03 – 2026.03 · 초기 상담 그래프와 서비스 경계 설계·주요 구현</p>
+              <p class="claim">웹·Kakao에서 환자 문의를 받고, 병원별 지식 안내부터 필요한 상담 절차까지 이어주는 <em>텍스트 기반 상담 챗봇</em>입니다.</p>
+            </div>
+          </div>
+          <div class="lead-body">
+            <div class="chatbot-intro-board an d2" role="img" aria-label="웹과 카카오에서 들어온 환자 질문을 AI 상담이 받아 병원 지식 안내, 개인정보 수집, 예약 화면 안내, 상담원 연결 신청으로 이어주는 텍스트 챗봇의 상담 범위">
+              <div class="chatbot-entry">
+                <div class="chatbot-channel">
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 8h18M7 6h.01M10 6h.01"/></svg>
+                  <b>웹 챗봇</b><span>Web</span>
+                </div>
+                <div class="chatbot-channel">
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 11.5c0 4.1-4 7.5-9 7.5-1.1 0-2.2-.2-3.1-.5L4 21l1.4-4C3.9 15.6 3 13.7 3 11.5 3 7.4 7 4 12 4s9 3.4 9 7.5z"/></svg>
+                  <b>Kakao</b><span>Chat</span>
+                </div>
+              </div>
+              <div class="chatbot-intro-arrow" aria-hidden="true"><span>→</span></div>
+              <div class="chatbot-core">
+                <span class="chatbot-core-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="6" width="16" height="13" rx="4"/><path d="M9 11h.01M15 11h.01M9 15h6M12 3v3"/></svg></span>
+                <small>AI Consultation</small>
+                <b>질문 맥락을 유지</b>
+                <span>텍스트 · 카드 · 버튼</span>
+              </div>
+              <div class="chatbot-intro-arrow" aria-hidden="true"><span>→</span></div>
+              <div class="chatbot-outcomes">
+                <div class="chatbot-outcome"><span class="chatbot-outcome-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H11v16H6.5A2.5 2.5 0 0 0 4 21zM20 5.5A2.5 2.5 0 0 0 17.5 3H13v16h4.5A2.5 2.5 0 0 1 20 21z"/></svg></span><div><b>병원 지식 안내</b><span>운영시간·의료진·진료 정보</span></div></div>
+                <div class="chatbot-outcome"><span class="chatbot-outcome-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 22s8-3.5 8-10V5l-8-3-8 3v7c0 6.5 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg></span><div><b>개인정보 수집</b><span>동의 후 필요한 정보만 수집</span></div></div>
+                <div class="chatbot-outcome"><span class="chatbot-outcome-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 10h18M8 14h.01M12 14h.01M16 14h.01"/></svg></span><div><b>예약 UI 안내</b><span>신청·조회 화면으로 연결</span></div></div>
+                <div class="chatbot-outcome"><span class="chatbot-outcome-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 13a8 8 0 0 1 16 0M4 13v4a2 2 0 0 0 2 2h2v-7H4M20 13v4a2 2 0 0 1-2 2h-2v-7h4M16 19c0 1.1-.9 2-2 2h-2"/></svg></span><div><b>상담원 연결 준비</b><span>질문과 정보를 연결 신청에 반영</span></div></div>
               </div>
             </div>
-            <div class="split-side">
-              <div class="chatbot-intro-board an d2" role="img" aria-label="웹과 카카오에서 들어온 환자 질문을 AI 상담이 받아 병원 지식 안내, 개인정보 수집, 예약 화면 안내, 상담원 연결 신청으로 이어주는 텍스트 챗봇의 상담 범위">
-                <div class="chatbot-entry">
-                  <div class="chatbot-channel">
-                    <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 8h18M7 6h.01M10 6h.01"/></svg>
-                    <b>웹 챗봇</b><span>Web</span>
-                  </div>
-                  <div class="chatbot-channel">
-                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 11.5c0 4.1-4 7.5-9 7.5-1.1 0-2.2-.2-3.1-.5L4 21l1.4-4C3.9 15.6 3 13.7 3 11.5 3 7.4 7 4 12 4s9 3.4 9 7.5z"/></svg>
-                    <b>Kakao</b><span>Chat</span>
-                  </div>
-                </div>
-                <div class="chatbot-intro-arrow" aria-hidden="true"><span>→</span></div>
-                <div class="chatbot-core">
-                  <span class="chatbot-core-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="6" width="16" height="13" rx="4"/><path d="M9 11h.01M15 11h.01M9 15h6M12 3v3"/></svg></span>
-                  <small>AI Consultation</small>
-                  <b>질문 맥락을 유지</b>
-                  <span>텍스트 · 카드 · 버튼</span>
-                </div>
-                <div class="chatbot-intro-arrow" aria-hidden="true"><span>→</span></div>
-                <div class="chatbot-outcomes">
-                  <div class="chatbot-outcome"><span class="chatbot-outcome-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H11v16H6.5A2.5 2.5 0 0 0 4 21zM20 5.5A2.5 2.5 0 0 0 17.5 3H13v16h4.5A2.5 2.5 0 0 1 20 21z"/></svg></span><div><b>병원 지식 안내</b><span>운영시간·의료진·진료 정보</span></div></div>
-                  <div class="chatbot-outcome"><span class="chatbot-outcome-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 22s8-3.5 8-10V5l-8-3-8 3v7c0 6.5 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg></span><div><b>개인정보 수집</b><span>동의 후 필요한 정보만 수집</span></div></div>
-                  <div class="chatbot-outcome"><span class="chatbot-outcome-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 10h18M8 14h.01M12 14h.01M16 14h.01"/></svg></span><div><b>예약 UI 안내</b><span>신청·조회 화면으로 연결</span></div></div>
-                  <div class="chatbot-outcome"><span class="chatbot-outcome-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 13a8 8 0 0 1 16 0M4 13v4a2 2 0 0 0 2 2h2v-7H4M20 13v4a2 2 0 0 1-2 2h-2v-7h4M16 19c0 1.1-.9 2-2 2h-2"/></svg></span><div><b>상담원 연결 준비</b><span>질문과 정보를 연결 신청에 반영</span></div></div>
-                </div>
-              </div>
-              <div class="chatbot-boundaries an d3">
-                <div class="chatbot-boundary"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8 8l8 8M16 8l-8 8"/></svg><div><b>예약을 직접 실행하지 않습니다</b><span>의도를 확인하고 해당 화면을 엽니다.</span></div></div>
-                <div class="chatbot-boundary"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 22s8-3.5 8-10V5l-8-3-8 3v7c0 6.5 8 10 8 10z"/><path d="M9 9h6M12 6v6"/></svg><div><b>의학적 판단을 하지 않습니다</b><span>진단·처방 요청은 안내 범위에서 차단합니다.</span></div></div>
-              </div>
+            <div class="chatbot-boundaries an d3">
+              <div class="chatbot-boundary"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8 8l8 8M16 8l-8 8"/></svg><div><b>예약을 직접 실행하지 않습니다</b><span>의도를 확인하고 해당 화면을 엽니다.</span></div></div>
+              <div class="chatbot-boundary"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 22s8-3.5 8-10V5l-8-3-8 3v7c0 6.5 8 10 8 10z"/><path d="M9 9h6M12 6v6"/></svg><div><b>의학적 판단을 하지 않습니다</b><span>진단·처방 요청은 안내 범위에서 차단합니다.</span></div></div>
             </div>
           </div>
         </div>
@@ -3603,7 +3611,7 @@
       </section>
 
       <!-- ============ 21 · CH3 ③ 상담 흐름 ============ -->
-      <section class="slide ch3 split-layout" data-slide="ch3-flow">
+      <section class="slide ch3 split-layout lead-layout" data-slide="ch3-flow">
         <div class="stage-bg"></div>
         <div class="slide-inner">
 
@@ -3612,54 +3620,54 @@
             <span class="rail-track"><i></i><i></i><i class="on"></i><i></i></span>
             <span class="rail-layer" data-l="how">상태 흐름</span>
           </div>
-          <div class="split split-ev">
-            <div class="split-main">
-              <div class="head an d1">
-                <h2>상태 기반 상담 흐름</h2>
-                <p class="claim">개인정보 수집이 중간에 끼어들어도 <em>원래 질문과 이미 수집한 값</em>을 보존해 상담을 이어갑니다.</p>
-              </div>
+          <div class="lead an d1">
+            <div class="lead-title">
+              <h2>상태 기반 상담 흐름</h2>
             </div>
-            <div class="split-side">
-              <div class="stateflow-board an d2" role="img" aria-label="상담원 연결과 임플란트 상담을 요청한 환자의 원래 질문을 상태에 보관하고 개인정보를 수집해 필드별로 병합한 뒤 원래 질문으로 복귀하는 상태 기반 상담 흐름">
-                <div class="stateflow-context">
-                  <span class="stateflow-context-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 11.5c0 4.1-4 7.5-9 7.5-1.1 0-2.2-.2-3.1-.5L4 21l1.4-4C3.9 15.6 3 13.7 3 11.5 3 7.4 7 4 12 4s9 3.4 9 7.5z"/></svg></span>
-                  <div><small>환자 질문</small><b>“상담원 연결해 주세요. 임플란트 상담도 가능한가요?”</b></div>
-                  <span>중간 절차에서도 맥락 유지</span>
+            <div class="lead-text">
+              <p class="claim">개인정보 수집이 중간에 끼어들어도 <em>원래 질문과 이미 수집한 값</em>을 보존해 상담을 이어갑니다.</p>
+            </div>
+          </div>
+          <div class="lead-body">
+            <div class="stateflow-board an d2" role="img" aria-label="상담원 연결과 임플란트 상담을 요청한 환자의 원래 질문을 상태에 보관하고 개인정보를 수집해 필드별로 병합한 뒤 원래 질문으로 복귀하는 상태 기반 상담 흐름">
+              <div class="stateflow-context">
+                <span class="stateflow-context-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 11.5c0 4.1-4 7.5-9 7.5-1.1 0-2.2-.2-3.1-.5L4 21l1.4-4C3.9 15.6 3 13.7 3 11.5 3 7.4 7 4 12 4s9 3.4 9 7.5z"/></svg></span>
+                <div><small>환자 질문</small><b>“상담원 연결해 주세요. 임플란트 상담도 가능한가요?”</b></div>
+                <span>중간 절차에서도 맥락 유지</span>
+              </div>
+              <div class="stateflow-track">
+                <div class="stateflow-step">
+                  <div class="stateflow-step-top"><span class="stateflow-step-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16v14H4zM8 9h8M8 13h5"/></svg></span><span class="stateflow-step-num">01</span></div>
+                  <h3>질문 접수</h3><p>상담 목적과 후속 질문을 함께 이해합니다.</p><span class="stateflow-code">messages</span>
                 </div>
-                <div class="stateflow-track">
-                  <div class="stateflow-step">
-                    <div class="stateflow-step-top"><span class="stateflow-step-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16v14H4zM8 9h8M8 13h5"/></svg></span><span class="stateflow-step-num">01</span></div>
-                    <h3>질문 접수</h3><p>상담 목적과 후속 질문을 함께 이해합니다.</p><span class="stateflow-code">messages</span>
-                  </div>
-                  <div class="stateflow-arrow" aria-hidden="true"><span>→</span></div>
-                  <div class="stateflow-step">
-                    <div class="stateflow-step-top"><span class="stateflow-step-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4h14v16H5zM8 8h8M8 12h8M8 16h5"/></svg></span><span class="stateflow-step-num">02</span></div>
-                    <h3>원래 질문 보관</h3><p>개인정보 수집 전에 첫 질문을 잠시 저장합니다.</p><span class="stateflow-code">pending_question</span>
-                  </div>
-                  <div class="stateflow-arrow" aria-hidden="true"><span>→</span></div>
-                  <div class="stateflow-step">
-                    <div class="stateflow-step-top"><span class="stateflow-step-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="3"/><path d="M5 21v-2a7 7 0 0 1 14 0v2M4 4h4M16 4h4"/></svg></span><span class="stateflow-step-num">03</span></div>
-                    <h3>개인정보 수집</h3><p>동의 후 이름·전화번호·생년월일을 확인합니다.</p><span class="stateflow-code">customer info</span>
-                  </div>
-                  <div class="stateflow-arrow" aria-hidden="true"><span>→</span></div>
-                  <div class="stateflow-step">
-                    <div class="stateflow-step-top"><span class="stateflow-step-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v18M3 8h18M5 8v11h14V8M8 12h8M8 16h5"/></svg></span><span class="stateflow-step-num">04</span></div>
-                    <h3>필드별 상태 병합</h3><p>새 값만 더하고 이미 수집한 값은 지우지 않습니다.</p><span class="stateflow-code">collected_info</span>
-                  </div>
-                  <div class="stateflow-arrow" aria-hidden="true"><span>→</span></div>
-                  <div class="stateflow-step">
-                    <div class="stateflow-step-top"><span class="stateflow-step-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12h15M13 7l5 5-5 5M21 5v14"/></svg></span><span class="stateflow-step-num">05</span></div>
-                    <h3>원래 질문으로 복귀</h3><p>연결 신청과 임플란트 질문을 이어서 처리합니다.</p><span class="stateflow-code">current_node</span>
-                  </div>
+                <div class="stateflow-arrow" aria-hidden="true"><span>→</span></div>
+                <div class="stateflow-step">
+                  <div class="stateflow-step-top"><span class="stateflow-step-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4h14v16H5zM8 8h8M8 12h8M8 16h5"/></svg></span><span class="stateflow-step-num">02</span></div>
+                  <h3>원래 질문 보관</h3><p>개인정보 수집 전에 첫 질문을 잠시 저장합니다.</p><span class="stateflow-code">pending_question</span>
                 </div>
-                <div class="stateflow-bottom">
-                  <div class="stateflow-principles">
-                    <div class="stateflow-principle"><span class="stateflow-principle-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16v14H4zM8 9h8M8 13h5"/></svg></span><div><b>질문을 잃지 않음</b><span>수집 전 원래 질문 보관</span></div></div>
-                    <div class="stateflow-principle"><span class="stateflow-principle-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h16M12 4v16M7 7l10 10M17 7 7 17"/></svg></span><div><b>아는 값을 지우지 않음</b><span>개인정보를 필드별로 병합</span></div></div>
-                    <div class="stateflow-principle"><span class="stateflow-principle-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12a7 7 0 1 0 2-5M5 4v5h5"/></svg></span><div><b>돌아갈 단계를 기억</b><span>수집 후 원래 상담으로 복귀</span></div></div>
-                  </div>
-                  <div class="stateflow-value"><small>사용자 가치</small><b>같은 말을 두 번 하지 않습니다</b><span>활성 동의 메시지도 기억해 중복 카드를 막았습니다.</span></div>
+                <div class="stateflow-arrow" aria-hidden="true"><span>→</span></div>
+                <div class="stateflow-step">
+                  <div class="stateflow-step-top"><span class="stateflow-step-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="3"/><path d="M5 21v-2a7 7 0 0 1 14 0v2M4 4h4M16 4h4"/></svg></span><span class="stateflow-step-num">03</span></div>
+                  <h3>개인정보 수집</h3><p>동의 후 이름·전화번호·생년월일을 확인합니다.</p><span class="stateflow-code">customer info</span>
                 </div>
+                <div class="stateflow-arrow" aria-hidden="true"><span>→</span></div>
+                <div class="stateflow-step">
+                  <div class="stateflow-step-top"><span class="stateflow-step-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v18M3 8h18M5 8v11h14V8M8 12h8M8 16h5"/></svg></span><span class="stateflow-step-num">04</span></div>
+                  <h3>필드별 상태 병합</h3><p>새 값만 더하고 이미 수집한 값은 지우지 않습니다.</p><span class="stateflow-code">collected_info</span>
+                </div>
+                <div class="stateflow-arrow" aria-hidden="true"><span>→</span></div>
+                <div class="stateflow-step">
+                  <div class="stateflow-step-top"><span class="stateflow-step-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12h15M13 7l5 5-5 5M21 5v14"/></svg></span><span class="stateflow-step-num">05</span></div>
+                  <h3>원래 질문으로 복귀</h3><p>연결 신청과 임플란트 질문을 이어서 처리합니다.</p><span class="stateflow-code">current_node</span>
+                </div>
+              </div>
+              <div class="stateflow-bottom">
+                <div class="stateflow-principles">
+                  <div class="stateflow-principle"><span class="stateflow-principle-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16v14H4zM8 9h8M8 13h5"/></svg></span><div><b>질문을 잃지 않음</b><span>수집 전 원래 질문 보관</span></div></div>
+                  <div class="stateflow-principle"><span class="stateflow-principle-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h16M12 4v16M7 7l10 10M17 7 7 17"/></svg></span><div><b>아는 값을 지우지 않음</b><span>개인정보를 필드별로 병합</span></div></div>
+                  <div class="stateflow-principle"><span class="stateflow-principle-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12a7 7 0 1 0 2-5M5 4v5h5"/></svg></span><div><b>돌아갈 단계를 기억</b><span>수집 후 원래 상담으로 복귀</span></div></div>
+                </div>
+                <div class="stateflow-value"><small>사용자 가치</small><b>같은 말을 두 번 하지 않습니다</b><span>활성 동의 메시지도 기억해 중복 카드를 막았습니다.</span></div>
               </div>
             </div>
           </div>
@@ -3667,7 +3675,7 @@
       </section>
 
       <!-- ============ 22 · CH3 ④ 병원별 지식 검색과 근거 응답 ============ -->
-      <section class="slide ch3 split-layout" data-slide="ch3-knowledge">
+      <section class="slide ch3 split-layout lead-layout" data-slide="ch3-knowledge">
         <div class="stage-bg"></div>
         <div class="slide-inner">
 
@@ -3676,51 +3684,51 @@
             <span class="rail-track"><i></i><i></i><i class="on"></i><i></i></span>
             <span class="rail-layer" data-l="evidence">지식 검색</span>
           </div>
-          <div class="split split-ev">
-            <div class="split-main">
-              <div class="head an d1">
-                <h2>병원별 지식 검색과 근거 응답</h2>
-                <p class="claim">같은 질문도 병원마다 답이 다르기 때문에 <em>병원과 질문 종류를 먼저 좁힌 뒤</em> 근거가 있는 답만 사용합니다.</p>
-              </div>
+          <div class="lead an d1">
+            <div class="lead-title">
+              <h2>병원별 지식 검색과 근거 응답</h2>
             </div>
-            <div class="split-side">
-              <div class="knowledge-board an d2" role="img" aria-label="주말 피부과 진료 질문에서 병원 ID와 질문 종류를 먼저 제한하고 FAQ, Fact Data, Qdrant Hybrid Search 중 적절한 근거를 선택한 뒤 정보, 의료진, 진료, 이미지 타입의 응답으로 변환하는 병원별 지식 검색 흐름">
-                <div class="knowledge-pipeline">
-                  <div class="knowledge-stage">
-                    <div class="knowledge-stage-head"><span class="knowledge-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 11.5c0 4.1-4 7.5-9 7.5-1.1 0-2.2-.2-3.1-.5L4 21l1.4-4C3.9 15.6 3 13.7 3 11.5 3 7.4 7 4 12 4s9 3.4 9 7.5z"/></svg></span><span class="knowledge-stage-num">01</span></div>
-                    <small>Question</small><h3>질문 해석</h3>
-                    <div class="knowledge-question">“주말에도 피부과 진료하나요?”</div>
-                    <p>운영시간과 진료과 정보를 함께 찾아야 하는 질문입니다.</p>
-                  </div>
-                  <div class="knowledge-arrow" aria-hidden="true"><span>→</span></div>
-                  <div class="knowledge-stage scope">
-                    <div class="knowledge-stage-head"><span class="knowledge-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 21h18M5 21V7l7-4 7 4v14M9 10h2M13 10h2M9 14h2M13 14h2M10 21v-3h4v3"/></svg></span><span class="knowledge-stage-num">02</span></div>
-                    <small>Tenant Scope</small><h3>병원·주제 제한</h3>
-                    <p>검색 전에 현재 병원과 질문 종류를 먼저 고정합니다.</p>
-                    <div class="knowledge-filter-code"><span>client.id = 현재 병원</span><span>topic = 질문에 맞는 지식 영역</span></div>
-                  </div>
-                  <div class="knowledge-arrow" aria-hidden="true"><span>→</span></div>
-                  <div class="knowledge-retrieval">
-                    <div class="knowledge-retrieval-head"><div><small>Grounded Retrieval</small><h3>근거 선택</h3></div><span class="knowledge-stage-num">03</span></div>
-                    <div class="knowledge-source-list">
-                      <div class="knowledge-source"><span class="knowledge-source-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16v14H4zM8 9h8M8 13h5"/></svg></span><div><b>등록 FAQ</b><span>엄격한 검증 후 등록 답변을 그대로 사용</span></div><span class="knowledge-source-tag">FAQ FIRST</span></div>
-                      <div class="knowledge-source"><span class="knowledge-source-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v7c0 1.7 3.6 3 8 3s8-1.3 8-3V5M4 12v7c0 1.7 3.6 3 8 3s8-1.3 8-3v-7"/></svg></span><div><b>병원 Fact Data</b><span>운영시간·위치처럼 명확한 기준정보에 즉답</span></div><span class="knowledge-source-tag">DIRECT</span></div>
-                      <div class="knowledge-source"><span class="knowledge-source-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10" cy="10" r="6"/><path d="m15 15 5 5M7 10h6M10 7v6"/></svg></span><div><b>Qdrant Hybrid Search</b><span>키워드 BM25와 의미 Embedding을 함께 검색</span></div><span class="knowledge-source-tag">HYBRID</span></div>
-                    </div>
-                  </div>
-                  <div class="knowledge-arrow" aria-hidden="true"><span>→</span></div>
-                  <div class="knowledge-stage response">
-                    <div class="knowledge-stage-head"><span class="knowledge-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16v14H4zM7 9h10M7 13h6M16 16l2 2 3-4"/></svg></span><span class="knowledge-stage-num">04</span></div>
-                    <small>Typed Response</small><h3>채널 응답 변환</h3>
-                    <div class="knowledge-response-types"><span>병원 정보</span><span>의료진</span><span>진료·시술</span><span>이미지</span></div>
-                    <div class="knowledge-response-note">검색 근거 안에서만 답변</div>
+            <div class="lead-text">
+              <p class="claim">같은 질문도 병원마다 답이 다르기 때문에 <em>병원과 질문 종류를 먼저 좁힌 뒤</em> 근거가 있는 답만 사용합니다.</p>
+            </div>
+          </div>
+          <div class="lead-body">
+            <div class="knowledge-board an d2" role="img" aria-label="주말 피부과 진료 질문에서 병원 ID와 질문 종류를 먼저 제한하고 FAQ, Fact Data, Qdrant Hybrid Search 중 적절한 근거를 선택한 뒤 정보, 의료진, 진료, 이미지 타입의 응답으로 변환하는 병원별 지식 검색 흐름">
+              <div class="knowledge-pipeline">
+                <div class="knowledge-stage">
+                  <div class="knowledge-stage-head"><span class="knowledge-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 11.5c0 4.1-4 7.5-9 7.5-1.1 0-2.2-.2-3.1-.5L4 21l1.4-4C3.9 15.6 3 13.7 3 11.5 3 7.4 7 4 12 4s9 3.4 9 7.5z"/></svg></span><span class="knowledge-stage-num">01</span></div>
+                  <small>Question</small><h3>질문 해석</h3>
+                  <div class="knowledge-question">“주말에도 피부과 진료하나요?”</div>
+                  <p>운영시간과 진료과 정보를 함께 찾아야 하는 질문입니다.</p>
+                </div>
+                <div class="knowledge-arrow" aria-hidden="true"><span>→</span></div>
+                <div class="knowledge-stage scope">
+                  <div class="knowledge-stage-head"><span class="knowledge-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 21h18M5 21V7l7-4 7 4v14M9 10h2M13 10h2M9 14h2M13 14h2M10 21v-3h4v3"/></svg></span><span class="knowledge-stage-num">02</span></div>
+                  <small>Tenant Scope</small><h3>병원·주제 제한</h3>
+                  <p>검색 전에 현재 병원과 질문 종류를 먼저 고정합니다.</p>
+                  <div class="knowledge-filter-code"><span>client.id = 현재 병원</span><span>topic = 질문에 맞는 지식 영역</span></div>
+                </div>
+                <div class="knowledge-arrow" aria-hidden="true"><span>→</span></div>
+                <div class="knowledge-retrieval">
+                  <div class="knowledge-retrieval-head"><div><small>Grounded Retrieval</small><h3>근거 선택</h3></div><span class="knowledge-stage-num">03</span></div>
+                  <div class="knowledge-source-list">
+                    <div class="knowledge-source"><span class="knowledge-source-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16v14H4zM8 9h8M8 13h5"/></svg></span><div><b>등록 FAQ</b><span>엄격한 검증 후 등록 답변을 그대로 사용</span></div><span class="knowledge-source-tag">FAQ FIRST</span></div>
+                    <div class="knowledge-source"><span class="knowledge-source-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v7c0 1.7 3.6 3 8 3s8-1.3 8-3V5M4 12v7c0 1.7 3.6 3 8 3s8-1.3 8-3v-7"/></svg></span><div><b>병원 Fact Data</b><span>운영시간·위치처럼 명확한 기준정보에 즉답</span></div><span class="knowledge-source-tag">DIRECT</span></div>
+                    <div class="knowledge-source"><span class="knowledge-source-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10" cy="10" r="6"/><path d="m15 15 5 5M7 10h6M10 7v6"/></svg></span><div><b>Qdrant Hybrid Search</b><span>키워드 BM25와 의미 Embedding을 함께 검색</span></div><span class="knowledge-source-tag">HYBRID</span></div>
                   </div>
                 </div>
-                <div class="knowledge-boundaries">
-                  <div class="knowledge-boundary"><span class="knowledge-boundary-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 4 7v5c0 5 3.4 8 8 9 4.6-1 8-4 8-9V7zM8 12h8"/></svg></span><div><b>다른 병원 정보 차단</b><span>병원 ID와 topic을 모든 검색 조건에 함께 사용</span></div></div>
-                  <div class="knowledge-boundary"><span class="knowledge-boundary-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4M8 8l6 6M14 8l-6 6"/></svg></span><div><b>결과가 없으면 만들지 않음</b><span>근거가 없을 때 다른 병원·항목으로 조용히 대체하지 않음</span></div></div>
-                  <div class="knowledge-boundary"><span class="knowledge-boundary-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12l4 4L19 6"/></svg></span><div><b>FAQ는 검증 후 그대로</b><span>모델이 내용을 바꾸지 않고 등록된 답변을 사용</span></div></div>
+                <div class="knowledge-arrow" aria-hidden="true"><span>→</span></div>
+                <div class="knowledge-stage response">
+                  <div class="knowledge-stage-head"><span class="knowledge-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16v14H4zM7 9h10M7 13h6M16 16l2 2 3-4"/></svg></span><span class="knowledge-stage-num">04</span></div>
+                  <small>Typed Response</small><h3>채널 응답 변환</h3>
+                  <div class="knowledge-response-types"><span>병원 정보</span><span>의료진</span><span>진료·시술</span><span>이미지</span></div>
+                  <div class="knowledge-response-note">검색 근거 안에서만 답변</div>
                 </div>
+              </div>
+              <div class="knowledge-boundaries">
+                <div class="knowledge-boundary"><span class="knowledge-boundary-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 4 7v5c0 5 3.4 8 8 9 4.6-1 8-4 8-9V7zM8 12h8"/></svg></span><div><b>다른 병원 정보 차단</b><span>병원 ID와 topic을 모든 검색 조건에 함께 사용</span></div></div>
+                <div class="knowledge-boundary"><span class="knowledge-boundary-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4M8 8l6 6M14 8l-6 6"/></svg></span><div><b>결과가 없으면 만들지 않음</b><span>근거가 없을 때 다른 병원·항목으로 조용히 대체하지 않음</span></div></div>
+                <div class="knowledge-boundary"><span class="knowledge-boundary-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12l4 4L19 6"/></svg></span><div><b>FAQ는 검증 후 그대로</b><span>모델이 내용을 바꾸지 않고 등록된 답변을 사용</span></div></div>
               </div>
             </div>
           </div>
@@ -3728,7 +3736,7 @@
       </section>
 
       <!-- ============ 23 · CH3 ⑤ 운영 결과와 배운 점 ============ -->
-      <section class="slide ch3 split-layout" data-slide="ch3-result">
+      <section class="slide ch3 split-layout lead-layout" data-slide="ch3-result">
         <div class="stage-bg"></div>
         <div class="slide-inner">
 
@@ -3737,59 +3745,59 @@
             <span class="rail-track"><i></i><i></i><i class="on"></i><i></i></span>
             <span class="rail-layer" data-l="result">운영 결과와 배운 점</span>
           </div>
-          <div class="split split-ev">
-            <div class="split-main">
-              <div class="head an d1">
-                <h2>데모가 아니라, 300개 병원에서 운영 중인 제품입니다</h2>
-                <p class="claim">2025년 5월 출시 후 1년 3개월 — <em>실제 퍼널 수치</em>와, 그 수치를 만든 설계 원칙입니다.</p>
-              </div>
+          <div class="lead an d1">
+            <div class="lead-title">
+              <h2>데모가 아니라, 300개 병원에서 운영 중인 제품입니다</h2>
             </div>
-            <div class="split-side">
-              <div class="opsr-board an d2" role="img" aria-label="300개 이상 병원에서 2025년 5월부터 운영 중인 챗봇의 GA4 퍼널 수치와, 규칙 우선 처리 후 필요한 경우에만 생성형 상담을 실행하는 설계 교훈">
-                <div class="opsr-left">
-                  <div class="opsr-stats">
-                    <div class="opsr-stat"><small>HOSPITALS</small><b>300+</b><span>도입 병원</span></div>
-                    <div class="opsr-stat"><small>IN PRODUCTION</small><b>1년 3개월</b><span>2025.05 – 현재</span></div>
-                    <div class="opsr-stat"><small>SESSIONS</small><b>7,464</b><span>누적 상담 시작 사용자</span></div>
+            <div class="lead-text">
+              <p class="claim">2025년 5월 출시 후 1년 3개월 — <em>실제 퍼널 수치</em>와, 그 수치를 만든 설계 원칙입니다.</p>
+            </div>
+          </div>
+          <div class="lead-body">
+            <div class="opsr-board an d2" role="img" aria-label="300개 이상 병원에서 2025년 5월부터 운영 중인 챗봇의 GA4 퍼널 수치와, 규칙 우선 처리 후 필요한 경우에만 생성형 상담을 실행하는 설계 교훈">
+              <div class="opsr-left">
+                <div class="opsr-stats">
+                  <div class="opsr-stat"><small>HOSPITALS</small><b>300+</b><span>도입 병원</span></div>
+                  <div class="opsr-stat"><small>IN PRODUCTION</small><b>1년 3개월</b><span>2025.05 – 현재</span></div>
+                  <div class="opsr-stat"><small>SESSIONS</small><b>7,464</b><span>누적 상담 시작 사용자</span></div>
+                </div>
+                <div class="opsr-funnel">
+                  <div class="opsr-funnel-head"><b>상담 시작부터 예약 완료까지</b><span>GA4 FUNNEL · ACTIVE USERS</span></div>
+                  <div class="opsr-frow">
+                    <span class="opsr-lbl">챗봇 상담 시작</span>
+                    <div><div class="opsr-bar"></div></div>
+                    <span class="opsr-val"><b>7,464명</b>100%</span>
                   </div>
-                  <div class="opsr-funnel">
-                    <div class="opsr-funnel-head"><b>상담 시작부터 예약 완료까지</b><span>GA4 FUNNEL · ACTIVE USERS</span></div>
-                    <div class="opsr-frow">
-                      <span class="opsr-lbl">챗봇 상담 시작</span>
-                      <div><div class="opsr-bar"></div></div>
-                      <span class="opsr-val"><b>7,464명</b>100%</span>
-                    </div>
-                    <div class="opsr-frow mid">
-                      <span class="opsr-lbl">예약 또는<br>상담원 연결</span>
-                      <div><div class="opsr-bar"></div></div>
-                      <span class="opsr-val"><b>2,987명</b>시작 대비 40%</span>
-                    </div>
-                    <div class="opsr-frow end">
-                      <span class="opsr-lbl">예약 완료</span>
-                      <div><div class="opsr-bar"></div></div>
-                      <span class="opsr-val"><b>812명</b>시작 대비 10.9%</span>
-                    </div>
-                    <div class="opsr-funnel-note"><b>10.9%</b><span>챗봇 상담을 시작한 사용자 10명 중 1명이 예약 완료까지 도달합니다. 상담의 40%는 예약·상담원 연결 단계로 이어집니다.</span></div>
+                  <div class="opsr-frow mid">
+                    <span class="opsr-lbl">예약 또는<br>상담원 연결</span>
+                    <div><div class="opsr-bar"></div></div>
+                    <span class="opsr-val"><b>2,987명</b>시작 대비 40%</span>
+                  </div>
+                  <div class="opsr-frow end">
+                    <span class="opsr-lbl">예약 완료</span>
+                    <div><div class="opsr-bar"></div></div>
+                    <span class="opsr-val"><b>812명</b>시작 대비 10.9%</span>
+                  </div>
+                  <div class="opsr-funnel-note"><b>10.9%</b><span>챗봇 상담을 시작한 사용자 10명 중 1명이 예약 완료까지 도달합니다. 상담의 40%는 예약·상담원 연결 단계로 이어집니다.</span></div>
+                </div>
+              </div>
+              <div class="opsr-lesson">
+                <small>LESSON · 설계 교훈</small>
+                <b>LLM에게 처음부터<br>다 맡기지 않았습니다</b>
+                <div class="opsr-flow">
+                  <div class="opsr-step full">
+                    <div class="opsr-node"><b>질문 접수</b><span>모든 상담은 규칙 검사부터 통과합니다</span></div>
+                  </div>
+                  <div class="opsr-step">
+                    <span class="opsr-tag hit">HIT</span>
+                    <div class="opsr-node hit"><b>규칙으로 즉시 응답</b><span>검증된 FAQ · 병원 운영시간·진료 Fact Data</span></div>
+                  </div>
+                  <div class="opsr-step">
+                    <span class="opsr-tag miss">MISS</span>
+                    <div class="opsr-node miss"><b>그때만 생성형 상담</b><span>병원별 근거 검색 후 답변 생성</span></div>
                   </div>
                 </div>
-                <div class="opsr-lesson">
-                  <small>LESSON · 설계 교훈</small>
-                  <b>LLM에게 처음부터<br>다 맡기지 않았습니다</b>
-                  <div class="opsr-flow">
-                    <div class="opsr-step full">
-                      <div class="opsr-node"><b>질문 접수</b><span>모든 상담은 규칙 검사부터 통과합니다</span></div>
-                    </div>
-                    <div class="opsr-step">
-                      <span class="opsr-tag hit">HIT</span>
-                      <div class="opsr-node hit"><b>규칙으로 즉시 응답</b><span>검증된 FAQ · 병원 운영시간·진료 Fact Data</span></div>
-                    </div>
-                    <div class="opsr-step">
-                      <span class="opsr-tag miss">MISS</span>
-                      <div class="opsr-node miss"><b>그때만 생성형 상담</b><span>병원별 근거 검색 후 답변 생성</span></div>
-                    </div>
-                  </div>
-                  <p><strong>정답이 정해진 질문은 규칙이 답하고, 생성형 답변은 마지막 수단으로 남겼습니다.</strong> 병원이 300개로 늘어도 답변 품질이 흔들리지 않은 이유입니다.</p>
-                </div>
+                <p><strong>정답이 정해진 질문은 규칙이 답하고, 생성형 답변은 마지막 수단으로 남겼습니다.</strong> 병원이 300개로 늘어도 답변 품질이 흔들리지 않은 이유입니다.</p>
               </div>
             </div>
           </div>
@@ -3993,6 +4001,12 @@
             <span class="rail-track"><i></i><i></i><i></i><i class="on"></i></span>
             <span class="rail-layer" data-l="how">14:00 · 문의 응대</span>
           </div>
+          <div class="an d1" style="margin-bottom:0.7rem">
+            <div class="ask">
+              <span class="ask-time">14:00</span>
+              <div class="ask-bubble"><b>"병원에서 Agent Admin 화면 두 개가 뭐가 다른지 물어보는데, 어떻게 설명하지?"</b><span class="ask-who">운영 동료 · 웹</span></div>
+            </div>
+          </div>
           <div class="lead lead-solo an d1">
             <div class="lead-title">
               <h2>322개 매뉴얼에서 근거를 찾아, 화면까지 붙여 답합니다</h2>
@@ -4019,12 +4033,6 @@
                   </div>
                   <figcaption class="fig-cap"><b>WEB</b><span>비슷한 두 화면의 차이를 비교표로 구분해 답한 실제 사례입니다.</span></figcaption>
                 </figure>
-              </div>
-            </div>
-            <div class="an d1" style="margin-bottom:0.7rem">
-              <div class="ask">
-                <span class="ask-time">14:00</span>
-                <div class="ask-bubble"><b>"병원에서 Agent Admin 화면 두 개가 뭐가 다른지 물어보는데, 어떻게 설명하지?"</b><span class="ask-who">운영 동료 · 웹</span></div>
               </div>
             </div>
           </div>
