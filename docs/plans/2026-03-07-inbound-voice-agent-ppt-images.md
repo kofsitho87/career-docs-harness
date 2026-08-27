@@ -4,9 +4,9 @@
 
 **Goal:** Generate two 16:9 PPT-style slide images from `case-studies/inbound-voice-agent.md` using the repository's local `image-generation` skill.
 
-**Architecture:** Use the inbound portfolio document as the single content source, compress it into a matched two-slide visual set, and run the local Gemini wrapper through `.codex/skills/image-generation/scripts/generate-image`. Save both exported images under `assets/` as reusable portfolio artifacts.
+**Architecture:** Use the inbound portfolio document as the single content source, compress it into a matched two-slide visual set, and run the local Gemini script with `uv run .agents/skills/image-generation/scripts/generate_image.py`. Save both exported images under `portfolio/assets/` as reusable portfolio artifacts.
 
-**Tech Stack:** Markdown source document, local Codex image-generation skill, Gemini wrapper script, repository assets folder
+**Tech Stack:** Markdown source document, local Codex image-generation skill, Gemini script, repository assets folder
 
 ---
 
@@ -25,8 +25,8 @@ Expected: the first slide maps to system architecture, and the second slide maps
 
 **Step 2: Fix output filenames**
 
-- `assets/inbound-voice-agent-ppt-architecture.png`
-- `assets/inbound-voice-agent-ppt-flow-transfer.png`
+- `portfolio/assets/inbound-voice-agent-ppt-architecture.png`
+- `portfolio/assets/inbound-voice-agent-ppt-flow-transfer.png`
 
 **Step 3: Keep the deck scope single-purpose**
 
@@ -69,53 +69,53 @@ Create an English generation prompt that includes:
 ### Task 3: Verify generation readiness
 
 **Files:**
-- Check: `.codex/skills/image-generation/SKILL.md`
-- Check: `.codex/skills/image-generation/scripts/generate-image`
-- Check: `.claude/skills/image_generation/scripts/.env`
+- Check: `.agents/skills/image-generation/SKILL.md`
+- Check: `.agents/skills/image-generation/scripts/generate_image.py`
+- Check: `.agents/skills/image-generation/scripts/.env`
 
 **Step 1: Verify the wrapper is executable**
 
-Run: `test -x .codex/skills/image-generation/scripts/generate-image`
+Run: `test -f .agents/skills/image-generation/scripts/generate_image.py`
 Expected: exit status `0`.
 
 **Step 2: Verify the API key is configured without printing it**
 
-Run: `test -f .claude/skills/image_generation/scripts/.env && rg -q '^GEMINI_API_KEY=' .claude/skills/image_generation/scripts/.env`
+Run: `test -f .agents/skills/image-generation/scripts/.env && rg -q '^GEMINI_API_KEY=' .agents/skills/image-generation/scripts/.env`
 Expected: exit status `0`.
 
 ### Task 4: Generate the architecture slide
 
 **Files:**
-- Create: `assets/inbound-voice-agent-ppt-architecture.png`
+- Create: `portfolio/assets/inbound-voice-agent-ppt-architecture.png`
 
 **Step 1: Run the generator**
 
-Run the local image-generation wrapper with a 16:9 prompt for the architecture slide.
+Run the local image-generation script with a 16:9 prompt for the architecture slide.
 
 **Step 2: Verify the file exists**
 
-Run: `ls -l assets/inbound-voice-agent-ppt-architecture*`
+Run: `ls -l portfolio/assets/inbound-voice-agent-ppt-architecture*`
 Expected: generated image is present.
 
 ### Task 5: Generate the flow/transfer slide
 
 **Files:**
-- Create: `assets/inbound-voice-agent-ppt-flow-transfer.png`
+- Create: `portfolio/assets/inbound-voice-agent-ppt-flow-transfer.png`
 
 **Step 1: Run the generator**
 
-Run the local image-generation wrapper with a 16:9 prompt for the flow/transfer slide.
+Run the local image-generation script with a 16:9 prompt for the flow/transfer slide.
 
 **Step 2: Verify the file exists**
 
-Run: `ls -l assets/inbound-voice-agent-ppt-flow-transfer*`
+Run: `ls -l portfolio/assets/inbound-voice-agent-ppt-flow-transfer*`
 Expected: generated image is present.
 
 ### Task 6: Validate outputs for one revision pass
 
 **Files:**
-- Check: `assets/inbound-voice-agent-ppt-architecture.png`
-- Check: `assets/inbound-voice-agent-ppt-flow-transfer.png`
+- Check: `portfolio/assets/inbound-voice-agent-ppt-architecture.png`
+- Check: `portfolio/assets/inbound-voice-agent-ppt-flow-transfer.png`
 
 **Step 1: Inspect both outputs against the design**
 

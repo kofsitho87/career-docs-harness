@@ -24,7 +24,7 @@
 
 - 이력서나 포트폴리오 본문을 다시 작성하지 않는다.
 - `docs/plans/` 구조 자체는 바꾸지 않는다.
-- `.claude/skills/` 같은 로컬 스킬 구조는 이번 단계에서 건드리지 않는다.
+- `.agents/skills/` 같은 로컬 스킬 구조는 이번 단계에서 건드리지 않는다.
 
 ## 제안 구조
 
@@ -40,24 +40,24 @@
 
 ### 자산
 
-- `assets/heewung-song-infographic.png`
+- `portfolio/assets/heewung-song-infographic.png`
 
 ### 유지 항목
 
 - `README.md`
 - `docs/workflow.md`
 - `docs/plans/`
-- `.claude/skills/`
+- `.agents/skills/`
 
 ## 설계 원칙
 
 1. 결과물은 루트가 아니라 역할별 디렉터리에 둔다.
 2. `docs/`는 설명, 가이드, 계획 문서 중심으로 유지한다.
-3. 이미지 같은 보조 자산은 `assets/`로 모은다.
+3. 이미지 같은 보조 자산은 `portfolio/assets/`로 모은다.
 4. 경로 변경 시 현재 문서에서 깨지는 참조를 함께 수정한다.
 
 ## 기대 결과
 
 - 저장소를 처음 열었을 때 결과물과 작업 문서의 역할이 더 분명해진다.
-- 이후 포트폴리오 프로젝트가 늘어나도 `resume/`, `case-studies/`, `assets/`, `docs/` 구조 안에서 자연스럽게 확장할 수 있다.
+- 이후 포트폴리오 프로젝트가 늘어나도 `resume/`, `case-studies/`, `portfolio/assets/`, `docs/` 구조 안에서 자연스럽게 확장할 수 있다.
 - README와 workflow에 적힌 설명이 실제 파일 구조와 더 잘 일치하게 된다.

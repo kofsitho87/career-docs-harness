@@ -3,7 +3,7 @@
 ## 메타
 
 - 작성일: 2026-08-26
-- 대상 산출물: `portfolio/heewung-song-portfolio-v3.html`
+- 대상 산출물: `portfolio/html/heewung-song-portfolio-v3.html`
 - 대상 범위: CH 01 병원 전화 Voice AI
 - 목적: 기존 9장을 7장으로 재구성하고, 각 장의 내용 합의·구현·검증 상태를 한 문서에서 추적한다.
 - 선행 설계: `docs/plans/2026-08-25-portfolio-v3-structure-design.md`
@@ -172,7 +172,7 @@
 - `docs/plans/2026-08-25-portfolio-v3-structure-design.md`
 - `/Users/heewungsong/Desktop/Wise-Ai/Outbound-Agent-Project/inbound-agent/docs/livekit-technology-stack-and-infrastructure.md`
 - `/Users/heewungsong/Desktop/Wise-Ai/Outbound-Agent-Project/inbound-agent/openwiki/inbound/transfers.md`
-- `assets/agent-admin-warm-transfer-evidence.png`
+- `portfolio/assets/agent-admin-warm-transfer-evidence.png`
 - `https://ai.wiseai.co.kr/platform/aiu`
 - `https://ai.wiseai.co.kr/event/target-event/6-1`
 - `https://docs.livekit.io/telephony/features/transfers/cold/`

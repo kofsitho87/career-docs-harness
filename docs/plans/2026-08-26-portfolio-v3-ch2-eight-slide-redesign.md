@@ -3,7 +3,7 @@
 ## 메타
 
 - 작성일: 2026-08-26
-- 대상 산출물: `portfolio/heewung-song-portfolio-v3.html`
+- 대상 산출물: `portfolio/html/heewung-song-portfolio-v3.html`
 - 대상 범위: CH 02 인/아웃바운드 통화 분석 및 평가(기존 `통화 관측과 평가`)
 - 목적: 기존 5장을 쉬운 언어와 명확한 흐름의 8장으로 재설계하고, 각 장의 내용 합의·구현·검증 상태를 한 문서에서 추적한다.
 - 선행 챕터: `docs/plans/2026-08-26-portfolio-v3-ch1-seven-slide-redesign.md`
@@ -241,9 +241,9 @@
 - `case-studies/inbound-voice-agent.md`
 - `docs/plans/2026-08-25-portfolio-v3-structure-design.md`
 - `docs/plans/2026-08-25-portfolio-v3-implementation.md`
-- `assets/cupix-ax-operations-screen.png`
-- `assets/cupix-ax-analytics-screen.png`
-- `assets/agent-admin-call-classification-evidence.png`
+- `portfolio/assets/cupix-ax-operations-screen.png`
+- `portfolio/assets/cupix-ax-analytics-screen.png`
+- `portfolio/assets/agent-admin-call-classification-evidence.png`
 - `/Users/heewungsong/Desktop/Wise-Ai/Outbound-Agent-Project/inbound-agent/docs/call-analytics-redesign.md`
 - `/Users/heewungsong/Desktop/Wise-Ai/Outbound-Agent-Project/inbound-agent/docs/manuals/user-manual/pages/inbound/call-analytics-v2.md`
 - `/Users/heewungsong/Desktop/Wise-Ai/Outbound-Agent-Project/inbound-agent/openwiki/quickstart.md`

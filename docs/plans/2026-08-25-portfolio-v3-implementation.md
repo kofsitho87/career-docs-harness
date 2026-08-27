@@ -2,7 +2,7 @@
 
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
-**Goal:** 설계 문서의 4챕터·22장 구조를 `portfolio/heewung-song-portfolio-v3.html` 한 파일로 구현한다.
+**Goal:** 설계 문서의 4챕터·22장 구조를 `portfolio/html/heewung-song-portfolio-v3.html` 한 파일로 구현한다.
 
 **Architecture:** v2의 셸(CSS 시스템·메뉴·네비게이션 JS)을 그대로 들어 올려 재사용하고, 슬라이드 본문만 새로 쓴다. v2는 지우지 않고 남긴다. 슬라이드는 기존 컴포넌트 클래스(`.lay`, `.node`, `.blk`, `.fig`, `.gate` 등)로 조립하며 새 CSS는 꼭 필요할 때만 추가한다.
 
@@ -22,7 +22,7 @@
 - 측정하지 않은 성과(절감 시간, 확산률)를 주장하지 않는다.
 - 16:9 기준 `font-size: clamp(11px, min(1.094vw, 1.944vh), 24px)` 루트 스케일을 유지한다. 보조 문구도 `--t-meta`(13.3px @1080p) 아래로 내려가지 않는다.
 - 다크·라이트 테마 모두에서 읽혀야 한다. 색은 v2의 CSS 변수만 쓴다.
-- 이미지는 `assets/`에 있는 것만 쓴다. 새 이미지를 만들지 않는다.
+- 이미지는 `portfolio/assets/`에 있는 것만 쓴다. 새 이미지를 만들지 않는다.
 
 ---
 
@@ -30,8 +30,8 @@
 
 | 파일 | 책임 |
 |---|---|
-| `portfolio/heewung-song-portfolio-v3.html` (신규) | 전체 산출물. 셸 + 22장 |
-| `portfolio/heewung-song-portfolio-v2.html` (수정 없음) | 셸 추출 원본이자 대조 기준 |
+| `portfolio/html/heewung-song-portfolio-v3.html` (신규) | 전체 산출물. 셸 + 22장 |
+| `portfolio/html/heewung-song-portfolio-v2.html` (수정 없음) | 셸 추출 원본이자 대조 기준 |
 | `docs/plans/2026-08-25-portfolio-v3-structure-design.md` (참조) | 슬라이드별 내용 명세 |
 | `resume/product-engineer.md` (참조) | 사실 기준 |
 
@@ -93,8 +93,8 @@ v2의 줄 구성은 다음과 같다. 셸 추출에 그대로 쓴다.
 v2의 CSS·메뉴·JS를 그대로 옮기고, 내용이 빈 슬라이드 22개를 만든다. 이 태스크가 끝나면 좌우 키로 22장을 넘길 수 있고 테마 토글이 동작한다.
 
 **Files:**
-- Create: `portfolio/heewung-song-portfolio-v3.html`
-- Read: `portfolio/heewung-song-portfolio-v2.html:1-841`, `:2336-2474`
+- Create: `portfolio/html/heewung-song-portfolio-v3.html`
+- Read: `portfolio/html/heewung-song-portfolio-v2.html:1-841`, `:2336-2474`
 
 **Interfaces:**
 - Consumes: 없음
@@ -104,8 +104,8 @@ v2의 CSS·메뉴·JS를 그대로 옮기고, 내용이 빈 슬라이드 22개�
 
 ```bash
 cd /Users/heewungsong/Desktop/Dan/career-docs-harness
-V2=portfolio/heewung-song-portfolio-v2.html
-V3=portfolio/heewung-song-portfolio-v3.html
+V2=portfolio/html/heewung-song-portfolio-v2.html
+V3=portfolio/html/heewung-song-portfolio-v3.html
 sed -n '1,841p' "$V2" > "$V3"
 printf '\n      <!-- SLIDES -->\n\n' >> "$V3"
 sed -n '2336,2474p' "$V2" >> "$V3"
@@ -121,7 +121,7 @@ wc -l "$V3"
 `<title>`은 그대로 두되, CSS의 챕터 색 정의에서 `ch5`를 제거하고 `ch4`까지만 남긴다. v2에서 `.ch1`과 `.ch4`만 별도 정의돼 있으므로 실제 수정 대상은 챕터 강조색을 쓰는 규칙뿐이다. 다음으로 확인한다.
 
 ```bash
-grep -n "ch5\|\.ch4\|\.ch1" portfolio/heewung-song-portfolio-v3.html | head -20
+grep -n "ch5\|\.ch4\|\.ch1" portfolio/html/heewung-song-portfolio-v3.html | head -20
 ```
 
 `ch5` 선택자가 있으면 지운다. 없으면 이 스텝은 확인만 하고 넘어간다.
@@ -129,8 +129,8 @@ grep -n "ch5\|\.ch4\|\.ch1" portfolio/heewung-song-portfolio-v3.html | head -20
 이어서 counter 초기값을 고친다. v2에서 `1 / 28`로 하드코딩돼 있다.
 
 ```bash
-sed -i '' 's|>1 / 28<|>1 / 22<|' portfolio/heewung-song-portfolio-v3.html
-grep -n "1 / 22" portfolio/heewung-song-portfolio-v3.html
+sed -i '' 's|>1 / 28<|>1 / 22<|' portfolio/html/heewung-song-portfolio-v3.html
+grep -n "1 / 22" portfolio/html/heewung-song-portfolio-v3.html
 ```
 
 한 줄이 잡혀야 한다.
@@ -163,7 +163,7 @@ grep -n "1 / 22" portfolio/heewung-song-portfolio-v3.html
 python3 -m http.server 8899 --directory /Users/heewungsong/Desktop/Dan/career-docs-harness
 ```
 
-백그라운드로 실행한 뒤 `http://localhost:8899/portfolio/heewung-song-portfolio-v3.html`을 브라우저 도구로 연다.
+백그라운드로 실행한 뒤 `http://localhost:8899/portfolio/html/heewung-song-portfolio-v3.html`을 브라우저 도구로 연다.
 
 - [ ] **Step 5: 네비게이션을 확인한다**
 
@@ -178,7 +178,7 @@ python3 -m http.server 8899 --directory /Users/heewungsong/Desktop/Dan/career-do
 - [ ] **Step 6: 커밋**
 
 ```bash
-git add portfolio/heewung-song-portfolio-v3.html
+git add portfolio/html/heewung-song-portfolio-v3.html
 git commit -m "chore: v3 셸과 22장 프레임 추가"
 ```
 
@@ -187,7 +187,7 @@ git commit -m "chore: v3 셸과 22장 프레임 추가"
 ## Task 2: 오프닝 3장
 
 **Files:**
-- Modify: `portfolio/heewung-song-portfolio-v3.html` — `data-slide="hero"`, `"about"`, `"map"`
+- Modify: `portfolio/html/heewung-song-portfolio-v3.html` — `data-slide="hero"`, `"about"`, `"map"`
 
 **Interfaces:**
 - Consumes: Task 1의 프레임과 컴포넌트 클래스
@@ -232,7 +232,7 @@ v2의 `data-slide="toc"`(`:1035-1074`)를 4행으로 줄인다. 각 행은 챕�
 - [ ] **Step 5: 커밋**
 
 ```bash
-git add portfolio/heewung-song-portfolio-v3.html
+git add portfolio/html/heewung-song-portfolio-v3.html
 git commit -m "feat: v3 오프닝 3장"
 ```
 
@@ -243,7 +243,7 @@ git commit -m "feat: v3 오프닝 3장"
 내용 명세는 설계 문서의 `### 1 · 병원 전화 Voice AI (확정)` 절을 따른다. 그 절의 표와 문장이 이 태스크의 사양이다.
 
 **Files:**
-- Modify: `portfolio/heewung-song-portfolio-v3.html` — `ch1-what`, `ch1-booking`, `ch1-transfer`, `ch1-directions`, `ch1-result`
+- Modify: `portfolio/html/heewung-song-portfolio-v3.html` — `ch1-what`, `ch1-booking`, `ch1-transfer`, `ch1-directions`, `ch1-result`
 
 **Interfaces:**
 - Consumes: Task 1의 `.rail`, `.lay`, `.node`, `.blk`, `.gate`, `.fig`, `.metric` 클래스
@@ -292,7 +292,7 @@ git commit -m "feat: v3 오프닝 3장"
 
 - [ ] **Step 3: ② 상담원 연결을 쓴다**
 
-`.states` 컴포넌트로 `queued → waiting_for_trunk → dialing → briefing → connected`를 그린다. ZSET/HASH/Stream 세 구조를 `.blk` 세 개로 나눈다. 깨진 것 네 가지를 `.bul` 목록으로 넣는다. `assets/inbound-warm-transfer-flow.png`를 `.fig`로 붙인다.
+`.states` 컴포넌트로 `queued → waiting_for_trunk → dialing → briefing → connected`를 그린다. ZSET/HASH/Stream 세 구조를 `.blk` 세 개로 나눈다. 깨진 것 네 가지를 `.bul` 목록으로 넣는다. `portfolio/assets/inbound-warm-transfer-flow.png`를 `.fig`로 붙인다.
 
 - [ ] **Step 4: ② 두 방향의 차이를 쓴다**
 
@@ -314,7 +314,7 @@ git commit -m "feat: v3 오프닝 3장"
 - [ ] **Step 7: 사실을 대조한다**
 
 ```bash
-grep -n "550,000\|70,000\|2,500\|1,500\|300+" portfolio/heewung-song-portfolio-v3.html
+grep -n "550,000\|70,000\|2,500\|1,500\|300+" portfolio/html/heewung-song-portfolio-v3.html
 grep -n "550,000\|70,000\|2,500\|1,500\|300" resume/product-engineer.md
 ```
 
@@ -323,7 +323,7 @@ grep -n "550,000\|70,000\|2,500\|1,500\|300" resume/product-engineer.md
 - [ ] **Step 8: 커밋**
 
 ```bash
-git add portfolio/heewung-song-portfolio-v3.html
+git add portfolio/html/heewung-song-portfolio-v3.html
 git commit -m "feat: v3 챕터1 병원 전화 Voice AI 5장"
 ```
 
@@ -334,7 +334,7 @@ git commit -m "feat: v3 챕터1 병원 전화 Voice AI 5장"
 내용 명세는 설계 문서의 `### 2 · 통화 관측과 평가 (확정)` 절을 따른다.
 
 **Files:**
-- Modify: `portfolio/heewung-song-portfolio-v3.html` — `ch2-what`, `ch2-transcribe`, `ch2-resolution`, `ch2-semantic`, `ch2-result`
+- Modify: `portfolio/html/heewung-song-portfolio-v3.html` — `ch2-what`, `ch2-transcribe`, `ch2-resolution`, `ch2-semantic`, `ch2-result`
 
 **Interfaces:**
 - Consumes: Task 3이 만든 `.flow` ① 문법
@@ -382,7 +382,7 @@ git commit -m "feat: v3 챕터1 병원 전화 Voice AI 5장"
 Task 3의 Step 6과 같은 절차로 9~13장을 본다. 통과하면 커밋한다.
 
 ```bash
-git add portfolio/heewung-song-portfolio-v3.html
+git add portfolio/html/heewung-song-portfolio-v3.html
 git commit -m "feat: v3 챕터2 통화 관측과 평가 5장"
 ```
 
@@ -393,7 +393,7 @@ git commit -m "feat: v3 챕터2 통화 관측과 평가 5장"
 내용 명세는 설계 문서의 `### 3 · 챗봇 고객상담 (확정)` 절을 따른다.
 
 **Files:**
-- Modify: `portfolio/heewung-song-portfolio-v3.html` — `ch3-what`, `ch3-flow`, `ch3-result`
+- Modify: `portfolio/html/heewung-song-portfolio-v3.html` — `ch3-what`, `ch3-flow`, `ch3-result`
 
 **Interfaces:**
 - Consumes: Task 3·4의 `.flow` ① 문법, Task 4의 `.figs`
@@ -419,7 +419,7 @@ FAQ 우선          → 등록된 답변을 그대로 (엄격 검증 통과 시)
 LLM 팀 실행
 ```
 
-`pending_question` 복귀를 이 장의 하이라이트로 `.blk blk-own`에 넣는다. 동의 카드 중복 사건을 `.note`로 한 줄. `assets/customer-support-chat-flow.png`를 `.fig`로 붙인다.
+`pending_question` 복귀를 이 장의 하이라이트로 `.blk blk-own`에 넣는다. 동의 카드 중복 사건을 `.note`로 한 줄. `portfolio/assets/customer-support-chat-flow.png`를 `.fig`로 붙인다.
 
 - [ ] **Step 3: ③ 결과와 한계를 쓴다**
 
@@ -430,7 +430,7 @@ LLM 팀 실행
 14~16장을 본다. 통과하면 커밋한다.
 
 ```bash
-git add portfolio/heewung-song-portfolio-v3.html
+git add portfolio/html/heewung-song-portfolio-v3.html
 git commit -m "feat: v3 챕터3 챗봇 고객상담 3장"
 ```
 
@@ -441,7 +441,7 @@ git commit -m "feat: v3 챕터3 챗봇 고객상담 3장"
 내용 명세는 설계 문서의 `### 4 · AIU 사내 업무지원 (확정)` 절을 따른다.
 
 **Files:**
-- Modify: `portfolio/heewung-song-portfolio-v3.html` — `ch4-what`, `ch4-manual`, `ch4-analytics`, `ch4-qa`, `ch4-result`
+- Modify: `portfolio/html/heewung-song-portfolio-v3.html` — `ch4-what`, `ch4-manual`, `ch4-analytics`, `ch4-qa`, `ch4-result`
 
 **Interfaces:**
 - Consumes: Task 3·4·5의 컴포넌트 문법 전체
@@ -473,7 +473,7 @@ Supervisor가 매뉴얼을 직접 못 읽는다는 것을 그림으로. 네 전�
 | `outbound-agent` | 아웃바운드 |
 | `hq-svc-agent` | AIU HQ · AIU SVC |
 
-깨진 것 두 가지(접근 거부를 문서 없음으로 답하던 문제, 매니페스트 문서 수 불일치)를 `.bul`로. 문서 322개 규모를 `.metric`으로. `assets/aiu-web-knowledge-answer.png`를 `.fig`로.
+깨진 것 두 가지(접근 거부를 문서 없음으로 답하던 문제, 매니페스트 문서 수 불일치)를 `.bul`로. 문서 322개 규모를 `.metric`으로. `portfolio/assets/aiu-web-knowledge-answer.png`를 `.fig`로.
 
 - [ ] **Step 3: ② 통화 조회·전환율을 쓴다**
 
@@ -500,14 +500,14 @@ SELECT-only 경계를 `.blk blk-bound`로. 결과에서 제외하는 것(이름�
 17~21장을 본다.
 
 ```bash
-grep -n "322\|45개\|3주" portfolio/heewung-song-portfolio-v3.html
+grep -n "322\|45개\|3주" portfolio/html/heewung-song-portfolio-v3.html
 grep -n "322\|45개\|3주" resume/product-engineer.md
 ```
 
 수치가 일치하면 커밋한다.
 
 ```bash
-git add portfolio/heewung-song-portfolio-v3.html
+git add portfolio/html/heewung-song-portfolio-v3.html
 git commit -m "feat: v3 챕터4 AIU 사내 업무지원 5장"
 ```
 
@@ -516,7 +516,7 @@ git commit -m "feat: v3 챕터4 AIU 사내 업무지원 5장"
 ## Task 7: 클로징 1장
 
 **Files:**
-- Modify: `portfolio/heewung-song-portfolio-v3.html` — `closing`
+- Modify: `portfolio/html/heewung-song-portfolio-v3.html` — `closing`
 
 **Interfaces:**
 - Consumes: Task 2~6이 만든 챕터 전체
@@ -536,7 +536,7 @@ v2의 `data-slide="close"`(`:2261` 이후)를 뼈대로 삼되 4챕터에 맞춘
 - [ ] **Step 2: 브라우저로 확인하고 커밋**
 
 ```bash
-git add portfolio/heewung-song-portfolio-v3.html
+git add portfolio/html/heewung-song-portfolio-v3.html
 git commit -m "feat: v3 클로징"
 ```
 
@@ -545,7 +545,7 @@ git commit -m "feat: v3 클로징"
 ## Task 8: 전체 검증
 
 **Files:**
-- Modify: `portfolio/heewung-song-portfolio-v3.html` (수정이 필요한 경우만)
+- Modify: `portfolio/html/heewung-song-portfolio-v3.html` (수정이 필요한 경우만)
 
 **Interfaces:**
 - Consumes: 완성된 22장
@@ -584,7 +584,7 @@ git commit -m "feat: v3 클로징"
 - [ ] **Step 5: 금지 표현을 검사한다**
 
 ```bash
-grep -n -i "cupix\|큐픽스\|지원\s*동기\|절감\|확산률" portfolio/heewung-song-portfolio-v3.html
+grep -n -i "cupix\|큐픽스\|지원\s*동기\|절감\|확산률" portfolio/html/heewung-song-portfolio-v3.html
 ```
 
 결과가 비어 있어야 한다. 회사명·지원 직무 문구·측정하지 않은 성과가 없어야 한다.

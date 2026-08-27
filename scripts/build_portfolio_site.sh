@@ -3,7 +3,7 @@
 set -euo pipefail
 
 repo_root="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
-output_dir="$repo_root/dist"
+output_dir="$repo_root/portfolio/dist"
 staging_dir="$(mktemp -d "${TMPDIR:-/tmp}/portfolio-site.XXXXXX")"
 
 cleanup() {
@@ -14,7 +14,7 @@ trap cleanup EXIT
 mkdir -p "$staging_dir/assets"
 
 sed 's#\.\./assets/#./assets/#g' \
-  "$repo_root/portfolio/heewung-song-portfolio-v4.html" \
+  "$repo_root/portfolio/html/heewung-song-portfolio.html" \
   > "$staging_dir/index.html"
 
 for asset in \
@@ -24,7 +24,7 @@ for asset in \
   cupix-ax-analytics-screen.png \
   aiu-web-knowledge-answer.png
 do
-  cp "$repo_root/assets/$asset" "$staging_dir/assets/$asset"
+  cp "$repo_root/portfolio/assets/$asset" "$staging_dir/assets/$asset"
 done
 
 rm -rf "$output_dir"

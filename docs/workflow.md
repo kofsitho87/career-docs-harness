@@ -34,17 +34,15 @@
 이 범주의 문서는 외부에 보여주기 위한 현재 결과물이다. 지원용 이력서, 프로젝트 케이스 스터디, 필요 시 시각 자료가 여기에 해당한다.
 
 - `resume/product-engineer.md`: 현재 메인 이력서 산출물이자 사실 기준 문서
-- `portfolio/heewung-song-portfolio.html`: 반복 업무를 프로덕션 AI 시스템으로 전환해 온 다섯 프로젝트를 하나의 커리어 서사로 연결한 종합 포트폴리오
-- `portfolio/heewung-song-portfolio-v2.html`: 위 포트폴리오의 디자인 개선 버전. 콘텐츠·수치·28장 구성은 동일하고 시각 위계와 레이아웃 언어만 재설계했다. 사실을 고칠 때는 두 파일을 함께 맞춘다.
-- `portfolio/heewung-song-portfolio-v3.html`: v4 이전의 구조 정본. v2와 달리 다섯 챕터를 네 챕터·30장으로 재구성했다(오프닝 3장 + 병원 전화 Voice AI 7장 + 통화 분석 및 평가 8장 + 병원 고객상담 AI Agent 5장 + AIU 사내 업무지원 6장 + 클로징 1장). 인바운드·아웃바운드를 한 챕터의 두 방향으로 통합했고, CH 01은 프로젝트 소개 → 전체 시스템 → LiveKit 실시간 음성 → 안전한 예약 → Warm Transfer → 공용 대기줄 → 성과와 배운 점, CH 02는 분석 시스템 → 통화 복원 → 28개 규칙 분류 → 업무/통화 결과 → LLM 평가 → 현황 확인 → 문제 진단 → 운영 개선 순으로 전개된다. CH 01 작업 기록은 `docs/plans/2026-08-26-portfolio-v3-ch1-seven-slide-redesign.md`, CH 02 작업 기록은 `docs/plans/2026-08-26-portfolio-v3-ch2-eight-slide-redesign.md`다. CH 03은 `docs/plans/2026-08-26-portfolio-v3-ch3-redesign.md`에서 소개 → LangGraph 기반 상담 시스템 아키텍처 → 상태 기반 상담 흐름 → 병원별 지식 검색 → 운영 가능한 서비스 경계와 배운 점의 5장으로 구현했다. CH 04는 `docs/plans/2026-08-27-portfolio-v3-ch4-redesign.md`에서 사내 AX 프로젝트 소개 → 구조와 기술 → 하루 시나리오 세 장(성과 확인·통화 검토·문의 응대) → 확장 비전의 6장으로 구현했다.
-- `portfolio/heewung-song-portfolio-v4.html`: 현재 대표 종합 포트폴리오. v3의 챕터 구성·장수·문구·수치를 그대로 계승하고 레이아웃 언어만 편집 스플릿으로 재설계했다. **사실을 고칠 때는 v3와 v4를 함께 맞춘다.** 레이아웃은 슬라이드마다 세 모드 중 하나를 쓴다: `.split`(서사 주도 2컬럼), `.split.split-ev`(증거 주도 2컬럼), `.lead`+`.lead-body`(상단 서사 밴드 + 전체 폭 증거). 다이어그램이 폭을 필요로 하는 장은 세 번째 모드를 쓴다. 작업 기록은 `docs/plans/2026-08-27-portfolio-v4-split-layout.md`다.
+- `portfolio/html/heewung-song-portfolio.html`: 현재 유일한 종합 포트폴리오 HTML 정본이다. 4개 챕터·30장 구성에 편집 스플릿 레이아웃을 사용한다. 레이아웃은 슬라이드마다 세 모드 중 하나를 쓴다: `.split`(서사 주도 2컬럼), `.split.split-ev`(증거 주도 2컬럼), `.lead`+`.lead-body`(상단 서사 밴드 + 전체 폭 증거). 다이어그램이 폭을 필요로 하는 장은 세 번째 모드를 쓴다. 작업 기록은 `docs/plans/2026-08-27-portfolio-v4-split-layout.md`다.
+- `portfolio/pdf/heewung-song-portfolio-v4.pdf`: v4의 16:9 벡터 PDF(30쪽). `uv run --with playwright --with pypdf python3 scripts/build_portfolio_pdf.py`로 다시 뽑는다. v4 HTML을 고치면 이 PDF도 다시 빌드한다.
 - `case-studies/outbound-voice-agent.md`: 아웃바운드 Voice AI Agent 케이스 스터디
 - `case-studies/inbound-voice-agent.md`: 인바운드 Voice AI Agent 케이스 스터디
 - `case-studies/hospital-customer-support-agent.md`: 병원 고객상담 AI Agent 케이스 스터디
-- `assets/heewung-song-infographic.png`: 이력서와 함께 사용할 수 있는 시각 자료
-- `assets/hospital-customer-support-agent-ppt-overview.png`: 병원 고객상담 AI Agent 개요·아키텍처 시각 자료
-- `assets/hospital-customer-support-agent-ppt-flow.png`: 병원 고객상담 AI Agent 흐름·설계 의사결정 시각 자료
-- `assets/agent-admin-call-classification-evidence.png`: 실제 통화 상세의 규칙 기반 분류 카드에서 개인·병원·통화 식별정보를 제외한 CH 02 증거 이미지
+- `portfolio/assets/heewung-song-infographic.png`: 이력서와 함께 사용할 수 있는 시각 자료
+- `portfolio/assets/hospital-customer-support-agent-ppt-overview.png`: 병원 고객상담 AI Agent 개요·아키텍처 시각 자료
+- `portfolio/assets/hospital-customer-support-agent-ppt-flow.png`: 병원 고객상담 AI Agent 흐름·설계 의사결정 시각 자료
+- `portfolio/assets/agent-admin-call-classification-evidence.png`: 실제 통화 상세의 규칙 기반 분류 카드에서 개인·병원·통화 식별정보를 제외한 CH 02 증거 이미지
 
 실무 원칙:
 
@@ -53,10 +51,10 @@
 
 ### 1.4 로컬 스킬과 런타임 상태 (local skills and runtime state)
 
-이 범주는 문서 자체보다 작업 보조 수단과 로컬 실행 흔적에 해당한다. 현재 저장소 안에서 확인 가능한 항목은 이미지 자산 생성 스킬과 스크립트이며, 런타임 상태 경로는 로컬 환경에서 생성될 수 있는 부가 요소로 본다. 이 범주는 최종 산출물의 근거 문서로 취급하지 않는다.
+이 범주는 문서 자체보다 작업 보조 수단과 로컬 실행 흔적에 해당한다. 공통 로컬 스킬은 `.agents/skills/`에서 관리하며, 런타임 상태 경로는 로컬 환경에서 생성될 수 있는 부가 요소로 본다. 이 범주는 최종 산출물의 근거 문서로 취급하지 않는다.
 
-- `.claude/skills/image_generation/SKILL.md`: 로컬 이미지 생성 워크플로우 설명
-- `.claude/skills/image_generation/scripts/generate_image.py`: 이미지 생성 스크립트
+- `.agents/skills/agent-browser/`: 브라우저 자동화 스킬
+- `.agents/skills/visualize/`: HTML 시각화 제작 스킬
 - `.omx`, `.omc`: 로컬에서 생성될 수 있는 런타임 상태나 로그용 무시 대상 경로
 
 실무 원칙:
@@ -100,12 +98,12 @@
 
 문서 이해를 돕기 위한 이미지나 다이어그램이 필요하면 마지막 단계에서 생성한다.
 
-- 로컬 이미지 생성 흐름은 `.claude/skills/image_generation/SKILL.md`와 관련 스크립트를 따른다.
+- 생성하거나 수집한 포트폴리오 시각 자산은 `portfolio/assets/`에 보관한다.
 - 보조 자산은 문서의 핵심 내용을 대체하는 것이 아니라, 이미 정리된 내용을 더 잘 전달하기 위한 수단으로 사용한다.
 
 ### 2.5 종합 포트폴리오 웹 배포
 
-Cloudflare Pages는 GitHub의 `main` 브랜치와 연결한다. `main`에 푸시하면 `bash scripts/build_portfolio_site.sh`를 실행해 `dist/`를 만들고 자동 배포한다. 빌드 결과에는 `portfolio/heewung-song-portfolio-v4.html`을 `index.html`로 변환한 파일과 실제 참조하는 이미지 5개만 포함한다. 저장소 루트 전체를 배포 디렉터리로 지정하지 않는다.
+Cloudflare Pages는 GitHub의 `main` 브랜치와 연결한다. `main`에 푸시하면 `bash scripts/build_portfolio_site.sh`를 실행해 `portfolio/dist/`를 만들고 자동 배포한다. 빌드 결과에는 `portfolio/html/heewung-song-portfolio.html`을 `index.html`로 변환한 파일과 실제 참조하는 이미지 5개만 포함한다. 저장소 루트 전체를 배포 디렉터리로 지정하지 않는다.
 
 ## 3. 현재 저장소 기준 운영 메모
 

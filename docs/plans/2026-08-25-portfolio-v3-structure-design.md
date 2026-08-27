@@ -1,7 +1,7 @@
 # 포트폴리오 v3 구조 재설계
 
 **작성일:** 2026-08-25
-**대상 산출물:** `portfolio/heewung-song-portfolio-v3.html` (신규)
+**대상 산출물:** `portfolio/html/heewung-song-portfolio-v3.html` (신규)
 **선행 문서:** `docs/plans/2026-08-24-general-portfolio-narrative-design.md`
 **사실 근거:** `resume/product-engineer.md`, 각 프로젝트 OpenWiki
 
@@ -263,7 +263,7 @@ v2는 28장이다. 인/아웃바운드를 합치면서 중복 설명이 사라�
 
 #### S7 · ② 대기열
 
-초판 S3의 Redis 내용이 여기로 온다. 도식 `assets/inbound-warm-transfer-flow.png`도 이 장에 붙인다.
+초판 S3의 Redis 내용이 여기로 온다. 도식 `portfolio/assets/inbound-warm-transfer-flow.png`도 이 장에 붙인다.
 
 두 방향이 **하나의 병원별 FIFO 큐를 실제로 공유**한다. 아웃바운드 위키가 명시한다. "shares a company FIFO queue between inbound/outbound calls."
 
@@ -333,8 +333,8 @@ v2는 28장이다. 인/아웃바운드를 합치면서 중복 설명이 사라�
 
 | 화면 | 역할 | 담는 것 |
 |---|---|---|
-| `assets/cupix-ax-operations-screen.png` 인바운드 운영 현황 | **모니터** — 지표가 어떻게 움직이는가 | 전체 통화·응대 성공률·셀프 처리율·예약 생성 전환율·상담원 연결 성공률, 비교 기간 대비 변화, 그리고 인사말 시작 전·인사말 중·인사 완료 후 무입력으로 나눈 초기 이탈 3분할 |
-| `assets/cupix-ax-analytics-screen.png` 인바운드 콜 분석 진단실 | **진단** — 어디서 깨졌고 누가 고치는가 | 통화를 시도 단위로 분해한 손실 지점과 개선 담당 주체, 상호배타 통화 결과 분포, 자체 처리율, 분석 커버리지와 버전 |
+| `portfolio/assets/cupix-ax-operations-screen.png` 인바운드 운영 현황 | **모니터** — 지표가 어떻게 움직이는가 | 전체 통화·응대 성공률·셀프 처리율·예약 생성 전환율·상담원 연결 성공률, 비교 기간 대비 변화, 그리고 인사말 시작 전·인사말 중·인사 완료 후 무입력으로 나눈 초기 이탈 3분할 |
+| `portfolio/assets/cupix-ax-analytics-screen.png` 인바운드 콜 분석 진단실 | **진단** — 어디서 깨졌고 누가 고치는가 | 통화를 시도 단위로 분해한 손실 지점과 개선 담당 주체, 상호배타 통화 결과 분포, 자체 처리율, 분석 커버리지와 버전 |
 
 운영 도구도 한 줄 넣는다. 버전 기반 백필로 과거 통화를 규칙 변경에 맞춰 다시 계산할 수 있고, 리포트 시점에 신뢰도 임계값을 바꿔도 모델을 다시 돌리지 않는다.
 

@@ -18,7 +18,7 @@
 
 ### 시스템 아키텍처
 
-![시스템 아키텍처](../assets/inbound-system-architecture.png)
+![시스템 아키텍처](../portfolio/assets/inbound-system-architecture.png)
 
 ```
 ┌─────────────────────────────────────────────────────────────────────┐
@@ -111,7 +111,7 @@
 
 `flow_config`는 콜 플로우를 **노드 그래프**로 정의합니다. SupervisorAgent가 진입 노드부터 순회하면서 각 노드 타입에 맞는 처리를 수행합니다.
 
-![flow_config 노드 그래프 설계](../assets/inbound-flow-config-design.png)
+![flow_config 노드 그래프 설계](../portfolio/assets/inbound-flow-config-design.png)
 
 ```
 flow_config (JSON)
@@ -240,7 +240,7 @@ SupervisorAgent는 대화를 하지 않습니다. flow_config의 노드를 순�
 
 "상담원에게 연결해 주세요"는 사용자에게는 한 마디지만, 시스템에서는 여러 상태를 거치는 복잡한 흐름입니다.
 
-![Warm Transfer 상태 흐름](../assets/inbound-warm-transfer-flow.png)
+![Warm Transfer 상태 흐름](../portfolio/assets/inbound-warm-transfer-flow.png)
 
 ```
 상담원 연결 요청

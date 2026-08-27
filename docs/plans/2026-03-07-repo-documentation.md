@@ -43,7 +43,7 @@ Check that the README can be scanned quickly and does not duplicate the detailed
 - Check: `docs/source/origin-resume.md`
 - Check: `docs/guides/resume-guide.md`
 - Check: `docs/plans/2026-03-07-outbound-voice-agent-portfolio-design.md`
-- Check: `.claude/skills/image_generation/SKILL.md`
+- Check: `.agents/skills/image-generation/SKILL.md`
 
 **Step 1: Define file categories**
 

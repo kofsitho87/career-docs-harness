@@ -4,9 +4,9 @@
 
 **Goal:** Generate a single 16:9 PPT-style summary image from `case-studies/outbound-voice-agent.md` using the repository's local `image-generation` skill.
 
-**Architecture:** Use the existing portfolio case study as the only content source, compress it into one slide-worthy visual hierarchy, and run the local Gemini wrapper through `.codex/skills/image-generation/scripts/generate-image`. Save the exported image under `assets/` so it remains a reusable portfolio artifact inside this repository.
+**Architecture:** Use the existing portfolio case study as the only content source, compress it into one slide-worthy visual hierarchy, and run the local Gemini script with `uv run .agents/skills/image-generation/scripts/generate_image.py`. Save the exported image under `portfolio/assets/` so it remains a reusable portfolio artifact inside this repository.
 
-**Tech Stack:** Markdown source document, local Codex skill, Gemini image generation wrapper, repository assets folder
+**Tech Stack:** Markdown source document, local Codex skill, Gemini image generation script, repository assets folder
 
 ## Plan Notes
 
@@ -52,9 +52,9 @@ The result must feel like a premium technical presentation slide, legible, balan
 
 ## Generation Readiness Checks
 
-- Verify `.codex/skills/image-generation/SKILL.md` requires checking `GEMINI_API_KEY`, English prompt translation, aspect ratio selection, and wrapper execution.
-- Verify `.codex/skills/image-generation/scripts/generate-image` is executable.
-- Verify `.claude/skills/image_generation/scripts/.env` contains `GEMINI_API_KEY=` without printing the secret.
+- Verify `.agents/skills/image-generation/SKILL.md` requires checking `GEMINI_API_KEY`, English prompt translation, aspect ratio selection, and wrapper execution.
+- Verify `.agents/skills/image-generation/scripts/generate_image.py` exists.
+- Verify `.agents/skills/image-generation/scripts/.env` contains `GEMINI_API_KEY=` without printing the secret.
 
 ---
 
@@ -172,26 +172,26 @@ git commit -m "docs: define prompt for outbound voice agent slide"
 ### Task 3: Verify the image-generation path before invoking Gemini
 
 **Files:**
-- Check: `.codex/skills/image-generation/SKILL.md`
-- Check: `.codex/skills/image-generation/scripts/generate-image`
-- Check: `.claude/skills/image_generation/scripts/.env`
+- Check: `.agents/skills/image-generation/SKILL.md`
+- Check: `.agents/skills/image-generation/scripts/generate_image.py`
+- Check: `.agents/skills/image-generation/scripts/.env`
 
 **Step 1: Verify the Codex image-generation skill instructions**
 
 Run:
 
 ```bash
-sed -n '1,220p' .codex/skills/image-generation/SKILL.md
+sed -n '1,220p' .agents/skills/image-generation/SKILL.md
 ```
 
-Expected: the workflow explicitly says to verify `GEMINI_API_KEY`, translate the request into English, pick an aspect ratio, and run the wrapper script.
+Expected: the workflow explicitly says to verify `GEMINI_API_KEY`, translate the request into English, pick an aspect ratio, and run the shared script.
 
-**Step 2: Verify the generation wrapper is executable**
+**Step 2: Verify the generation script is executable**
 
 Run:
 
 ```bash
-test -x .codex/skills/image-generation/scripts/generate-image
+test -f .agents/skills/image-generation/scripts/generate_image.py
 ```
 
 Expected: command exits with status `0`.
@@ -201,7 +201,7 @@ Expected: command exits with status `0`.
 Run:
 
 ```bash
-test -f .claude/skills/image_generation/scripts/.env && rg -q '^GEMINI_API_KEY=' .claude/skills/image_generation/scripts/.env
+test -f .agents/skills/image-generation/scripts/.env && rg -q '^GEMINI_API_KEY=' .agents/skills/image-generation/scripts/.env
 ```
 
 Expected: command exits with status `0`.
@@ -216,7 +216,7 @@ git commit -m "docs: add generation readiness checks"
 ### Task 4: Generate the first PPT-style slide image
 
 **Files:**
-- Create: `assets/outbound-voice-agent-ppt-slide.png`
+- Create: `portfolio/assets/outbound-voice-agent-ppt-slide.png`
 - Reference: `docs/plans/2026-03-07-outbound-voice-agent-ppt-image.md`
 
 **Step 1: Run the generator with the planned prompt**
@@ -224,21 +224,21 @@ git commit -m "docs: add generation readiness checks"
 Run:
 
 ```bash
-.codex/skills/image-generation/scripts/generate-image \
+uv run .agents/skills/image-generation/scripts/generate_image.py \
   --prompt "Create a polished 16:9 presentation slide image in Korean for a technical portfolio case study. The slide title is '병원 아웃바운드 Voice AI Agent'. Add the subtitle '병원 예약 확인·안내 전화를 AI가 자동 발신하고 분석하는 실시간 음성 AI 시스템'. Use a clean white background with restrained teal and blue enterprise accents, modern presentation typography, and a structured layout that looks like a real investor or product engineering PPT slide. Show five KPI cards: '총 통화 성공 96,000건+', '일 평균 통화 2,000건/일', '도입 병원 100개+', '응답 레이턴시 300ms', '지원 언어 6개'. In the center, show a simplified architecture diagram flowing from RabbitMQ trigger to LiveKit multi-agent server, then to BookingAgent, InfoAgent, Booking API, Qdrant, analysis pipeline, and S3. At the bottom, show three concise feature panels labeled 'Multi-Agent Routing', 'Realtime Voice', and 'Call Analysis Pipeline'. The result must feel like a premium technical presentation slide, legible, balanced, and suitable for a resume portfolio. Use Korean labels where appropriate. Do not make it look like a poster or a website screenshot." \
   --name "outbound-voice-agent-ppt-slide" \
   --output "assets" \
   --aspect 16:9
 ```
 
-Expected: a new image file is saved under `assets/` and the tool prints the final saved path.
+Expected: a new image file is saved under `portfolio/assets/` and the tool prints the final saved path.
 
 **Step 2: Verify the output file exists**
 
 Run:
 
 ```bash
-ls -l assets/outbound-voice-agent-ppt-slide*
+ls -l portfolio/assets/outbound-voice-agent-ppt-slide*
 ```
 
 Expected: at least one generated image file is present.
@@ -246,7 +246,7 @@ Expected: at least one generated image file is present.
 **Step 3: Commit**
 
 ```bash
-git add assets/outbound-voice-agent-ppt-slide.png
+git add portfolio/assets/outbound-voice-agent-ppt-slide.png
 git commit -m "feat: add outbound voice agent ppt slide image"
 ```
 
@@ -254,7 +254,7 @@ git commit -m "feat: add outbound voice agent ppt slide image"
 
 **Files:**
 - Modify: `docs/plans/2026-03-07-outbound-voice-agent-ppt-image.md`
-- Update: `assets/outbound-voice-agent-ppt-slide.png`
+- Update: `portfolio/assets/outbound-voice-agent-ppt-slide.png`
 
 **Step 1: Inspect the first output against the acceptance criteria**
 
@@ -292,6 +292,6 @@ Expected: one improved replacement image is saved and the workflow stops after t
 **Step 4: Commit**
 
 ```bash
-git add docs/plans/2026-03-07-outbound-voice-agent-ppt-image.md assets/outbound-voice-agent-ppt-slide.png
+git add docs/plans/2026-03-07-outbound-voice-agent-ppt-image.md portfolio/assets/outbound-voice-agent-ppt-slide.png
 git commit -m "refactor: refine outbound voice agent slide image"
 ```

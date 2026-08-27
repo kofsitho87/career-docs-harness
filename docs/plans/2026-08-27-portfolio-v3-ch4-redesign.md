@@ -3,7 +3,7 @@
 ## 메타
 
 - 작성일: 2026-08-27
-- 대상 산출물: `portfolio/heewung-song-portfolio-v3.html`
+- 대상 산출물: `portfolio/html/heewung-song-portfolio-v3.html`
 - 대상 범위: CH 04 AIU 사내 업무지원 (슬라이드 24~29, 덱 30장 중)
 - 목적: 기존 5장을 "운영 동료의 하루" 시나리오로 재구성해, 프로젝트를 모르는 채용담당자도 각 장을 직관적으로 이해하게 한다.
 - 선행 설계: `docs/plans/2026-08-25-portfolio-v3-structure-design.md`
@@ -34,7 +34,7 @@
 - 2장(통화 조회)과 3장(QA)은 실제 제품 흐름으로 인과 연결한다: 전환 지표 답변에서 실패 통화를 확인하고, 그 통화 ID로 비식별 검토를 이어간다.
 - 각 기능 장의 공통 구조: **동료의 실제 질문(말풍선) → AIU가 답을 만드는 과정(간단 도식) → 지켜지는 경계 한 줄**. 경계(SELECT-only, source isolation, 마스킹)는 장당 한 줄로 압축해 실용성이 주인공이 되게 한다.
 - AG-UI, Deep Agents, OKF 같은 내부 스택 이름은 본문 문장에서 빼고, 필요한 곳에만 모노스페이스 캡션으로 남긴다. AIU·OpenBot은 1장에서 한 문장으로 정의한 뒤 사용한다.
-- 매뉴얼 장은 실제 답변 화면(`assets/aiu-web-knowledge-answer.png`)을 증거로 유지한다.
+- 매뉴얼 장은 실제 답변 화면(`portfolio/assets/aiu-web-knowledge-answer.png`)을 증거로 유지한다.
 - 사용량 수치를 만들지 않는다. 규모 수치는 사실 기준 문서에 있는 것만 쓴다: 5개 소스, 322개 문서, 4개 전문 Agent, 45개 unit/contract test, 2026.08 착수 후 3주.
 - 5장(비전)은 현재 사실과 방향을 구분한다. **이미 있는 것**(OpenBot의 정책·감사·HITL·컨테이너 브라우저 실행 기반, AIU의 읽기 전용 경계)은 사실로, **확장(실행 업무 자동화)**은 진행 방향으로 명시하며 완성된 기능으로 주장하지 않는다.
 - 챕터 지도의 CH 04는 6장으로 표기한다. `showSlide()` 챕터 시작 인덱스(4·11·19·24)는 CH 04가 마지막 챕터라 변경이 없고, 총 장수는 JS가 동적으로 계산한다. 정적 표기(지도 "6 slides", rail "28 slides", 초기 카운터 "1 / 30")만 갱신한다.
@@ -105,7 +105,7 @@
 - [x] 질문 → 담당 전문 Agent 위임 → 매뉴얼 근거 + 스크린샷 답변의 과정 도식
 - [x] 4개 전문 Agent가 각자 자기 소스만 읽는 구조(source isolation)를 쉬운 문장으로 유지
 - [x] 322개 문서·5개 소스 수치 표시
-- [x] 실제 답변 화면(`assets/aiu-web-knowledge-answer.png`) 유지
+- [x] 실제 답변 화면(`portfolio/assets/aiu-web-knowledge-answer.png`) 유지
 - [x] "접근 거부를 문서 없음으로 답하지 않는다" 사례는 유지 여부를 구현 중 판단(밀도 초과 시 제거)
 - [x] 정적 검증
 - [x] 사용자 화면 확인
@@ -150,7 +150,7 @@
 - `/Users/heewungsong/Desktop/Experiment/OpenBot/openwiki/openbot-integration.md` — 서명된 run·콜백 토큰, OpenBot 거버넌스 경계
 - `/Users/heewungsong/Desktop/Experiment/OpenBot/openwiki/tools-and-attachments.md` — 도구 소유권 분리, 서명 URL attachment
 - `/Users/heewungsong/Desktop/Experiment/OpenBot/README.md` — 게이트웨이(정책 평가→감사 기록→실행), 컨테이너 브라우저, `/admin/audit`
-- `assets/aiu-web-knowledge-answer.png` — 실제 매뉴얼 답변 화면
+- `portfolio/assets/aiu-web-knowledge-answer.png` — 실제 매뉴얼 답변 화면
 
 ## 작업 로그
 

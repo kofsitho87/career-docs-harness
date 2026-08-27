@@ -1,7 +1,7 @@
 # 종합 포트폴리오 중심 서사 재설계
 
 **작성일:** 2026-08-24
-**대상 산출물:** `portfolio/heewung-song-portfolio.html`
+**대상 산출물:** `portfolio/html/heewung-song-portfolio-v1.html`
 
 ## 문제 정의
 

@@ -4,7 +4,7 @@
 .worktrees
 .DS_Store
 tmp/
-dist/
+portfolio/dist/
 
 # Env
 .env

@@ -41,5 +41,5 @@
 - 사실 변경은 먼저 `docs/source/origin-resume.md`
 - 표현 개선은 `docs/guides/resume-guide.md` 확인 후 `resume/` 또는 `case-studies/` 수정
 - 설계/계획 문서는 `docs/plans/`
-- 이미지 자산은 `assets/`
+- 이미지 자산은 `portfolio/assets/`
 - 현재 대표 산출물은 `resume/product-engineer.md`, `case-studies/outbound-voice-agent.md`

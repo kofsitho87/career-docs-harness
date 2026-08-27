@@ -1,7 +1,7 @@
 # AIU 업무지원 Agent 포트폴리오 확장 설계
 
 **작성일:** 2026-08-24
-**대상:** `portfolio/heewung-song-portfolio.html` Chapter 05
+**대상:** `portfolio/html/heewung-song-portfolio-v1.html` Chapter 05
 
 ## 문제 정의
 

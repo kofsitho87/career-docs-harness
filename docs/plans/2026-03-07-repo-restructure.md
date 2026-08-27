@@ -15,7 +15,7 @@
 **Files:**
 - Create: `resume/`
 - Create: `case-studies/`
-- Create: `assets/`
+- Create: `portfolio/assets/`
 - Create: `docs/source/`
 - Create: `docs/guides/`
 
@@ -24,7 +24,7 @@
 Create:
 - `resume/`
 - `case-studies/`
-- `assets/`
+- `portfolio/assets/`
 
 **Step 2: Create the document-support directories**
 
@@ -46,7 +46,7 @@ Confirm that the repository now has clear destinations for:
 **Files:**
 - Move: `dan-resume-product-engineer.md` -> `resume/product-engineer.md`
 - Move: `projects/portfolio-outbound-voice-agent.md` -> `case-studies/outbound-voice-agent.md`
-- Move: `heewung-song-infographic.png` -> `assets/heewung-song-infographic.png`
+- Move: `heewung-song-infographic.png` -> `portfolio/assets/heewung-song-infographic.png`
 - Move: `docs/origin-resume.md` -> `docs/source/origin-resume.md`
 - Move: `docs/resume-guidelines/resume-guide.md` -> `docs/guides/resume-guide.md`
 
@@ -65,7 +65,7 @@ Move the baseline resume and reusable guide into:
 **Step 3: Move the infographic asset**
 
 Move the infographic into:
-- `assets/heewung-song-infographic.png`
+- `portfolio/assets/heewung-song-infographic.png`
 
 ### Task 3: Update internal references to the new paths
 
@@ -80,7 +80,7 @@ Move the infographic into:
 Change references to:
 - `resume/product-engineer.md`
 - `case-studies/outbound-voice-agent.md`
-- `assets/heewung-song-infographic.png`
+- `portfolio/assets/heewung-song-infographic.png`
 - `docs/source/origin-resume.md`
 - `docs/guides/resume-guide.md`
 
@@ -118,7 +118,7 @@ Search for remaining references to:
 Confirm the new files exist at:
 - `resume/product-engineer.md`
 - `case-studies/outbound-voice-agent.md`
-- `assets/heewung-song-infographic.png`
+- `portfolio/assets/heewung-song-infographic.png`
 - `docs/source/origin-resume.md`
 - `docs/guides/resume-guide.md`
 

@@ -18,7 +18,7 @@
 
 ### 시스템 아키텍처
 
-![Hospital Customer Support Agent Architecture](../assets/hospital-customer-support-agent-ppt-overview.png)
+![Hospital Customer Support Agent Architecture](../portfolio/assets/hospital-customer-support-agent-ppt-overview.png)
 
 ---
 
@@ -58,7 +58,7 @@
 
 ## 시스템 동작 방식
 
-![Hospital Customer Support Agent Flow](../assets/hospital-customer-support-agent-ppt-flow.png)
+![Hospital Customer Support Agent Flow](../portfolio/assets/hospital-customer-support-agent-ppt-flow.png)
 
 ### 일반 문의 처리
 

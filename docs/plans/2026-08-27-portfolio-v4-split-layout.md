@@ -3,8 +3,8 @@
 ## 메타
 
 - 작성일: 2026-08-27
-- 대상 산출물: `portfolio/heewung-song-portfolio-v4.html` (신규)
-- 원본: `portfolio/heewung-song-portfolio-v3.html` (변경 없음, 그대로 유지)
+- 대상 산출물: `portfolio/html/heewung-song-portfolio.html` (현재 정본, 최초 작성 당시 v4)
+- 원본: `portfolio/html/heewung-song-portfolio-v3.html` (작업 당시 원본, 현재 정본 승격 후 삭제)
 - 범위: 30장 전체
 - 선행 설계: `docs/plans/2026-08-25-portfolio-v3-structure-design.md`
 - 사실 기준: `resume/product-engineer.md`
@@ -83,4 +83,15 @@ CH 03(19·20·21·22·23)은 다섯 장 모두 다중 트랙 보드라 전부 `.
 ## 남은 것
 
 - `run` 시 상대 경로 이미지가 프리뷰 스냅샷에서 로드되지 않는다. 브라우저에서 파일을 직접 열면 정상이다.
-- `output/pdf/` 빌드는 아직 v3 기준이다. v4로 PDF를 다시 뽑을지는 미정.
+- 없음. PDF까지 빌드해 `portfolio/pdf/heewung-song-portfolio-v4.pdf`로 내보냈다.
+
+## PDF 빌드
+
+- 스크립트: `scripts/build_portfolio_pdf.py` (기존 28장 캡처 기반 구현을 제거하고 v4 HTML의 Chromium 인쇄 방식으로 통합했다).
+- 방식: 미리 캡처한 PNG를 JPEG로 묶는 대신 Chromium 인쇄 경로(`page.pdf`)를 썼다. 덱에 `@media print`가 이미 있어 30장이 그대로 펼쳐진다.
+  결과적으로 텍스트가 선택되고 연락처·GitHub 링크 6개가 살아 있다.
+- 빌드 중 고친 것:
+  - 덱은 저장된 테마가 없으면 `prefers-color-scheme`를 따라간다. Chromium 기본값이 light라 라이트 테마로 인쇄됐다 → `color_scheme="dark"`로 강제.
+  - 카운터는 화면 애니메이션으로만 채워져 인쇄 시 0으로 굳는다 → 인쇄 전에 `data-count` 목표값으로 확정.
+  - 화면 전용 안내 `.zoom-hint`("클릭해 크게 보기")가 인쇄물에 남았다 → v4 인쇄 CSS에서 숨김.
+- 검증: 30쪽 · 1152×648pt(16:9) · 저대비(빈) 쪽 0 · 전 쪽 텍스트 추출 392~1347자 · 링크 6개.

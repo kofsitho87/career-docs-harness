@@ -8,7 +8,7 @@ Infographic
 - LinkedIn: [https://www.linkedin.com/in/kofsitho](https://www.linkedin.com/in/kofsitho)
 - Tech Blog: [https://kofsitho87.github.io/my-tech-blog/](https://kofsitho87.github.io/my-tech-blog/)
 - Medium: [https://medium.com/@kofsitho](https://medium.com/@kofsitho)
-- Portfolio: [종합 포트폴리오](../portfolio/heewung-song-portfolio.html)
+- Portfolio: [종합 포트폴리오](../portfolio/html/heewung-song-portfolio.html)
 
 ## Professional Summary
 

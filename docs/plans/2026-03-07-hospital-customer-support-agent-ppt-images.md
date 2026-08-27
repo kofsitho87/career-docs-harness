@@ -4,9 +4,9 @@
 
 **Goal:** `case-studies/hospital-customer-support-agent.md`를 기반으로 16:9 PPT 스타일 이미지 2장을 생성해 포트폴리오용 시각 자산으로 저장한다.
 
-**Architecture:** 케이스 스터디 문서를 그대로 옮기지 않고, 핵심 메시지를 두 장으로 압축한다. 첫 장은 프로젝트 개요와 서비스 아키텍처를, 두 번째 장은 상담 흐름과 핵심 설계 의사결정을 중심으로 구성하고, 실제 생성은 `.codex/skills/image-generation/scripts/generate-image` 래퍼를 사용한다.
+**Architecture:** 케이스 스터디 문서를 그대로 옮기지 않고, 핵심 메시지를 두 장으로 압축한다. 첫 장은 프로젝트 개요와 서비스 아키텍처를, 두 번째 장은 상담 흐름과 핵심 설계 의사결정을 중심으로 구성하고, 실제 생성은 `uv run .agents/skills/image-generation/scripts/generate_image.py` 래퍼를 사용한다.
 
-**Tech Stack:** Markdown source document, local Codex `image-generation` skill, Gemini image wrapper, repository `assets/` folder
+**Tech Stack:** Markdown source document, local Codex `image-generation` skill, Gemini image script, repository `portfolio/assets/` folder
 
 ---
 
@@ -108,8 +108,8 @@ Expected: the document naturally separates into overview/architecture and flow/d
 
 **Step 2: Fix output filenames**
 
-- `assets/hospital-customer-support-agent-ppt-overview.png`
-- `assets/hospital-customer-support-agent-ppt-flow.png`
+- `portfolio/assets/hospital-customer-support-agent-ppt-overview.png`
+- `portfolio/assets/hospital-customer-support-agent-ppt-flow.png`
 
 **Step 3: Keep the deck scope single-purpose**
 
@@ -134,29 +134,29 @@ Expected: both architecture and flow prompts contain the required source concept
 ### Task 3: Verify image-generation readiness
 
 **Files:**
-- Check: `.codex/skills/image-generation/SKILL.md`
-- Check: `.codex/skills/image-generation/scripts/generate-image`
-- Check: `.claude/skills/image_generation/scripts/.env`
+- Check: `.agents/skills/image-generation/SKILL.md`
+- Check: `.agents/skills/image-generation/scripts/generate_image.py`
+- Check: `.agents/skills/image-generation/scripts/.env`
 
 **Step 1: Verify the Codex image-generation workflow**
 
-Run: `sed -n '1,220p' .codex/skills/image-generation/SKILL.md`
-Expected: the workflow says to verify `GEMINI_API_KEY`, rewrite the prompt in English, choose aspect ratio, and use the wrapper script.
+Run: `sed -n '1,220p' .agents/skills/image-generation/SKILL.md`
+Expected: the workflow says to verify `GEMINI_API_KEY`, rewrite the prompt in English, choose aspect ratio, and use the shared script.
 
-**Step 2: Verify the generation wrapper is executable**
+**Step 2: Verify the generation script is executable**
 
-Run: `test -x .codex/skills/image-generation/scripts/generate-image`
+Run: `test -f .agents/skills/image-generation/scripts/generate_image.py`
 Expected: exit status `0`.
 
 **Step 3: Verify the API key is configured without printing it**
 
-Run: `test -f .claude/skills/image_generation/scripts/.env && rg -q '^GEMINI_API_KEY=' .claude/skills/image_generation/scripts/.env`
+Run: `test -f .agents/skills/image-generation/scripts/.env && rg -q '^GEMINI_API_KEY=' .agents/skills/image-generation/scripts/.env`
 Expected: exit status `0`.
 
 ### Task 4: Generate the overview architecture slide
 
 **Files:**
-- Create: `assets/hospital-customer-support-agent-ppt-overview.png`
+- Create: `portfolio/assets/hospital-customer-support-agent-ppt-overview.png`
 - Reference: `docs/plans/2026-03-07-hospital-customer-support-agent-ppt-images.md`
 
 **Step 1: Run the generator for slide 1**
@@ -164,24 +164,24 @@ Expected: exit status `0`.
 Run:
 
 ```bash
-.codex/skills/image-generation/scripts/generate-image \
+uv run .agents/skills/image-generation/scripts/generate_image.py \
   --prompt "Create a polished 16:9 presentation slide image in Korean for a technical portfolio case study. The slide title is '병원 고객상담 AI Agent'. Add the subtitle '복잡한 병원 문의를 상태 기반 상담 흐름과 데이터 조회 구조로 처리한 AI 상담 시스템'. Use a clean white or very light background with restrained teal and blue accents, premium enterprise presentation typography, and a structured layout that looks like a real product engineering or architecture PPT slide. Include a compact meta section with '기간 2025.03 - 2025.05', '소속 와이즈에이아이', and '역할 핵심 아키텍트 + 일부 구현'. In the center, show a clear architecture diagram: User Inquiry flows into a LangGraph consultation engine, then branches into primary_assistant, customer_interaction, extract_personal_info, and tools. Connect those to Qdrant search, FastAPI plus LangGraph SDK API, a Next.js monitoring dashboard, and AWS ECS Fargate deployment. Add three short callout cards for '상태 기반 상담 흐름', '병원별 지식 조회', and '운영 가능한 서비스 경계'. The image should feel legible, balanced, and credible for a senior engineer portfolio. Use Korean labels where appropriate. Do not make it look like a poster, infographic, or website screenshot." \
   --name "hospital-customer-support-agent-ppt-overview" \
   --output "assets" \
   --aspect 16:9
 ```
 
-Expected: a generated slide image is saved under `assets/`.
+Expected: a generated slide image is saved under `portfolio/assets/`.
 
 **Step 2: Verify the file exists**
 
-Run: `ls -l assets/hospital-customer-support-agent-ppt-overview*`
+Run: `ls -l portfolio/assets/hospital-customer-support-agent-ppt-overview*`
 Expected: a matching output file is present.
 
 ### Task 5: Generate the flow and design-decision slide
 
 **Files:**
-- Create: `assets/hospital-customer-support-agent-ppt-flow.png`
+- Create: `portfolio/assets/hospital-customer-support-agent-ppt-flow.png`
 - Reference: `docs/plans/2026-03-07-hospital-customer-support-agent-ppt-images.md`
 
 **Step 1: Run the generator for slide 2**
@@ -189,25 +189,25 @@ Expected: a matching output file is present.
 Run:
 
 ```bash
-.codex/skills/image-generation/scripts/generate-image \
+uv run .agents/skills/image-generation/scripts/generate_image.py \
   --prompt "Create a polished 16:9 presentation slide image in Korean for a technical portfolio case study. The slide title is 'Consultation Flow + Design Decisions'. Add the subtitle '상담 흐름 분리, 병원별 지식 응답, 운영 가능한 서비스 경계'. Use the same visual language as a premium enterprise PPT slide: white or very light background, restrained teal and blue accents, sharp presentation typography, and a clean grid layout. On the left, show a simplified consultation flow with three paths: '일반 문의 처리', '개인정보 수집 후 원래 질문 복귀', and '상담원 연결 준비'. Use concrete mini examples such as asking weekend clinic hours, collecting name and phone number before resuming a pending implant question, and preparing a human handoff only after required info is present. On the right, show three design decision panels labeled 'LangGraph 상태 기반 워크플로우', '병원별 검색 기반 응답', and 'API·검색·대시보드·배포 경계'. At the bottom, add a concise takeaway in Korean: 'AI 제품의 복잡도는 모델보다 절차와 시스템 경계에서 더 크게 생긴다'. The result must feel like a real strategy or architecture slide for a technical portfolio, not an illustration poster. Keep text brief and highly legible." \
   --name "hospital-customer-support-agent-ppt-flow" \
   --output "assets" \
   --aspect 16:9
 ```
 
-Expected: a generated slide image is saved under `assets/`.
+Expected: a generated slide image is saved under `portfolio/assets/`.
 
 **Step 2: Verify the file exists**
 
-Run: `ls -l assets/hospital-customer-support-agent-ppt-flow*`
+Run: `ls -l portfolio/assets/hospital-customer-support-agent-ppt-flow*`
 Expected: a matching output file is present.
 
 ### Task 6: Validate output quality and allow one revision pass
 
 **Files:**
-- Check: `assets/hospital-customer-support-agent-ppt-overview.png`
-- Check: `assets/hospital-customer-support-agent-ppt-flow.png`
+- Check: `portfolio/assets/hospital-customer-support-agent-ppt-overview.png`
+- Check: `portfolio/assets/hospital-customer-support-agent-ppt-flow.png`
 
 **Step 1: Inspect both slides against acceptance criteria**
 

@@ -3,7 +3,7 @@
 ## 메타
 
 - 작성일: 2026-08-26
-- 대상 산출물: `portfolio/heewung-song-portfolio-v3.html`
+- 대상 산출물: `portfolio/html/heewung-song-portfolio-v3.html`
 - 대상 범위: CH 03 병원 고객상담 AI Agent(기존 `챗봇 고객상담`)
 - 목적: 기존 3장을 프로젝트의 핵심 설계가 드러나는 흐름으로 다시 구성하고, 각 장의 내용 합의·구현·검증 상태를 한 문서에서 추적한다.
 - 선행 챕터: `docs/plans/2026-08-26-portfolio-v3-ch2-eight-slide-redesign.md`
