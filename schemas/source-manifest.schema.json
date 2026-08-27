@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://career-harness.local/schemas/source-manifest.schema.json",
+  "title": "Source Manifest",
+  "type": "object",
+  "required": ["version", "sources"],
+  "properties": {
+    "version": {"type": "integer", "const": 1},
+    "sources": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "type", "path", "origin", "sha256", "imported_at", "status"],
+        "properties": {
+          "id": {"type": "string", "pattern": "^source-[a-z0-9]+(?:-[a-z0-9]+)*$"},
+          "type": {"enum": ["pdf", "docx", "markdown", "text", "html", "web_snapshot", "github", "interview", "image"]},
+          "path": {"type": "string", "minLength": 1},
+          "origin": {"type": "string", "minLength": 1},
+          "sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+          "imported_at": {"type": "string", "format": "date-time"},
+          "captured_at": {"type": ["string", "null"], "format": "date-time"},
+          "extracted_text_path": {"type": ["string", "null"]},
+          "status": {"enum": ["verified", "inferred", "unverified", "conflicted"]},
+          "metadata": {"type": "object"}
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false
+}

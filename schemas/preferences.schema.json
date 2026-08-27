@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://career-harness.local/schemas/preferences.schema.json",
+  "title": "Candidate Preferences",
+  "type": "object",
+  "required": ["version", "status", "language", "resume", "portfolio", "source_refs"],
+  "properties": {
+    "version": {"type": "integer", "const": 1},
+    "status": {"enum": ["not_started", "in_progress", "needs_review", "complete"]},
+    "language": {"type": "string", "minLength": 2},
+    "resume": {
+      "type": "object",
+      "required": ["tone", "length", "avoid_phrases"],
+      "properties": {
+        "tone": {"type": "string", "minLength": 1},
+        "length": {"type": ["integer", "null"], "minimum": 1},
+        "avoid_phrases": {"type": "array", "items": {"type": "string"}}
+      },
+      "additionalProperties": false
+    },
+    "portfolio": {
+      "type": "object",
+      "required": ["theme", "target_slides", "visual_preferences", "avoid_styles"],
+      "properties": {
+        "theme": {"enum": ["editorial", "minimal", "technical"]},
+        "target_slides": {"type": "integer", "minimum": 7, "maximum": 15},
+        "visual_preferences": {"type": "array", "items": {"type": "string"}},
+        "avoid_styles": {"type": "array", "items": {"type": "string"}}
+      },
+      "additionalProperties": false
+    },
+    "source_refs": {"type": "array", "uniqueItems": true, "items": {"type": "string"}}
+  },
+  "additionalProperties": false
+}

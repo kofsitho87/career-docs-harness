@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="ko" data-theme="{{ outline.theme }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="{{ outline.title }}">
+  <title>{{ outline.title }}</title>
+  <style>{{ components_css | safe }}</style>
+  <style>{{ theme_css | safe }}</style>
+</head>
+<body>
+  <main class="deck" aria-label="{{ outline.title }}">
+  {% for slide in outline.slides %}
+    <section
+      class="slide slide--{{ slide.type }} layout--{{ slide.layout }}"
+      id="{{ slide.id }}"
+      data-slide-id="{{ slide.id }}"
+      data-slide-index="{{ loop.index }}"
+      data-claim-ids="{{ slide.claim_ids | join(',') }}"
+      data-evidence-ids="{{ slide.evidence_ids | join(',') }}"
+      aria-label="{{ loop.index }}. {{ slide.title }}"
+    >
+      <div class="slide__chrome" aria-hidden="true">
+        <span>{{ "%02d" | format(loop.index) }}</span>
+        <span>{{ outline.theme }}</span>
+      </div>
+      <header class="slide__header">
+        {% if slide.eyebrow %}<p class="eyebrow">{{ slide.eyebrow }}</p>{% endif %}
+        {% if slide.type == "cover" %}<h1>{{ slide.title }}</h1>{% else %}<h2>{{ slide.title }}</h2>{% endif %}
+        {% if slide.summary %}<p class="summary">{{ slide.summary }}</p>{% endif %}
+      </header>
+      <div class="slide__body">
+        <div class="narrative">
+          {% for paragraph in slide.body %}<p>{{ paragraph }}</p>{% endfor %}
+          {% if slide.bullets %}
+          <ul class="points">
+            {% for bullet in slide.bullets %}<li>{{ bullet }}</li>{% endfor %}
+          </ul>
+          {% endif %}
+          {% if slide.metrics %}
+          <div class="metrics">
+            {% for metric in slide.metrics %}
+            <article class="metric"><strong>{{ metric.value }}</strong><span>{{ metric.label }}</span></article>
+            {% endfor %}
+          </div>
+          {% endif %}
+        </div>
+        <div class="visual">
+          {% if slide.image %}
+          <figure>
+            <img src="{{ slide.image }}" alt="{{ slide.image_alt }}">
+            {% if slide.caption %}<figcaption>{{ slide.caption }}</figcaption>{% endif %}
+          </figure>
+          {% else %}
+          <div class="motif" aria-hidden="true"><span></span><span></span><span></span></div>
+          {% endif %}
+        </div>
+      </div>
+      <footer class="slide__footer">
+        <span>{{ slide.purpose }}</span>
+        <span>{{ loop.index }} / {{ outline.slides | length }}</span>
+      </footer>
+    </section>
+  {% endfor %}
+  </main>
+  <div class="deck-controls" aria-label="슬라이드 이동 안내">← → · Home End · <span id="current-slide">1</span>/{{ outline.slides | length }}</div>
+  <script>{{ presentation_js | safe }}</script>
+</body>
+</html>

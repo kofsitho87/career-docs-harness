@@ -1,0 +1,4 @@
+interface:
+  display_name: "Master Resume"
+  short_description: "Write the canonical Korean Markdown resume"
+  default_prompt: "Use $master-resume to create my Korean master resume from verified career memory."

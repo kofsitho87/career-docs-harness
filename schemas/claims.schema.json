@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://career-harness.local/schemas/claims.schema.json",
+  "title": "Career Claims",
+  "type": "object",
+  "required": ["version", "claims"],
+  "properties": {
+    "version": {"type": "integer", "const": 1},
+    "claims": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "statement", "status", "source_refs", "visibility", "allowed_outputs", "user_edited"],
+        "properties": {
+          "id": {"type": "string", "pattern": "^claim-[a-z0-9]+(?:-[a-z0-9]+)*$"},
+          "statement": {"type": "string", "minLength": 1},
+          "project_id": {"type": ["string", "null"]},
+          "status": {"enum": ["verified", "inferred", "unverified", "conflicted"]},
+          "source_refs": {"type": "array", "uniqueItems": true, "items": {"type": "string"}},
+          "visibility": {"enum": ["public", "private", "restricted"]},
+          "allowed_outputs": {"type": "array", "uniqueItems": true, "items": {"enum": ["resume", "case_study", "portfolio", "interview"]}},
+          "user_edited": {"type": "boolean"},
+          "last_updated": {"type": ["string", "null"], "format": "date-time"}
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false
+}

@@ -1,0 +1,74 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://career-harness.local/schemas/harness.schema.json",
+  "title": "Career Harness Configuration",
+  "type": "object",
+  "required": ["version", "product", "agents", "sources", "memory", "resume", "portfolio", "deployment", "quality"],
+  "properties": {
+    "version": {"type": "number", "const": 0.1},
+    "product": {
+      "type": "object",
+      "required": ["mode", "default_language", "distribution"],
+      "properties": {
+        "mode": {"const": "single_user"},
+        "default_language": {"type": "string", "minLength": 2},
+        "distribution": {"const": "github_template"}
+      },
+      "additionalProperties": false
+    },
+    "agents": {
+      "type": "object",
+      "required": ["canonical_instructions", "canonical_skills", "supported"],
+      "properties": {
+        "canonical_instructions": {"type": "string", "minLength": 1},
+        "canonical_skills": {"type": "string", "minLength": 1},
+        "supported": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {"enum": ["codex", "claude_code", "cursor"]}
+        }
+      },
+      "additionalProperties": false
+    },
+    "sources": {
+      "type": "object",
+      "required": ["root", "immutable", "manifest", "allow_logged_in_browser", "store_auth_state", "supported_types"],
+      "properties": {
+        "root": {"type": "string", "minLength": 1},
+        "immutable": {"const": true},
+        "manifest": {"type": "string", "minLength": 1},
+        "allow_logged_in_browser": {"type": "boolean"},
+        "store_auth_state": {"const": false},
+        "supported_types": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {"enum": ["pdf", "docx", "markdown", "text", "html", "web_snapshot", "github", "interview", "image"]}
+        }
+      },
+      "additionalProperties": false
+    },
+    "memory": {
+      "type": "object",
+      "required": ["root", "auto_update", "require_provenance", "preserve_user_edits", "conflict_policy", "statuses"],
+      "properties": {
+        "root": {"type": "string", "minLength": 1},
+        "auto_update": {"const": true},
+        "require_provenance": {"const": true},
+        "preserve_user_edits": {"const": true},
+        "conflict_policy": {"const": "record_without_overwrite"},
+        "statuses": {
+          "type": "array",
+          "const": ["verified", "inferred", "unverified", "conflicted"]
+        }
+      },
+      "additionalProperties": false
+    },
+    "resume": {"type": "object", "required": ["master", "tailored_root", "default_language", "source_format", "pdf_enabled", "pdf_output"]},
+    "portfolio": {"type": "object", "required": ["format", "source", "pdf_output", "dist", "pdf_enabled", "slide_count", "themes"]},
+    "deployment": {"type": "object", "required": ["default", "local_preview", "github_pages", "cloudflare_pages"]},
+    "quality": {"type": "object", "required": ["require_claim_sources", "reject_conflicted_claims", "check_links", "check_assets", "check_sensitive_information", "visual_qa"]}
+  },
+  "additionalProperties": false
+}

@@ -1,0 +1,17 @@
+:root {
+  --bg: #e9e1d2;
+  --surface: #f8f3e9;
+  --ink: #1c211d;
+  --muted: #6d6b61;
+  --line: #b8b09f;
+  --accent: #d84a2f;
+  --accent-soft: #edc7b8;
+  --display: "Iowan Old Style", "Noto Serif KR", Georgia, serif;
+  --body: "Avenir Next", "Apple SD Gothic Neo", sans-serif;
+}
+.slide::before { background: linear-gradient(120deg, transparent 0 67%, rgb(216 74 47 / 7%) 67% 100%); }
+.slide:nth-child(even)::before { transform: scaleX(-1); }
+.slide__header { position: relative; }
+.slide__header::after { content: ""; position: absolute; top: 30px; left: -36px; width: 16px; height: 70%; background: var(--accent); }
+.slide--cover .slide__body { grid-template-columns: .78fr 1.22fr; }
+.slide--cover .motif { transform: rotate(-2deg); box-shadow: 22px 22px 0 var(--accent-soft); }

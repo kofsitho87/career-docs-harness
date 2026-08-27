@@ -1,0 +1,176 @@
+version: 1
+title: 김하늘 · AI Product Engineer
+theme: editorial
+slides:
+  - id: cover
+    type: cover
+    layout: split
+    purpose: 전문 정체성과 포트폴리오 주제를 소개한다
+    eyebrow: Career Portfolio
+    title: 반복 업무를 운영 가능한 AI 제품으로
+    summary: 문제 정의부터 시스템 경계, 평가, 운영 개선까지 연결합니다.
+    body: []
+    bullets: []
+    metrics: []
+    claim_ids: []
+    evidence_ids: []
+  - id: positioning
+    type: career-map
+    layout: lead
+    purpose: 반복되는 문제 해결 패턴을 보여준다
+    eyebrow: Positioning
+    title: 업무 흐름을 읽고 제품 경계를 설계합니다
+    summary: 기술 데모보다 실제 사용 흐름과 실패 복구를 먼저 정의합니다.
+    body:
+      - 현업의 탐색·판단·실행 단계를 분리하고 AI가 맡을 경계와 사람이 승인할 경계를 연결합니다.
+    bullets:
+      - 문제를 사용자 행동 단위로 구조화
+      - 지식과 실행 도구의 권한 분리
+      - 평가 결과를 운영 개선으로 환류
+    metrics: []
+    claim_ids: []
+    evidence_ids: []
+  - id: project-overview
+    type: project-overview
+    layout: split
+    purpose: 대표 프로젝트의 범위와 역할을 설명한다
+    eyebrow: 01 · Support Copilot
+    title: 상담 업무를 하나의 AI 워크플로로
+    summary: 지식 검색, 답변, 업무 도구 실행, 평가를 연결한 가상 프로젝트입니다.
+    body:
+      - 제품 설계와 백엔드 구현, 운영 지표 정의를 담당했습니다.
+    bullets:
+      - Example Labs · 2023–현재
+      - AI Product Engineer
+      - Python · FastAPI · PostgreSQL · RAG
+    metrics: []
+    claim_ids: []
+    evidence_ids: []
+  - id: problem
+    type: problem
+    layout: split
+    purpose: 기존 업무의 병목과 제약을 설명한다
+    eyebrow: Problem
+    title: 답을 찾는 것보다 다음 행동이 더 어려웠습니다
+    summary: 상담원은 여러 시스템을 오가며 정보를 확인하고 같은 내용을 다시 입력했습니다.
+    body: []
+    bullets:
+      - 지식이 여러 문서와 시스템에 분산
+      - 답변 이후 업무 실행은 별도 화면에서 반복
+      - 실패 원인을 정량적으로 확인하기 어려움
+    metrics:
+      - value: 8단계
+        label: 테스트 기준 평균 처리 단계
+    claim_ids:
+      - claim-sample-workflow-impact
+    evidence_ids:
+      - evidence-sample-workflow
+  - id: architecture
+    type: architecture
+    layout: lead
+    purpose: 시스템 경계와 구성 요소를 설명한다
+    eyebrow: Architecture
+    title: 지식, 판단, 실행, 평가를 분리했습니다
+    summary: 각 계층을 독립적으로 검증하고 권한을 제한할 수 있는 구조입니다.
+    body: []
+    bullets:
+      - Retrieval · 승인된 지식만 검색
+      - Orchestration · 상태와 다음 행동 결정
+      - Tools · 허용된 업무만 실행
+      - Evaluation · 실패 유형과 근거 기록
+    metrics: []
+    claim_ids: []
+    evidence_ids: []
+  - id: decision
+    type: decision
+    layout: split
+    purpose: 핵심 기술 결정을 보여준다
+    eyebrow: Decision
+    title: 하나의 거대한 Agent 대신 경계를 선택했습니다
+    summary: 검색과 실행을 분리해 품질 문제와 권한 문제를 독립적으로 다뤘습니다.
+    body:
+      - 빠른 데모보다 운영 중 실패를 추적하고 복구할 수 있는 구조를 우선했습니다.
+    bullets:
+      - 도구별 입력 스키마 검증
+      - 상태 전이와 사용자 승인 기록
+      - 평가와 제품 로그 연결
+    metrics: []
+    claim_ids: []
+    evidence_ids: []
+  - id: workflow
+    type: workflow
+    layout: split
+    purpose: 사용자 업무 흐름을 설명한다
+    eyebrow: Workflow
+    title: 질문에서 업무 완료까지 다섯 단계
+    summary: 의도 확인, 지식 검색, 답변, 승인, 실행 결과를 한 흐름으로 연결했습니다.
+    body: []
+    bullets:
+      - 질문과 컨텍스트 확인
+      - 근거 문서 검색
+      - 답변과 다음 행동 제안
+      - 사용자 승인 후 도구 실행
+      - 결과 기록과 품질 평가
+    metrics:
+      - value: 5단계
+        label: 개선 후 테스트 처리 단계
+    claim_ids:
+      - claim-sample-workflow-impact
+    evidence_ids:
+      - evidence-sample-workflow
+  - id: evidence
+    type: evidence
+    layout: evidence
+    purpose: 운영 개선의 근거를 보여준다
+    eyebrow: Evidence
+    title: 실패 유형이 다음 개선 작업이 되었습니다
+    summary: 답변 실패와 실행 실패를 분리해 담당자가 직접 원인을 확인하도록 했습니다.
+    body: []
+    bullets:
+      - 근거 문서 부족
+      - 잘못된 의도 분류
+      - 도구 입력 검증 실패
+      - 사용자 승인 이전 중단
+    metrics:
+      - value: 4유형
+        label: 테스트 평가 분류
+    claim_ids:
+      - claim-sample-evaluation
+    evidence_ids:
+      - evidence-sample-evaluation
+  - id: results
+    type: results
+    layout: split
+    purpose: 프로젝트 결과를 압축한다
+    eyebrow: Results
+    title: 더 짧은 흐름과 더 명확한 실패
+    summary: 합성 테스트 환경에서 처리 단계를 줄이고 개선 대상을 구조화했습니다.
+    body: []
+    bullets:
+      - 평균 처리 단계 8 → 5
+      - 실패 원인을 네 가지 운영 분류로 정리
+      - 지식과 실행 권한을 독립적으로 관리
+    metrics:
+      - value: 37.5%
+        label: 합성 테스트 처리 단계 감소
+      - value: 4개
+        label: 실패 분류
+    claim_ids:
+      - claim-sample-workflow-impact
+      - claim-sample-evaluation
+    evidence_ids:
+      - evidence-sample-workflow
+      - evidence-sample-evaluation
+  - id: closing
+    type: closing
+    layout: lead
+    purpose: 역할과 강점을 종합한다
+    eyebrow: Closing
+    title: AI를 기능이 아니라 운영 가능한 제품으로
+    summary: 사용자 흐름, 시스템 경계, 평가, 개선 루프를 함께 설계합니다.
+    body:
+      - 이 포트폴리오는 Career Harness 검증을 위한 합성 후보자 예제입니다.
+    bullets: []
+    metrics: []
+    claim_ids: []
+    evidence_ids: []

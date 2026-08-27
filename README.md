@@ -1,56 +1,153 @@
-# 이력서·포트폴리오 제작 워크스페이스
+# Career Harness
 
-이 저장소는 이력서와 포트폴리오를 작성, 정리, 개선하기 위한 작업 공간입니다. 사실 기준 문서, 작성 가이드, 설계/계획 문서, 현재 산출물을 함께 두고 문서 제작 흐름을 관리합니다.
+Career Harness는 사용자가 기존 이력서, LinkedIn, 경력기술서, 프로젝트 문서, GitHub 자료를 넣으면 AI와 함께 한국어 마스터 이력서와 슬라이드형 HTML 포트폴리오를 만드는 GitHub Template Repository다.
 
-## 프로젝트 요약
+원본, AI 메모리, 초안, 최종 산출물을 분리하고 모든 중요한 경력 주장에 provenance를 연결한다. Codex, Claude Code, Cursor는 동일한 `AGENTS.md`, `memory/`, `.agents/skills/`를 사용한다.
 
-- 목적: 이력서와 포트폴리오를 일관된 기준으로 제작하고 업데이트하기
-- 성격: 최종 결과물만 모아둔 폴더가 아니라, 작성 근거와 중간 계획까지 함께 관리하는 문서 작업 저장소
-- 구성: 사실 기준 문서, 작성 가이드, 계획 문서, 최종 산출물, 일부 로컬 보조 스킬이 함께 존재
+## Quick Start
 
-## 현재 산출물
+```bash
+uv sync
+./scripts/harness init
+```
 
-- `resume/product-engineer.md`: 현재 정본이자 사실 기준으로 사용하는 제품 엔지니어 이력서
-- `resume/cupix-ax-operations-engineer.md`: 큐픽스 AX Operations Engineer 지원용 맞춤 이력서
-- `portfolio/html/heewung-song-portfolio.html`: **현재 대표 종합 포트폴리오.** v4에서 버전 접미사를 제거한 정본이다. v3의 4개 챕터·30장 구성과 문구·수치를 그대로 두고 레이아웃 언어만 편집 스플릿으로 재설계했다. 좌측 서사 컬럼과 우측 증거 패널을 헤어라인으로 나누고, 표지에만 쓰던 그라디언트 배경을 전 슬라이드에 적용한다. 슬라이드마다 콘텐츠 밀도에 맞춰 세 가지 레이아웃 모드(서사 주도 2컬럼 · 증거 주도 2컬럼 · 상단 서사 밴드 + 전체 폭 증거)를 골라 쓴다. 작업 기록은 `docs/plans/2026-08-27-portfolio-v4-split-layout.md`다
-- `portfolio/pdf/heewung-song-portfolio-v4.pdf`: **현재 대표 포트폴리오 PDF.** v4 30장을 16:9(1152×648pt) 벡터 PDF로 뽑았다. 화면 캡처를 이미지로 묶는 방식이 아니라 Chromium 인쇄 경로를 써서 텍스트가 선택되고 연락처·GitHub 링크가 살아 있다. 빌드는 `scripts/build_portfolio_pdf.py`
-- `case-studies/outbound-voice-agent.md`: 아웃바운드 Voice AI Agent 케이스 스터디
-- `case-studies/inbound-voice-agent.md`: 인바운드 Voice AI Agent 케이스 스터디
-- `case-studies/hospital-customer-support-agent.md`: 병원 고객상담 AI Agent 케이스 스터디
-- `portfolio/assets/heewung-song-infographic.png`: 이력서와 함께 쓰는 시각 자료 자산
-- `portfolio/assets/hospital-customer-support-agent-ppt-overview.png`: 병원 고객상담 AI Agent 개요·아키텍처 슬라이드 이미지
-- `portfolio/assets/hospital-customer-support-agent-ppt-flow.png`: 병원 고객상담 AI Agent 흐름·설계 의사결정 슬라이드 이미지
-- `portfolio/assets/customer-support-chat-step1.png`, `portfolio/assets/customer-support-chat-complete.png`: 공개 개발 서비스에서 검증한 정보 응답·개인정보 수집·상담 신청 흐름 캡처
-- `portfolio/assets/cupix-ax-operations-screen.png`, `portfolio/assets/cupix-ax-analytics-screen.png`: 로컬 Agent Admin의 실제 PROD 집계 화면에서 비식별 상단 영역만 캡처한 인바운드 운영 현황·통화 분석 v2 증거 이미지
-- `portfolio/assets/agent-admin-call-classification-evidence.png`: 실제 통화 상세의 예약·정보·상담원·종료 분류 카드 중 개인·병원·통화 식별정보를 완전히 제외한 규칙 기반 다중 분류 증거 이미지
-- `portfolio/assets/aiu-web-knowledge-answer.png`, `portfolio/assets/aiu-slack-knowledge-answer.jpg`: 동일한 AIU 지식 질문을 Web·Slack에서 실행한 서비스 증거 화면
-- `portfolio/assets/agent-admin-warm-transfer-evidence.png`: 실제 Warm Transfer의 대기열 진입·DTMF 수락·연결 성공·AI 브리핑을 보여주는 비식별 운영 증거 화면
+자료를 추가한다.
 
-## 저장소 구성
+```text
+sources/files/        PDF, DOCX, Markdown, TXT, HTML
+sources/web/          인증정보 없는 웹 스냅샷
+sources/github/       공개 GitHub 메타데이터
+sources/interviews/   사용자 인터뷰 답변
+sources/screenshots/  승인된 이미지 증거
+```
 
-- `resume/product-engineer.md`: 현재 사실 기준(source-of-truth)으로 사용하는 이력서
-- `docs/guides/`: 재사용 가능한 이력서 작성 가이드와 채용공고 검색 가이드
-- `docs/plans/`: 문서 구조, 케이스 스터디, 저장소 문서화 관련 설계 및 구현 계획
-- `resume/`: 최종 이력서 산출물
-- `case-studies/`: 개별 프로젝트 기반 케이스 스터디 문서
-- `portfolio/html/`: 직접 편집하는 포트폴리오 HTML 원본
-- `portfolio/pdf/`: 제출과 공유에 사용하는 포트폴리오 PDF
-- `portfolio/assets/`: 포트폴리오와 케이스 스터디에 사용하는 이미지와 시각 자료
-- `portfolio/dist/`: Cloudflare Pages 배포 시 생성되는 사이트 결과물(Git 제외)
-- `scripts/build_portfolio_pdf.py`: 현재 v4 HTML을 30쪽 16:9 벡터 PDF로 인쇄하고 페이지 크기·텍스트·외부 링크를 검증하는 빌드 스크립트
-- `scripts/build_portfolio_site.sh`: v4 HTML과 공개에 필요한 이미지 5개만 `portfolio/dist/`에 모아 Cloudflare Pages 배포본을 만드는 빌드 스크립트
-- `.agents/skills/`: 에이전트별 중복 없이 공통으로 사용하는 로컬 스킬 모음
+AI에게 요청한다.
 
-## 추천 읽기 순서
+```text
+$career-intake를 사용해 sources를 먼저 읽고 커리어 인터뷰를 시작해줘.
+이미 확인된 내용은 다시 묻지 마.
+```
 
-1. `README.md`로 저장소 목적과 구조를 파악합니다.
-2. `resume/product-engineer.md`로 사실 기반 경력 재료와 현재 정본 이력서를 함께 확인합니다.
-3. `docs/guides/resume-guide.md`로 작성 원칙을 확인합니다.
-4. 채용공고 탐색 작업이 필요할 때는 `docs/guides/job-search-protocol.md`를 확인합니다.
-5. 필요할 때 현재 이력서 표현을 가이드 기준으로 다듬습니다.
-6. `case-studies/outbound-voice-agent.md`, `case-studies/inbound-voice-agent.md`, `case-studies/hospital-customer-support-agent.md`에서 프로젝트 케이스 스터디 문서를 읽습니다.
-7. 필요할 때만 `docs/plans/`에서 설계 의도와 작업 계획을 확인합니다.
+자세한 온보딩은 `START_HERE.md`를 따른다.
 
-## 포트폴리오 웹 배포
+## Data Flow
 
-Cloudflare Pages는 GitHub의 `main` 브랜치와 연결한다. 빌드 명령은 `bash scripts/build_portfolio_site.sh`, 빌드 출력 디렉터리는 `portfolio/dist`를 사용한다. `main`에 새 커밋을 푸시하면 v4 포트폴리오가 자동으로 다시 배포된다.
+```text
+sources/ -> memory/ -> drafts/ -> resume|case-studies|portfolio/
+```
+
+- `sources/`: 수정하지 않는 사용자 원본과 스냅샷
+- `memory/`: AI가 자동 관리하는 출처 기반 커리어 메모리
+- `targets/`: 채용공고와 맞춤 전략
+- `drafts/`: outline, 전략, 승인 전 초안
+- `resume/`: Markdown 마스터·맞춤 이력서와 PDF
+- `case-studies/`: 프로젝트 케이스 스터디
+- `portfolio/`: HTML, PDF, 시각 자산, 배포 결과
+
+## Canonical Files
+
+- `AGENTS.md`: 멀티 에이전트 운영 계약
+- `harness.yaml`: 제품 설정
+- `sources/manifest.yaml`: 원본 manifest
+- `memory/state.yaml`: 사용자 작업 상태
+- `.agents/skills/`: 공통 스킬 정본
+- `privacy.allowlist.yaml`: 공개 연락처 허용 목록
+
+Claude Code와 Cursor 어댑터는 정본을 복제하지 않는다.
+
+```bash
+uv run python scripts/setup_agents.py
+uv run python scripts/setup_agents.py --check
+```
+
+## Skills
+
+- `career-intake`: source 분석과 집중 인터뷰
+- `career-memory`: 자동 메모리, provenance, 충돌 보존
+- `master-resume`: 한국어 마스터 이력서
+- `targeted-resume`: 마스터 기반 맞춤 이력서
+- `career-review`: 사실·출처·개인정보·품질 감사
+- `career-portfolio`: outline, 3개 테마, 슬라이드 HTML·PDF·시각 QA
+- `agent-browser`: 로그인된 웹 자료 읽기
+- `visualize`: 범용 HTML 시각화
+
+## CLI
+
+```bash
+./scripts/harness init
+./scripts/harness ingest sources/files/FILE
+./scripts/harness check
+./scripts/harness build resume
+./scripts/harness build portfolio
+./scripts/harness preview
+./scripts/harness deploy
+```
+
+개별 모듈 명령과 인터뷰 기록 방법은 `START_HERE.md`와 `docs/workflow.md`에 있다.
+
+## Resume
+
+- 정본: `resume/master.md`
+- 맞춤 이력서: `resume/tailored/<target>.md`
+- PDF: `resume/master.pdf`
+- 템플릿: `templates/resume/`
+
+Markdown을 semantic HTML로 변환하고 Chromium으로 A4 PDF를 생성한다. 페이지 수, A4 크기, 링크, 텍스트 추출, 가로 overflow를 검사한다.
+
+## Portfolio
+
+- outline: `drafts/portfolio/outline.yaml`
+- HTML: `portfolio/html/index.html`
+- PDF: `portfolio/pdf/portfolio.pdf`
+- 자산: `portfolio/assets/`
+- 배포본: `portfolio/dist/`
+
+기본 목표는 10장이며 자료에 따라 7~15장으로 조정한다. 모든 테마는 같은 semantic HTML과 컴포넌트를 사용한다.
+
+- `editorial`: 서사와 증거의 균형
+- `minimal`: 절제된 기업·컨설팅 스타일
+- `technical`: 시스템·아키텍처 중심
+
+렌더러는 1920×1080 PNG, contact sheet, 16:9 PDF를 만들고 overflow, 페이지 수, 크기, 텍스트 추출을 검사한다.
+
+## Quality Gates
+
+```bash
+uv run pytest -q
+uv run ruff check scripts tests
+./scripts/harness check
+```
+
+통합 검사는 다음을 다룬다.
+
+- YAML·JSON Schema와 source refs
+- conflicted·비공개·출처 없는 claim
+- 깨진 로컬 링크와 이미지
+- alt text
+- 비밀 키와 non-allowlisted 연락처
+- 에이전트 adapter drift
+- 포트폴리오 slide IDs와 memory IDs
+
+## Synthetic End-to-End Test
+
+`examples/sample-candidate/`는 실제 개인정보가 없는 합성 후보자다.
+
+```bash
+uv run python -m scripts.e2e_sample
+```
+
+이 명령은 A4 이력서 PDF, 10장 포트폴리오 PDF, 슬라이드 PNG, contact sheet, 정적 사이트와 검증 보고서를 `tmp/pdfs/e2e-sample/`에 생성한다.
+
+## CI and Deployment
+
+- `.github/workflows/check.yml`: push·PR 품질 검사
+- `.github/workflows/deploy-pages.yml`: `portfolio/html/index.html`이 있을 때 GitHub Pages 배포
+- `./scripts/harness preview`: 로컬 정적 사이트 미리보기
+
+GitHub Pages가 기본 배포 대상이며 Cloudflare Pages는 선택적 어댑터로 확장할 수 있다.
+
+## Design and Implementation
+
+- 제품 설계: `docs/plans/2026-08-27-career-harness-product-design.md`
+- 구현 계획·상태: `docs/plans/2026-08-27-career-harness-implementation.md`
+- 사용자·AI 작업 흐름: `docs/workflow.md`

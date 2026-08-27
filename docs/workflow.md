@@ -1,140 +1,142 @@
-# 워크플로우 문서
+# Career Harness Workflow
 
-이 저장소는 이력서와 포트폴리오를 만들고 다듬기 위한 작업 공간이다. 핵심은 사실 기준 문서를 보존하고, 가이드와 설계 문서를 참고해 최종 산출물을 점진적으로 개선하는 것이다.
+## 1. Authority
 
-## 1. 저장소를 보는 기준
+```text
+사용자 최신 교정
+-> sources 불변 원본
+-> provenance-backed memory
+-> target 전략
+-> drafts
+-> 최종 산출물
+```
 
-### 1.1 사실 기준 문서 (source-of-truth)
+최종 이력서와 포트폴리오는 새로운 사실의 원본이 아니다. 충돌이 발견되면 memory를 먼저 수정하고 산출물을 다시 만든다.
 
-이 범주의 문서는 실제 경력, 프로젝트, 기술, 성과를 정리한 기준 데이터다. 표현 방식은 바뀔 수 있어도 사실 자체를 가장 우선해서 유지해야 한다.
+## 2. Initialize
 
-- `resume/product-engineer.md`: 현재 정본이자 경력, 프로젝트, 기술 스택, 활동 이력을 관리하는 사실 기준 이력서
+```bash
+uv sync
+./scripts/harness init
+./scripts/harness check
+```
 
-실무 원칙:
+`init`은 기존 사용자 데이터를 덮어쓰지 않고 필요한 디렉터리와 에이전트 어댑터를 준비한다.
 
-- 새로운 경력이나 프로젝트 사실을 추가할 때는 먼저 이 범주의 문서를 갱신한다.
-- 최종 이력서나 포트폴리오에서 표현을 줄이거나 재구성하더라도, 근거는 항상 이 범주에서 가져온다.
+## 3. Collect Sources
 
-### 1.2 가이드와 계획 문서 (guidelines and plans)
+로컬 파일:
 
-이 범주의 문서는 무엇을 어떻게 쓸지 정하는 기준과 설계 문서다. 사실 데이터 자체를 담기보다는, 어떤 관점으로 문서를 편집할지 안내한다.
+```bash
+./scripts/harness ingest sources/files/FILE
+```
 
-- `docs/guides/resume-guide.md`: 이력서 구조, 문체, 성과 표현, ATS 대응 등 재사용 가능한 작성 가이드
-- `docs/guides/job-search-protocol.md`: 원하는 포지션과 스펙을 바탕으로 적합한 채용공고를 찾기 위한 내부 검색 프로토콜
-- `docs/plans/2026-03-07-outbound-voice-agent-portfolio-design.md`: 아웃바운드 보이스 에이전트 포트폴리오의 구성과 강조 포인트를 정리한 설계 문서
-- `docs/plans/`: 저장소 문서화나 산출물 정리를 위한 작업 계획 문서 모음
+로그인된 웹 페이지:
 
-실무 원칙:
+1. 사용자가 접근 권한을 가진 브라우저 세션에서 텍스트를 읽는다.
+2. 쿠키·토큰·세션 상태를 저장하지 않는다.
+3. 인증정보 없는 텍스트를 등록한다.
 
-- 새 문서를 쓰기 전에 먼저 가이드와 설계 문서를 확인해 톤, 구조, 강조 지점을 맞춘다.
-- 설계 문서는 최종 산출물과 동일하지 않을 수 있으므로, 초안 작성 시 실제 파일명과 연결 관계를 별도로 확인한다.
+```bash
+uv run python -m scripts.lib.ingest_web_snapshot \
+  --url "https://example.com/profile" \
+  --title "Profile" \
+  --input /tmp/profile.txt
+```
 
-### 1.3 최종 산출물 (final outputs)
+GitHub:
 
-이 범주의 문서는 외부에 보여주기 위한 현재 결과물이다. 지원용 이력서, 프로젝트 케이스 스터디, 필요 시 시각 자료가 여기에 해당한다.
+```bash
+uv run python -m scripts.lib.ingest_github USERNAME
+```
 
-- `resume/product-engineer.md`: 현재 메인 이력서 산출물이자 사실 기준 문서
-- `portfolio/html/heewung-song-portfolio.html`: 현재 유일한 종합 포트폴리오 HTML 정본이다. 4개 챕터·30장 구성에 편집 스플릿 레이아웃을 사용한다. 레이아웃은 슬라이드마다 세 모드 중 하나를 쓴다: `.split`(서사 주도 2컬럼), `.split.split-ev`(증거 주도 2컬럼), `.lead`+`.lead-body`(상단 서사 밴드 + 전체 폭 증거). 다이어그램이 폭을 필요로 하는 장은 세 번째 모드를 쓴다. 작업 기록은 `docs/plans/2026-08-27-portfolio-v4-split-layout.md`다.
-- `portfolio/pdf/heewung-song-portfolio-v4.pdf`: v4의 16:9 벡터 PDF(30쪽). `uv run --with playwright --with pypdf python3 scripts/build_portfolio_pdf.py`로 다시 뽑는다. v4 HTML을 고치면 이 PDF도 다시 빌드한다.
-- `case-studies/outbound-voice-agent.md`: 아웃바운드 Voice AI Agent 케이스 스터디
-- `case-studies/inbound-voice-agent.md`: 인바운드 Voice AI Agent 케이스 스터디
-- `case-studies/hospital-customer-support-agent.md`: 병원 고객상담 AI Agent 케이스 스터디
-- `portfolio/assets/heewung-song-infographic.png`: 이력서와 함께 사용할 수 있는 시각 자료
-- `portfolio/assets/hospital-customer-support-agent-ppt-overview.png`: 병원 고객상담 AI Agent 개요·아키텍처 시각 자료
-- `portfolio/assets/hospital-customer-support-agent-ppt-flow.png`: 병원 고객상담 AI Agent 흐름·설계 의사결정 시각 자료
-- `portfolio/assets/agent-admin-call-classification-evidence.png`: 실제 통화 상세의 규칙 기반 분류 카드에서 개인·병원·통화 식별정보를 제외한 CH 02 증거 이미지
+인터뷰 답변:
 
-실무 원칙:
+```bash
+uv run python -m scripts.lib.record_interview \
+  --topic "..." \
+  --question "..." \
+  --answer "..."
+```
 
-- 이 범주의 문서는 직접 배포하거나 제출할 수 있는 상태를 목표로 관리한다.
-- 표현을 수정할 때는 사실 기반 원문과 가이드 문서에 어긋나지 않는지 먼저 확인한다.
+## 4. Build Memory
 
-### 1.4 로컬 스킬과 런타임 상태 (local skills and runtime state)
+1. `$career-intake`로 sources와 기존 memory를 비교한다.
+2. 이미 확인된 내용은 다시 묻지 않는다.
+3. 사용자 답변을 interview source로 기록한다.
+4. `$career-memory`로 stable ID, source refs, status를 포함해 병합한다.
+5. 자동 충돌은 덮어쓰지 않고 `memory/conflicts.yaml`에 둔다.
+6. `memory/changelog.md`와 `memory/state.yaml`을 갱신한다.
 
-이 범주는 문서 자체보다 작업 보조 수단과 로컬 실행 흔적에 해당한다. 공통 로컬 스킬은 `.agents/skills/`에서 관리하며, 런타임 상태 경로는 로컬 환경에서 생성될 수 있는 부가 요소로 본다. 이 범주는 최종 산출물의 근거 문서로 취급하지 않는다.
+```bash
+uv run python -m scripts.lib.validate_memory
+```
 
-- `.agents/skills/agent-browser/`: 브라우저 자동화 스킬
-- `.agents/skills/visualize/`: HTML 시각화 제작 스킬
-- `.omx`, `.omc`: 로컬에서 생성될 수 있는 런타임 상태나 로그용 무시 대상 경로
+## 5. Master Resume
 
-실무 원칙:
+1. blocking conflict를 해결하거나 해당 사실을 제외한다.
+2. `$master-resume`으로 `resume/master.md`를 만든다.
+3. visible public claim은 verified 상태와 source refs를 가져야 한다.
+4. 중요한 bullet 옆에 claim ID HTML comment를 둔다.
+5. PDF를 빌드한다.
 
-- 이 범주는 문서 작업을 보조하지만, 이력이나 프로젝트 사실의 source-of-truth는 아니다.
-- 런타임 상태 경로는 저장소의 핵심 문서 체계라기보다 로컬 작업 중 생성될 수 있는 운영 보조 요소로만 다룬다.
+```bash
+./scripts/harness build resume
+```
 
-## 2. 실제 작업 순서
+## 6. Targeted Resume
 
-이 저장소의 기본 흐름은 아래 순서를 따른다.
+```text
+targets/<slug>/job-description.md
+targets/<slug>/strategy.md
+resume/tailored/<slug>.md
+```
 
-### 2.1 사실 자료 수집
+`$targeted-resume`은 마스터의 Summary, 순서, 강조, 키워드, 분량만 바꾼다. 새로운 경력 사실은 memory와 master에 먼저 반영한다.
 
-먼저 경력, 프로젝트, 기술 스택, 수치 성과 같은 사실 정보를 모은다.
+## 7. Portfolio
 
-- 기본 시작점은 `resume/product-engineer.md`다.
-- 새 프로젝트를 문서화할 때도 먼저 사실, 역할, 기간, 성과, 사용 기술을 정리한다.
+1. `$career-portfolio`로 narrative와 대표 프로젝트를 결정한다.
+2. `drafts/portfolio/outline.yaml`을 먼저 만든다.
+3. 슬라이드별 purpose, claim IDs, evidence IDs를 검증한다.
+4. editorial, minimal, technical 중 테마를 선택한다.
+5. HTML과 PDF를 빌드한다.
 
-### 2.2 작성 및 설계 기준 정의
+```bash
+./scripts/harness build portfolio
+```
 
-다음으로 어떤 메시지와 구조로 보여줄지 정한다.
+렌더 결과는 `tmp/pdfs/portfolio/`의 PNG와 contact sheet에서 확인한다. 생성된 `portfolio/dist/`는 직접 편집하지 않는다.
 
-- 이력서 작성 원칙은 `docs/guides/resume-guide.md`를 기준으로 삼는다.
-- 채용공고 탐색 작업은 `docs/guides/job-search-protocol.md`를 기준으로 검색 입력값, 사이트별 탐색 순서, 적합도 판단 방식을 맞춘다.
-- 특정 프로젝트 케이스 스터디 문서는 관련 설계 문서를 함께 본다.
-- 아웃바운드 보이스 에이전트 케이스 스터디는 `docs/plans/2026-03-07-outbound-voice-agent-portfolio-design.md`를 참고한다.
-- 인바운드 보이스 에이전트 케이스 스터디는 `docs/plans/2026-03-07-inbound-voice-agent-portfolio-design.md`를 참고한다.
-- 병원 고객상담 AI Agent 케이스 스터디는 `docs/plans/2026-03-07-hospital-customer-support-agent-design.md`를 참고한다.
+## 8. Review
 
-### 2.3 최종 문서 작성 또는 개선
+`$career-review`는 기본적으로 산출물을 다시 쓰지 않고 P0–P3 findings를 보고한다.
 
-기준이 정리되면 실제 산출물을 작성하거나 다듬는다.
+- P0: credential, privacy, fabricated fact, serious attribution
+- P1: wrong date/metric/title, conflicted claim, broken required artifact
+- P2: weak evidence, unclear ownership, ATS/relevance, visual readability
+- P3: wording and polish
 
-- 이력서 작업은 `resume/product-engineer.md`를 중심으로 진행한다.
-- 프로젝트 케이스 스터디 작업은 대상 문서에 맞는 `case-studies/*.md` 파일을 중심으로 진행한다.
-- 종합 포트폴리오의 구조나 중심 메시지를 바꿀 때는 `docs/plans/2026-08-24-general-portfolio-narrative-design.md`를 기준으로 Voice AI, 통화 지표 자동화, AIU가 하나의 문제 해결 패턴으로 연결되는지 확인한다.
-- 종합 포트폴리오의 AIU 업무지원 Agent 장을 수정할 때는 `docs/plans/2026-08-24-aiu-portfolio-expansion-design.md`를 기준으로 Supervisor·지식·운영 데이터·OpenBot 실행 경계가 분리되어 있는지 확인한다.
-- 이 단계에서는 내용을 압축하거나 재배치할 수 있지만, 사실 왜곡 없이 사실 기준 문서를 바탕으로 수정해야 한다.
+수정을 요청받은 경우에도 source와 memory를 먼저 고친다.
 
-### 2.4 필요 시 보조 자산 생성
+## 9. Check, Preview, Deploy
 
-문서 이해를 돕기 위한 이미지나 다이어그램이 필요하면 마지막 단계에서 생성한다.
+```bash
+./scripts/harness check
+./scripts/harness preview
+./scripts/harness deploy
+```
 
-- 생성하거나 수집한 포트폴리오 시각 자산은 `portfolio/assets/`에 보관한다.
-- 보조 자산은 문서의 핵심 내용을 대체하는 것이 아니라, 이미 정리된 내용을 더 잘 전달하기 위한 수단으로 사용한다.
+GitHub Actions는 unit tests, Ruff, memory schema, adapters, integrated quality gates를 실행한다. main의 `portfolio/html/index.html`이 준비되면 GitHub Pages artifact를 배포한다.
 
-### 2.5 종합 포트폴리오 웹 배포
+## 10. Completion
 
-Cloudflare Pages는 GitHub의 `main` 브랜치와 연결한다. `main`에 푸시하면 `bash scripts/build_portfolio_site.sh`를 실행해 `portfolio/dist/`를 만들고 자동 배포한다. 빌드 결과에는 `portfolio/html/heewung-song-portfolio.html`을 `index.html`로 변환한 파일과 실제 참조하는 이미지 5개만 포함한다. 저장소 루트 전체를 배포 디렉터리로 지정하지 않는다.
-
-## 3. 현재 저장소 기준 운영 메모
-
-현재 상태를 기준으로 작업할 때 아래 사항을 알고 있어야 한다.
-
-### 3.1 계획 문서명과 실제 산출물 파일명이 다를 수 있다
-
-설계 문서는 주제 기준으로 이름이 붙어 있고, 실제 결과 문서는 목적에 맞는 별도 파일명을 사용할 수 있다.
-
-- 케이스 스터디 설계 문서: `docs/plans/2026-03-07-outbound-voice-agent-portfolio-design.md`
-- 실제 케이스 스터디 산출물: `case-studies/outbound-voice-agent.md`
-- 저장소 문서화 설계 문서: `docs/plans/2026-03-07-repo-documentation-design.md`
-- 저장소 문서화 구현 계획: `docs/plans/2026-03-07-repo-documentation.md`
-- 실제 문서화 결과 파일: `README.md`, `docs/workflow.md`
-
-따라서 작업자는 "계획 문서를 수정하는지", "최종 산출물을 수정하는지"를 항상 구분해야 한다.
-
-### 3.2 현재 프로젝트 케이스 스터디는 3건 정리되어 있다
-
-현재 저장소에서 정리된 프로젝트 케이스 스터디는 3건이다.
-
-- `case-studies/outbound-voice-agent.md`: 아웃바운드 Voice AI Agent
-- `case-studies/inbound-voice-agent.md`: 인바운드 Voice AI Agent (아웃바운드의 시리즈 후속편)
-- `case-studies/hospital-customer-support-agent.md`: 병원 고객상담 AI Agent
-
-추가 프로젝트를 확장하려면 먼저 사실 자료를 정리하고, 필요한 경우 별도 설계 문서를 만든 뒤 `case-studies/` 아래 케이스 스터디 문서를 늘리는 방식이 적절하다.
-
-## 4. 권장 작업 방식
-
-이 저장소에서 문서를 만들 때는 아래 기준을 유지하는 것이 좋다.
-
-- 사실 업데이트는 먼저 사실 기준 문서에 반영한다.
-- 표현 개선은 가이드와 설계 문서를 확인한 뒤 최종 산출물에 적용한다.
-- 이미지 생성이나 시각 자산 제작은 문서 구조와 메시지가 정리된 뒤에 진행한다.
+- 모든 중요한 사실이 허용된 status와 provenance를 가진다.
+- unresolved conflict가 final output에 없다.
+- 마스터와 맞춤 이력서가 같은 사실을 사용한다.
+- HTML·Markdown 로컬 링크와 이미지가 유효하다.
+- 공개 연락처는 allowlist에 있다.
+- 이력서 PDF는 A4, 포트폴리오 PDF는 16:9다.
+- PDF 텍스트와 링크가 살아 있다.
+- 포트폴리오 PNG와 contact sheet에 clipping·overflow가 없다.
+- `memory/state.yaml`에 완료 단계와 남은 질문이 반영된다.
