@@ -5,6 +5,8 @@
 **선행 문서:** `docs/plans/2026-08-24-general-portfolio-narrative-design.md`
 **사실 근거:** `resume/product-engineer.md`, 각 프로젝트 OpenWiki
 
+> **2026-08-26 최신 구조 알림:** CH 01은 7장, CH 02는 28개 규칙 기반 통화 분류를 추가한 8장이다. CH 03은 `docs/plans/2026-08-26-portfolio-v3-ch3-redesign.md`에서 재설계 중이며, LangGraph 아키텍처·상태 흐름·병원별 지식 검색을 포함한 현재 5장이다. 전체 덱은 30장이고 CH 03·04 시작 인덱스는 19·24다. CH 04는 `docs/plans/2026-08-27-portfolio-v3-ch4-redesign.md`에서 재설계한 6장이다. 아래의 초기 장수·예산은 이전 의사결정 기록으로 보존한다.
+
 ## 문제 정의
 
 v2는 다섯 챕터가 모두 같은 틀을 쓴다. `Background → Process → Outcome → My Role` + `Problem State → Designed System`.

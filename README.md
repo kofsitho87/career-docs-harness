@@ -14,7 +14,7 @@
 - `resume/cupix-ax-operations-engineer.md`: 큐픽스 AX Operations Engineer 지원용 맞춤 이력서
 - `portfolio/heewung-song-portfolio.html`: 반복 운영 업무를 프로덕션 AI 시스템으로 바꿔 온 커리어를 중심으로, 병원 Voice AI·고객상담·통화 지표 자동화·사내 업무지원 Multi-Agent(AIU)를 연결한 슬라이드형 종합 포트폴리오
 - `portfolio/heewung-song-portfolio-v2.html`: 같은 28장 서사를 유지한 채 시각 위계(Chapter → Problem → System boundary → Evidence → My Role)와 슬라이드별 다이어그램 언어를 재설계한 개선 버전
-- `portfolio/heewung-song-portfolio-v3.html`: 4개 챕터·26장으로 구조를 재설계한 현재 대표 종합 포트폴리오. 각 챕터가 `① 무엇인가 → ② 기능별 실패 사례·의도적 경계 → ③ 결과와 한계`의 동일한 3단 리듬을 따르며, 병원 전화 Voice AI(인/아웃바운드 통합)·통화 관측과 평가·챗봇 고객상담·AIU 사내 업무지원 순으로 전개된다
+- `portfolio/heewung-song-portfolio-v3.html`: 4개 챕터·30장으로 구조를 재설계한 현재 대표 종합 포트폴리오. 병원 전화 Voice AI 7장, 통화 분석 및 평가 8장, 병원 고객상담 AI Agent 5장, AIU 사내 업무지원 6장에 오프닝 3장과 클로징 1장을 더한다. CH 01은 인·아웃바운드 소개 → 전체 시스템 → LiveKit → 안전한 예약 → 상담원 연결 → 공용 대기줄 → 성과와 배운 점, CH 02는 분석 시스템 → 통화 복원 → 28개 규칙 분류 → 업무/통화 결과 → LLM 평가 → 현황 확인 → 문제 진단 → 운영 개선 순으로 전개되며, CH 03은 프로젝트 소개 → LangGraph 기반 상담 시스템 아키텍처 → 상태 기반 상담 흐름 → 병원별 지식 검색 → 운영 가능한 서비스 경계와 배운 점 순으로, CH 04는 사내 AX 프로젝트 소개 → 구조와 기술 → 성과 확인 → 통화 검토 → 문의 응대 → 확장 비전(AX 자동화) 순으로 전개된다
 - `portfolio/cupix-ax-aiu-case-study.html`: 큐픽스 지원용 AIU AX 인터랙티브 시각 사례 — AIU 프로젝트 1건을 깊게 파고드는 단일 프로젝트 딥다이브
 - `portfolio/cupix-ax-career-story.html`: 큐픽스 지원용 커리어 저니 내러티브 — 아웃바운드·인바운드·고객상담·통화 지표 자동화·AIU까지 다섯 프로젝트가 하나의 반복 업무 자동화 패턴으로 이어지는 과정을 보여주는 스토리텔링형 페이지. `cupix-ax-aiu-case-study.html`을 대체하지 않고, 그 산출물이 어떤 경력 위에서 나왔는지 보여주는 동반 문서로 존재한다.
 - `output/pdf/heewung-song-ai-product-engineer-portfolio.pdf`: 종합 포트폴리오 28장을 16:9 페이지로 변환한 원티드 업로드용 PDF
@@ -26,8 +26,10 @@
 - `assets/hospital-customer-support-agent-ppt-overview.png`: 병원 고객상담 AI Agent 개요·아키텍처 슬라이드 이미지
 - `assets/hospital-customer-support-agent-ppt-flow.png`: 병원 고객상담 AI Agent 흐름·설계 의사결정 슬라이드 이미지
 - `assets/customer-support-chat-step1.png`, `assets/customer-support-chat-complete.png`: 공개 개발 서비스에서 검증한 정보 응답·개인정보 수집·상담 신청 흐름 캡처
-- `assets/cupix-ax-operations-screen.png`, `assets/cupix-ax-analytics-screen.png`: Agent Admin 매뉴얼의 인바운드 운영 현황·통화 분석 v2 화면
+- `assets/cupix-ax-operations-screen.png`, `assets/cupix-ax-analytics-screen.png`: 로컬 Agent Admin의 실제 PROD 집계 화면에서 비식별 상단 영역만 캡처한 인바운드 운영 현황·통화 분석 v2 증거 이미지
+- `assets/agent-admin-call-classification-evidence.png`: 실제 통화 상세의 예약·정보·상담원·종료 분류 카드 중 개인·병원·통화 식별정보를 완전히 제외한 규칙 기반 다중 분류 증거 이미지
 - `assets/aiu-web-knowledge-answer.png`, `assets/aiu-slack-knowledge-answer.jpg`: 동일한 AIU 지식 질문을 Web·Slack에서 실행한 서비스 증거 화면
+- `assets/agent-admin-warm-transfer-evidence.png`: 실제 Warm Transfer의 대기열 진입·DTMF 수락·연결 성공·AI 브리핑을 보여주는 비식별 운영 증거 화면
 
 ## 저장소 구성
 

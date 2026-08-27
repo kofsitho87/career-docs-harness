@@ -59,6 +59,18 @@ Self-hosted LiveKit 기반 실시간 음성 처리, 안전한 Tool Calling과 Ag
 | 확인 불가 cold 전환     | 15,798건 (성사 집계에서 제외)                           |
 | 활성 병원 · 활동 유지율    | 130곳 (2026-08 MTD) · 91.1% (2026-07 기준)        |
 
+인바운드 Analytics v2 운영 스냅샷 (2026-08-13 ~ 08-26 prod, 분석 완료 통화 20,151건 기준):
+
+| 지표 | 수치 |
+| --- | --- |
+| AI 단독 처리율 | 7.4% · 1,482 / 20,151건 (상담원 연결·메모 접수 없이 완료) |
+| 예약 조회 요청 완료율 | 91.0% · 694 / 763건 |
+| 예약 취소 요청 완료율 | 36.6% · 146 / 399건 |
+| 예약 신청 요청 완료율 | 16.8% · 535 / 3,192건 |
+| 예약 변경 요청 완료율 | 10.5% · 233 / 2,209건 |
+
+업무별 완료율은 해당 업무의 시도 단위 결과이며 전체 통화 수치와 합산하지 않는다. 예약 신청의 완료는 신청 정보 기록을 뜻하며 EMR 최종 확정이 아니다. 예약 변경·취소 완료율도 요청 흐름의 완료를 뜻하며 실제 EMR 예약 상태 변경·취소 수치로 해석하지 않는다.
+
 146.4시간은 AI가 수행한 응대 시간이며 절감된 인건비가 아니다. 수동 처리 시간과 후처리 데이터가 없어 절감분은 계산할 수 없다. 활성 고객 구성이 기간 중 크게 달라져 월별 변화를 제품 성능 변화로 귀속할 수 없다.
 
 
@@ -125,6 +137,7 @@ AIU 제품과 운영 정보를 여러 사내 시스템에서 찾아야 하는 �
 실시간 통화와 분석 부하를 분리하면서도 한 통화의 업무 결과와 품질을 재구성할 수 있는 Kafka 기반 후처리·평가 파이프라인을 구축했습니다.
 
 - 대화 transcript, 구조화 Agent event, 녹음과 단계별 latency metric을 Kafka로 전달하고, `room_name` 기준 멱등 처리와 재처리가 가능한 Consumer를 구현해 분석 장애가 실시간 통화에 영향을 주지 않도록 분리했습니다.
+- 구조화된 developer event를 규칙으로 파싱해 예약 12개, 정보 문의 1개, 상담원 연결·메모 10개, 통화 종료 5개의 `InboundConversationMetadata` boolean 플래그로 분류했습니다. 한 통화에서 여러 활동 플래그가 동시에 참이 될 수 있으며, 이 상세 분류와 Analytics v2의 업무별 시도·통화당 대표 결과를 서로 다른 분석층으로 분리했습니다.
 - 상담원 연결 이후의 녹음 구간을 잘라 전사를 보완하고, 원본 event를 업무별 시도와 통화별 최종 resolution으로 정규화하는 Analytics v2를 설계했습니다. 실패를 단계·유형·개선 주체로 분류해 운영 KPI에서 원인까지 추적할 수 있게 했습니다.
 - 업무 완료는 결정론적 event로, 요청 의도와 응답 품질은 근거 turn을 포함한 Semantic 분석으로 평가했습니다. `task_completion`, `routing_correctness`, `response_quality`를 버전이 있는 Langfuse session score로 발행하도록 구현했습니다.
 - 환자 transcript·임상 정보·식별 정보는 로컬 저장소에 유지하고 비민감 집계값만 Langfuse로 전송했습니다. 통화·점수·평가 버전 기반 idempotency key와 hard-cap 규칙으로 개인정보 경계와 재평가 일관성을 확보했습니다.
@@ -142,6 +155,7 @@ AIU 제품과 운영 정보를 여러 사내 시스템에서 찾아야 하는 �
 - FastAPI gateway가 LangGraph SDK의 thread·run을 호출하고, Thread ID 재사용으로 대화 상태와 개인정보를 이어가도록 구현했습니다. Batch 요청은 Semaphore로 동시성을 제한하고 LangGraph API·PostgreSQL·Redis·FastAPI를 Docker로 묶어 독립 실행 가능한 서비스 경계를 만들었습니다.
 - 웹·Voice·Kakao 등 채널별 응답 규칙과 다국어 메시지, 개인정보 동의 버튼, 예약 안내 경로를 설정으로 분리하고 상담 종료 시 대화 로그를 외부 API에 저장하도록 연결했습니다.
 - 이후 팀이 추가한 `harness_agent`는 내가 설계한 기존 상담 노드와 상태를 team wrapper로 감싸고, `current_node`의 legacy 값을 유지한 채 허용 전이·도구 루프 감시·fast/full controller를 추가했습니다. 초기 상태 모델과 API 경계가 제품 확장을 수용한 구조적 근거를 확인했습니다.
+- 2025년 5월 상용 출시 후 300개 이상 병원에서 운영 중입니다(2026.08 기준). GA4 퍼널(activeUsers) 기준 누적 상담 시작 사용자 7,464명 중 2,987명(40%)이 예약 또는 상담원 연결 단계로 진입했고, 812명(시작 대비 10.9%)이 예약 완료까지 도달했습니다. 챗봇 경유 예약은 전체 예약 21,343건의 약 4%(점유율 3.8%)입니다.
 
 기술: Python, FastAPI, LangGraph, LangGraph SDK, LangChain, Qdrant Hybrid Search, FastEmbed, PostgreSQL, Redis, trustcall, LangSmith, Docker, AWS Elastic Beanstalk, ECR
 
