@@ -1,0 +1,48 @@
+name: Deploy Career Portfolio
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+        with:
+          enable-cache: true
+      - run: uv sync --locked
+      - id: portfolio
+        shell: bash
+        run: |
+          if [[ -f portfolio/html/index.html ]]; then
+            echo "exists=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "exists=false" >> "$GITHUB_OUTPUT"
+            echo "portfolio/html/index.html is absent; skipping Pages deployment"
+          fi
+      - if: steps.portfolio.outputs.exists == 'true'
+        run: ./scripts/harness deploy
+      - if: steps.portfolio.outputs.exists == 'true'
+        uses: actions/configure-pages@v5
+      - if: steps.portfolio.outputs.exists == 'true'
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: portfolio/dist
+      - if: steps.portfolio.outputs.exists == 'true'
+        id: deployment
+        uses: actions/deploy-pages@v4

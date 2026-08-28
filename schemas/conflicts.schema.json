@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://career-harness.local/schemas/conflicts.schema.json",
+  "title": "Memory Conflicts",
+  "type": "object",
+  "required": ["version", "conflicts"],
+  "properties": {
+    "version": {"type": "integer", "const": 1},
+    "conflicts": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "record_id", "field", "values", "status", "resolution", "created_at"],
+        "properties": {
+          "id": {"type": "string", "pattern": "^conflict-[a-z0-9]+(?:-[a-z0-9]+)*$"},
+          "record_id": {"type": "string", "minLength": 1},
+          "field": {"type": "string", "minLength": 1},
+          "values": {
+            "type": "array",
+            "minItems": 2,
+            "items": {
+              "type": "object",
+              "required": ["value", "source_refs"],
+              "properties": {
+                "value": {},
+                "source_refs": {"type": "array", "uniqueItems": true, "items": {"type": "string"}}
+              },
+              "additionalProperties": false
+            }
+          },
+          "status": {"enum": ["open", "resolved"]},
+          "resolution": {"type": ["string", "null"]},
+          "created_at": {"type": "string", "format": "date-time"}
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false
+}

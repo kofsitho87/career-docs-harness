@@ -1,0 +1,19 @@
+:root {
+  --bg: #07131a;
+  --surface: #091b24;
+  --ink: #e7f5f5;
+  --muted: #8fa9ae;
+  --line: #21414a;
+  --accent: #31d7c5;
+  --accent-soft: #103c3e;
+  --display: "Avenir Next", "Apple SD Gothic Neo", sans-serif;
+  --body: "Avenir Next", "Apple SD Gothic Neo", sans-serif;
+  --mono: "IBM Plex Mono", "SFMono-Regular", Consolas, monospace;
+}
+.slide::before { background-image: linear-gradient(rgb(49 215 197 / 6%) 1px, transparent 1px), linear-gradient(90deg, rgb(49 215 197 / 6%) 1px, transparent 1px); background-size: 42px 42px; mask-image: linear-gradient(to bottom right, #000, transparent 72%); }
+.eyebrow, .slide__chrome, .slide__footer { text-shadow: 0 0 16px rgb(49 215 197 / 38%); }
+h1, h2 { font-family: var(--body); font-weight: 700; letter-spacing: -.055em; }
+.slide__header { border-bottom: 1px solid var(--line); padding-bottom: 24px; }
+.motif { background: radial-gradient(circle at 68% 36%, rgb(49 215 197 / 22%), transparent 22%), linear-gradient(135deg, #0b2a34, #07131a); box-shadow: inset 0 0 0 1px rgb(49 215 197 / 16%); }
+.motif span:nth-child(2) { background: #f3af3d; border-color: #f3af3d; opacity: .88; }
+.metric { border-color: var(--accent); background: rgb(16 60 62 / 78%); }

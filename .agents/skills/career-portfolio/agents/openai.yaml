@@ -1,0 +1,4 @@
+interface:
+  display_name: "Career Portfolio"
+  short_description: "Build a verified slide career portfolio"
+  default_prompt: "Use $career-portfolio to design and build my slide portfolio from verified memory."

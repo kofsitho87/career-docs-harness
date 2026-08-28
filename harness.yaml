@@ -1,0 +1,85 @@
+version: 0.1
+
+product:
+  mode: single_user
+  default_language: ko
+  distribution: github_template
+
+agents:
+  canonical_instructions: AGENTS.md
+  canonical_skills: .agents/skills
+  supported:
+    - codex
+    - claude_code
+    - cursor
+
+sources:
+  root: sources
+  immutable: true
+  manifest: sources/manifest.yaml
+  allow_logged_in_browser: true
+  store_auth_state: false
+  project_repository:
+    openwiki_priority: auto
+  supported_types:
+    - pdf
+    - docx
+    - markdown
+    - text
+    - html
+    - web_snapshot
+    - github
+    - project_repository
+    - interview
+    - image
+
+memory:
+  root: memory
+  auto_update: true
+  require_provenance: true
+  preserve_user_edits: true
+  conflict_policy: record_without_overwrite
+  statuses:
+    - verified
+    - inferred
+    - unverified
+    - conflicted
+
+resume:
+  master: resume/master.md
+  tailored_root: resume/tailored
+  default_language: ko
+  source_format: markdown
+  pdf_enabled: true
+  pdf_output: resume/master.pdf
+
+portfolio:
+  format: slide_html
+  source: portfolio/html/index.html
+  pdf_output: portfolio/pdf/portfolio.pdf
+  dist: portfolio/dist
+  pdf_enabled: true
+  slide_count:
+    minimum: 7
+    target: 10
+    maximum: 15
+  themes:
+    default: editorial
+    available:
+      - editorial
+      - minimal
+      - technical
+
+deployment:
+  default: github_pages
+  local_preview: true
+  github_pages: true
+  cloudflare_pages: optional
+
+quality:
+  require_claim_sources: true
+  reject_conflicted_claims: true
+  check_links: true
+  check_assets: true
+  check_sensitive_information: true
+  visual_qa: true

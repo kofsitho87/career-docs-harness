@@ -1,78 +1,161 @@
-# AGENTS.md
+# Career Harness Agent Contract
 
-## 저장소 목적
+## Purpose
 
-이 저장소는 이력서와 포트폴리오를 작성, 정리, 개선하기 위한 작업 공간이다. 단순히 최종 결과물만 보관하는 곳이 아니라, 사실 기준 문서, 작성 가이드, 설계/계획 문서, 최종 산출물, 보조 자산을 함께 관리하는 harness로 사용한다.
+This repository is a single-user, Korean-first career-document harness. It turns immutable career sources into provenance-backed memory, a Markdown master resume, tailored resumes, case studies, and a slide-based HTML portfolio.
 
-## 핵심 디렉터리와 역할
+All supported coding agents must follow this file as the canonical operating contract. Platform-specific instruction files are generated adapters and must not duplicate or override these rules.
 
-- `resume/`: 현재 정본 이력서이자 사실 기준 문서를 보관한다.
-- `docs/guides/`: 재사용 가능한 작성 가이드. 문체, 구조, 성과 표현 원칙을 확인할 때 본다.
-- `docs/plans/`: 설계 문서와 구현 계획. 특정 결과물이나 케이스 스터디가 어떤 의도로 작성됐는지 파악할 때 사용한다.
-- `case-studies/`: 개별 프로젝트 기반 케이스 스터디 문서를 보관한다.
-- `portfolio/html/`: 직접 편집하는 포트폴리오 HTML 원본을 보관한다.
-- `portfolio/pdf/`: 제출과 공유에 사용하는 포트폴리오 PDF를 보관한다.
-- `portfolio/assets/`: 포트폴리오와 케이스 스터디에 쓰는 이미지와 시각 자료를 보관한다.
-- `portfolio/dist/`: Cloudflare Pages 배포 시 생성되는 사이트 결과물이다. Git에는 포함하지 않는다.
-- `.agents/skills/`: 에이전트별 중복 없이 공통으로 사용하는 로컬 스킬을 보관한다.
+## Canonical Configuration
 
-## 현재 대표 산출물
+- Product settings: `harness.yaml`
+- Source manifest: `sources/manifest.yaml`
+- Working state: `memory/state.yaml`
+- Canonical skills: `.agents/skills/`
+- User onboarding: `START_HERE.md`
+- Product design: `docs/plans/2026-08-27-career-harness-product-design.md`
+- Implementation plan: `docs/plans/2026-08-27-career-harness-implementation.md`
 
-- `resume/product-engineer.md`
-- `case-studies/outbound-voice-agent.md`
-- `portfolio/html/heewung-song-portfolio.html`
-- `portfolio/pdf/heewung-song-portfolio-v4.pdf`
-- `portfolio/assets/heewung-song-infographic.png`
+When paths or settings disagree, prefer `harness.yaml` for product configuration and this file for agent behavior.
 
-## 우선 읽기 순서
+## Information Authority
 
-1. `README.md`로 저장소 목적과 구조를 빠르게 파악한다.
-2. `resume/product-engineer.md`로 사실 기준 데이터와 현재 정본 이력서를 함께 확인한다.
-3. `docs/guides/resume-guide.md`로 작성 원칙을 확인한다.
-4. `case-studies/outbound-voice-agent.md`를 읽어 현재 대표 케이스 스터디를 파악한다.
-5. `docs/workflow.md`를 읽어 현재 저장소의 작업 흐름과 주의사항을 확인한다.
-6. 특정 결과물을 수정할 때는 관련 `docs/plans/` 문서를 함께 확인한다.
+Use this order when deciding what is true:
 
-## 작업 원칙
+1. The user's latest explicit correction or instruction.
+2. Immutable originals and captured snapshots under `sources/`.
+3. Provenance-backed facts under `memory/`.
+4. Target-specific strategy under `targets/`.
+5. Drafts under `drafts/`.
+6. Final outputs under `resume/`, `case-studies/`, and `portfolio/`.
+7. Historical design and implementation records under `docs/plans/`.
 
-- 사실 변경은 먼저 `resume/product-engineer.md`에 반영한다.
-- 표현 개선은 `docs/guides/resume-guide.md`를 확인한 뒤 최종 산출물에 적용한다.
-- 프로젝트 케이스 스터디 문서를 수정할 때는 관련 `docs/plans/` 설계 문서를 함께 확인한다.
-- 설계나 구조 변경 전에는 관련 `docs/plans/` 문서를 먼저 확인한다.
-- 이미지나 시각 자산은 문서 구조와 메시지가 정리된 뒤 마지막 단계에서 다룬다.
-- 포트폴리오 HTML은 `portfolio/html/`에서 직접 수정하고 `portfolio/dist/`의 파일은 직접 편집하지 않는다.
-- 대표 포트폴리오 HTML을 수정하면 `scripts/build_portfolio_pdf.py`로 `portfolio/pdf/heewung-song-portfolio-v4.pdf`를 다시 만들고, `scripts/build_portfolio_site.sh`로 `portfolio/dist/`를 다시 빌드한다.
-- HTML에서 포트폴리오 자산을 참조할 때는 형제 디렉터리 기준의 `../assets/` 상대 경로를 사용한다.
-- 케이스 스터디에서 포트폴리오 자산을 참조할 때는 `../portfolio/assets/` 상대 경로를 사용한다.
-- 최종 산출물을 수정할 때는 사실 기준 문서와 모순이 없는지 항상 확인한다.
+Final outputs are not independent fact sources. When an output conflicts with `sources/` or verified `memory/`, correct the memory flow first and then regenerate or update the output.
 
-## 수정 우선순위
+## Required Read Order
 
-### 1. 사실 수정
+At the beginning of a new task:
 
-경력, 수치, 기간, 기술 스택, 역할 같은 사실 정보는 먼저 `resume/product-engineer.md`를 고친다.
+1. Read `harness.yaml`.
+2. Read `memory/state.yaml`.
+3. Read the minimum relevant memory files.
+4. Read the relevant guide, plan, template, and skill only when the task requires them.
+5. Inspect the current output only after understanding its upstream facts and strategy.
 
-### 2. 가이드 확인
+For a new user whose state is `not_started`, read `START_HERE.md` and begin with source intake rather than drafting an output.
 
-문장 압축, 성과 표현, 이력서 구조 조정은 `docs/guides/resume-guide.md`를 기준으로 판단한다.
+## Directory Responsibilities
 
-### 3. 결과물 반영
+- `sources/`: immutable user-provided files and authentication-free web snapshots.
+- `memory/`: AI-maintained durable career memory with provenance and status.
+- `targets/`: job descriptions, company research, and target-specific strategy.
+- `drafts/`: outlines, strategies, and unapproved intermediate work.
+- `templates/`: reusable resume and portfolio structures with no personal facts.
+- `resume/`: master and tailored resume outputs.
+- `case-studies/`: final project case studies.
+- `portfolio/html/`: editable slide-portfolio source.
+- `portfolio/pdf/`: generated portfolio PDFs.
+- `portfolio/assets/`: portfolio and case-study visual evidence.
+- `portfolio/dist/`: generated deployment output; never edit it directly.
+- `.agents/skills/`: canonical reusable workflows shared across agents.
+- `scripts/`: deterministic ingestion, build, validation, preview, and deployment tools.
+- `docs/guides/`: reusable writing and operating guidance.
+- `docs/plans/`: historical or active design and implementation context, not facts.
 
-이력서는 `resume/product-engineer.md`, 프로젝트 케이스 스터디는 `case-studies/[프로젝트명].md`, 종합 포트폴리오 HTML은 `portfolio/html/`에 반영한다.
+## Source Handling
 
-### 4. 보조 문서 정리
+- Never edit files under `sources/` as part of normalization or writing work.
+- Record every ingested source in `sources/manifest.yaml` with its type, location, capture time when relevant, and content hash.
+- Logged-in browser sessions may be used to read LinkedIn or other authorized pages.
+- Never save cookies, tokens, passwords, browser profiles, or authenticated session state in the repository.
+- Store only authentication-free text snapshots, metadata, and user-approved screenshots.
+- Record substantive user interview answers under `sources/interviews/` before using them as verified memory provenance.
+- Project repository paths and GitHub URLs may be read to create immutable snapshots under `sources/projects/`; never edit the source repository or store its Git credentials.
+- When a project contains `openwiki/`, prefer an OpenWiki CLI briefing and wiki Markdown over raw tree/code inference. Run OpenWiki only in a temporary clone, never against the user's original checkout.
+- OpenWiki auto mode may fall back to existing wiki pages and the standard Git snapshot; required mode must stop on missing wiki, missing CLI, or CLI failure.
+- Repository structure, documentation, manifests, and history are evidence context. Do not infer the user's ownership or business impact without interview or source confirmation.
+- Do not infer career achievements from repository activity counts alone.
 
-구조나 흐름이 바뀌면 `README.md`, `AGENTS.md`, `CLAUDE.md`, `docs/workflow.md`, 관련 `docs/plans/` 문서도 함께 맞춘다.
+## Automatic Memory Policy
 
-## 주의사항
+The AI may update `memory/` without asking for approval on every edit. Every automatic change must preserve traceability.
 
-- `docs/plans/`는 최종 결과물이 아니라 설계/계획 문서다.
-- 계획 문서명과 실제 산출물 파일명은 다를 수 있으므로, 수정 대상이 설계 문서인지 최종 결과물인지 먼저 구분한다.
-- 현재 아웃바운드 보이스 에이전트 케이스 스터디를 수정할 때는 `docs/plans/2026-03-07-outbound-voice-agent-portfolio-design.md`를 함께 참고한다.
-- 인바운드 보이스 에이전트 케이스 스터디를 수정할 때는 `docs/plans/2026-03-07-inbound-voice-agent-portfolio-design.md`를 함께 참고한다.
-- 일부 계획 문서에는 현재 저장소에 없는 참고 자료가 남아 있을 수 있으므로, 실제 작업 근거는 현재 저장소 안의 문서와 산출물을 우선한다.
-- 경로를 변경한 경우에는 `README.md`, `docs/workflow.md`, 문서 내부 링크를 함께 점검한다.
-- 루트 `assets/`, `output/`, `dist/`는 더 이상 사용하지 않는다. 포트폴리오 관련 파일은 `portfolio/` 아래의 역할별 디렉터리에 둔다.
-- `portfolio/dist/`는 재생성 가능한 배포 산출물이므로 source-of-truth로 취급하지 않는다.
-- `.omx`, `.omc` 같은 런타임 상태 경로나 이전 구조의 흔적이 보여도, 사실 기준 문서나 최종 산출물보다 우선하지 않는다.
-- 이 저장소는 문서 하네스이므로, 새 작업을 시작할 때도 가능하면 사실 기준 문서 -> 가이드 -> 결과물 순서를 유지한다.
+### Allowed automatic updates
+
+- Normalize company, role, project, technology, and date formatting.
+- Merge equivalent facts that point to compatible sources.
+- Add source references and confidence/status metadata.
+- Add newly discovered experience, project, claim, and evidence candidates.
+- Update `memory/state.yaml` and append a concise entry to `memory/changelog.md`.
+
+### Required safeguards
+
+- Use only `verified`, `inferred`, `unverified`, or `conflicted` as fact status values.
+- Never silently overwrite conflicting dates, titles, metrics, ownership, or visibility.
+- Record unresolved conflicts in `memory/conflicts.yaml`.
+- Preserve direct user corrections over automated extraction and inference.
+- Do not promote an inferred or unverified fact to verified without an explicit source.
+- Do not place conflicted facts in final outputs.
+- Every quantitative or high-impact public claim must link to one or more source references.
+
+## Resume Workflow
+
+- `resume/master.md` is the canonical resume output once the product migration reaches that phase.
+- Tailored resumes must be derived from the master resume and verified memory.
+- Tailoring may change summary, ordering, emphasis, keywords, and length.
+- Tailoring may not introduce new companies, roles, dates, metrics, projects, or skills without first updating memory.
+- The default language is Korean unless `harness.yaml` or the user requests otherwise.
+- Keep Markdown as the editable source and generate PDF through the build tool.
+- Validate ATS structure, repetition, dates, links, text extraction, and page layout before completion.
+
+## Case Study Workflow
+
+- Read the relevant project memory and claims before editing a case study.
+- Separate problem, constraints, decisions, implementation, personal contribution, evidence, results, and lessons.
+- Make ownership boundaries explicit; do not present team or later work as the user's own contribution.
+- Store reusable visual evidence under `portfolio/assets/` and reference it with valid relative paths.
+
+## Portfolio Workflow
+
+- Build a portfolio outline before editing HTML.
+- Target 10 slides by default and remain within the configured 7–15 range.
+- Do not add filler slides to reach the target count.
+- Give each slide one primary communication goal.
+- Connect important slide claims and evidence to stable IDs from memory.
+- Use a configured theme rather than inventing an unrelated visual system per run.
+- Edit source under `portfolio/html/`; never edit `portfolio/dist/` directly.
+- After source changes, rebuild the portfolio PDF and deployment output.
+- Validate slide count, 16:9 rendering, overflow, missing assets, contrast, links, PDF page size, and text extraction.
+
+## Planning and Change Scope
+
+- Read relevant plans before structural or architectural changes.
+- Keep historical plans accurate as records; do not rewrite old implementation history to pretend removed artifacts still exist.
+- Add or update design and implementation plans before a substantial new subsystem.
+- Preserve unrelated user changes in a dirty worktree.
+- Do not delete, move, publish, or expose personal career data unless the task explicitly authorizes it.
+- Keep real candidate data out of the template baseline; use `examples/sample-candidate/` for product tests.
+
+## Validation and Completion
+
+Run the narrowest relevant checks while working and the integrated check when it becomes available.
+
+An output task is complete only when:
+
+- used facts have acceptable status and provenance;
+- unresolved conflicts do not leak into the output;
+- dates, metrics, roles, and technologies agree across outputs;
+- local links and referenced assets exist;
+- sensitive-information checks pass or approved values are allowlisted;
+- requested Markdown, PDF, HTML, and deployment artifacts build successfully;
+- generated outputs are not treated as editable source;
+- `memory/state.yaml` reflects the new phase and pending questions.
+
+## Multi-Agent Portability
+
+- `AGENTS.md` is the only canonical behavior document.
+- `.agents/skills/` is the only canonical project skill directory.
+- `CLAUDE.md` and Cursor rule files are thin generated adapters.
+- Run `uv run python scripts/setup_agents.py` to create or repair adapters.
+- Run `uv run python scripts/setup_agents.py --check` to detect adapter drift.
+- Never copy the full contents of this file into an adapter.

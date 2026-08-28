@@ -1,0 +1,4 @@
+interface:
+  display_name: "Targeted Resume"
+  short_description: "Tailor the master resume to one target role"
+  default_prompt: "Use $targeted-resume to tailor my master resume to the saved target job description."

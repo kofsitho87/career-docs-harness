@@ -1,0 +1,4 @@
+interface:
+  display_name: "Career Review"
+  short_description: "Audit career outputs for facts and quality"
+  default_prompt: "Use $career-review to audit this career artifact and report prioritized findings."

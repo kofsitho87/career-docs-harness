@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://career-harness.local/schemas/evidence.schema.json",
+  "title": "Career Evidence",
+  "type": "object",
+  "required": ["version", "evidence"],
+  "properties": {
+    "version": {"type": "integer", "const": 1},
+    "evidence": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "kind", "location", "status", "source_refs", "claim_ids", "visibility", "user_edited"],
+        "properties": {
+          "id": {"type": "string", "pattern": "^evidence-[a-z0-9]+(?:-[a-z0-9]+)*$"},
+          "kind": {"enum": ["document", "url", "github", "image", "screenshot", "metric", "testimonial"]},
+          "location": {"type": "string", "minLength": 1},
+          "status": {"enum": ["verified", "inferred", "unverified", "conflicted"]},
+          "source_refs": {"type": "array", "uniqueItems": true, "items": {"type": "string"}},
+          "claim_ids": {"type": "array", "uniqueItems": true, "items": {"type": "string"}},
+          "visibility": {"enum": ["public", "private", "restricted"]},
+          "user_edited": {"type": "boolean"}
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false
+}

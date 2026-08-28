@@ -1,0 +1,4 @@
+interface:
+  display_name: "Career Memory"
+  short_description: "Maintain provenance-backed career memory safely"
+  default_prompt: "Use $career-memory to merge these new facts into memory with provenance and conflict protection."

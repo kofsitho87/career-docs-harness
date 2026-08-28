@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://career-harness.local/schemas/timeline.schema.json",
+  "title": "Career Timeline",
+  "type": "object",
+  "required": ["version", "status", "entries"],
+  "properties": {
+    "version": {"type": "integer", "const": 1},
+    "status": {"enum": ["not_started", "in_progress", "needs_review", "complete"]},
+    "entries": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "kind", "label", "start", "end", "status", "source_refs", "user_edited"],
+        "properties": {
+          "id": {"type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"},
+          "kind": {"enum": ["experience", "project", "education", "activity"]},
+          "label": {"type": "string", "minLength": 1},
+          "start": {"type": ["string", "null"], "pattern": "^\\d{4}(?:-\\d{2})?$"},
+          "end": {"type": ["string", "null"], "pattern": "^(?:\\d{4}(?:-\\d{2})?|present)$"},
+          "status": {"enum": ["verified", "inferred", "unverified", "conflicted"]},
+          "source_refs": {"type": "array", "uniqueItems": true, "items": {"type": "string"}},
+          "user_edited": {"type": "boolean"}
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false
+}

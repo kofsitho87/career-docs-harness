@@ -1,0 +1,13 @@
+version: 1
+status: not_started
+language: ko
+resume:
+  tone: concise
+  length: null
+  avoid_phrases: []
+portfolio:
+  theme: editorial
+  target_slides: 10
+  visual_preferences: []
+  avoid_styles: []
+source_refs: []

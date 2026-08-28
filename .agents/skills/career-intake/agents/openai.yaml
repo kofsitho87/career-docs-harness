@@ -1,0 +1,4 @@
+interface:
+  display_name: "Career Intake"
+  short_description: "Build career intake from sources and interviews"
+  default_prompt: "Use $career-intake to inspect my sources and continue the career interview from the current state."

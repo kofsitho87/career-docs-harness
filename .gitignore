@@ -5,6 +5,12 @@
 .DS_Store
 tmp/
 portfolio/dist/
+resume/.build/
+tmp/pdfs/
+.venv/
+.pytest_cache/
+__pycache__/
+*.py[cod]
 
 # Env
 .env
