@@ -1,6 +1,6 @@
 ---
 name: career-intake
-description: Collect and resume a candidate's career intake from repository sources and focused interviews. Use when onboarding a new user, importing new career material, or continuing an incomplete intake; do not use to draft final resumes or portfolios.
+description: Collect and resume a candidate's career intake from documents, project repositories, web profiles, and focused interviews. Use when onboarding a new user, importing career or Git project material, or continuing an incomplete intake; do not use to draft final resumes or portfolios.
 metadata:
   short-description: Build career intake from sources and interviews
 ---
@@ -23,6 +23,8 @@ Build enough provenance-backed input for career memory without asking the user t
 - Use the logged-in browser only for pages the user is authorized to access.
 - Store authentication-free snapshots, never browser state or credentials.
 - Treat GitHub activity as evidence context, not an achievement by itself.
+- When a local path or GitHub project URL is provided, create a `project_repository` snapshot before reading it as career evidence.
+- Use repository content to understand the project, then interview the user to confirm ownership, decisions, operating scope, and results.
 - Do not edit originals under `sources/`.
 
 ## Interview Loop

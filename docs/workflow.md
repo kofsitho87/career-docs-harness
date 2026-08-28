@@ -50,6 +50,21 @@ GitHub:
 uv run python -m scripts.lib.ingest_github USERNAME
 ```
 
+수행 프로젝트 저장소:
+
+```bash
+./scripts/harness ingest-project /absolute/path/to/repository
+./scripts/harness ingest-project https://github.com/owner/repository
+```
+
+기본 snapshot은 tracked tree, README·docs, dependency·build manifest, branch·HEAD, 최근 commit metadata를 포함하며 코드 본문은 제외한다. 코드 기반 구현 분석이 필요한 프로젝트만 다음 옵션을 사용한다.
+
+```bash
+./scripts/harness ingest-project /path/to/repository --include-code
+```
+
+원본 프로젝트는 수정하지 않는다. repository source를 읽은 뒤 `$career-intake`가 사용자의 직접 기여, 기존 코드와의 경계, 팀 소유 범위, 기술 결정, 결과 근거를 질문한다.
+
 인터뷰 답변:
 
 ```bash

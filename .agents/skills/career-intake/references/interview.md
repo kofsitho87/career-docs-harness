@@ -11,6 +11,8 @@
 7. Education, open source, talks, writing, and relevant activities
 8. Tone, length, visual preferences, and excluded content
 
+For an ingested project repository, explicitly confirm which parts the user designed or implemented, what existed before their involvement, which commits or modules are representative, what the team owned, and which outcomes can be publicly claimed.
+
 ## Ask Useful Questions
 
 Ask for one missing decision or fact, not a broad autobiography.

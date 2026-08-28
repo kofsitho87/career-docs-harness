@@ -1,6 +1,6 @@
 # Career Harness
 
-Career Harness는 사용자가 기존 이력서, LinkedIn, 경력기술서, 프로젝트 문서, GitHub 자료를 넣으면 AI와 함께 한국어 마스터 이력서와 슬라이드형 HTML 포트폴리오를 만드는 GitHub Template Repository다.
+Career Harness는 사용자가 기존 이력서, LinkedIn, 경력기술서와 자신이 수행한 프로젝트의 로컬 Git 경로 또는 GitHub URL을 넣으면 AI와 함께 한국어 마스터 이력서와 슬라이드형 HTML 포트폴리오를 만드는 GitHub Template Repository다.
 
 원본, AI 메모리, 초안, 최종 산출물을 분리하고 모든 중요한 경력 주장에 provenance를 연결한다. Codex, Claude Code, Cursor는 동일한 `AGENTS.md`, `memory/`, `.agents/skills/`를 사용한다.
 
@@ -17,6 +17,7 @@ uv sync
 sources/files/        PDF, DOCX, Markdown, TXT, HTML
 sources/web/          인증정보 없는 웹 스냅샷
 sources/github/       공개 GitHub 메타데이터
+sources/projects/     로컬·GitHub 프로젝트 저장소 snapshot
 sources/interviews/   사용자 인터뷰 답변
 sources/screenshots/  승인된 이미지 증거
 ```
@@ -29,6 +30,13 @@ $career-intake를 사용해 sources를 먼저 읽고 커리어 인터뷰를 시�
 ```
 
 자세한 온보딩은 `START_HERE.md`를 따른다.
+
+프로젝트 저장소가 준비되어 있다면 문서를 일일이 복사하기보다 먼저 등록하는 것을 권장한다.
+
+```bash
+./scripts/harness ingest-project /absolute/path/to/project
+./scripts/harness ingest-project https://github.com/owner/repository
+```
 
 ## Data Flow
 
@@ -76,6 +84,7 @@ uv run python scripts/setup_agents.py --check
 ```bash
 ./scripts/harness init
 ./scripts/harness ingest sources/files/FILE
+./scripts/harness ingest-project /path/to/project
 ./scripts/harness check
 ./scripts/harness build resume
 ./scripts/harness build portfolio
@@ -84,6 +93,63 @@ uv run python scripts/setup_agents.py --check
 ```
 
 개별 모듈 명령과 인터뷰 기록 방법은 `START_HERE.md`와 `docs/workflow.md`에 있다.
+
+## Project Repository Ingestion
+
+이력서와 포트폴리오의 중심 재료는 사용자가 수행한 프로젝트다. `ingest-project`는 프로젝트 저장소를 수정하거나 그대로 복사하지 않고, 경력 분석에 필요한 안전한 snapshot을 `sources/projects/`에 만든다.
+
+로컬 Git 저장소:
+
+```bash
+./scripts/harness ingest-project /Users/me/projects/voice-agent
+```
+
+GitHub 저장소:
+
+```bash
+./scripts/harness ingest-project https://github.com/owner/voice-agent
+```
+
+GitHub URL은 `gh repo clone`을 이용해 임시 디렉터리에 shallow clone한 뒤 snapshot만 남긴다. GitHub 인증정보, 임시 clone, 토큰은 저장소에 저장하지 않는다.
+
+기본 snapshot에 포함되는 항목:
+
+- 현재 branch와 HEAD commit
+- Git이 추적하는 안전한 파일 tree
+- README, architecture·design 문서, `docs/` Markdown
+- `pyproject.toml`, `package.json`, `go.mod`, `Cargo.toml`, Docker·requirements 등 주요 manifest
+- 최근 100개 commit의 hash·날짜·작성자·제목
+- dirty working tree 여부
+
+기본적으로 소스코드 본문은 포함하지 않는다. 구현 세부사항도 AI가 분석해야 할 때만 명시적으로 사용한다.
+
+```bash
+./scripts/harness ingest-project /path/to/project --include-code
+```
+
+`--include-code`도 다음 제한을 지킨다.
+
+- Git이 추적하는 텍스트 코드만 대상
+- 기본 최대 50개 코드 파일
+- 파일·전체 snapshot 크기 제한
+- `.env`, key, credential, password, secret, token 관련 파일 제외
+- private key·API key·GitHub token·AWS key 패턴이 감지된 파일 제외
+
+파일 수를 더 낮출 수 있다.
+
+```bash
+./scripts/harness ingest-project /path/to/project \
+  --include-code \
+  --max-code-files 20
+```
+
+프로젝트 snapshot은 프로젝트의 구조와 구현을 이해하는 source다. 저장소의 존재, commit 수, 코드만으로 사용자의 역할·기여·성과를 확정하지 않는다. `$career-intake`가 다음을 추가로 확인하고 interview source로 기록한다.
+
+- 사용자가 직접 설계·구현한 범위
+- 기존 시스템과 사용자가 변경한 부분
+- 팀·다른 개발자·외부 서비스의 소유 범위
+- 대표적인 기술 결정과 트레이드오프
+- 운영 규모와 결과를 공개할 수 있는 근거
 
 ## Resume
 

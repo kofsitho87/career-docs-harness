@@ -13,7 +13,7 @@
         "required": ["id", "type", "path", "origin", "sha256", "imported_at", "status"],
         "properties": {
           "id": {"type": "string", "pattern": "^source-[a-z0-9]+(?:-[a-z0-9]+)*$"},
-          "type": {"enum": ["pdf", "docx", "markdown", "text", "html", "web_snapshot", "github", "interview", "image"]},
+          "type": {"enum": ["pdf", "docx", "markdown", "text", "html", "web_snapshot", "github", "project_repository", "interview", "image"]},
           "path": {"type": "string", "minLength": 1},
           "origin": {"type": "string", "minLength": 1},
           "sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"},

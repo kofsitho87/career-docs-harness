@@ -44,7 +44,7 @@
           "type": "array",
           "minItems": 1,
           "uniqueItems": true,
-          "items": {"enum": ["pdf", "docx", "markdown", "text", "html", "web_snapshot", "github", "interview", "image"]}
+          "items": {"enum": ["pdf", "docx", "markdown", "text", "html", "web_snapshot", "github", "project_repository", "interview", "image"]}
         }
       },
       "additionalProperties": false

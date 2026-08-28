@@ -274,3 +274,12 @@ AI는 메모리를 자동 갱신할 수 있다. 대신 모든 사실은 출처�
 - Markdown, PDF, HTML, 로컬 미리보기, GitHub Pages가 동일한 사실을 사용한다.
 - 에이전트를 바꿔도 같은 메모리와 작업 규칙을 따른다.
 - `./scripts/harness check`가 전체 품질 게이트를 실행한다.
+
+## 15. Project Repository Sources
+
+사용자는 수행한 프로젝트의 로컬 Git 경로 또는 GitHub URL을 직접 주입할 수 있다. 하네스는 원본 저장소를 수정하지 않고 tracked tree, README와 설계 문서, 의존성·빌드 manifest, commit metadata를 `sources/projects/`의 불변 snapshot으로 등록한다.
+
+- 기본 수집은 문서·manifest·tree·history이며 코드 본문을 복사하지 않는다.
+- `--include-code`에서만 추적된 텍스트 소스코드를 크기·파일 수 제한과 credential 검사를 적용해 포함한다.
+- GitHub URL은 로컬 임시 디렉터리에 shallow clone한 뒤 같은 snapshot pipeline을 사용한다.
+- repository source는 프로젝트 내용을 설명하는 근거지만 사용자 소유권, 역할, 성과를 자동 증명하지 않는다. `$career-intake`가 해당 경계를 인터뷰한다.

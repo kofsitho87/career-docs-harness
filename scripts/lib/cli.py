@@ -14,6 +14,7 @@ from scripts.lib.build_portfolio import build_portfolio
 from scripts.lib.build_resume import build_resume
 from scripts.lib.build_site import build_site
 from scripts.lib.ingest_files import ingest_file
+from scripts.lib.ingest_project import ingest_project
 from scripts.lib.render_portfolio import render_portfolio
 from scripts.lib.scan_sensitive_info import scan_sensitive_info
 from scripts.lib.validate_assets import validate_assets
@@ -92,6 +93,17 @@ def command_check(_: argparse.Namespace) -> int:
     return 0
 
 
+def command_ingest_project(args: argparse.Namespace) -> int:
+    entry, created = ingest_project(
+        args.location,
+        include_code=args.include_code,
+        maximum_code_files=args.max_code_files,
+    )
+    action = "ingested" if created else "already registered"
+    print(f"{action} {entry['id']}: {entry['path']}")
+    return 0
+
+
 def command_build_resume(args: argparse.Namespace) -> int:
     config = load_config()
     input_path = args.input or REPOSITORY_ROOT / config["resume"]["master"]
@@ -152,6 +164,14 @@ def build_parser() -> argparse.ArgumentParser:
     ingest_parser = subparsers.add_parser("ingest", help="Ingest immutable local sources")
     ingest_parser.add_argument("paths", nargs="+", type=Path)
     ingest_parser.set_defaults(handler=command_ingest)
+
+    project_parser = subparsers.add_parser(
+        "ingest-project", help="Ingest a local or GitHub project repository"
+    )
+    project_parser.add_argument("location")
+    project_parser.add_argument("--include-code", action="store_true")
+    project_parser.add_argument("--max-code-files", type=int, default=50)
+    project_parser.set_defaults(handler=command_ingest_project)
 
     check_parser = subparsers.add_parser("check", help="Run integrated quality gates")
     check_parser.set_defaults(handler=command_check)

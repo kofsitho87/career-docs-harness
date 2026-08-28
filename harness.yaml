@@ -27,6 +27,7 @@ sources:
     - html
     - web_snapshot
     - github
+    - project_repository
     - interview
     - image
 

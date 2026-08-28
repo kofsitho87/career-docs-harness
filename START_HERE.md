@@ -6,7 +6,7 @@
 
 1. GitHub에서 이 저장소를 템플릿으로 사용해 새 저장소를 만든다.
 2. `uv run python scripts/setup_agents.py`를 실행해 Claude Code와 Cursor 어댑터를 준비한다.
-3. 기존 이력서, 경력기술서, 프로젝트 문서, 인증서, 스크린샷을 `sources/files/` 또는 `sources/screenshots/`에 넣는다.
+3. 기존 이력서, 경력기술서, 프로젝트 문서, 인증서, 스크린샷을 `sources/files/` 또는 `sources/screenshots/`에 넣는다. 수행한 프로젝트의 GitHub URL이나 로컬 Git 경로가 있다면 `ingest-project`로 먼저 등록한다.
 4. LinkedIn이나 웹 프로필을 읽어야 한다면 로그인된 브라우저를 준비한다. 인증정보와 쿠키는 저장소에 저장하지 않는다.
 5. AI에게 다음과 같이 요청한다.
 
@@ -61,6 +61,8 @@ uv run python -m scripts.lib.validate_memory
 ```bash
 ./scripts/harness init
 ./scripts/harness ingest sources/files/FILE
+./scripts/harness ingest-project /path/to/project
+./scripts/harness ingest-project https://github.com/owner/repository
 ./scripts/harness check
 ./scripts/harness build resume
 ./scripts/harness build portfolio
@@ -76,6 +78,7 @@ GitHub Actions는 push와 pull request에서 품질 검사를 실행하고, `por
 sources/files/        PDF, DOCX, Markdown, TXT, HTML
 sources/web/          LinkedIn 등 웹 페이지의 인증정보 없는 스냅샷
 sources/github/       GitHub 프로필과 저장소 요약
+sources/projects/     프로젝트 Git 저장소의 문서·tree·history snapshot
 sources/interviews/   AI 인터뷰에서 사용자가 직접 확인한 답변
 sources/screenshots/  프로젝트와 성과를 설명하는 이미지
 ```

@@ -422,4 +422,36 @@ deploy
 
 ## Current Execution Point
 
-Phase 1~9를 구현했다. 제품 설정·온보딩·메모리와 source engine, 멀티 에이전트 계약, 커리어 스킬, Markdown 이력서 A4 PDF, `career-portfolio`와 3개 테마, 슬라이드 PNG·contact sheet·PDF QA, 통합 CLI와 품질 게이트, GitHub Actions·Pages, 합성 후보자 end-to-end 테스트가 준비됐다. 개인 산출물과 과거 개인 작업 계획은 `main`에 보존하고 제품 브랜치에서는 제거해 GitHub Template 기준선을 정리했다.
+Phase 1~10을 구현했다. 제품 설정·온보딩·메모리와 source engine, 로컬·GitHub 프로젝트 repository snapshot, 멀티 에이전트 계약, 커리어 스킬, Markdown 이력서 A4 PDF, `career-portfolio`와 3개 테마, 슬라이드 PNG·contact sheet·PDF QA, 통합 CLI와 품질 게이트, GitHub Actions·Pages, 합성 후보자 end-to-end 테스트가 준비됐다. 개인 산출물과 과거 개인 작업 계획은 `main`에 보존하고 제품 브랜치에서는 제거해 GitHub Template 기준선을 정리했다.
+
+---
+
+## Phase 10. Project Repository Ingestion
+
+### Task 21. Ingest local and GitHub project repositories
+
+**Files**
+
+- Create: `sources/projects/.gitkeep`
+- Create: `scripts/lib/ingest_project.py`
+- Create: `tests/test_ingest_project.py`
+- Modify: `harness.yaml`, source schemas, `scripts/lib/cli.py`
+- Modify: `career-intake` source routing, `README.md`, `START_HERE.md`, `docs/workflow.md`
+
+**Work**
+
+1. 로컬 Git 경로와 GitHub URL을 입력받는다.
+2. 원본 저장소를 수정하지 않고 tracked tree, 주요 문서·manifest, Git metadata를 snapshot한다.
+3. 코드 본문은 기본 제외하고 `--include-code`에서만 안전 제한과 secret 검사를 적용한다.
+4. snapshot을 `sources/projects/`와 manifest에 `project_repository` source로 기록한다.
+5. repository 내용에서 역할·성과를 자동 추론하지 않고 intake 인터뷰로 확인한다.
+
+**Validation**
+
+```bash
+./scripts/harness ingest-project /path/to/repository
+./scripts/harness ingest-project https://github.com/owner/repository
+uv run pytest -q tests/test_ingest_project.py
+```
+
+**Status:** Complete. Local repositories and GitHub URLs share the same immutable snapshot pipeline. Tests cover source-repository immutability, duplicate ingestion, docs-only defaults, safe code inclusion, sensitive-file exclusion, and temporary GitHub clone routing.
