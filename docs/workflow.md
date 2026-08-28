@@ -66,6 +66,8 @@ uv run python -m scripts.lib.ingest_github USERNAME
 
 `required`는 OpenWiki 누락·실패를 허용하지 않는다. 하네스는 원본 wiki를 자동 갱신하지 않으므로 최신 wiki가 필요하면 사용자가 원본 프로젝트에서 `openwiki --update`를 먼저 실행한다.
 
+상세한 설치, 모드 선택, 보안 경계, metadata와 troubleshooting은 `docs/guides/openwiki-project-ingestion.md`를 따른다.
+
 기본 snapshot은 tracked tree, README·docs, dependency·build manifest, branch·HEAD, 최근 commit metadata를 포함하며 코드 본문은 제외한다. 코드 기반 구현 분석이 필요한 프로젝트만 다음 옵션을 사용한다.
 
 ```bash

@@ -72,6 +72,8 @@ uv run python -m scripts.lib.validate_memory
 
 프로젝트에 `openwiki/`가 있으면 `ingest-project`가 기본적으로 임시 clone에서 OpenWiki CLI를 먼저 사용한다. OpenWiki가 반드시 필요한 경우 `--openwiki required`, 사용하지 않을 경우 `--openwiki off`를 지정한다.
 
+OpenWiki를 처음 사용하거나 fallback·provider 문제를 확인하려면 `docs/guides/openwiki-project-ingestion.md`를 읽는다.
+
 GitHub Actions는 push와 pull request에서 품질 검사를 실행하고, `portfolio/html/index.html`이 준비된 main 브랜치에서는 GitHub Pages 배포본을 생성한다.
 
 ## 자료를 넣는 위치

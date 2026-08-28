@@ -466,6 +466,7 @@ uv run pytest -q tests/test_ingest_project.py
 
 - Modify: `scripts/lib/ingest_project.py`, CLI, schemas, harness settings
 - Modify: `career-intake`, `README.md`, `START_HERE.md`, `docs/workflow.md`
+- Create: `docs/guides/openwiki-project-ingestion.md`
 - Extend: `tests/test_ingest_project.py`
 
 **Work**
@@ -484,4 +485,4 @@ uv run pytest -q tests/test_ingest_project.py
 - OpenWiki runner는 원본 경로가 아닌 임시 clone을 받는다.
 - snapshot metadata는 detected/used/pages/error 상태를 기록한다.
 
-**Status:** Complete against the installed official OpenWiki v0.4.0 CLI contract. The harness uses `openwiki code -p` only in an isolated temporary clone and never runs init/update against the user's checkout.
+**Status:** Complete against the installed official OpenWiki v0.4.0 CLI contract. The harness uses `openwiki code -p` only in an isolated temporary clone and never runs init/update against the user's checkout. README provides the quick path and `docs/guides/openwiki-project-ingestion.md` documents concepts, modes, security, cost, metadata, troubleshooting, and interview handoff.

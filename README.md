@@ -102,6 +102,8 @@ uv run python scripts/setup_agents.py --check
 
 프로젝트 루트에 `openwiki/`가 있으면 일반 tree·문서·코드 분석보다 [OpenWiki](https://github.com/langchain-ai/openwiki)를 먼저 사용한다. 현재 구현·테스트 기준은 OpenWiki v0.4.0이다. OpenWiki code wiki는 repository source와 tests를 바탕으로 architecture, concepts, workflows, operations, integrations, testing 문서와 grounded claims를 `openwiki/`에 관리한다.
 
+설치, code/personal mode, OpenWiki 생성·업데이트 책임, 내부 임시 clone 흐름, 비용·보안, fallback, troubleshooting은 [OpenWiki Project Ingestion Guide](docs/guides/openwiki-project-ingestion.md)에 정리되어 있다.
+
 기본 모드는 `auto`다.
 
 ```bash
@@ -266,3 +268,4 @@ GitHub Pages가 기본 배포 대상이며 Cloudflare Pages는 선택적 어댑�
 - 제품 설계: `docs/plans/2026-08-27-career-harness-product-design.md`
 - 구현 계획·상태: `docs/plans/2026-08-27-career-harness-implementation.md`
 - 사용자·AI 작업 흐름: `docs/workflow.md`
+- OpenWiki 프로젝트 수집: `docs/guides/openwiki-project-ingestion.md`
