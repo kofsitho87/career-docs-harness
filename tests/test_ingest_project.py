@@ -6,9 +6,11 @@ import tempfile
 from importlib import import_module
 from pathlib import Path
 
+import pytest
 import yaml
 
 from scripts.lib.ingest_project import (
+    ProjectIngestionError,
     github_repository_slug,
     ingest_project,
     is_github_location,
@@ -65,6 +67,19 @@ def create_harness_root(root: Path) -> None:
     (root / "sources" / "projects").mkdir(parents=True)
     (root / "sources" / "manifest.yaml").write_text(
         "version: 1\nsources: []\n", encoding="utf-8"
+    )
+
+
+def add_openwiki(project: Path) -> None:
+    wiki = project / "openwiki"
+    (wiki / "architecture").mkdir(parents=True)
+    (wiki / "quickstart.md").write_text(
+        "---\ntitle: Quickstart\n---\n\n# Project Quickstart\n\nOpenWiki understands the project.\n",
+        encoding="utf-8",
+    )
+    (wiki / "architecture" / "overview.md").write_text(
+        "---\ntitle: Architecture\n---\n\n# Architecture\n\nThe service separates API and tools.\n",
+        encoding="utf-8",
     )
 
 
@@ -149,3 +164,116 @@ def test_github_url_uses_temporary_clone_pipeline(monkeypatch) -> None:
         assert created is True
         assert entry["origin"] == "https://github.com/example/voice-agent"
         assert entry["metadata"]["project"] == "voice-agent"
+
+
+def test_openwiki_auto_mode_prioritizes_cli_and_wiki_in_temporary_clone() -> None:
+    with tempfile.TemporaryDirectory() as temporary_directory:
+        temporary_root = Path(temporary_directory)
+        project = create_project(temporary_root)
+        add_openwiki(project)
+        harness_root = temporary_root / "harness"
+        create_harness_root(harness_root)
+        runner_paths: list[Path] = []
+
+        def openwiki_runner(workspace: Path, message: str) -> str:
+            runner_paths.append(workspace)
+            assert workspace != project
+            assert (workspace / "openwiki" / "quickstart.md").is_file()
+            assert "Personal Contribution" in message
+            return "## Purpose\nA factual OpenWiki CLI project briefing."
+
+        entry, created = ingest_project(
+            str(project),
+            repository_root=harness_root,
+            openwiki_runner=openwiki_runner,
+        )
+
+        assert created is True
+        snapshot = (harness_root / entry["path"]).read_text(encoding="utf-8")
+        assert snapshot.index("## OpenWiki Priority Context") < snapshot.index(
+            "## Tracked Tree"
+        )
+        assert "A factual OpenWiki CLI project briefing" in snapshot
+        assert "OpenWiki understands the project" in snapshot
+        assert entry["metadata"]["openwiki_detected"] is True
+        assert entry["metadata"]["openwiki_cli_used"] is True
+        assert entry["metadata"]["openwiki_pages"] == 2
+        assert runner_paths
+
+
+def test_openwiki_auto_falls_back_to_existing_wiki_pages() -> None:
+    with tempfile.TemporaryDirectory() as temporary_directory:
+        temporary_root = Path(temporary_directory)
+        project = create_project(temporary_root)
+        add_openwiki(project)
+        harness_root = temporary_root / "harness"
+        create_harness_root(harness_root)
+
+        def failing_runner(_: Path, __: str) -> str:
+            raise ProjectIngestionError("provider unavailable")
+
+        entry, created = ingest_project(
+            str(project),
+            repository_root=harness_root,
+            openwiki_runner=failing_runner,
+        )
+
+        assert created is True
+        snapshot = (harness_root / entry["path"]).read_text(encoding="utf-8")
+        assert "OpenWiki Fallback Notice" in snapshot
+        assert "OpenWiki understands the project" in snapshot
+        assert entry["metadata"]["openwiki_cli_used"] is False
+        assert "provider unavailable" in entry["metadata"]["openwiki_cli_error"]
+
+
+def test_openwiki_required_rejects_missing_wiki_and_cli_failure() -> None:
+    with tempfile.TemporaryDirectory() as temporary_directory:
+        temporary_root = Path(temporary_directory)
+        project = create_project(temporary_root)
+        harness_root = temporary_root / "harness"
+        create_harness_root(harness_root)
+
+        with pytest.raises(ProjectIngestionError, match="has no openwiki"):
+            ingest_project(
+                str(project),
+                repository_root=harness_root,
+                openwiki_mode="required",
+            )
+
+        add_openwiki(project)
+
+        def failing_runner(_: Path, __: str) -> str:
+            raise ProjectIngestionError("provider unavailable")
+
+        with pytest.raises(ProjectIngestionError, match="required but failed"):
+            ingest_project(
+                str(project),
+                repository_root=harness_root,
+                openwiki_mode="required",
+                openwiki_runner=failing_runner,
+            )
+
+
+def test_openwiki_off_does_not_invoke_runner() -> None:
+    with tempfile.TemporaryDirectory() as temporary_directory:
+        temporary_root = Path(temporary_directory)
+        project = create_project(temporary_root)
+        add_openwiki(project)
+        harness_root = temporary_root / "harness"
+        create_harness_root(harness_root)
+
+        def unexpected_runner(_: Path, __: str) -> str:
+            raise AssertionError("OpenWiki runner should not be called")
+
+        entry, created = ingest_project(
+            str(project),
+            repository_root=harness_root,
+            openwiki_mode="off",
+            openwiki_runner=unexpected_runner,
+        )
+
+        assert created is True
+        snapshot = (harness_root / entry["path"]).read_text(encoding="utf-8")
+        assert "OpenWiki Priority Context" not in snapshot
+        assert entry["metadata"]["openwiki_detected"] is True
+        assert entry["metadata"]["openwiki_cli_used"] is False

@@ -422,7 +422,7 @@ deploy
 
 ## Current Execution Point
 
-Phase 1~10을 구현했다. 제품 설정·온보딩·메모리와 source engine, 로컬·GitHub 프로젝트 repository snapshot, 멀티 에이전트 계약, 커리어 스킬, Markdown 이력서 A4 PDF, `career-portfolio`와 3개 테마, 슬라이드 PNG·contact sheet·PDF QA, 통합 CLI와 품질 게이트, GitHub Actions·Pages, 합성 후보자 end-to-end 테스트가 준비됐다. 개인 산출물과 과거 개인 작업 계획은 `main`에 보존하고 제품 브랜치에서는 제거해 GitHub Template 기준선을 정리했다.
+Phase 1~11을 구현했다. 제품 설정·온보딩·메모리와 source engine, OpenWiki-first 로컬·GitHub 프로젝트 repository snapshot, 멀티 에이전트 계약, 커리어 스킬, Markdown 이력서 A4 PDF, `career-portfolio`와 3개 테마, 슬라이드 PNG·contact sheet·PDF QA, 통합 CLI와 품질 게이트, GitHub Actions·Pages, 합성 후보자 end-to-end 테스트가 준비됐다. 개인 산출물과 과거 개인 작업 계획은 `main`에 보존하고 제품 브랜치에서는 제거해 GitHub Template 기준선을 정리했다.
 
 ---
 
@@ -455,3 +455,33 @@ uv run pytest -q tests/test_ingest_project.py
 ```
 
 **Status:** Complete. Local repositories and GitHub URLs share the same immutable snapshot pipeline. Tests cover source-repository immutability, duplicate ingestion, docs-only defaults, safe code inclusion, sensitive-file exclusion, and temporary GitHub clone routing.
+
+---
+
+## Phase 11. OpenWiki-First Project Ingestion
+
+### Task 22. Prefer OpenWiki when a project wiki exists
+
+**Files**
+
+- Modify: `scripts/lib/ingest_project.py`, CLI, schemas, harness settings
+- Modify: `career-intake`, `README.md`, `START_HERE.md`, `docs/workflow.md`
+- Extend: `tests/test_ingest_project.py`
+
+**Work**
+
+1. 프로젝트 루트의 `openwiki/`를 감지한다.
+2. 원본 checkout을 보호하기 위해 임시 clone과 wiki copy를 만든다.
+3. `openwiki code -p`로 career-oriented project briefing을 비대화형 생성한다.
+4. briefing과 `openwiki/**/*.md`를 snapshot의 최우선 섹션으로 포함한다.
+5. `auto|required|off` 모드와 fallback/error semantics를 제공한다.
+
+**Validation**
+
+- OpenWiki가 없는 저장소는 기존 snapshot과 동일하게 동작한다.
+- auto mode는 CLI failure에서 wiki Markdown으로 fallback한다.
+- required mode는 missing wiki·CLI failure를 거부한다.
+- OpenWiki runner는 원본 경로가 아닌 임시 clone을 받는다.
+- snapshot metadata는 detected/used/pages/error 상태를 기록한다.
+
+**Status:** Complete against the installed official OpenWiki v0.4.0 CLI contract. The harness uses `openwiki code -p` only in an isolated temporary clone and never runs init/update against the user's checkout.

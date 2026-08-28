@@ -19,6 +19,8 @@ sources:
   manifest: sources/manifest.yaml
   allow_logged_in_browser: true
   store_auth_state: false
+  project_repository:
+    openwiki_priority: auto
   supported_types:
     - pdf
     - docx

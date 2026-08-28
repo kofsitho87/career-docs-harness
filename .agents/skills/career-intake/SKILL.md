@@ -24,6 +24,7 @@ Build enough provenance-backed input for career memory without asking the user t
 - Store authentication-free snapshots, never browser state or credentials.
 - Treat GitHub activity as evidence context, not an achievement by itself.
 - When a local path or GitHub project URL is provided, create a `project_repository` snapshot before reading it as career evidence.
+- If the project contains `openwiki/`, use the default OpenWiki-first snapshot unless the user explicitly selects required or off mode.
 - Use repository content to understand the project, then interview the user to confirm ownership, decisions, operating scope, and results.
 - Do not edit originals under `sources/`.
 

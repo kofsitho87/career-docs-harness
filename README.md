@@ -98,6 +98,47 @@ uv run python scripts/setup_agents.py --check
 
 이력서와 포트폴리오의 중심 재료는 사용자가 수행한 프로젝트다. `ingest-project`는 프로젝트 저장소를 수정하거나 그대로 복사하지 않고, 경력 분석에 필요한 안전한 snapshot을 `sources/projects/`에 만든다.
 
+### OpenWiki 우선 분석
+
+프로젝트 루트에 `openwiki/`가 있으면 일반 tree·문서·코드 분석보다 [OpenWiki](https://github.com/langchain-ai/openwiki)를 먼저 사용한다. 현재 구현·테스트 기준은 OpenWiki v0.4.0이다. OpenWiki code wiki는 repository source와 tests를 바탕으로 architecture, concepts, workflows, operations, integrations, testing 문서와 grounded claims를 `openwiki/`에 관리한다.
+
+기본 모드는 `auto`다.
+
+```bash
+./scripts/harness ingest-project /path/to/project
+```
+
+`auto` 동작:
+
+1. 프로젝트 루트에 `openwiki/`가 있는지 확인한다.
+2. 원본 프로젝트를 수정하지 않도록 임시 Git clone을 만든다.
+3. 기존 `openwiki/`를 임시 clone으로 복사한다.
+4. 임시 clone에서 `openwiki code -p`를 실행해 career-oriented project briefing을 생성한다.
+5. CLI briefing과 `openwiki/**/*.md`를 snapshot 맨 앞에 배치한다.
+6. CLI·provider 실행이 실패하면 기존 wiki Markdown을 우선 사용하고 일반 Git snapshot으로 이어간다.
+
+OpenWiki가 반드시 성공해야 하는 프로젝트:
+
+```bash
+./scripts/harness ingest-project /path/to/project --openwiki required
+```
+
+`required`는 `openwiki/` 누락, CLI 미설치, provider 설정 오류, 실행 실패를 ingestion 오류로 처리한다.
+
+OpenWiki를 사용하지 않으려면:
+
+```bash
+./scripts/harness ingest-project /path/to/project --openwiki off
+```
+
+OpenWiki CLI가 없다면 Node.js 22 이상에서 설치한다.
+
+```bash
+npm install -g openwiki
+```
+
+OpenWiki는 설치된 provider·model 설정을 사용하므로 CLI briefing 생성에 모델 사용량과 비용이 발생할 수 있다. `ingest-project`는 `openwiki --init`이나 `--update`를 자동 실행하지 않는다. wiki를 최신화하려면 사용자가 원본 프로젝트에서 먼저 `openwiki --update`를 실행한 뒤 ingestion한다. 하네스는 기존 wiki를 읽고 비대화형 project briefing만 생성한다.
+
 로컬 Git 저장소:
 
 ```bash
@@ -120,6 +161,14 @@ GitHub URL은 `gh repo clone`을 이용해 임시 디렉터리에 shallow clone�
 - `pyproject.toml`, `package.json`, `go.mod`, `Cargo.toml`, Docker·requirements 등 주요 manifest
 - 최근 100개 commit의 hash·날짜·작성자·제목
 - dirty working tree 여부
+
+OpenWiki가 감지되면 위 항목보다 먼저 다음이 포함된다.
+
+- OpenWiki CLI project briefing
+- `openwiki/quickstart.md`
+- architecture·concepts·workflows·operations·integrations·testing 페이지
+- `openwiki/INSTRUCTIONS.md` 등 안전한 Markdown
+- CLI 사용 여부, wiki page 수, fallback 오류 metadata
 
 기본적으로 소스코드 본문은 포함하지 않는다. 구현 세부사항도 AI가 분석해야 할 때만 명시적으로 사용한다.
 

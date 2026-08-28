@@ -57,6 +57,15 @@ uv run python -m scripts.lib.ingest_github USERNAME
 ./scripts/harness ingest-project https://github.com/owner/repository
 ```
 
+프로젝트에 `openwiki/`가 있으면 기본 `auto` 모드는 원본이 아닌 임시 clone에서 `openwiki code -p` briefing을 생성하고 wiki Markdown을 가장 먼저 snapshot한다. CLI 실패 시 기존 wiki 페이지로 fallback한다.
+
+```bash
+./scripts/harness ingest-project /path/to/repository --openwiki required
+./scripts/harness ingest-project /path/to/repository --openwiki off
+```
+
+`required`는 OpenWiki 누락·실패를 허용하지 않는다. 하네스는 원본 wiki를 자동 갱신하지 않으므로 최신 wiki가 필요하면 사용자가 원본 프로젝트에서 `openwiki --update`를 먼저 실행한다.
+
 기본 snapshot은 tracked tree, README·docs, dependency·build manifest, branch·HEAD, 최근 commit metadata를 포함하며 코드 본문은 제외한다. 코드 기반 구현 분석이 필요한 프로젝트만 다음 옵션을 사용한다.
 
 ```bash

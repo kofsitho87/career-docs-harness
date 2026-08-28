@@ -98,9 +98,17 @@ def command_ingest_project(args: argparse.Namespace) -> int:
         args.location,
         include_code=args.include_code,
         maximum_code_files=args.max_code_files,
+        openwiki_mode=args.openwiki,
     )
     action = "ingested" if created else "already registered"
     print(f"{action} {entry['id']}: {entry['path']}")
+    if entry["metadata"].get("openwiki_detected"):
+        openwiki_status = (
+            "CLI briefing and wiki pages"
+            if entry["metadata"].get("openwiki_cli_used")
+            else "existing wiki pages fallback"
+        )
+        print(f"  OpenWiki priority: {openwiki_status}")
     return 0
 
 
@@ -155,6 +163,7 @@ def command_preview(args: argparse.Namespace) -> int:
 
 
 def build_parser() -> argparse.ArgumentParser:
+    config = load_config()
     parser = argparse.ArgumentParser(prog="harness", description="Career Harness CLI")
     subparsers = parser.add_subparsers(dest="command", required=True)
 
@@ -171,6 +180,11 @@ def build_parser() -> argparse.ArgumentParser:
     project_parser.add_argument("location")
     project_parser.add_argument("--include-code", action="store_true")
     project_parser.add_argument("--max-code-files", type=int, default=50)
+    project_parser.add_argument(
+        "--openwiki",
+        choices=("auto", "required", "off"),
+        default=config["sources"]["project_repository"]["openwiki_priority"],
+    )
     project_parser.set_defaults(handler=command_ingest_project)
 
     check_parser = subparsers.add_parser("check", help="Run integrated quality gates")

@@ -71,6 +71,8 @@ For a new user whose state is `not_started`, read `START_HERE.md` and begin with
 - Store only authentication-free text snapshots, metadata, and user-approved screenshots.
 - Record substantive user interview answers under `sources/interviews/` before using them as verified memory provenance.
 - Project repository paths and GitHub URLs may be read to create immutable snapshots under `sources/projects/`; never edit the source repository or store its Git credentials.
+- When a project contains `openwiki/`, prefer an OpenWiki CLI briefing and wiki Markdown over raw tree/code inference. Run OpenWiki only in a temporary clone, never against the user's original checkout.
+- OpenWiki auto mode may fall back to existing wiki pages and the standard Git snapshot; required mode must stop on missing wiki, missing CLI, or CLI failure.
 - Repository structure, documentation, manifests, and history are evidence context. Do not infer the user's ownership or business impact without interview or source confirmation.
 - Do not infer career achievements from repository activity counts alone.
 

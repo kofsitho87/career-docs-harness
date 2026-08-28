@@ -283,3 +283,14 @@ AI는 메모리를 자동 갱신할 수 있다. 대신 모든 사실은 출처�
 - `--include-code`에서만 추적된 텍스트 소스코드를 크기·파일 수 제한과 credential 검사를 적용해 포함한다.
 - GitHub URL은 로컬 임시 디렉터리에 shallow clone한 뒤 같은 snapshot pipeline을 사용한다.
 - repository source는 프로젝트 내용을 설명하는 근거지만 사용자 소유권, 역할, 성과를 자동 증명하지 않는다. `$career-intake`가 해당 경계를 인터뷰한다.
+
+## 16. OpenWiki-First Project Understanding
+
+프로젝트 루트에 `openwiki/`가 있으면 OpenWiki가 이미 repository source와 tests를 바탕으로 만든 OKF wiki와 grounded claims를 최우선 입력으로 사용한다.
+
+- `auto` 기본값은 OpenWiki CLI와 wiki를 우선하고 실패 시 기존 wiki Markdown과 표준 Git snapshot으로 fallback한다.
+- `required`는 wiki·CLI·실행이 모두 준비되지 않으면 ingestion을 실패시킨다.
+- `off`는 OpenWiki를 무시하고 기존 snapshot pipeline만 사용한다.
+- OpenWiki CLI는 원본 repository가 아닌 임시 clone에서 `code -p` 비대화형 질의로 실행한다.
+- snapshot에는 CLI project briefing과 안전한 `openwiki/**/*.md` 페이지가 tree·manifest·history보다 먼저 배치된다.
+- OpenWiki가 정리한 architecture·workflow·invariant도 사용자 개인 기여를 증명하지 않으므로 intake 인터뷰는 계속 필요하다.

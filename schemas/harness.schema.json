@@ -33,13 +33,21 @@
     },
     "sources": {
       "type": "object",
-      "required": ["root", "immutable", "manifest", "allow_logged_in_browser", "store_auth_state", "supported_types"],
+      "required": ["root", "immutable", "manifest", "allow_logged_in_browser", "store_auth_state", "project_repository", "supported_types"],
       "properties": {
         "root": {"type": "string", "minLength": 1},
         "immutable": {"const": true},
         "manifest": {"type": "string", "minLength": 1},
         "allow_logged_in_browser": {"type": "boolean"},
         "store_auth_state": {"const": false},
+        "project_repository": {
+          "type": "object",
+          "required": ["openwiki_priority"],
+          "properties": {
+            "openwiki_priority": {"enum": ["auto", "required", "off"]}
+          },
+          "additionalProperties": false
+        },
         "supported_types": {
           "type": "array",
           "minItems": 1,
